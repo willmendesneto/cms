@@ -1,1 +1,1 @@
-CMS estilo WYSISYG
+CMS estilo WYSIWYG
