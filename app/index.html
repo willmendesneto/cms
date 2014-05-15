@@ -20,20 +20,55 @@
   <script src="../bower_components/angular-route/angular-route.js"></script>
   <script src="../bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   <script src="../bower_components/angular-resource/angular-resource.js"></script>
+  <script src="js/oauth.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+  <script>
+    OAuth.initialize('nOLmdocECLWfvTKz_ftqQWWVgUc');
+    
+    function login() {
+      OAuth.popup('github', function(err, result) {
+        // handle error with err
+        // use result.access_token in your API request
+
+        result.get('/user').done(function(data) {
+          console.log(data);
+          // data is the API call's response. e.g. data.name for your facebook's fullname.
+        });
+
+        result.get('/repos/movimento-sem-terra/site-novo/readme').done(function(data) {
+          console.log(data);
+          // data is the API call's response. e.g. data.name for your facebook's fullname.
+        });
+
+        result.get('/repos/movimento-sem-terra/site-novo/contents/_posts').done(function(data) {
+          for(i in data) {
+            console.log(data[i].name);
+          }
+          result.get(data[0].git_url).done(function(data) {
+            var post = atob(data.content);
+            document.getElementById('editor').value = post;
+          });
+        });      
+      });
+  }
+  </script>
 </head>
 <body>
  
   <!--"nOLmdocECLWfvTKz_ftqQWWVgUc"-->
+  
+<textarea id="editor"></textarea>
+
   <ul class="menu">
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
   </ul>
 
+  <button onclick="login()">Login</button>
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
