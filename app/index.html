@@ -20,8 +20,6 @@
   <script src="../bower_components/angular-route/angular-route.js"></script>
   <script src="../bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   <script src="../bower_components/angular-resource/angular-resource.js"></script>
-  <script src="../bower_components/oauth-js/dist/oauth.js"></script>
-  <script src="../bower_components/angular-oauthio-login/oauthio-login.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
@@ -29,15 +27,8 @@
   <script src="js/directives.js"></script>
 </head>
 <body>
-  <div drr-oauthio-login
-    data-on-login="login(endpoint,user,provider,error)"
-    data-oauth-provider="github"
-    data-provider-icon="github-alt"
-    data-oauthio-key="nOLmdocECLWfvTKz_ftqQWWVgUc">
-  </div>
-
-  <h1>Logged in as {{user.name}}</h1>
-
+ 
+  <!--"nOLmdocECLWfvTKz_ftqQWWVgUc"-->
   <ul class="menu">
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
