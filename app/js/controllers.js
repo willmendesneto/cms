@@ -1,8 +1,6 @@
 'use strict';
 
-/* Controllers */
-
-angular.module('myApp.controllers', [])
+angular.module('cms.controllers', [])
   .controller('MyCtrl1', ['$scope', function($scope) {
 
   }])

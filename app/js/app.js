@@ -1,13 +1,12 @@
 'use strict';
 
-
 // Declare app level module which depends on filters, and services
-angular.module('myApp', [
+angular.module('cms', [
   'ngRoute',
-  'myApp.filters',
-  'myApp.services',
-  'myApp.directives',
-  'myApp.controllers',
+  'cms.filters',
+  'cms.services',
+  'cms.directives',
+  'cms.controllers',
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
