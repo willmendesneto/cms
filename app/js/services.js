@@ -1,6 +1,19 @@
 'use strict';
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('cms.services', []).
-  value('version', '0.1');
+angular.
+ module('cms.services', []).
+  controller('LoginCtrl', ['$scope','notify', function ($scope, notify) {
+    $scope.callNotify = function(msg) {
+      notify(msg);
+    };
+  }]).
+ factory('notify', ['$window', function(win) {
+    var msgs = [];
+    return function(msg) {
+      msgs.push(msg);
+      if (msgs.length == 3) {
+        win.alert(msgs.join("\n"));
+        msgs = [];
+      }
+    };
+  }]);  

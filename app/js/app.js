@@ -1,15 +1,23 @@
 'use strict';
 
-// Declare app level module which depends on filters, and services
 angular.module('cms', [
   'ngRoute',
-  'cms.filters',
   'cms.services',
-  'cms.directives',
   'cms.controllers',
+  'oauth.io'
 ]).
-config(['$routeProvider', function($routeProvider) {
+config(['$routeProvider', 'OAuthProvider', function($routeProvider, OAuthProvider) {
   $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
-  $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'});
+  $routeProvider.otherwise({redirectTo: '/login'});
+  OAuthProvider.setPublicKey('nOLmdocECLWfvTKz_ftqQWWVgUc');
+
+  OAuthProvider.setHandler('github', function (OAuthData, $rootScope) {
+    console.log(OAuthData);
+    OAuthData.result.get('/user').done(function(data) {
+      $rootScope.username = data.login;
+      $rootScope.oauthdata = data;
+      $rootScope.$apply();
+    });
+   });
 }]);
