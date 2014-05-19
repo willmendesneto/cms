@@ -16,17 +16,12 @@ angular.module('cms.controllers', [])
       return GithubClient.isLogged();
     };
 
-    $scope.requestReadmeContent = function() {
-      GithubClient.requestReadmeContent();
+    $scope.showPost = function(post) {
+      GithubClient.fetchPostContent(post, $scope);
     };
 
-    $scope.requestPosts = function() {
-      GithubClient.requestPosts(); 
-    };
-
-    $scope.savePost = function() {
-      var post_name = data[0].name;
-      $rootScope.oauthDataConnection.put('/repos/movimento-sem-terra/site-novo/contents/_drafts/' + post_name, {
+    $scope.savePost = function(post) {
+      $rootScope.oauthDataConnection.put('/repos/movimento-sem-terra/site-novo/contents/_drafts/' + post.name, {
         data: '{"message": "comitando do cms!!!","sha": "'+post.sha+'","content": "'+
         btoa(document.getElementById("first-draft").value)+'"}'
       }).done(function(data) {
@@ -34,6 +29,5 @@ angular.module('cms.controllers', [])
       }).fail(function(data) {
         console.log('Exception saving post => ', data);
       });
-    }
-
+    };
   }]);

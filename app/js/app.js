@@ -14,8 +14,14 @@ config(['$routeProvider', 'OAuthProvider', function($routeProvider, OAuthProvide
 
   OAuthProvider.setHandler('github', function (OAuthData, $rootScope) {
     $rootScope.oauthDataConnection = OAuthData.result;
+    
     OAuthData.result.get('/user').done(function(data) {
       $rootScope.username = data.login;
+      $rootScope.$apply();
+    });
+
+    OAuthData.result.get('/repos/movimento-sem-terra/site-novo/contents/_drafts').done(function(data) {
+      $rootScope.posts = data;
       $rootScope.$apply();
     });
    });

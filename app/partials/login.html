@@ -8,19 +8,15 @@
   <h2>Logado como {{username}}</h2>
 
   <p>
-    README:
-    <button ng-click="requestReadmeContent()">show readme</button>
+    Draft Content
+    <!--button ng-click="commit(post)"-->
   </p>
-  <textarea rows=2 cols=70 id="editor"></textarea>
+  <textarea rows=6 cols=70 id="first-draft" ng-model="currentPost.content"></textarea>
 
-  <p>
-    Posts
-    <button ng-click="requestPosts()">show draft posts</button>
-  </p>
-  <textarea rows=6 cols=100 id="drafts-textarea"></textarea>
-  
-  <p>
-    First Draft Content
-  </p>
-  <textarea rows=6 cols=70 id="first-draft"></textarea>
+  <ul>
+    <li ng-repeat='post in posts'>
+      <button ng-click="showPost(post)">{{post.name}}</button>
+    </li>
+  </ul>
+
 </div>

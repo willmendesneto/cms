@@ -7,24 +7,33 @@ angular.
       return $rootScope.oauthDataConnection;
     };
 
-    this.requestReadmeContent = function() {
-      $rootScope.oauthDataConnection.get('/repos/movimento-sem-terra/site-novo/readme').done(function(data) {
-        document.getElementById('editor').value = atob(data.content);
+    this.fetchPostContent = function(post, scope) {
+      $rootScope.oauthDataConnection.get(post.git_url)
+      .done(function(data) {
+        post.content = atob(data.content);
+        scope.currentPost = post;
+        scope.$apply();
       });
     };
 
-    this.requestPosts = function() {
+    this.requestPosts = function(scope) {
       var draftsTitles = "";
-      $rootScope.oauthDataConnection.get('/repos/movimento-sem-terra/site-novo/contents/_drafts').done(function(data) {
-        for(var i in data) {
-          draftsTitles += data[i].name + "\n";
-        }
-        document.getElementById('drafts-textarea').value = draftsTitles;
-
-        $rootScope.oauthDataConnection.get(data[0].git_url).done(function(data) {
-          document.getElementById('first-draft').value = atob(data.content);
+      var titles = [];
+      $rootScope.oauthDataConnection.get('/repos/movimento-sem-terra/site-novo/contents/_drafts')
+        .done(function(data) {
+          for(var i in data) {
+            draftsTitles += data[i].name + "\n";
+            titles.push(data[i].name);
+          }
+          scope.titles = titles;
+          scope.draftsTitles = draftsTitles;
+          scope.$apply();
+          $rootScope.oauthDataConnection.get(data[0].git_url)
+            .done(function(data) {
+              scope.firstDraft = atob(data.content);
+              scope.$apply();
+            });
         });
-      });       
     };
 
     /*
@@ -40,5 +49,4 @@ angular.
       });
     }    
     */
-
  }]);
