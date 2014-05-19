@@ -7,34 +7,21 @@ angular.module('cms.controllers', [])
   .controller('MyCtrl2', ['$scope', function($scope) {
   
   }])
-  .controller('LoginCtrl', ['$scope', '$rootScope', 'OAuth', function($scope, $rootScope, OAuth) {
+  .controller('LoginCtrl', ['$scope', '$rootScope', 'OAuth', 'GithubClient', function($scope, $rootScope, OAuth, GithubClient) {
     $scope.login = function() {
       OAuth.popup('github');
     };
 
     $scope.isLogged = function() {
-      return $rootScope.oauthDataConnection;
+      return GithubClient.isLogged();
     };
 
     $scope.requestReadmeContent = function() {
-      $rootScope.oauthDataConnection.get('/repos/movimento-sem-terra/site-novo/readme').done(function(data) {
-        document.getElementById('editor').value = atob(data.content);
-      });
+      GithubClient.requestReadmeContent();
     };
 
     $scope.requestPosts = function() {
-      var draftsTitles = "";
-      $rootScope.oauthDataConnection.get('/repos/movimento-sem-terra/site-novo/contents/_drafts').done(function(data) {
-        for(var i in data) {
-          draftsTitles += data[i].name + "\n";
-        }
-        document.getElementById('drafts-textarea').value = draftsTitles;
-
-        $rootScope.oauthDataConnection.get(data[0].git_url).done(function(data) {
-          document.getElementById('first-draft').value = atob(data.content);
-        });
-
-      });  
+      GithubClient.requestPosts(); 
     };
 
     $scope.savePost = function() {
