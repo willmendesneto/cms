@@ -1,4 +1,26 @@
-<h1>Login page</h1>
-<button ng-click="login()">Login</button>
-Logado como {{username}}
+<h1>
+  Login page
+  <button ng-hide="isLogged()" ng-click="login()">Login</button>
+</h1>
 
+
+<div ng-show="isLogged()">
+  <h2>Logado como {{username}}</h2>
+
+  <p>
+    README:
+    <button ng-click="requestReadmeContent()">show readme</button>
+  </p>
+  <textarea rows=2 cols=70 id="editor"></textarea>
+
+  <p>
+    Posts
+    <button ng-click="requestPosts()">show draft posts</button>
+  </p>
+  <textarea rows=6 cols=100 id="drafts-textarea"></textarea>
+  
+  <p>
+    First Draft Content
+  </p>
+  <textarea rows=6 cols=70 id="first-draft"></textarea>
+</div>

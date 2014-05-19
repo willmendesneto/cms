@@ -13,10 +13,9 @@ config(['$routeProvider', 'OAuthProvider', function($routeProvider, OAuthProvide
   OAuthProvider.setPublicKey('nOLmdocECLWfvTKz_ftqQWWVgUc');
 
   OAuthProvider.setHandler('github', function (OAuthData, $rootScope) {
-    console.log(OAuthData);
+    $rootScope.oauthDataConnection = OAuthData.result;
     OAuthData.result.get('/user').done(function(data) {
       $rootScope.username = data.login;
-      $rootScope.oauthdata = data;
       $rootScope.$apply();
     });
    });
