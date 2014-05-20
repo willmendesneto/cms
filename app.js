@@ -1,24 +1,27 @@
 var cms = angular.module('cms', ['ngRoute']);
 
 cms.config(function($routeProvider, $locationProvider) {
-	$routeProvider
+  $routeProvider
     .when('/auth', { controller: 'Authentication', templateUrl: 'partials/auth.html' })
     .when('/posts', { controller: 'Posts', templateUrl: 'partials/posts.html' })
     .when('/posts/:sha', { controller: 'Post', templateUrl: 'partials/post.html' })
     .otherwise({ redirectTo: '/auth' });
 });
 
-cms.controller('Authentication', function Authentication($scope, $rootScope, $location) {
+cms.factory('oauth', function () {
   OAuth.initialize('nOLmdocECLWfvTKz_ftqQWWVgUc');
+  return OAuth;
+});
 
-	$scope.authenticate = function() {
-		OAuth.popup('github', function(err, res) {
-			if(err) return alert(err);
-			$rootScope.github = res;
-			$location.path('/posts');
-			$scope.$apply();
-		});
-	};
+cms.controller('Authentication', function Authentication($scope, $rootScope, $location, oauth) {
+  $scope.authenticate = function() {
+    oauth.popup('github', function(err, res) {
+      if(err) return alert(err);
+      $rootScope.github = res;
+      $location.path('/posts');
+      $scope.$apply();
+    });
+  };
 });
 
 cms.controller('Posts', function Posts($scope, $rootScope) {
