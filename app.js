@@ -44,6 +44,7 @@ cms.controller('Post', function Post($scope, $rootScope, $routeParams) {
       alert('Post salvo com sucesso!');
     }).fail(function(data) {
       alert('Erro ao salvar post. Tente novamente.');
+      console.log('error data:', data);
     });
   };
 
