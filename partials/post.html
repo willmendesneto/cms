@@ -1,0 +1,6 @@
+<form>
+  <h1>{{ post.name }}</h1>
+  <p><textarea cols="100" rows="10" ng-model="post.content.meta"></textarea></p>
+  <p><textarea ck-editor ng-model="post.content.text"></textarea></p>
+  <p><input type="submit" value="Salvar" ng-click="save(post)" /></p>
+</form>
