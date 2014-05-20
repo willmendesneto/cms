@@ -79,12 +79,8 @@ cms.controller('Post', function Post($scope, $rootScope, $routeParams) {
   }
 
   function compile(content) {
-    return [
-      '---',
-      content.meta, 
-      '---',
-      btoa(unescape(encodeURIComponent(content.text)))
-    ].join('\n');
+    var compiled = ['---', content.meta, '---', content.text].join('\n');
+    return btoa(unescape(encodeURIComponent(compiled)));
   }
 });
 
