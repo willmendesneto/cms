@@ -6,6 +6,7 @@
     "angular-route": "*",
     "oauth-js": "*",
     "ckeditor": "4",
-    "js-yaml": "3.0.2"
+    "js-yaml": "3.0.*",
+    "lodash": "2.4.*"
   }
 }

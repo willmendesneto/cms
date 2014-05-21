@@ -1,0 +1,16 @@
+div.editor {
+  float: left;
+  width: 55%;
+}
+
+div.datapreview {
+  float: left;
+  width: 35%;
+  height: 600px;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+  margin: 15px;
+  padding: 30px;
+  border: solid 1px #888;
+  background-color: #eee;
+}

@@ -26,7 +26,7 @@ cms.controller('Authentication', function Authentication($scope, $rootScope, $lo
 
 cms.controller('Posts', function Posts($scope, $rootScope) {
   $rootScope.github.get('/repos/movimento-sem-terra/site-novo/contents/_drafts').done(function(data) {
-    $rootScope.posts = data;
+    $rootScope.posts = _.map(data, makePost);
     $scope.$apply();
   });
 });
@@ -36,13 +36,13 @@ cms.controller('Post', function Post($scope, $rootScope, $routeParams) {
   $scope.post = findPost(sha);
 
   $rootScope.github.get(contentPath(sha)).done(function(data) {
-    $scope.post.content = parse(atob(data.content));
+    $scope.post.loadContentFromJekyllData(atob(data.content));
     $scope.$apply();
   });
 
   $scope.save = function(post) {
     $rootScope.github.put(filePath(post.name), {
-      data: commitData(post)
+      data: JSON.stringify(post.commitData())
     }).done(function(data) {
       alert('Post salvo com sucesso!');
     }).fail(function(data) {
@@ -63,27 +63,6 @@ cms.controller('Post', function Post($scope, $rootScope, $routeParams) {
 
   function filePath(name) {
     return '/repos/movimento-sem-terra/site-novo/contents/_posts/'+name;
-  }
-
-  function commitData(post) {
-    return JSON.stringify({
-      sha: post.sha,
-      content: compile(post.content),
-      message: 'commit from cms'
-    });
-  }
-
-  function parse(content) {
-    var parts = decodeURIComponent(escape(content)).split('---');
-    return {
-      text: parts.pop(),
-      meta: parts.pop()
-    };
-  }
-
-  function compile(content) {
-    var compiled = ['---', content.meta, '---', content.text].join('\n');
-    return btoa(unescape(encodeURIComponent(compiled)));
   }
 });
 
@@ -110,20 +89,30 @@ cms.directive('ckEditor', function() {
   };
 })
 
-function makePost() {
+function makePost(data) {
   var self = {};
+  _.extend(self, data);
 
   self.loadContentFromJekyllData = function (data) {
-    self.content = parse(data);
-  };
-
-  function parse(content) {
-    var parts = decodeURIComponent(escape(content)).split('---');
-    return {
+    var parts = decodeURIComponent(escape(data)).split('---');
+    self.content = {
       text: parts.pop(),
       meta: jsyaml.load(parts.pop())
     };
-  }
+  };
+
+  self.convertContentToJekyllData = function () {
+    var compiled = ['---', jsyaml.dump(self.content.meta), '---' + self.content.text].join('\n');
+    return unescape(encodeURIComponent(compiled));
+  };
+
+  self. commitData = function() {
+    return {
+      sha: self.sha,
+      content: btoa(self.convertContentToJekyllData()),
+      message: 'commit from cms'
+    };
+  };
 
   return self;
 }
