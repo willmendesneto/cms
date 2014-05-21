@@ -48,4 +48,27 @@ describe('Post', function() {
     expect(commitData.content).toBe(btoa("---\nmetadata\n---\n\npost content"));
     expect(commitData.message).toBe("commit from cms");
   });
+
+  describe('setting menu items', function () {
+    it('should add a new menu: tag to posts without any', function () {
+      var post = makePost();
+      post.loadContentFromJekyllData(data);
+      post.content.meta.tags = [];
+
+      post.setMenuItem("agronegocios");
+
+      expect(post.content.meta.tags).toContain("menu:agronegocios");
+    });
+
+    it('should replace menu: tag in posts that already have one', function () {
+      var post = makePost();
+      post.loadContentFromJekyllData(data);
+      post.content.meta.tags = ["menu:agronegocios"];
+
+      post.setMenuItem("meio ambiente");
+
+      expect(post.content.meta.tags).not.toContain("menu:agronegocios");
+      expect(post.content.meta.tags).toContain("menu:meio ambiente");
+    });
+  });
 });

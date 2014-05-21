@@ -114,5 +114,13 @@ function makePost(data) {
     };
   };
 
+  self.setMenuItem = function(menuItemName) {
+    self.content.meta.tags = _.filter(self.content.meta.tags, function (el) {
+      return !(/^menu:/).test(el);
+    });
+
+    self.content.meta.tags.push("menu:"+menuItemName);
+  };
+
   return self;
 }
