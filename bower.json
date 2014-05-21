@@ -5,6 +5,7 @@
     "angular": "*",
     "angular-route": "*",
     "oauth-js": "*",
-    "ckeditor": "4"
+    "ckeditor": "4",
+    "js-yaml": "3.0.2"
   }
 }

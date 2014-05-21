@@ -36,7 +36,7 @@ cms.controller('Post', function Post($scope, $rootScope, $routeParams) {
   $scope.post = findPost(sha);
 
   $rootScope.github.get(contentPath(sha)).done(function(data) {
-    $scope.post.content = parse(data.content);
+    $scope.post.content = parse(atob(data.content));
     $scope.$apply();
   });
 
@@ -62,7 +62,7 @@ cms.controller('Post', function Post($scope, $rootScope, $routeParams) {
   }
 
   function filePath(name) {
-    return '/repos/movimento-sem-terra/site-novo/contents/_drafts/'+name;
+    return '/repos/movimento-sem-terra/site-novo/contents/_posts/'+name;
   }
 
   function commitData(post) {
@@ -74,7 +74,7 @@ cms.controller('Post', function Post($scope, $rootScope, $routeParams) {
   }
 
   function parse(content) {
-    var parts = decodeURIComponent(escape(atob(content))).split('---');
+    var parts = decodeURIComponent(escape(content)).split('---');
     return {
       text: parts.pop(),
       meta: parts.pop()
@@ -109,3 +109,21 @@ cms.directive('ckEditor', function() {
     }
   };
 })
+
+function makePost() {
+  var self = {};
+
+  self.loadContentFromJekyllData = function (data) {
+    self.content = parse(data);
+  };
+
+  function parse(content) {
+    var parts = decodeURIComponent(escape(content)).split('---');
+    return {
+      text: parts.pop(),
+      meta: jsyaml.load(parts.pop())
+    };
+  }
+
+  return self;
+}
