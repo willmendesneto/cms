@@ -8,7 +8,6 @@ video:\n\
 tags:\n\
 - menu:menuitem\n\
 ---\n\
-\n\
 post content";
 
 describe('Post', function() {
@@ -24,7 +23,7 @@ describe('Post', function() {
 
     post.loadContentFromJekyllData(data);
 
-    expect(post.content.text).toBe("\n\npost content");
+    expect(post.content.text).toBe("post content");
     expect(post.content.meta).toBe(dummyMeta);
   });
 
@@ -35,7 +34,7 @@ describe('Post', function() {
     var result = post.convertContentToJekyllData();
 
     expect(jsyaml.dump).toHaveBeenCalledWith(post.content.meta);
-    expect(result).toBe("---\nmetadata\n---\n\npost content");
+    expect(result).toBe("---\nmetadata\n---\npost content");
   });
 
   it('should return empty jekyll data when post has no content', function () {
@@ -52,7 +51,7 @@ describe('Post', function() {
     var commitData = post.commitData();
 
     expect(commitData.sha).toBe('aaaaa');
-    expect(commitData.content).toBe(btoa("---\nmetadata\n---\n\npost content"));
+    expect(commitData.content).toBe(btoa("---\nmetadata\n---\npost content"));
     expect(commitData.message).toBe("commit from cms");
   });
 

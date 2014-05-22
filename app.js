@@ -115,7 +115,7 @@ function makePost(data) {
   self.loadContentFromJekyllData = function (data) {
     var parts = decodeURIComponent(escape(data)).split('---');
     self.content = {
-      text: parts.pop(),
+      text: parts.pop().replace(/^\n/, ""),
       meta: jsyaml.load(parts.pop())
     };
   };
@@ -123,7 +123,7 @@ function makePost(data) {
   self.convertContentToJekyllData = function () {
     if (!self.content) return "";
 
-    var compiled = ['---', jsyaml.dump(self.content.meta), '---' + self.content.text].join('\n');
+    var compiled = ['---', jsyaml.dump(self.content.meta), '---', self.content.text].join('\n');
     return unescape(encodeURIComponent(compiled));
   };
 
