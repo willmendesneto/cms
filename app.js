@@ -2,9 +2,9 @@ var cms = angular.module('cms', ['ngRoute']);
 
 cms.config(function($routeProvider, $locationProvider) {
   $routeProvider
-    .when('/auth', { controller: 'Authentication', templateUrl: 'partials/auth.html' })
-    .when('/posts', { controller: 'Posts', templateUrl: 'partials/posts.html' })
-    .when('/posts/:sha', { controller: 'Post', templateUrl: 'partials/post.html' })
+    .when('/auth', { controller: 'AuthenticationController', templateUrl: 'partials/auth.html' })
+    .when('/posts', { controller: 'PostsController', templateUrl: 'partials/posts.html' })
+    .when('/posts/:sha', { controller: 'PostController', templateUrl: 'partials/post.html' })
     .otherwise({ redirectTo: '/auth' });
 });
 
@@ -13,7 +13,7 @@ cms.factory('oauth', function () {
   return OAuth;
 });
 
-cms.controller('Authentication', function Authentication($scope, $rootScope, $location, oauth) {
+cms.controller('AuthenticationController', function AuthenticationController($scope, $rootScope, $location, oauth) {
   $scope.authenticate = function() {
     oauth.popup('github', function(err, res) {
       if(err) return alert(err);
@@ -24,16 +24,29 @@ cms.controller('Authentication', function Authentication($scope, $rootScope, $lo
   };
 });
 
-cms.controller('Posts', function Posts($scope, $rootScope) {
+cms.controller('PostsController', function PostsController($scope, $rootScope) {
   $rootScope.github.get('/repos/movimento-sem-terra/site-novo/contents/_drafts').done(function(data) {
     $rootScope.posts = _.map(data, makePost);
     $scope.$apply();
   });
 });
 
-cms.controller('Post', function Post($scope, $rootScope, $routeParams) {
+cms.controller('PostController', function PostController($scope, $rootScope, $routeParams) {
   var sha = $routeParams.sha;
   $scope.post = findPost(sha);
+
+  $scope.menuTagOptions = [
+    "agricultura camponesa",
+    "agronegócio",
+    "direitos humanos",
+    "educação, cultura e comunicação",
+    "lutas e mobilizações",
+    "solidariedade internacional",
+    "meio ambiente",
+    "projeto popular",
+    "reforma agrária",
+    "transgênicos"
+  ];
 
   $rootScope.github.get(contentPath(sha)).done(function(data) {
     $scope.post.loadContentFromJekyllData(atob(data.content));
@@ -87,7 +100,7 @@ cms.directive('ckEditor', function() {
       };
     }
   };
-})
+});
 
 function makePost(data) {
   var self = {};

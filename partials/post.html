@@ -1,6 +1,10 @@
 <div class="editor">
   <form>
-    <h1>{{ post.name }}</h1>
+    <input type="text" class="post-title-input" ng-model="post.content.meta.title" />
+    <p>
+      <label for="menu-tag">Menu: </label>
+      <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
+    </p>
     <p><textarea ck-editor ng-model="post.content.text"></textarea></p>
     <p><input type="submit" value="Salvar" ng-click="save(post)" /></p>
   </form>
