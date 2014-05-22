@@ -140,7 +140,9 @@ function makePost(data) {
       return !(/^menu:/).test(el);
     });
 
-    self.content.meta.tags.push("menu:"+menuItemName);
+    if (!!menuItemName){
+      self.content.meta.tags.push("menu:"+menuItemName);
+    }
   };
 
   return self;

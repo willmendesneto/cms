@@ -77,5 +77,17 @@ describe('Post', function() {
       expect(post.content.meta.tags).not.toContain("menu:agronegocios");
       expect(post.content.meta.tags).toContain("menu:meio ambiente");
     });
+
+    it('should remove menu: tag when setting it to undefined', function () {
+      var post = makePost();
+      post.loadContentFromJekyllData(data);
+      post.content.meta.tags = ["menu:agronegocios"];
+
+      post.setMenuItem(undefined);
+
+      _.each(post.content.meta.tags, function(tag) {
+        expect(tag).not.toMatch(/^menu:*/);
+      });
+    });
   });
 });
