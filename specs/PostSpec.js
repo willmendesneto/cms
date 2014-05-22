@@ -38,6 +38,13 @@ describe('Post', function() {
     expect(result).toBe("---\nmetadata\n---\n\npost content");
   });
 
+  it('should return empty jekyll data when post has no content', function () {
+    var post = makePost();
+    var result = post.convertContentToJekyllData();
+
+    expect(result).toBe("");
+  });
+
   it('should generate commit data from a post', function () {
     var post = makePost({sha: 'aaaaa'});
     post.loadContentFromJekyllData(data);

@@ -115,6 +115,8 @@ function makePost(data) {
   };
 
   self.convertContentToJekyllData = function () {
+    if (!self.content) return "";
+
     var compiled = ['---', jsyaml.dump(self.content.meta), '---' + self.content.text].join('\n');
     return unescape(encodeURIComponent(compiled));
   };
