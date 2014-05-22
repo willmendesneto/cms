@@ -18,7 +18,10 @@ module.exports = function(config) {
       'bower_components/lodash/dist/lodash.js',
       'bower_components/js-yaml/js-yaml.js',
       'bower_components/angular/angular.js',
+      "bower_components/angular-route/angular-route.js",
+      'bower_components/angular-mocks/angular-mocks.js',
       'app.js',
+      'specs/helpers/**/*.js',
       'specs/**/*Spec.js'
     ],
 

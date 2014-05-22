@@ -4,6 +4,8 @@
     <p>
       <label for="menu-tag">Menu: </label>
       <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
+        <option value="">-- Nenhum --</option>
+      </select>
     </p>
     <p><textarea ck-editor ng-model="post.content.text"></textarea></p>
     <p><input type="submit" value="Salvar" ng-click="save(post)" /></p>

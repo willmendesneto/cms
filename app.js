@@ -48,6 +48,12 @@ cms.controller('PostController', function PostController($scope, $rootScope, $ro
     "transgênicos"
   ];
 
+  $scope.menuTag = undefined;
+
+  $scope.$watch('menuTag', function (newval) {
+    $scope.post.setMenuItem(newval);
+  });
+
   $rootScope.github.get(contentPath(sha)).done(function(data) {
     $scope.post.loadContentFromJekyllData(atob(data.content));
     $scope.$apply();
