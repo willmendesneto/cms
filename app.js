@@ -9,7 +9,7 @@ cms.config(function($routeProvider, $locationProvider) {
 });
 
 cms.factory('oauth', function () {
-  OAuth.initialize('nOLmdocECLWfvTKz_ftqQWWVgUc');
+  OAuth.initialize('S2shWzj2Cp87Mg4estazc6DFGQc');
   return OAuth;
 });
 
