@@ -81,7 +81,7 @@ cms.controller('PostController', function PostController($scope, $rootScope, $ro
   }
 
   function filePath(name) {
-    return '/repos/movimento-sem-terra/site-novo/contents/_posts/'+name;
+    return '/repos/movimento-sem-terra/site-novo/contents/_drafts/'+name;
   }
 });
 
