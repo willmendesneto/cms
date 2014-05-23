@@ -31,6 +31,16 @@ cms.controller('PostsController', function PostsController($scope, $rootScope) {
   });
 });
 
+function postSearchFilter(posts, term) {
+  return _.filter(posts, function (post) {
+    return post.name.indexOf(term) != -1;
+  });
+}
+
+cms.filter('postSearchFilter', function() {
+  return postSearchFilter;
+});
+
 cms.controller('PostController', function PostController($scope, $rootScope, $routeParams) {
   var sha = $routeParams.sha;
   $scope.post = findPost(sha);
