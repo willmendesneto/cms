@@ -6,6 +6,7 @@ created: 1323977240\n\
 images: []\n\
 video:\n\
 tags:\n\
+section:\n\
 - menu:menuitem\n\
 ---\n\
 post content";
@@ -96,6 +97,46 @@ describe('Post', function() {
         post.setMenuItem("agronegocios");
       }).not.toThrow();
     });
+  });
 
+  describe('setting the section', function() {
+    it('should set the section', function() {
+      var post = makePost();
+      post.loadContentFromJekyllData(data);
+
+      post.setSection({label: "Destaques", value: "featured-news"});
+
+      expect(post.content.meta.section).toBe("featured-news");
+    });
+
+    it('should change the section', function() {
+      var post = makePost();
+      post.loadContentFromJekyllData(data);
+
+      post.content.meta.section = "featured-news";
+
+      post.setSection({label: "Carrosel", value: "carousel"});
+
+      expect(post.content.meta.section).toBe("carousel");
+    });
+
+    it('should clear section when passing undefined as section', function() {
+      var post = makePost();
+      post.loadContentFromJekyllData(data);
+
+      post.content.meta.section = "carousel";
+
+      post.setSection(undefined);
+
+      expect(post.content.meta.section).toBe("");
+    });
+
+    it('should not throw error when there is no content', function() {
+      var post = makePost();
+
+      expect(function() {
+        post.setSection({label: "Destaques", value: "featured-news"});
+      }).not.toThrow();
+    });
   });
 });

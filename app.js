@@ -60,10 +60,27 @@ cms.controller('PostController', function PostController($scope, $rootScope, $ro
     "transgênicos"
   ];
 
+  $scope.sectionOptions = [
+    {label: "Destaque", value: "featured-news"},
+    {label: "Carrossel", value: "carousel"},
+    {label: "Artigo", value: "articles"},
+    {label: "Entrevista", value: "interviews"},
+    {label: "Debate", value: "debate"},
+    {label: "Capa", value: "cover"},
+    {label: "Recente", value: "recent"},
+    {label: "Reportagens Especiais", value: "special-stories"},
+    {label: "MST TV", value: "tv"}
+  ];
+
   $scope.menuTag = undefined;
+  $scope.section = undefined;
 
   $scope.$watch('menuTag', function (newval) {
     $scope.post.setMenuItem(newval);
+  });
+
+  $scope.$watch('section', function (newval) {
+    $scope.post.setSection(newval);
   });
 
   $rootScope.github.get(contentPath(sha)).done(function(data) {
@@ -157,6 +174,17 @@ function makePost(data) {
     if (!!menuItemName){
       self.content.meta.tags.push("menu:"+menuItemName);
     }
+  };
+
+  self.setSection = function(section) {
+    if (!self.content) return;
+
+    if (!section) {
+      self.content.meta.section = "";
+      return;
+    }
+
+    self.content.meta.section = section.value;
   };
 
   return self;

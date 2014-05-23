@@ -34,4 +34,15 @@ describe('PostController', function() {
 
     expect(scope.post.setMenuItem).toHaveBeenCalledWith("agronegócios");
   });
+
+  it('should set the section of a post', function() {
+    scope.post = PostBuilder.buildAndLoadJekyllData();
+    spyOn(scope.post, 'setSection');
+
+    scope.$apply(function () {
+      scope.section = {label: "Destaques", value: "featured-news"};
+    });
+
+    expect(scope.post.setSection).toHaveBeenCalledWith(scope.section);
+  });
 });
