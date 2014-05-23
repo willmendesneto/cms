@@ -136,6 +136,8 @@ function makePost(data) {
   };
 
   self.setMenuItem = function(menuItemName) {
+    if (!self.content) return;
+
     self.content.meta.tags = _.filter(self.content.meta.tags, function (el) {
       return !(/^menu:/).test(el);
     });

@@ -88,5 +88,14 @@ describe('Post', function() {
         expect(tag).not.toMatch(/^menu:*/);
       });
     });
+
+    it('should not throw error when trying to set a menu: tag to posts with no content', function () {
+      var post = makePost();
+
+      expect(function() {
+        post.setMenuItem("agronegocios");
+      }).not.toThrow();
+    });
+
   });
 });
