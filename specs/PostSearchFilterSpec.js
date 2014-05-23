@@ -6,8 +6,14 @@ describe('PostSearchFilter', function() {
 
   var posts = [aaaaPost, bbbbPost, abbaPost, accaPost];
 
-  it('should return all posts with no search term', function() {
+  it('should return all posts with empty search term', function() {
     var filteredPosts = postSearchFilter(posts, "");
+
+    expect(filteredPosts).toEqual(posts);
+  });
+
+  it('should return all posts when term is undefined', function() {
+    var filteredPosts = postSearchFilter(posts, undefined);
 
     expect(filteredPosts).toEqual(posts);
   });

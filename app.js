@@ -32,6 +32,8 @@ cms.controller('PostsController', function PostsController($scope, $rootScope) {
 });
 
 function postSearchFilter(posts, term) {
+  if (!term) return posts;
+
   return _.filter(posts, function (post) {
     return post.name.indexOf(term) != -1;
   });
