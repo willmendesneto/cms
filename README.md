@@ -27,3 +27,11 @@ After installing all dependencies, you can use grunt to run different project re
 
 * Run the app locally: `grunt serve`
 * Run the jasmine specs: `grunt test`
+
+## Deployment tasks
+
+To deploy the app to github pages run
+
+```
+grunt buildcontrol:pages
+```
