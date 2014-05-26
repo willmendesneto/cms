@@ -1,4 +1,4 @@
-describe('PostController', function() {
+describe('PostCtrl', function() {
   var controller;
   var scope;
   var githubMock = {
@@ -11,7 +11,7 @@ describe('PostController', function() {
 
 
   beforeEach(function () {
-    module('cms');
+    module('cmsApp');
   });
 
   beforeEach(inject(function ($rootScope, $controller) {
@@ -20,7 +20,7 @@ describe('PostController', function() {
     $rootScope.posts = [];
     $rootScope.github = githubMock;
 
-    controller = $controller('PostController', {$scope: scope});
+    controller = $controller('PostCtrl', {$scope: scope});
   }));
 
 
