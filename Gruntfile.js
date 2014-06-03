@@ -297,7 +297,7 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:movimento-sem-terra/cms.git',
+          remote: 'git@github.com:Ratox/cms.git',
           branch: 'gh-pages'
         }
       },
