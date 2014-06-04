@@ -297,7 +297,7 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:Ratox/cms.git',
+          remote: 'git@github.com:paidamoyo/cms-ash.git',
           branch: 'gh-pages'
         }
       },
