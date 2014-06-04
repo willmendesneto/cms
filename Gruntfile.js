@@ -283,7 +283,7 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: true
+        singleRun: true // set to false to run tests after every save
       }
     },
 
