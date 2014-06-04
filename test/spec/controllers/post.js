@@ -1,7 +1,15 @@
-describe('PostCtrl', function() {
-  var controller;
-  var scope;
-  var githubMock = {
+'use strict';
+
+describe('Controller: PostCtrl', function () {
+
+  // load the controller's module
+  beforeEach(module('cmsApp'));
+
+  var PostCtrl,
+    scope,
+    Post,
+    PostBuilder = {},
+    githubMock = {
     get: jasmine.createSpy().and.callFake(function () {
       return {
         done: jasmine.createSpy()
@@ -9,18 +17,39 @@ describe('PostCtrl', function() {
     })
   };
 
-
-  beforeEach(function () {
-    module('cmsApp');
-  });
-
-  beforeEach(inject(function ($rootScope, $controller) {
+  beforeEach(inject(function ($rootScope, $controller, _Post_) {
     scope = $rootScope.$new();
-
+    Post = _Post_;
     $rootScope.posts = [];
     $rootScope.github = githubMock;
 
-    controller = $controller('PostCtrl', {$scope: scope});
+    PostCtrl = $controller('PostCtrl', {
+      $scope: scope
+    });
+
+    PostBuilder =  {
+      jekyllData: '---\n' +
+        'layout: post\n' +
+        'title: \'Post Title\'\n' +
+        'created: 1323977240\n' +
+        'images: []\n' +
+        'video:\n' +
+        'tags:\n' +
+        'section:\n' +
+        'label:\n' +
+        '- menu:menuitem\n' +
+        '---\n' +
+        'post content',
+      build: function () {
+        return Post.makePost();
+      },
+      buildAndLoadJekyllData: function () {
+        var post = this.build();
+        post.loadContentFromJekyllData(this.jekyllData);
+        return post;
+      }
+    };
+
   }));
 
 
@@ -29,10 +58,10 @@ describe('PostCtrl', function() {
     spyOn(scope.post, 'setMenuItem');
 
     scope.$apply(function () {
-      scope.menuTag = "agronegócios";
+      scope.menuTag = 'agronegócios';
     });
 
-    expect(scope.post.setMenuItem).toHaveBeenCalledWith("agronegócios");
+    expect(scope.post.setMenuItem).toHaveBeenCalledWith('agronegócios');
   });
 
   it('should set the section of a post', function() {
@@ -40,9 +69,21 @@ describe('PostCtrl', function() {
     spyOn(scope.post, 'setSection');
 
     scope.$apply(function () {
-      scope.section = {label: "Destaques", value: "featured-news"};
+      scope.section = {label: 'Destaques', value: 'featured-news'};
     });
 
     expect(scope.post.setSection).toHaveBeenCalledWith(scope.section);
   });
+
+  it('should set the label of a post', function() {
+    scope.post = PostBuilder.buildAndLoadJekyllData();
+    spyOn(scope.post, 'setLabel');
+
+    scope.$apply(function () {
+      scope.label = {label: 'Artigo', value: 'article'};
+    });
+
+    expect(scope.post.setLabel).toHaveBeenCalledWith(scope.label);
+  });
+
 });
