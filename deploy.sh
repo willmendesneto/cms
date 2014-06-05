@@ -29,7 +29,7 @@ function dist {
   echo "DIST_DIR folder before copy"
   echo $(ls $DIST_DIR)
 
-  cp -r ./dist/* $DIST_DIR/
+  rsync -r ./dist/* $DIST_DIR/
 
   echo "showing DIST_DIR folder after copy"
   echo $(ls $DIST_DIR)
