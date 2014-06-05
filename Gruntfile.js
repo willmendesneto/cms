@@ -285,31 +285,8 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js',
         singleRun: true // set to false to run tests after every save
       }
-    },
-
-    // Deployment settings
-    buildcontrol: {
-      options: {
-        dir: 'dist',
-        commit: true,
-        push: true,
-        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
-      },
-      pages: {
-        options: {
-          remote: '$GIT_URL',
-          branch: 'gh-pages'
-        }
-      },
-      local: {
-        options: {
-          remote: '../',
-          branch: 'build'
-        }
-      }
     }
   });
-
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
