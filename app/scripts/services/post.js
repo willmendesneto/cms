@@ -73,6 +73,19 @@ angular.module('cmsApp').service('Post', function Post(_, jsyaml) {
           self.content.meta.section = section.value;
         };
 
+		self.setImagesHD = function(images_hd) {
+			if (!self.content) {
+				return;
+			}
+		
+			if (!images_hd) {
+				self.content.meta.images_hd = '';
+				return;
+			}
+				  
+			self.content.meta.images_hd = images_hd;
+		};
+		
         self.addNewTag = function(customTag) {
           if (!self.content.meta.tags) {
             return;
@@ -81,37 +94,8 @@ angular.module('cmsApp').service('Post', function Post(_, jsyaml) {
           customTag = 'personalizada:'+customTag;
           self.content.meta.tags.push(customTag);
         };
-
-        self.uploadImage = function(imgFile) {
-
-          var xhr = new XMLHttpRequest();
-          var form = new FormData();
-          var that = this;
-
-          form.append('myfile', imgFile);
-
-          xhr.upload.onprogress = function() {
-            console.log('indoooo...');
-          };
-
-          xhr.onload = function() {
-            var response = that._transformResponse(xhr.response);
-            console.log(response);
-          };
-
-          xhr.onerror = function() {
-            console.log('error');
-          };
-
-          xhr.onabort = function() {
-            console.log('abort');
-          };
-          form.append('token','insert_token');
-          xhr.open('POST', 'http://mst-image-service.herokuapp.com/upload', true);
-          xhr.send(form);
-        };
-
-        return self;
+		
+		return self;
       }
     };
 

@@ -47,6 +47,7 @@ angular.module('cmsApp')
     $scope.section = undefined;
     $scope.label = undefined;
     $scope.tag = '';
+	$scope.images_hd = undefined;
 
     $scope.$watch('label', function (newval) {
       $scope.post.setLabel(newval);
@@ -65,18 +66,35 @@ angular.module('cmsApp')
       $scope.$apply();
     });
 
-    $scope.save = function(post) {
-      $rootScope.github.put(filePath(post.name), {
-        data: JSON.stringify(post.commitData())
-      }).done(function(data) {
-        alert('Post salvo com sucesso!');
-        console.log('Post salvo com sucesso!', data);
-      }).fail(function(data) {
-        alert('Erro ao salvar post. Tente novamente.');
-        console.log('error data:', data);
-      });
-    };
+	$scope.save = function(post) {
+		$scope.post.setImagesHD($scope.uploadImage());
+		$rootScope.github.put(filePath(post.name), {
+			data: JSON.stringify(post.commitData())
+		}).done(function(data) {
+			alert('Post salvo com sucesso!');
+		}).fail(function(data) {
+			console.log('error data:', data);
+		});
+	};
 
+	$scope.uploadImage = function() {
+		var xhr = new XMLHttpRequest();
+		var form = new FormData();
+		var that = this;
+	
+		var postedFiles = document.getElementById('imgFile');
+		if (postedFiles.files.length > 0) {
+			var imgFile = postedFiles.files[0];
+			form.append('myfile', imgFile);
+			form.append('token',$rootScope.github.access_token);
+			xhr.open('POST', 'http://mst-image-service.herokuapp.com/upload', false);      
+			xhr.send(form);
+			return xhr.response;
+		} else {
+			return '';
+		}
+	};
+	
     function filePath(name) {
       return '/repos/movimento-sem-terra/site-novo/contents/_drafts/'+name;
     }

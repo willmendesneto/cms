@@ -32,9 +32,8 @@
 
     <form>
       <label for="imgFile">Imagem: </label>
-      <input id="imgFile" type='file' />
-      <input type="submit" value="Adicionar"
-      ng-click="post.uploadImage(angular.element(document.querySelector('#imgFile')))" />
+	  <label>{{images_hd}}</label><br/>
+	  <input ng-model="images_hd" id="imgFile" type='file' />
     </form>
 
     <p><textarea ck-editor ng-model="post.content.text"></textarea></p>
