@@ -23,8 +23,16 @@ function dist {
       --depth=1 $REMOTE_ORIGIN \
       $DIST_DIR
   fi
+  echo "showing dist folder"
+  echo $(ls ./dist/)
+
+  echo "DIST_DIR folder before copy"
+  echo $(ls $DIST_DIR)
 
   cp -r ./dist/ $DIST_DIR/
+
+  echo "showing DIST_DIR folder after copy"
+  echo $(ls $DIST_DIR)
 }
 
 
@@ -34,9 +42,14 @@ function deploy {
   GH_PAGES_HEAD_SHA=$(git rev-parse HEAD)
   TAG_NUMBER=$(git tag | awk -F  "#" '{x=$2>x?$2:x}END{print x+1}' x=1)
   pushd $DIST_DIR
+
+    echo "Get git status"
+    echo $(git status)
+
     git add . -A
     git commit -m "Deployed from master: $MASTER_HEAD_SHA"
     git tag -a "Deploy#$TAG_NUMBER" -m "Deployed from master $MASTER_HEAD_SHA to gh-pages $GH_PAGES_HEAD_SHA"
+
     echo "Pushing code to branch gh-pages..."
     git push origin gh-pages
     echo "Pushing deploy tag..."
