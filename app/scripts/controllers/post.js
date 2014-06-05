@@ -85,7 +85,7 @@ angular.module('cmsApp')
     if (postedFiles.files.length > 0) {
       var imgFile = postedFiles.files[0];
       form.append('myfile', imgFile);
-      form.append('token',$rootScope.github.accessToken);
+      form.append('token',$rootScope.github.access_token);
       xhr.open('POST', 'http://mst-image-service.herokuapp.com/upload', false);
       xhr.send(form);
       return xhr.response;
