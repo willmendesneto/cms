@@ -1,0 +1,44 @@
+<div class="editor">
+  <form>
+    <input type="text" class="post-title-input" ng-model="post.content.meta.title">
+    <p>
+      <label for="menu-tag">Menu: </label>
+      <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
+        <option value="">-- Nenhum --</option>
+      </select>
+    </p>
+
+    <p>
+      <label for="section">Sessão: </label>
+      <select ng-model="section" ng-options="opt.label for opt in sectionOptions">
+        <option value="">-- Nenhuma --</option>
+      </select>
+    </p>
+
+    <p>
+      <label for="label">Rótulo: </label>
+      <select ng-model="label" ng-options="opt.label for opt in labelOptions">
+        <option value="">-- Nenhuma --</option>
+      </select>
+    </p>
+
+    <form>
+      <label for="tag">Tag: </label>
+      <input type="text" value="{{tag}}" ng-model="tag">
+      <input type="submit" value="Adicionar" ng-click="post.addNewTag(tag)">
+    </form>
+
+    <form>
+      <label for="imgFile">Imagem: </label>
+      <input id="imgFile" type="file">
+      <input type="submit" value="Go" ng-click="post.uploadImage(angular.element(document.querySelector('#imgFile')))">
+    </form>
+
+    <p><textarea ck-editor="" ng-model="post.content.text"></textarea></p>
+    <p><input type="submit" value="Salvar" ng-click="save(post)"></p>
+    <p><a href="#/posts">Cancelar</a></p>
+  </form>
+</div>
+<div class="datapreview">
+  <pre>{{ post.convertContentToJekyllData() }}</pre>
+</div>
