@@ -28,10 +28,12 @@
       <input type="submit" value="Adicionar" ng-click="post.addNewTag(tag)">
     </form>
 
+    
+
     <form>
       <label for="imgFile">Imagem: </label>
       <input id="imgFile" type="file">
-      <input type="submit" value="Go" ng-click="post.uploadImage(angular.element(document.querySelector('#imgFile')))">
+      <input type="submit" value="Adicionar" ng-click="post.uploadImage(angular.element(document.querySelector('#imgFile')))">
     </form>
 
     <p><textarea ck-editor="" ng-model="post.content.text"></textarea></p>
