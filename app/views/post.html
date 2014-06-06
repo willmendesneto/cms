@@ -1,5 +1,5 @@
 <div class="editor">
-  <form>
+  <form name="postForm"> 
     <input type="text" class="post-title-input" ng-model="post.content.meta.title" />
     <p>
       <label for="menu-tag">Menu: </label>
@@ -21,21 +21,16 @@
         <option value="">-- Nenhuma --</option>
       </select>
     </p>
-
-    <form>
+    <p>
       <label for="tag">Tag: </label>
-      <input type="text" value='{{tag}}' ng-model="tag"/>
-      <input type="submit" value="Adicionar" ng-click="post.addNewTag(tag)" />
-    </form>
+      <input type="text" ng-model="tag" name="tag" required />
+      <button ng-disabled="postForm.tag.$invalid" ng-click="post.addNewTag(tag)" >Adicionar</button>
+    </p>
 
-    </br>
-
-    <form>
+    <p>
       <label for="imgFile">Imagem: </label>
-	  <label>{{images_hd}}</label><br/>
-	  <input ng-model="images_hd" id="imgFile" type='file' />
-    </form>
-
+      <input ng-model="imagesHD" id="imgFile" type='file' />
+    </p>
     <p><textarea ck-editor ng-model="post.content.text"></textarea></p>
     <p><input type="submit" value="Salvar" ng-click="save(post)" /></p>
     <p><a href="#/posts">Cancelar</a></p>
