@@ -83,6 +83,7 @@ angular.module('cmsApp')
 
     var postedFiles = document.getElementById('imgFile');
     if (postedFiles.files.length > 0) {
+    /*jshint camelcase: false */
       var imgFile = postedFiles.files[0];
       form.append('myfile', imgFile);
       form.append('token',$rootScope.github.access_token);

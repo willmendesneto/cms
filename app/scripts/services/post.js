@@ -79,11 +79,11 @@ angular.module('cmsApp').service('Post', function Post(_, jsyaml) {
         }
 
         if (!imagesHD) {
-          self.content.meta.images_hd = '';
+          self.content.meta.imagesHD = '';
           return;
         }
 
-        self.content.meta.images_hd = imagesHD;
+        self.content.meta.imagesHD = imagesHD;
       };
 
       self.addNewTag = function(customTag) {
