@@ -30,8 +30,7 @@ After installing all dependencies, you can use grunt to run different project re
 
 ## Deployment tasks
 
-When all the grunt  tasks pass
+When all the grunt  tasks pass:
 
-```
 [snap-ci] (https://snap-ci.com/movimento-sem-terra/cms/branch/master) deploys to github pages
-```
+
