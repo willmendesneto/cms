@@ -1,8 +1,7 @@
 /* globals alert */
 'use strict';
 
-angular.module('cmsApp')
-.controller('PostCtrl', function ($scope, $rootScope, $routeParams) {
+app.controller('PostCtrl', function ($scope, $rootScope, $routeParams) {
 
   function findPost(sha) {
     return $rootScope.posts.filter(function(post) {

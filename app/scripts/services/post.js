@@ -1,7 +1,7 @@
 /* globals escape, unescape */
 'use strict';
 
-angular.module('cmsApp').service('Post', function Post(_, jsyaml) {
+app.service('Post', function Post(_, jsyaml) {
 
   return {
     makePost: function(data) {
