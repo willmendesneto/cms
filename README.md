@@ -26,11 +26,12 @@ After installing all dependencies, you can use grunt to run different project re
 
 * Run the app locally: `grunt serve`
 * Run the jasmine specs: `grunt test`
+* Run all grunt tasks: 'grunt'
 
 ## Deployment tasks
 
-To deploy the app to github pages run
+When all the grunt  tasks pass
 
 ```
-grunt buildcontrol:pages
+[snap-ci](https://snap-ci.com/movimento-sem-terra/cms/branch/master) deploys to github pages
 ```
