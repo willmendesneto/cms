@@ -1,6 +1,6 @@
 # MST CMS
 
-This is the MST new website CMS. 
+This is the MST new website CMS.
 
 ## How to
 
@@ -14,11 +14,10 @@ Install `grunt-cli` globally so you can use [Grunt](http://gruntjs.com) to run p
 npm install -g grunt-cli
 ```
 
-Then, `cd` into the project folder and install dependencies with npm and [bower](http://bower.io):
+Then, `cd` into the project folder and install dependencies with npm:
 
 ```
 npm install
-bower install
 ```
 
 ## Development tasks
