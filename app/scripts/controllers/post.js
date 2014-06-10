@@ -74,20 +74,16 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image) {
       console.log('error data:', data);
     });
   };
-
+  
   $scope.uploadImage = function() {
 	  var postedFiles = document.getElementById('imgFile');
 	  if (postedFiles.files.length > 0) {
 		  var file = postedFiles.files[0];
-		  Image.send(file);
-		  window.alert(Image);
+		  Image.send(file, addImage);
 	  }
-  };
+  };  
 
   $scope.images = [
-    {image : 'https://farm4.staticflickr.com/3911/14389454462_6e748234db_b.jpg', thumbnail : 'https://farm4.staticflickr.com/3911/14389454462_6e748234db_b.jpg', description : 'Test 1'},
-    {image : 'https://farm4.staticflickr.com/3836/14168485908_5527ba07fc_b.jpg', thumbnail : 'https://farm4.staticflickr.com/3836/14168485908_5527ba07fc_b.jpg', description : 'Test 2'},
-    {image : 'https://farm4.staticflickr.com/3911/14389454462_6e748234db_b.jpg', thumbnail : 'https://farm4.staticflickr.com/3911/14389454462_6e748234db_b.jpg', description : 'Test 3'},
   ];
 
   $scope.currentImage = $scope.images[0];
@@ -95,6 +91,10 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image) {
   $scope.setCurrentImage = function (image) {
 	  $scope.currentImage = image;
   };
+
+  function addImage(url) {
+	  $scope.images.push({image : url, thumbnail: url, description: url});
+  }
 
   function filePath(name) {
     return '/repos/movimento-sem-terra/site-novo/contents/_drafts/'+name;

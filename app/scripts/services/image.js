@@ -2,9 +2,8 @@
 
 app.factory('Image', function($http, $rootScope, IMAGE_SERVICE_URL, FormDataObject){
   var Image = {
-    send: function(file) {
+    send: function(file, success) {
       /*jshint camelcase: false */
-      var promise = '';
       $http({
         url: IMAGE_SERVICE_URL,
         method: 'POST',
@@ -22,16 +21,13 @@ app.factory('Image', function($http, $rootScope, IMAGE_SERVICE_URL, FormDataObje
         console.log(status);
         console.log(headers);
         console.log(config);
-        promise = data;
-
+		success(data);
       }).
       error(function(data,status,headers, config){
         console.log('error');
         console.log(data);
         console.log(status);
         console.log(headers);
-        console.log(config);
-        promise = data;
       });
     }
   };
