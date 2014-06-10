@@ -42,3 +42,41 @@ input.post-title-input {
   font-weight: bold;
   width: 100%;
 }
+
+/*Images*/
+
+#albumImage {
+	width: 100%;
+	margin-bottom: 10px;
+	border-style: solid;
+	border-width: 1px;
+}
+
+#thumbWrapper {
+	height: 310px;
+	width: 100%;
+	overflow: auto;
+}
+
+#thumbList {
+	height: 310px;
+	white-space: nowrap;
+	margin: 0px;
+	padding: 0px;
+}
+
+#thumbList img {
+	height: 100px;
+}
+
+#thumbList li {
+	display: inline;
+	list-style-type: none;
+	padding-left: 2px;
+	padding-right: 2px;
+	cursor: pointer;
+}
+
+#thumbList li:hover {
+	opacity: 0.5;
+}

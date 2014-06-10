@@ -1,41 +1,61 @@
-<div class="editor">
-  <form name="postForm" novalidate> 
-    <input type="text" class="post-title-input" ng-model="post.content.meta.title" />
-    <p>
-      <label for="menu-tag">Menu: </label>
-      <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
-        <option value="">-- Nenhum --</option>
-      </select>
-    </p>
+<div>
+	<div class="editor">
+		<form name="postForm" novalidate> 
+			<input type="text" class="post-title-input" ng-model="post.content.meta.title" />
+			<p>
+				<label for="menu-tag">Menu: </label>
+				<select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
+					<option value="">-- Nenhum --</option>
+				</select>
+			</p>
 
-    <p>
-      <label for="section">Sessão: </label>
-      <select ng-model="section" ng-options="opt.label for opt in sectionOptions">
-        <option value="">-- Nenhuma --</option>
-      </select>
-    </p>
+			<p>
+				<label for="section">Sessão: </label>
+				<select ng-model="section" ng-options="opt.label for opt in sectionOptions">
+					<option value="">-- Nenhuma --</option>
+				</select>
+			</p>
 
-    <p>
-      <label for="label">Rótulo: </label>
-      <select ng-model="label" ng-options="opt.label for opt in labelOptions">
-        <option value="">-- Nenhuma --</option>
-      </select>
-    </p>
-    <p>
-      <label for="tag">Tag: </label>
-      <input type="text" ng-model="tag" name="tag" required />
-      <button ng-disabled="postForm.tag.$invalid" ng-click="post.addNewTag(tag)" >Adicionar</button>
-    </p>
+			<p>
+				<label for="label">Rótulo: </label>
+				<select ng-model="label" ng-options="opt.label for opt in labelOptions">
+					<option value="">-- Nenhuma --</option>
+				</select>
+			</p>
+			<p>
+				<label for="tag">Tag: </label>
+				<input type="text" ng-model="tag" name="tag" required />
+				<button ng-disabled="postForm.tag.$invalid" ng-click="post.addNewTag(tag)" >Adicionar</button>
+			</p>
 
-    <p>
-      <label for="imgFile">Imagem: </label>
-      <input ng-model="imagesHD" id="imgFile" type='file' />
-    </p>
-    <p><textarea ck-editor ng-model="post.content.text"></textarea></p>
-    <p><input type="submit" value="Salvar" ng-click="save(post)" /></p>
-    <p><a href="#/posts">Cancelar</a></p>
-  </form>
-</div>
-<div class="datapreview">
-  <pre>{{ post.convertContentToJekyllData() }}</pre>
+			<p>
+				<label for="imgFile">Imagem: </label>
+				<input ng-model="images_hd" type='text' />
+			</p>
+			<p><textarea ck-editor ng-model="post.content.text"></textarea></p>
+			<p><input type="submit" value="Salvar" ng-click="save(post)" /></p>
+			<p><a href="#/posts">Cancelar</a></p>
+		</form>
+	</div>
+	<div class="datapreview">
+		<pre>{{ post.convertContentToJekyllData() }}</pre>
+	</div>
+	<div style="clear:both;">
+	<div id="albumImage">
+		<div>
+			<label for="imgFile">Imagem: </label>
+			<input id="imgFile" type='file' />
+			<button ng-click="uploadImage()">Adicionar</button>
+		</div>
+		<div id="header">
+			<h2>{{currentImage.image}}</h2>
+		</div>
+		<div id="thumbWrapper">
+			<ul id="thumbList">
+				<li ng-repeat="image in images" ng-click="setCurrentImage(image)">
+					<img ng-src="{{image.thumbnail}}" alt="{{image.description}}">
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>

@@ -1,7 +1,7 @@
 /* globals alert */
 'use strict';
 
-app.controller('PostCtrl', function ($scope, $rootScope, $routeParams) {
+app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image) {
 
   function findPost(sha) {
     return $rootScope.posts.filter(function(post) {
@@ -66,7 +66,6 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams) {
   });
 
   $scope.save = function(post) {
-    $scope.post.setImagesHD($scope.uploadImage());
     $rootScope.github.put(filePath(post.name), {
       data: JSON.stringify(post.commitData())
     }).done(function() {
@@ -75,23 +74,26 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams) {
       console.log('error data:', data);
     });
   };
-
+  
   $scope.uploadImage = function() {
-    var xhr = new XMLHttpRequest();
-    var form = new FormData();
+	  var postedFiles = document.getElementById('imgFile');
+	  if (postedFiles.files.length > 0) {
+		  var file = postedFiles[0];
+		  Image.send(file);
+		  window.alert(Image);
+	  }
+  };
 
-    var postedFiles = document.getElementById('imgFile');
-    if (postedFiles.files.length > 0) {
-    /*jshint camelcase: false */
-      var imgFile = postedFiles.files[0];
-      form.append('myfile', imgFile);
-      form.append('token',$rootScope.github.access_token);
-      xhr.open('POST', 'http://mst-image-service.herokuapp.com/upload', false);
-      xhr.send(form);
-      return xhr.response;
-    } else {
-      return '';
-    }
+  $scope.images = [
+    {image : 'https://farm4.staticflickr.com/3911/14389454462_6e748234db_b.jpg', thumbnail : 'https://farm4.staticflickr.com/3911/14389454462_6e748234db_b.jpg', description : 'Test 1'},
+    {image : 'https://farm4.staticflickr.com/3836/14168485908_5527ba07fc_b.jpg', thumbnail : 'https://farm4.staticflickr.com/3836/14168485908_5527ba07fc_b.jpg', description : 'Test 2'},
+    {image : 'https://farm4.staticflickr.com/3911/14389454462_6e748234db_b.jpg', thumbnail : 'https://farm4.staticflickr.com/3911/14389454462_6e748234db_b.jpg', description : 'Test 3'},
+  ];
+
+  $scope.currentImage = $scope.images[0];
+
+  $scope.setCurrentImage = function (image) {
+	  $scope.currentImage = image;
   };
 
   function filePath(name) {
