@@ -1,7 +1,8 @@
 'use strict';
 
-var app = angular.module('cmsApp', ['ngRoute']);
+var app = angular.module('cmsApp', ['ngRoute', 'firebase']);
 
+app.constant('FIREBASE_URL', 'https://mst-cms.firebaseio.com');
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/auth', {
