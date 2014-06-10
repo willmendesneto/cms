@@ -54,6 +54,7 @@ module.exports = function (grunt) {
       }
     },
 
+    plugins: ['karma-jasmine', 'karma-phantomjs-launcher'],
     // The actual grunt server settings
     connect: {
       options: {

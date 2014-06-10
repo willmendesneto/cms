@@ -23,7 +23,6 @@ module.exports = function(config) {
       'https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
       'test/helpers/**/*.js',
       'test/spec/**/*.js'
     ],
