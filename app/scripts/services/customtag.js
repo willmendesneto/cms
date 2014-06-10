@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('CustomTag', function($firebase, FIREBASE_URL){
+app.factory('CustomTag',['$firebase', 'FIREBASE_URL', function($firebase, FIREBASE_URL){
   var ref = new Firebase(FIREBASE_URL + 'customtags');
   var customTags = $firebase(ref);
 
@@ -12,5 +12,5 @@ app.factory('CustomTag', function($firebase, FIREBASE_URL){
     }
   };
   return CustomTag;
-});
+}]);
 
