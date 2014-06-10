@@ -81,7 +81,7 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image) {
 		  var file = postedFiles.files[0];
 		  Image.send(file, addImage);
 	  }
-  };  
+  };
 
   $scope.images = [
   ];

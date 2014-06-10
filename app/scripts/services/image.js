@@ -21,9 +21,9 @@ app.factory('Image', function($http, $rootScope, IMAGE_SERVICE_URL, FormDataObje
         console.log(status);
         console.log(headers);
         console.log(config);
-		success(data);
+        success(data);
       }).
-      error(function(data,status,headers, config){
+      error(function(data,status,headers){
         console.log('error');
         console.log(data);
         console.log(status);
