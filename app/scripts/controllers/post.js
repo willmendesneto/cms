@@ -74,11 +74,11 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image) {
       console.log('error data:', data);
     });
   };
-  
+
   $scope.uploadImage = function() {
 	  var postedFiles = document.getElementById('imgFile');
 	  if (postedFiles.files.length > 0) {
-		  var file = postedFiles[0];
+		  var file = postedFiles.files[0];
 		  Image.send(file);
 		  window.alert(Image);
 	  }
