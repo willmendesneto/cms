@@ -1,14 +1,14 @@
 'use strict';
 
 describe('customtag factory', function(){
-  var CustomTag, firebase, FIREBASE_URL;
+  var CustomTag, firebase, FIREBASE_REF;
 
   beforeEach(module('cmsApp'));
 
-  beforeEach(inject(function(_CustomTag_, $firebase, _FIREBASE_URL_){
+  beforeEach(inject(function(_CustomTag_, $firebase, _FIREBASE_REF_){
     CustomTag = _CustomTag_;
     firebase = $firebase;
-    FIREBASE_URL = _FIREBASE_URL_;
+    FIREBASE_REF = _FIREBASE_REF_;
   }));
 
   it('should be defined', function () {
@@ -20,6 +20,16 @@ describe('customtag factory', function(){
   });
 
   it('firebase url should be defined', function(){
-    expect(!!FIREBASE_URL).toBe(true);
+    expect(!!FIREBASE_REF).toBe(true);
+  });
+
+  it('should call $firebase on add method', function() {
+    var tag = 'social';
+    var firebaseTags = CustomTag.all;
+
+    spyOn(firebaseTags, '$add');
+
+    CustomTag.addNewCustomTag(tag);
+    expect(firebaseTags.$add).toHaveBeenCalled();
   });
 });

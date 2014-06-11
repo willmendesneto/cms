@@ -2,8 +2,8 @@
 
 var app = angular.module('cmsApp', ['ngRoute', 'firebase']);
 
-app.constant('FIREBASE_URL', 'https://mst-cms.firebaseio.com');
 app.constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload');
+app.constant('FIREBASE_REF', new Firebase('https://mst-cms.firebaseio.com/customtags'));
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/auth', {
