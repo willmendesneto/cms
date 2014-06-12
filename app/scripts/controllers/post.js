@@ -66,8 +66,22 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, 
 
   $rootScope.github.get(contentPath(sha)).done(function(data) {
     $scope.post.loadContentFromJekyllData(atob(data.content));
+
+    $scope.menuTag = $scope.post.getMenuItem();
+    $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
+    $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
+    $scope.tag = $scope.post.tags;
+    $scope.imagesHD = $scope.post.getImagesHD();
     $scope.$apply();
   });
+
+  function findLabelByValue(list, value) {
+	  for (var index = 0; index < list.length; i++) {
+		  if (list[index].value === value) {
+			  return list[index];
+		  }
+	  }
+  }
 
   $scope.save = function(post) {
     $rootScope.github.put(filePath(post.name), {
@@ -87,8 +101,7 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, 
 	  }
   };
 
-  $scope.images = [
-  ];
+  $scope.images = [];
 
   $scope.currentImage = $scope.images[0];
 

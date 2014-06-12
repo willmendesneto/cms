@@ -47,6 +47,13 @@ app.service('Post', function Post(_, jsyaml) {
         }
       };
 
+      self.getMenuItem = function() {
+        if (!self.content) {
+          return '';
+        }
+        return 'agricultura camponesa';
+      };
+
       self.setLabel = function(label) {
         if (!self.content) {
           return;
@@ -60,6 +67,13 @@ app.service('Post', function Post(_, jsyaml) {
         self.content.meta.label = label.value;
       };
 
+      self.getLabel = function() {
+        if (!self.content) {
+          return '';
+        }
+        return self.content.meta.label;
+      };
+	  
       self.setSection = function(section) {
         if (!self.content) {
           return;
@@ -69,8 +83,15 @@ app.service('Post', function Post(_, jsyaml) {
           self.content.meta.section = '';
           return;
         }
-
+		
         self.content.meta.section = section.value;
+      };
+	  
+      self.getSection = function() {
+        if (!self.content) {
+          return '';
+        }
+        return self.content.meta.section;
       };
 
       self.setImagesHD = function(imagesHD) {
@@ -84,6 +105,14 @@ app.service('Post', function Post(_, jsyaml) {
         }
 
         self.content.meta.images_hd = imagesHD;
+      };
+	  
+      self.getImagesHD = function() {
+        if (!self.content) {
+          return '';
+        }
+		/*jshint camelcase: false */
+        return self.content.meta.images_hd;
       };
 
       self.addNewTag = function(customTag) {
