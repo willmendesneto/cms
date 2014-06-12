@@ -28,8 +28,11 @@
 				<button ng-disabled="postForm.tag.$invalid" ng-click="processTag()">Adicionar</button>
 			</p>
 
-      <p>
-        <span class="tag" ng-repeat="tagPersonalizada in tagsPersonalizadas">{{ tagPersonalizada }}</span>
+      <p ng-repeat="tagPersonalizada in tagsPersonalizadas">
+        <span class="tag">
+          <button class="tag" ng-click="removeTag($index)">X</button>
+          <span>{{ tagPersonalizada }}</span>
+        </span>
       </p>
 
 			<p>
@@ -42,7 +45,7 @@
 			<p><a href="#/posts">Cancelar</a></p>
 		</form>
 	</div>
-	<div class="datapreview" style="display: none">
+	<div class="datapreview">
 		<pre>{{ post.convertContentToJekyllData() }}</pre>
 	</div>
 	<div style="clear:both">
