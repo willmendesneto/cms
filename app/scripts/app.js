@@ -14,7 +14,11 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/posts.html',
       controller: 'PostsCtrl'
     })
-    .when('/posts/:sha', {
+    .when('/post/:sha', {
+      templateUrl: 'views/post.html',
+      controller: 'PostCtrl'
+    })
+    .when('/post', {
       templateUrl: 'views/post.html',
       controller: 'PostCtrl'
     })
