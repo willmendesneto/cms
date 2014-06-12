@@ -1,7 +1,7 @@
 /* globals escape, unescape */
 'use strict';
 
-app.service('Post', function Post(_, jsyaml) {
+app.service('Post', function Post(_, jsyaml, CustomTag) {
 
   return {
     makePost: function(data) {
@@ -120,8 +120,11 @@ app.service('Post', function Post(_, jsyaml) {
           return;
         }
 
-        customTag = 'personalizada:'+customTag;
-        self.content.meta.tags.push(customTag);
+        var customTagJason = {'personalizada': customTag};
+        CustomTag.addNewCustomTag(customTagJason);
+
+        var customTagMeta = 'personalizada:'+customTag;
+        self.content.meta.tags.push(customTagMeta);
       };
 
       return self;

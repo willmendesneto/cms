@@ -86,4 +86,33 @@ describe('Controller: PostCtrl', function () {
     expect(scope.post.setLabel).toHaveBeenCalledWith(scope.label);
   });
 
+  describe('processTag', function(){
+
+    it('should call addNewTag', function(){
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      spyOn(scope.post, 'addNewTag');
+      scope.tag = 'newtag';
+      scope.processTag();
+
+      expect(scope.post.addNewTag).toHaveBeenCalledWith('newtag');
+    });
+
+    it('should add new tag', function(){
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      expect(scope.tagsPersonalizadas.length).toBe(0);
+      scope.tag ='newtag';
+      scope.processTag();
+      expect(scope.tagsPersonalizadas.length).toBe(1);
+    });
+
+    it('should not add the same tag twice', function(){
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      scope.tagsPersonalizadas = ['newtag'];
+      expect(scope.tagsPersonalizadas.length).toBe(1);
+      scope.tag ='newtag';
+      scope.processTag();
+      expect(scope.tagsPersonalizadas.length).toBe(1);
+    });
+  });
 });
+

@@ -1,6 +1,6 @@
 <div>
 	<div class="editor">
-		<form name="postForm" novalidate> 
+		<form name="postForm" novalidate>
 			<input type="text" class="post-title-input" ng-model="post.content.meta.title" />
 			<p>
 				<label for="menu-tag">Menu: </label>
@@ -25,8 +25,12 @@
 			<p>
 				<label for="tag">Tag: </label>
 				<input type="text" ng-model="tag" name="tag" required />
-				<button ng-disabled="postForm.tag.$invalid" ng-click="post.addNewTag(tag)" >Adicionar</button>
+				<button ng-disabled="postForm.tag.$invalid" ng-click="processTag()" >Adicionar</button>
 			</p>
+
+      <p>
+        <span class='tag' ng-repeat='tagPersonalizada in tagsPersonalizadas'>{{ tagPersonalizada }}</span>
+      </p>
 
 			<p>
 				<label for="imgFile">Imagem de Capa: </label>

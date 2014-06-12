@@ -30,6 +30,6 @@ describe('customtag factory', function(){
     spyOn(firebaseTags, '$add');
 
     CustomTag.addNewCustomTag(tag);
-    expect(firebaseTags.$add).toHaveBeenCalled();
+    expect(firebaseTags.$add).toHaveBeenCalledWith(tag);
   });
 });

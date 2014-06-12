@@ -21,9 +21,10 @@ describe('Service: Post', function () {
   beforeEach(module('cmsApp'));
 
   // instantiate service
-  var Post;
-  beforeEach(inject(function (_Post_) {
+  var Post, CustomTag;
+  beforeEach(inject(function (_Post_, _CustomTag_) {
     Post = _Post_;
+    CustomTag = _CustomTag_;
     spyOn(jsyaml, 'load').and.returnValue(dummyMeta);
     spyOn(jsyaml, 'dump').and.returnValue('metadata');
   }));
@@ -157,6 +158,16 @@ describe('Service: Post', function () {
 
       post.addNewTag('newTag');
       expect(post.content.meta.tags).toContain('personalizada:newTag');
+    });
+
+    it('should add tags to firebase service', function(){
+      var post = Post.makePost();
+      post.loadContentFromJekyllData(data);
+      post.content.meta.tags=[];
+      spyOn(CustomTag, 'addNewCustomTag');
+
+      post.addNewTag('newTag');
+      expect(CustomTag.addNewCustomTag).toHaveBeenCalledWith({'personalizada':'newTag'});
     });
   });
 

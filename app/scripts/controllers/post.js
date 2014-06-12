@@ -1,7 +1,7 @@
 /* globals alert */
 'use strict';
 
-app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, Image) {
+app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, _) {
 
   function findPost(sha) {
     return $rootScope.posts.filter(function(post) {
@@ -46,6 +46,9 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, 
   $scope.section = undefined;
   $scope.label = undefined;
   $scope.tag = '';
+  $scope.tagsPersonalizadas = [];
+
+
   $scope.imagesHD = undefined;
 
   $scope.$watch('label', function (newval) {
@@ -82,6 +85,13 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, 
 		  }
 	  }
   }
+  $scope.processTag = function(){
+    if(!_.contains($scope.tagsPersonalizadas, $scope.tag)){
+      $scope.post.addNewTag($scope.tag);
+      $scope.tagsPersonalizadas.push($scope.tag);
+    }
+    $scope.tag = '';
+  };
 
   $scope.save = function(post) {
     $rootScope.github.put(filePath(post.name), {
@@ -92,7 +102,7 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, 
       console.log('error data:', data);
     });
   };
-  
+
   $scope.uploadImage = function() {
 	  var postedFiles = document.getElementById('imgFile');
 	  if (postedFiles.files.length > 0) {
@@ -107,7 +117,7 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, 
 
   $scope.setCurrentImage = function (image) {
 	  $scope.currentImage = image;
-	  $window.alert('Utilize CTRL+C/CMD+C para copiar o endereço da imagem.');
+	  window.alert('Utilize CTRL+C/CMD+C para copiar o endereço da imagem.');
   };
 
   $scope.addImage = function (url) {
