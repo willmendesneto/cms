@@ -1,20 +1,59 @@
 /* globals jsyaml, _ */
 'use strict';
 
-var data = '---\n' +
-    'layout: post\n' +
-    'title: \'Post Title\'\n' +
-    'created: 1323977240\n' +
-    'images: []\n' +
-    'video:\n' +
-    'tags:\n' +
-    'section:\n' +
-    'label:\n' +
-    '- menu:menuitem\n' +
-    '---\n' +
-    'post content';
+
+describe('Service: New Post', function(){
+		/*jshint camelcase: false */
+  var dummyMeta = { layout: 'post',
+                    title: '',
+                    legacy_url: '',
+                    created: 0,
+                    images: '',
+                    video: '',
+                    tags: [],
+                    type: '',
+                    support_line: '',
+                    section: '',
+                    hat: '',
+                    label: '',
+                    images_hd: ''
+  };
+  
+  // load the service's module
+  beforeEach(module('cmsApp'));
+
+  var Post;
+  beforeEach(inject(function (_Post_) {
+    Post = _Post_;
+  }));
+  
+
+  describe('should create a new post', function(){
+    it('with default data', function() {
+      var post = Post.makePost();
+
+      post.create();
+
+      expect(post.content.text).toBe('');
+      expect(post.content.meta).toEqual(dummyMeta);
+    });
+  });
+});
 
 describe('Service: Post', function () {
+  var data = '---\n' +
+      'layout: post\n' +
+      'title: \'Post Title\'\n' +
+      'created: 1323977240\n' +
+      'images: []\n' +
+      'video:\n' +
+      'tags:\n' +
+      'section:\n' +
+      'label:\n' +
+      '- menu:menuitem\n' +
+      '---\n' +
+      'post content';
+
   var dummyMeta = {foo: 'bar'};
 
   // load the service's module

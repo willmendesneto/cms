@@ -1,7 +1,7 @@
 /* globals alert */
 'use strict';
 
-app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, _) {
+app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, Post, _) {
 
   function findPost(sha) {
     return $rootScope.posts.filter(function(post) {
@@ -9,12 +9,20 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, _)
     }).shift(0);
   }
 
+  function newPost(){
+    return Post.makePost();
+  }
+
   function contentPath(sha) {
     return 'https://api.github.com/repos/movimento-sem-terra/site-novo/git/blobs/'+sha;
   }
 
   var sha = $routeParams.sha;
-  $scope.post = findPost(sha);
+  if (sha) {
+    $scope.post = findPost(sha);
+  } else {
+    $scope.post = newPost();
+  }
 
   $scope.menuTagOptions = [
     'agricultura camponesa',
@@ -67,8 +75,27 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, _)
     $scope.post.setImagesHD(newval);
   });
 
-  $rootScope.github.get(contentPath(sha)).done(function(data) {
-    $scope.post.loadContentFromJekyllData(atob(data.content));
+  function findLabelByValue(list, value) {
+	  for (var index = 0; index < list.length; index++) {
+		  if (list[index].value === value) {
+			  return list[index];
+		  }
+	  }
+  }
+
+  if(sha){
+    $rootScope.github.get(contentPath(sha)).done(function(data) {
+      $scope.post.loadContentFromJekyllData(atob(data.content));
+
+      $scope.menuTag = $scope.post.getMenuItem();
+      $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
+      $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
+      $scope.tag = $scope.post.tags;
+      $scope.imagesHD = $scope.post.getImagesHD();
+      $scope.$apply();
+    });
+  }else{
+    $scope.post.create();
 
     $scope.menuTag = $scope.post.getMenuItem();
     $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
@@ -76,14 +103,6 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, _)
     $scope.tag = $scope.post.tags;
     $scope.imagesHD = $scope.post.getImagesHD();
     $scope.$apply();
-  });
-
-  function findLabelByValue(list, value) {
-	  for (var index = 0; index < list.length; index++) {
-		  if (list[index].value === value) {
-			  return list[index];
-		  }
-	  }
   }
   $scope.processTag = function(){
     if(!_.contains($scope.tagsPersonalizadas, $scope.tag)){

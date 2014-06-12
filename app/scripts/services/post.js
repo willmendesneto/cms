@@ -16,6 +16,27 @@ app.service('Post', function Post(_, jsyaml, CustomTag) {
         };
       };
 
+      self.create = function(){
+		/*jshint camelcase: false */
+        self.content = {
+            text: '',
+            meta: { layout: 'post',
+                    title: '',
+                    legacy_url: '',
+                    created: 0,
+                    images: '',
+                    video: '',
+                    tags: [],
+                    type: '',
+                    support_line: '',
+                    section: '',
+                    hat: '',
+                    label: '',
+                    images_hd: ''
+            }
+          };
+      };
+
       self.convertContentToJekyllData = function () {
         if (!self.content) {
           return '';
