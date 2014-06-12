@@ -76,7 +76,7 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, 
   });
 
   function findLabelByValue(list, value) {
-	  for (var index = 0; index < list.length; i++) {
+	  for (var index = 0; index < list.length; index++) {
 		  if (list[index].value === value) {
 			  return list[index];
 		  }
