@@ -208,6 +208,19 @@ describe('Service: Post', function () {
       post.addNewTag('newTag');
       expect(CustomTag.addNewCustomTag).toHaveBeenCalledWith({'personalizada':'newTag'});
     });
+
+    it('should delete custom tag', function(){
+      var post = Post.makePost();
+      post.loadContentFromJekyllData(data);
+
+      post.content.meta.tags = [];
+      post.addNewTag('newTag');
+      expect(post.content.meta.tags).toContain('personalizada:newTag');
+
+      post.deleteTag('newTag');
+      expect(post.content.meta.tags).not.toContain('personalizada:newTag');
+    });
+
   });
 
   describe('setting the label', function() {

@@ -94,7 +94,7 @@ app.service('Post', function Post(_, jsyaml, CustomTag) {
         }
         return self.content.meta.label;
       };
-	  
+
       self.setSection = function(section) {
         if (!self.content) {
           return;
@@ -104,10 +104,10 @@ app.service('Post', function Post(_, jsyaml, CustomTag) {
           self.content.meta.section = '';
           return;
         }
-		
+
         self.content.meta.section = section.value;
       };
-	  
+
       self.getSection = function() {
         if (!self.content) {
           return '';
@@ -127,7 +127,7 @@ app.service('Post', function Post(_, jsyaml, CustomTag) {
 
         self.content.meta.images_hd = imagesHD;
       };
-	  
+
       self.getImagesHD = function() {
         if (!self.content) {
           return '';
@@ -146,6 +146,13 @@ app.service('Post', function Post(_, jsyaml, CustomTag) {
 
         var customTagMeta = 'personalizada:'+customTag;
         self.content.meta.tags.push(customTagMeta);
+      };
+
+      self.deleteTag = function(customTag){
+        if (!self.content.meta.tags) {
+          return;
+        }
+        self.content.meta.tags = _.without(self.content.meta.tags, 'personalizada:'+customTag);
       };
 
       return self;

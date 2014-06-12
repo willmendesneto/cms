@@ -58,6 +58,17 @@ span.tag {
   margin-right: 5px;
 }
 
+button.tag{
+  background: linear-gradient(#961913, #7f1510);
+  color: white;
+  border: none;
+  margin: 0;
+  padding: 3px;
+  border-radius: 0.25em;
+  float: left;
+  vertical-align: middle;
+}
+
 /*Images*/
 
 #albumImage {

@@ -105,6 +105,12 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, Po
     $scope.tag = '';
   };
 
+  $scope.removeTag = function(index){
+    var customTag = $scope.tagsPersonalizadas[index];
+    $scope.post.deleteTag(customTag);
+    $scope.tagsPersonalizadas.splice(index,1);
+  };
+
   $scope.save = function(post) {
     $rootScope.github.put(filePath(post.name), {
       data: JSON.stringify(post.commitData())

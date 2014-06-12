@@ -114,5 +114,26 @@ describe('Controller: PostCtrl', function () {
       expect(scope.tagsPersonalizadas.length).toBe(1);
     });
   });
+
+  describe('removeTag', function(){
+
+    it('should call deleteTag', function(){
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      spyOn(scope.post, 'deleteTag');
+      scope.tagsPersonalizadas = ['newtag'];
+      scope.removeTag(0);
+
+      expect(scope.post.deleteTag).toHaveBeenCalledWith('newtag');
+    });
+
+    it('should delete tag', function(){
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      scope.tag ='newtag';
+      scope.processTag();
+      expect(scope.tagsPersonalizadas.length).toBe(1);
+      scope.removeTag(0);
+      expect(scope.tagsPersonalizadas.length).toBe(0);
+    });
+  });
 });
 
