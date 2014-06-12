@@ -60,6 +60,10 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, 
     $scope.post.setSection(newval);
   });
 
+  $scope.$watch('imagesHD', function (newval) {
+    $scope.post.setImagesHD(newval);
+  });
+
   $rootScope.github.get(contentPath(sha)).done(function(data) {
     $scope.post.loadContentFromJekyllData(atob(data.content));
     $scope.$apply();
