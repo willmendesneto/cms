@@ -18,11 +18,7 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, Po
   }
 
   var sha = $routeParams.sha;
-  if (sha) {
-    $scope.post = findPost(sha);
-  } else {
-    $scope.post = newPost();
-  }
+  $scope.post = (sha) ? findPost(sha) : newPost();
 
   $scope.menuTagOptions = [
     'agricultura camponesa',
@@ -83,26 +79,23 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, Po
 	  }
   }
 
+  function fillContent(post){
+    $scope.menuTag = post.getMenuItem();
+    $scope.section = findLabelByValue($scope.sectionOptions, post.getSection());
+    $scope.label = findLabelByValue($scope.labelOptions, post.getLabel());
+    $scope.tag = post.tags;
+    $scope.imagesHD = post.getImagesHD();
+    $scope.$apply();
+  }
+
   if(sha){
     $rootScope.github.get(contentPath(sha)).done(function(data) {
       $scope.post.loadContentFromJekyllData(atob(data.content));
-
-      $scope.menuTag = $scope.post.getMenuItem();
-      $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
-      $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
-      $scope.tag = $scope.post.tags;
-      $scope.imagesHD = $scope.post.getImagesHD();
-      $scope.$apply();
+      fillContent($scope.post);
     });
   }else{
     $scope.post.create();
-
-    $scope.menuTag = $scope.post.getMenuItem();
-    $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
-    $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
-    $scope.tag = $scope.post.tags;
-    $scope.imagesHD = $scope.post.getImagesHD();
-    $scope.$apply();
+    fillContent($scope.post);
   }
   $scope.processTag = function(){
     if(!_.contains($scope.tagsPersonalizadas, $scope.tag)){
