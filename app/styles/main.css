@@ -46,16 +46,18 @@ input.post-title-input {
 /*Images*/
 
 #albumImage {
-	width: 100%;
+	width: 95%;
 	margin-bottom: 10px;
 	border-style: solid;
 	border-width: 1px;
+	padding:10px;
 }
 
 #thumbWrapper {
 	height: 310px;
 	width: 100%;
 	overflow: auto;
+	margin-top:10px;
 }
 
 #thumbList {
@@ -67,6 +69,8 @@ input.post-title-input {
 
 #thumbList img {
 	height: 100px;
+	border-style: solid;
+	border-width: 2px;
 }
 
 #thumbList li {
@@ -79,4 +83,8 @@ input.post-title-input {
 
 #thumbList li:hover {
 	opacity: 0.5;
+}
+
+#currentURL {
+	width:375px;
 }

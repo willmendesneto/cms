@@ -1,7 +1,7 @@
 /* globals alert */
 'use strict';
 
-app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image) {
+app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, $window, Image) {
 
   function findPost(sha) {
     return $rootScope.posts.filter(function(post) {
@@ -79,7 +79,7 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image) {
 	  var postedFiles = document.getElementById('imgFile');
 	  if (postedFiles.files.length > 0) {
 		  var file = postedFiles.files[0];
-		  Image.send(file, addImage);
+		  Image.send(file, $scope.addImage);
 	  }
   };
 
@@ -90,11 +90,13 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image) {
 
   $scope.setCurrentImage = function (image) {
 	  $scope.currentImage = image;
+	  $window.alert('Utilize CTRL+C/CMD+C para copiar o endereço da imagem.');
   };
 
-  function addImage(url) {
-	  $scope.images.push({image : url, thumbnail: url, description: url});
-  }
+  $scope.addImage = function (url) {
+	  var image = {image : url, thumbnail: url, description: url};
+	  $scope.images.push(image);
+  };
 
   function filePath(name) {
     return '/repos/movimento-sem-terra/site-novo/contents/_drafts/'+name;
