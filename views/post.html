@@ -29,8 +29,9 @@
 			</p>
 
 			<p>
-				<label for="imgFile">Imagem: </label>
-				<input ng-model="images_hd" type="text">
+				<label for="imgFile">Imagem de Capa: </label>
+				<input class="imageURL" ng-model="imagesHD" type="text"><br>
+				<img id="coverImage" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show="imagesHD">
 			</p>
 			<p><textarea ck-editor="" ng-model="post.content.text"></textarea></p>
 			<p><input type="submit" value="Salvar" ng-click="save(post)"></p>
@@ -48,7 +49,7 @@
 			<button ng-click="uploadImage()">Adicionar</button>
 		</div>
 		<div id="header">
-			<input id="currentURL" select-on-focus="" type="text" value="{{currentImage.image}}">
+			<input class="imageURL" select-on-focus="" type="text" value="{{currentImage.image}}">
 		</div>
 		<div id="thumbWrapper">
 			<ul id="thumbList">
