@@ -40,9 +40,14 @@
 				<input class="imageURL" ng-model="imagesHD" type="text"><br>
 				<img id="coverImage" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show="imagesHD">
 			</p>
-			<p><textarea ck-editor="" ng-model="post.content.text"></textarea></p>
-			<p><input type="submit" value="Salvar" ng-click="save(post)"></p>
-			<p><a href="#/posts">Cancelar</a></p>
+
+			<p class="ckeditor"><textarea ck-editor="" ng-model="post.content.text"></textarea></p>
+
+			<p>
+        <input type="submit" value="Salvar" ng-click="save(post)">
+        <a href="#/posts">Cancelar</a></p>
+      
+
 		</form>
 	</div>
 
@@ -50,7 +55,6 @@
 		<pre>{{ post.convertContentToJekyllData() }}</pre>
 	</div>
 
-	<div style="clear:both">
 	<div id="albumImage">
 		<div>
 			<label for="imgFile">Imagem: </label>
@@ -68,4 +72,4 @@
 			</ul>
 		</div>
 	</div>
-</div></div>
+</div>
