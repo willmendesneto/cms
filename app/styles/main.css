@@ -44,6 +44,7 @@ input.post-title-input {
 }
 
 /* Tags */
+
 span.tag {
   background-color: #006400;
   padding: .2em .6em .3em;
@@ -56,67 +57,73 @@ span.tag {
   vertical-align: baseline;
   border-radius: .25em;
   margin-right: 5px;
+  float: left;
 }
 
-button.tag{
-  background: linear-gradient(#961913, #7f1510);
-  color: white;
-  border: none;
+button.tag {
+  color: darkgray;
+  background-color: #006400;
+  border: solid;
   margin: 0;
-  padding: 3px;
-  border-radius: 0.25em;
+  padding: 1px;
+  border-radius: 1.25em;
   float: left;
   vertical-align: middle;
+}
+
+span.specificTag {
+  margin-left: 3px;
+  vertical-align: sub;
 }
 
 /*Images*/
 
 #albumImage {
-	width: 95%;
-	margin-bottom: 10px;
-	border-style: solid;
-	border-width: 1px;
-	padding:10px;
+  width: 95%;
+  margin-bottom: 10px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
 }
 
 #thumbWrapper {
-	height: 310px;
-	width: 100%;
-	overflow: auto;
-	margin-top:10px;
+  height: 310px;
+  width: 100%;
+  overflow: auto;
+  margin-top: 10px;
 }
 
 #thumbList {
-	height: 310px;
-	white-space: nowrap;
-	margin: 0px;
-	padding: 0px;
+  height: 310px;
+  white-space: nowrap;
+  margin: 0px;
+  padding: 0px;
 }
 
 #thumbList img {
-	height: 100px;
-	border-style: solid;
-	border-width: 2px;
+  height: 100px;
+  border-style: solid;
+  border-width: 2px;
 }
 
 #thumbList li {
-	display: inline;
-	list-style-type: none;
-	padding-left: 2px;
-	padding-right: 2px;
-	cursor: pointer;
+  display: inline;
+  list-style-type: none;
+  padding-left: 2px;
+  padding-right: 2px;
+  cursor: pointer;
 }
 
 #thumbList li:hover {
-	opacity: 0.5;
+  opacity: 0.5;
 }
 
 .imageURL {
-	width:375px;
+  width: 375px;
 }
 
 #coverImage {
-	height: 100px;
-	border-style: solid;
-	border-width: 2px;
+  height: 100px;
+  border-style: solid;
+  border-width: 2px;
 }
