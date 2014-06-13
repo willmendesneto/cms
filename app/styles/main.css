@@ -18,6 +18,7 @@ header h1 {
 
 main {
   margin: 1em;
+  margin-left: 74px;
 }
 
 div.editor {
@@ -76,6 +77,9 @@ span.specificTag {
   vertical-align: sub;
 }
 
+p.tag{
+  padding-bottom: 24px;
+}
 /*Images*/
 
 #albumImage {
