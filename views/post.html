@@ -28,14 +28,12 @@
 				<button ng-disabled="postForm.tag.$invalid" ng-click="processTag()">Adicionar</button>
 			</p>
 
-      <p ng-repeat="tagPersonalizada in tagsPersonalizadas">
-        <span class="tag">
+      <p class="tag">
+        <span class="tag" ng-repeat="tagPersonalizada in tagsPersonalizadas">
           <button class="tag" ng-click="removeTag($index)">X</button>
           <span class="specificTag">{{ tagPersonalizada }}</span>
         </span>
       </p>
-
-      
 
 			<p>
 				<label for="imgFile">Imagem de Capa: </label>
@@ -47,9 +45,11 @@
 			<p><a href="#/posts">Cancelar</a></p>
 		</form>
 	</div>
+
 	<div class="datapreview" style="display:none">
 		<pre>{{ post.convertContentToJekyllData() }}</pre>
 	</div>
+
 	<div style="clear:both">
 	<div id="albumImage">
 		<div>
