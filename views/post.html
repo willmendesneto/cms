@@ -31,9 +31,11 @@
       <p ng-repeat="tagPersonalizada in tagsPersonalizadas">
         <span class="tag">
           <button class="tag" ng-click="removeTag($index)">X</button>
-          <span>{{ tagPersonalizada }}</span>
+          <span class="specificTag">{{ tagPersonalizada }}</span>
         </span>
       </p>
+
+      
 
 			<p>
 				<label for="imgFile">Imagem de Capa: </label>
