@@ -22,6 +22,13 @@
             <option value="">-- Nenhuma --</option>
           </select>
         </p>
+
+        <p>
+        <label for="imgFile">Capa: </label>
+          <input name="imgFile" ng-model="imagesHD" type='text' /><br/>
+          <img id='coverImage' ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
+        </p>
+
         <p>
           <label for="tag">Tag: </label>
           <input type="text" ng-model="tag" name="tag" required />
@@ -34,13 +41,7 @@
             <span class='specificTag'>{{ tagPersonalizada }}</span>
           </span>
         </p>
-
-        <p>
-          <label for="imgFile">Imagem de Capa: </label>
-          <input name="imgFile" ng-model="imagesHD" type='text' /><br/>
-          <img id='coverImage' ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
-        </p>
-
+        <br/>
 
         <p>
           <input type="submit" value="Salvar" ng-click="save(post)" />
