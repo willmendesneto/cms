@@ -1,59 +1,57 @@
 <div>
-	<div class="editor">
 		<form name="postForm" novalidate="">
-			<input type="text" class="post-title-input" ng-model="post.content.meta.title">
-			<p>
-				<label for="menu-tag">Menu: </label>
-				<select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
-					<option value="">-- Nenhum --</option>
-				</select>
-			</p>
+      <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título">
+      <div class="form">
+        <p>
+          <label for="menu-tag">Menu: </label>
+          <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
+            <option value="">-- Nenhum --</option>
+          </select>
+        </p>
 
-			<p>
-				<label for="section">Sessão: </label>
-				<select ng-model="section" ng-options="opt.label for opt in sectionOptions">
-					<option value="">-- Nenhuma --</option>
-				</select>
-			</p>
+        <p>
+          <label for="section">Sessão: </label>
+          <select ng-model="section" ng-options="opt.label for opt in sectionOptions">
+            <option value="">-- Nenhuma --</option>
+          </select>
+        </p>
 
-			<p>
-				<label for="label">Rótulo: </label>
-				<select ng-model="label" ng-options="opt.label for opt in labelOptions">
-					<option value="">-- Nenhuma --</option>
-				</select>
-			</p>
-			<p>
-				<label for="tag">Tag: </label>
-				<input type="text" ng-model="tag" name="tag" required="">
-				<button ng-disabled="postForm.tag.$invalid" ng-click="processTag()">Adicionar</button>
-			</p>
+        <p>
+          <label for="label">Rótulo: </label>
+          <select ng-model="label" ng-options="opt.label for opt in labelOptions">
+            <option value="">-- Nenhuma --</option>
+          </select>
+        </p>
+        <p>
+          <label for="tag">Tag: </label>
+          <input type="text" ng-model="tag" name="tag" required="">
+          <button ng-disabled="postForm.tag.$invalid" ng-click="processTag()">Adicionar</button>
+        </p>
 
-      <p class="tag">
-        <span class="tag" ng-repeat="tagPersonalizada in tagsPersonalizadas">
-          <button class="tag" ng-click="removeTag($index)">X</button>
-          <span class="specificTag">{{ tagPersonalizada }}</span>
-        </span>
-      </p>
+        <p class="tag">
+          <span class="tag" ng-repeat="tagPersonalizada in tagsPersonalizadas">
+            <button class="tag" ng-click="removeTag($index)">X</button>
+            <span class="specificTag">{{ tagPersonalizada }}</span>
+          </span>
+        </p>
 
-			<p>
-				<label for="imgFile">Imagem de Capa: </label>
-				<input class="imageURL" ng-model="imagesHD" type="text"><br>
-				<img id="coverImage" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show="imagesHD">
-			</p>
+        <p>
+          <label for="imgFile">Imagem de Capa: </label>
+          <input name="imgFile" ng-model="imagesHD" type="text"><br>
+          <img id="coverImage" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show="imagesHD">
+        </p>
 
-			<p class="ckeditor"><textarea ck-editor="" ng-model="post.content.text"></textarea></p>
 
-			<p>
-        <input type="submit" value="Salvar" ng-click="save(post)">
-        <a href="#/posts">Cancelar</a></p>
-      
+        <p>
+          <input type="submit" value="Salvar" ng-click="save(post)">
+          <a href="#/posts">Cancelar</a></p>
+        
+      </div>
 
+      <div class="editor">
+        <textarea ck-editor="" ng-model="post.content.text"></textarea>
+      </div>
 		</form>
-	</div>
-
-	<div class="datapreview" style="display:none">
-		<pre>{{ post.convertContentToJekyllData() }}</pre>
-	</div>
 
 	<div id="albumImage">
 		<div>
@@ -71,5 +69,9 @@
 				</li>
 			</ul>
 		</div>
+	</div>
+
+	<div class="datapreview" style="display:none">
+		<pre>{{ post.convertContentToJekyllData() }}</pre>
 	</div>
 </div>
