@@ -33,6 +33,15 @@ angular.module('cmsApp', [
       .otherwise({
         redirectTo: '/auth'
       });
-  });
+  })
+  .run(['$rootScope', '$location', function ($rootScope, $location) {
+    $rootScope.$on('$locationChangeStart', function () {
+      $rootScope.error = null;
+      if (!$rootScope.github) {
+        $location.path('/auth').replace();
+        return false;
+      }
+    });
 
+  }]);
 
