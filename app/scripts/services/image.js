@@ -16,11 +16,6 @@ app.factory('Image', function($http, $rootScope, IMAGE_SERVICE_URL, FormDataObje
           'myfile': file
         }
       }).success(function(data,status,headers, config){
-        console.log('success');
-        console.log(data);
-        console.log(status);
-        console.log(headers);
-        console.log(config);
         success(data);
       }).
       error(function(data,status,headers){
