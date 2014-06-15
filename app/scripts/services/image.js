@@ -2,7 +2,7 @@
 
 app.factory('Image', function($http, $rootScope, IMAGE_SERVICE_URL, FormDataObject){
   var Image = {
-    send: function(file, success) {
+    send: function(file, image_index, success) {
       /*jshint camelcase: false */
       $http({
         url: IMAGE_SERVICE_URL,
@@ -16,7 +16,7 @@ app.factory('Image', function($http, $rootScope, IMAGE_SERVICE_URL, FormDataObje
           'myfile': file
         }
       }).success(function(data,status,headers, config){
-        success(data);
+        success(image_index,data);
       }).error(function(data,status,headers){
         console.log('error');
         console.log(data);
