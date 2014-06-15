@@ -1,7 +1,7 @@
 /* globals alert */
 'use strict';
 
-app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, Post, _) {
+app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _) {
 
   function findPost(sha) {
     return $rootScope.posts.filter(function(post) {
@@ -119,28 +119,6 @@ app.controller('PostCtrl', function ($scope, $rootScope, $routeParams, Image, Po
     }).fail(function(data) {
       console.log('error data:', data);
     });
-  };
-
-  $scope.uploadImage = function() {
-	  var postedFiles = document.getElementById('imgFile');
-	  if (postedFiles.files.length > 0) {
-		  var file = postedFiles.files[0];
-		  Image.send(file, $scope.addImage);
-	  }
-  };
-
-  $scope.images = [];
-
-  $scope.currentImage = $scope.images[0];
-
-  $scope.setCurrentImage = function (image) {
-	  $scope.currentImage = image;
-	  window.alert('Utilize CTRL+C/CMD+C para copiar o endereço da imagem.');
-  };
-
-  $scope.addImage = function (url) {
-	  var image = {image : url, thumbnail: url, description: url};
-	  $scope.images.push(image);
   };
 
   function filePath(name) {
