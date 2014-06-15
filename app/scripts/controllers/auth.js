@@ -1,7 +1,8 @@
 /* globals alert */
 'use strict';
 
-app.controller('AuthCtrl', function ($scope, $rootScope, $location, oauth) {
+angular.module('cmsApp')
+  .controller('AuthCtrl', function ($scope, $rootScope, $location, oauth) {
     $scope.authenticate = function() {
       oauth.popup('github', function(err, res) {
         if(err) {

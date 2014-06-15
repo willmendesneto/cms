@@ -1,5 +1,6 @@
 'use strict';
 
-app.factory('jsyaml', function () {
+angular.module('cmsApp')
+  .factory('jsyaml', function () {
     return window.jsyaml;
   });

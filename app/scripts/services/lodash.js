@@ -1,5 +1,6 @@
 'use strict';
 
-app.factory('_', function () {
+angular.module('cmsApp')
+  .factory('_', function () {
     return window._;
   });
