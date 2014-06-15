@@ -37,13 +37,15 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "~0.2.0",
     "time-grunt": "~0.2.1",
-    "karma-chrome-launcher": "^0.1.4"
+    "karma-chrome-launcher": "^0.1.4",
+    "protractor": "~0.24.1"
   },
   "engines": {
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test",
+    "test": "grunt test && ./node_modules/protractor/bin/protractor protractor_conf.js",
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/protractor/bin/webdriver-manager update && cp ./node_modules/protractor/example/chromeOnlyConf.js protractor_conf.js",
     "prepublish": "./node_modules/.bin/bower install"
   }
 }
