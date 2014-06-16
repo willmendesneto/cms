@@ -1,5 +1,4 @@
 /*'use strict';
-
 describe('Controller: PostsCtrl', function () {
 
   // load the controller's module
