@@ -54,10 +54,10 @@
       </div>
 		</form>
 
-	<div id="albumImage">
+	<div id="albumImage" ng-controller="UploadCtrl">
 		<div>
 			<label for="imgFile">Imagem: </label>
-			<input id="imgFile" type="file">
+			<input id="imgFile" type="file" upload="" file="file">
 			<button ng-click="uploadImage()">Adicionar</button>
 		</div>
 		<div id="header">

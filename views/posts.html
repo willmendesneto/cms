@@ -1,11 +1,34 @@
-<p>
-  <label>Buscar: </label>
-  <input type="text" ng-model="searchTerm">
-  <a href="#/post">Novo</a>
-</p>
+<form autocomplete="off" role="form">
+    <label for="search">Buscar: </label>
+    <input type="search" name="search" id="search" placeholder="Buscar..." data-ng-model="search">
+</form>
+<a href="#/post">Novo</a>
 
-<ul>
-  <li ng-repeat="post in posts|filter:searchTerm track by $index">
-    <a href="#/post/{{ post.sha }}">{{ post.name }}</a>
-  </li>
-</ul>
+<div ng-show="filteredData.length > 0">
+  <table>
+    <thead>
+      <tr>
+        <th class="table-order" data-ng-class="{asc: reverse === true && predicate === 'name', desc: reverse === false && predicate === 'name'}" data-ng-click="predicate = 'name'; reverse=!reverse; ">Título</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-ng-repeat="post in filteredData = (posts | orderBy:predicate:reverse | filter:search | startFrom:currentPage*pageSize | limitTo:pageSize) track by post.sha">
+        <td>{{post.name}}</td>
+        <td>
+          <a href="#/post/{{ post.sha }}">EDITAR</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div data-ng-if="numberOfPages() > 1">
+    <button ng-disabled="currentPage === 0" ng-click="previousPage()">
+        Anterior
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button ng-disabled="currentPage >= numberOfPages() - 1" ng-click="nextPage()">
+        Próximo
+    </button>
+  </div>
+</div>
