@@ -25,7 +25,10 @@ angular.module('cmsApp')
       var draftExpression = new RegExp('^https?://.*?/_drafts/?');
       var publishedExpression = new RegExp('^https?://.*?/_posts/?');
       /*jshint camelcase: false */
-      if (draftExpression.exec($scope.post.html_url)) {
+      if (typeof $scope.post.html_url === 'undefined') {
+        return 'NOVO';
+      }
+      else if (draftExpression.exec($scope.post.html_url)) {
         return 'RASCUNHO';
       }
       else if (publishedExpression.exec($scope.post.html_url)) {
