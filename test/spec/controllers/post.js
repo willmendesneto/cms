@@ -8,6 +8,8 @@ describe('Controller: PostCtrl', function () {
   var PostCtrl,
     scope,
     Post,
+    DRAFT_URL,
+    PUBLISH_URL,
     PostBuilder = {},
     githubMock = {
     get: jasmine.createSpy().and.callFake(function () {
@@ -17,9 +19,11 @@ describe('Controller: PostCtrl', function () {
     })
   };
 
-  beforeEach(inject(function ($rootScope, $controller, _Post_) {
+  beforeEach(inject(function ($rootScope, $controller, _Post_, _DRAFT_URL_, _PUBLISH_URL_) {
     scope = $rootScope.$new();
     Post = _Post_;
+    DRAFT_URL = _DRAFT_URL_;
+    PUBLISH_URL = _PUBLISH_URL_;
     $rootScope.posts = [];
     $rootScope.github = githubMock;
 
@@ -135,5 +139,25 @@ describe('Controller: PostCtrl', function () {
       expect(scope.tagsPersonalizadas.length).toBe(0);
     });
   });
+
+  describe('save/publish a post ', function() {
+
+    it('should save a post in draft', function() {
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      spyOn(scope, 'save');
+      var url = DRAFT_URL + scope.post.name;
+      scope.draft(scope.post);
+      expect(scope.save).toHaveBeenCalledWith(scope.post, url);
+    });
+
+    it('should publish a post', function() {
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      spyOn(scope, 'save');
+      var url = PUBLISH_URL + scope.post.name;
+      scope.publish(scope.post);
+      expect(scope.save).toHaveBeenCalledWith(scope.post, url);
+    });
+  });
+
 });
 

@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DRAFT_URL) {
+  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DRAFT_URL, PUBLISH_URL) {
 
     function findPost(sha) {
       return $rootScope.posts.filter(function(post) {
@@ -113,8 +113,8 @@ angular.module('cmsApp')
       $scope.tagsPersonalizadas.splice(index,1);
     };
 
-    $scope.save = function(post) {
-      $rootScope.github.put(filePath(post.name), {
+    $scope.save = function(post, path) {
+      $rootScope.github.put(path, {
         data: JSON.stringify(post.commitData())
       }).done(function() {
         alert('Post salvo com sucesso!');
@@ -123,7 +123,14 @@ angular.module('cmsApp')
       });
     };
 
-    function filePath(name) {
-      return DRAFT_URL +name;
-    }
+    $scope.publish = function(post) {
+      var url = PUBLISH_URL + post.name;
+      $scope.save(post, url);
+    };
+
+    $scope.draft = function(post) {
+      var url = DRAFT_URL + post.name;
+      $scope.save(post, url);
+    };
+
   });
