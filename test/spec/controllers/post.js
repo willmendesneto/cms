@@ -166,21 +166,21 @@ describe('Controller: PostCtrl', function () {
       /*jshint camelcase: false */
       scope.post = PostBuilder.buildAndLoadJekyllData();
       scope.post.html_url = 'https://laskjdfl;sjdfl;ksja;lkfjsa/_drafts/l;sadjfl;sakjdflj';
-      expect(scope.isPublished()).toBe('RASCUNHO');
+      expect(scope.postStatus()).toBe('RASCUNHO');
     });
 
     it('should be PUBLICADO when post is published', function(){
       /*jshint camelcase: false */
       scope.post = PostBuilder.buildAndLoadJekyllData();
       scope.post.html_url = 'https://laskjdfl;sjdfl;ksja;lkfjsa/_posts/l;sadjfl;sakjdflj';
-      expect(scope.isPublished()).toBe('PUBLICADO');
+      expect(scope.postStatus()).toBe('PUBLICADO');
     });
 
     it('should be empty when post is not published and not draft', function(){
       /*jshint camelcase: false */
       scope.post = PostBuilder.buildAndLoadJekyllData();
       scope.post.html_url = 'https://laskjdfl;sjdfl;ksja;lkfjsa/_xxxxx/l;sadjfl;sakjdflj';
-      expect(scope.isPublished()).toBe('');
+      expect(scope.postStatus()).toBe('');
     });
   });
 });

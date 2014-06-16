@@ -21,9 +21,7 @@ angular.module('cmsApp')
     var sha = $routeParams.sha;
     $scope.post = (sha) ? findPost(sha) : newPost();
 
-    $scope.status = $scope.isPublished;
-
-    $scope.isPublished = function(){
+    $scope.postStatus = function(){
       var draftExpression = new RegExp('^https?://.*?/_drafts/?');
       var publishedExpression = new RegExp('^https?://.*?/_posts/?');
       /*jshint camelcase: false */
@@ -68,7 +66,6 @@ angular.module('cmsApp')
     $scope.label = undefined;
     $scope.tag = '';
     $scope.tagsPersonalizadas = [];
-
 
     $scope.imagesHD = undefined;
 
