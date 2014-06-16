@@ -1,76 +1,79 @@
 <div>
 		<form name="postForm" novalidate="">
       <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título">
-      <div class="form">
-        <p>
-          <label for="menu-tag">Menu: </label>
-          <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
-            <option value="">-- Nenhum --</option>
-          </select>
-        </p>
+      <section>
+        <div class="form">
+          <p>
+            <label for="menu-tag">Menu: </label>
+            <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
+              <option value="">-- Nenhum --</option>
+            </select>
+          </p>
 
-        <p>
-          <label for="section">Sessão: </label>
-          <select ng-model="section" ng-options="opt.label for opt in sectionOptions">
-            <option value="">-- Nenhuma --</option>
-          </select>
-        </p>
+          <p>
+            <label for="section">Sessão: </label>
+            <select ng-model="section" ng-options="opt.label for opt in sectionOptions">
+              <option value="">-- Nenhuma --</option>
+            </select>
+          </p>
 
-        <p>
-          <label for="label">Rótulo: </label>
-          <select ng-model="label" ng-options="opt.label for opt in labelOptions">
-            <option value="">-- Nenhuma --</option>
-          </select>
-        </p>
+          <p>
+            <label for="label">Rótulo: </label>
+            <select ng-model="label" ng-options="opt.label for opt in labelOptions">
+              <option value="">-- Nenhuma --</option>
+            </select>
+          </p>
 
-        <p>
-        <label for="imgFile">Capa: </label>
-          <input name="imgFile" ng-model="imagesHD" type="text"><br>
-          <img id="coverImage" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show="imagesHD">
-        </p>
+          <p>
+          <label for="imgFile">Capa: </label>
+            <input name="imgFile" ng-model="imagesHD" type="text"><br>
+            <img id="coverImage" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show="imagesHD">
+          </p>
 
-        <p>
-          <label for="tag">Tag: </label>
-          <input type="text" ng-model="tag" name="tag" required="">
-          <button ng-disabled="postForm.tag.$invalid" ng-click="processTag()">Adicionar</button>
-        </p>
+          <p>
+            <label for="tag">Tag: </label>
+            <input type="text" ng-model="tag" name="tag" required="">
+            <button ng-disabled="postForm.tag.$invalid" ng-click="processTag()">Adicionar</button>
+          </p>
 
-        <p class="tag">
-          <span class="tag" ng-repeat="tagPersonalizada in tagsPersonalizadas">
-            <button class="tag" ng-click="removeTag($index)">X</button>
-            <span class="specificTag">{{ tagPersonalizada }}</span>
-          </span>
-        </p>
-        <br>
+          <p class="tag">
+            <span class="tag" ng-repeat="tagPersonalizada in tagsPersonalizadas">
+              <button class="tag" ng-click="removeTag($index)">X</button>
+              <span class="specificTag">{{ tagPersonalizada }}</span>
+            </span>
+          </p>
+          <br>
 
-        <p>
-          <input type="submit" value="Salvar" ng-click="save(post)">
-          <a href="#/posts">Cancelar</a></p>
-        
-      </div>
+          <p>
+            <input type="submit" value="Salvar" ng-click="save(post)">
+            <a href="#/posts">Cancelar</a></p>
+          
 
-      <div class="editor">
-        <textarea ck-editor="" ng-model="post.content.text"></textarea>
-      </div>
+          <div id="albumImage" ng-controller="UploadCtrl">
+            <div>
+              <label for="imgFile">Imagem: </label>
+              <input id="imgFile" type="file" upload="" file="file">
+              <button ng-click="uploadImage()">Adicionar</button>
+            </div>
+            <div id="header">
+              <input class="imageURL" select-on-focus="" type="text" value="{{currentImage.image}}">
+            </div>
+            <div id="thumbWrapper">
+              <ul id="thumbList">
+                <li ng-repeat="image in images" ng-click="setCurrentImage(image)">
+                  <img ng-src="{{image.thumbnail}}" alt="{{image.description}}" onclick="$('#currentURL').focus()">
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="editor">
+          <textarea ck-editor="" ng-model="post.content.text"></textarea>
+        </div>
+      </section>
 		</form>
 
-	<div id="albumImage" ng-controller="UploadCtrl">
-		<div>
-			<label for="imgFile">Imagem: </label>
-			<input id="imgFile" type="file" upload="" file="file">
-			<button ng-click="uploadImage()">Adicionar</button>
-		</div>
-		<div id="header">
-			<input class="imageURL" select-on-focus="" type="text" value="{{currentImage.image}}">
-		</div>
-		<div id="thumbWrapper">
-			<ul id="thumbList">
-				<li ng-repeat="image in images" ng-click="setCurrentImage(image)">
-					<img ng-src="{{image.thumbnail}}" alt="{{image.description}}" onclick="$('#currentURL').focus()">
-				</li>
-			</ul>
-		</div>
-	</div>
 
 	<div class="datapreview" style="display:none">
 		<pre>{{ post.convertContentToJekyllData() }}</pre>
