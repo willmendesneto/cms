@@ -45,9 +45,14 @@
           <br>
 
           <p>
-            <input type="submit" value="Salvar" ng-click="save(post)">
-            <a href="#/posts">Cancelar</a></p>
-          
+            <input type="submit" value="Salvar" ng-click="draft(post)">
+            <input type="submit" value="Publicar" ng-disabled="true" ng-click="publish(post)">
+          </p>
+
+          <p class="cancel">
+            <a href="#/posts">Cancelar</a>
+          </p>
+
 
           <div id="albumImage" ng-controller="UploadCtrl">
             <div>
