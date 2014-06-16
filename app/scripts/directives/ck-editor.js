@@ -1,6 +1,7 @@
 'use strict';
 
-app.directive('ckEditor', function () {
+angular.module('cmsApp')
+  .directive('ckEditor', function () {
     return {
       require : '?ngModel',
       link : function($scope, elm, attr, ngModel) {
