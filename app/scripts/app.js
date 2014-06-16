@@ -7,6 +7,7 @@ angular.module('cmsApp', [
 
   .constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload')
   .constant('FIREBASE_REF', new Firebase('https://mst-cms.firebaseio.com/customtags'))
+  .constant('DRAFT_URL', '/repos/movimento-sem-terra/site-novo/contents/_drafts/')
 
   .config(function ($routeProvider, $httpProvider, $logProvider) {
     $httpProvider.defaults.useXDomain = true;

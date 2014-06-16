@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _) {
+  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DRAFT_URL) {
 
     function findPost(sha) {
       return $rootScope.posts.filter(function(post) {
@@ -124,6 +124,6 @@ angular.module('cmsApp')
     };
 
     function filePath(name) {
-      return '/repos/movimento-sem-terra/site-novo/contents/_drafts/'+name;
+      return DRAFT_URL +name;
     }
   });
