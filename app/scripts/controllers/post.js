@@ -124,13 +124,19 @@ angular.module('cmsApp')
     };
 
     $scope.prepareNameFile =  function(post){
-      var fileName = '';
+      if(!!post.name){
+        return post.name;
+      }
+      var fileName, date = '';
       var today = $scope.getTime();
       var month = (today.getMonth() + 1);
 
-      fileName = today.getFullYear() + '-' + month + '-' + today.getDate(); 
+      date = today.getFullYear() + '-' + month + '-' + today.getDate();
+      fileName = post.title.toLowerCase()
+                        .replace(/[^\w\s]/gi, '')
+                        .replace(/[ ]([a-zA-Z])/g, function (m, w) { return '-'+w; });
 
-      return fileName;
+      return date+'-'+fileName;
     };
 
     function filePath(post) {
