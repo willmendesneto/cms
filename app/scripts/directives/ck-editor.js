@@ -6,7 +6,7 @@ angular.module('cmsApp')
       require : '?ngModel',
       link : function($scope, elm, attr, ngModel) {
         var ck = window.CKEDITOR.replace(elm[0]);
-        ck.config.height = "100%";
+        ck.config.height = '100%';
 
         ck.on('instanceReady', function() {
           ck.setData(ngModel.$viewValue);
