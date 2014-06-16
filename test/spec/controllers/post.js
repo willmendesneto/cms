@@ -135,5 +135,19 @@ describe('Controller: PostCtrl', function () {
       expect(scope.tagsPersonalizadas.length).toBe(0);
     });
   });
-});
 
+  describe('should save a new post', function() {
+    it('add year, month and day in file name', function() {
+
+      var post = {
+        title: 'Olha lá o avião',
+        name: 'algo-aqui'
+      };
+      spyOn(scope,'getTime').and.returnValue(new Date(2001,11,29,12,0));
+      var fileName = scope.prepareNameFile(post);
+
+      expect(fileName).toMatch(/2001-12-29/);
+    });
+
+  });
+});

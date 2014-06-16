@@ -114,7 +114,7 @@ angular.module('cmsApp')
     };
 
     $scope.save = function(post) {
-      $rootScope.github.put(filePath(post.name), {
+      $rootScope.github.put(filePath(post), {
         data: JSON.stringify(post.commitData())
       }).done(function() {
         alert('Post salvo com sucesso!');
@@ -123,7 +123,17 @@ angular.module('cmsApp')
       });
     };
 
-    function filePath(name) {
-      return '/repos/movimento-sem-terra/site-novo/contents/_drafts/'+name;
+    $scope.prepareNameFile =  function(post){
+      var fileName = '';
+      var today = $scope.getTime();
+      var month = (today.getMonth() + 1);
+
+      fileName = today.getFullYear() + '-' + month + '-' + today.getDate(); 
+
+      return fileName;
+    };
+
+    function filePath(post) {
+      return '/repos/movimento-sem-terra/site-novo/contents/_drafts/'+prepareNameFile(post);
     }
   });
