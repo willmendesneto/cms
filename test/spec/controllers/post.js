@@ -187,22 +187,30 @@ describe('Controller: PostCtrl', function () {
   describe('should save a new post', function() {
 
     beforeEach(inject(function () {
-      spyOn(scope,'getTime').and.returnValue(new Date(2001,11,29,12,0));
+      spyOn(scope,'getTime').and.returnValue(new Date(2001,8,29,12,0));
     }));
 
     it('add year, month and day in file name', function() {
 
       var post = {
-        title: 'Olha lá o avião'
+        content: {
+          meta: {
+            title: 'Olha lá o avião'
+          }
+        }
       };
       var fileName = scope.prepareNameFile(post);
 
-      expect(fileName).toMatch(/2001-12-29/);
+      expect(fileName).toMatch(/2001-09-29/);
     });
 
     it('add title post to be file name', function() {
       var post = {
-        title: 'Olha lá o avião'
+        content: {
+          meta: {
+            title: 'Olha lá o avião'
+          }
+        }
       };
       var fileName = scope.prepareNameFile(post);
 
@@ -211,8 +219,12 @@ describe('Controller: PostCtrl', function () {
 
     it('should return the same file name when i have one', function() {
       var post = {
-        title: 'Olha lá o avião',
-        name: '2014-10-10-algo-aqui'
+        name: '2014-10-10-algo-aqui',
+        content: {
+          meta: {
+            title: 'Olha lá o avião'
+          }
+        }
       };
       var fileName = scope.prepareNameFile(post);
 

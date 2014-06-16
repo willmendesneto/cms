@@ -44,9 +44,5 @@ angular.module('cmsApp', [
         return false;
       }
     });
-
-    $rootScope.getTime = function(){
-      return Date.now();
-    };
   }]);
 
