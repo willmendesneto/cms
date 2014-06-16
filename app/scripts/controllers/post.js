@@ -21,6 +21,22 @@ angular.module('cmsApp')
     var sha = $routeParams.sha;
     $scope.post = (sha) ? findPost(sha) : newPost();
 
+    $scope.status = $scope.isPublished;
+
+    $scope.isPublished = function(){
+      var draftExpression = new RegExp('^https?://.*?/_drafts/?');
+      var publishedExpression = new RegExp('^https?://.*?/_posts/?');
+      /*jshint camelcase: false */
+      if (draftExpression.exec($scope.post.html_url)) {
+        return 'RASCUNHO';
+      }
+      else if (publishedExpression.exec($scope.post.html_url)) {
+        return 'PUBLICADO';
+      }
+
+      return '';
+    };
+
     $scope.menuTagOptions = [
       'agricultura camponesa',
       'agronegócio',

@@ -140,7 +140,7 @@ describe('Controller: PostCtrl', function () {
     });
   });
 
-  describe('save/publish a post ', function() {
+  describe('save/publish a post', function() {
 
     it('should save a post in draft', function() {
       scope.post = PostBuilder.buildAndLoadJekyllData();
@@ -159,5 +159,29 @@ describe('Controller: PostCtrl', function () {
     });
   });
 
+
+  describe('post status', function(){
+
+    it('should be RASCUNHO when post is draft', function(){
+      /*jshint camelcase: false */
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      scope.post.html_url = 'https://laskjdfl;sjdfl;ksja;lkfjsa/_drafts/l;sadjfl;sakjdflj';
+      expect(scope.isPublished()).toBe('RASCUNHO');
+    });
+
+    it('should be PUBLICADO when post is published', function(){
+      /*jshint camelcase: false */
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      scope.post.html_url = 'https://laskjdfl;sjdfl;ksja;lkfjsa/_posts/l;sadjfl;sakjdflj';
+      expect(scope.isPublished()).toBe('PUBLICADO');
+    });
+
+    it('should be empty when post is not published and not draft', function(){
+      /*jshint camelcase: false */
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      scope.post.html_url = 'https://laskjdfl;sjdfl;ksja;lkfjsa/_xxxxx/l;sadjfl;sakjdflj';
+      expect(scope.isPublished()).toBe('');
+    });
+  });
 });
 

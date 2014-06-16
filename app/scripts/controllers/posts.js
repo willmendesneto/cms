@@ -6,7 +6,6 @@ angular.module('cmsApp')
     $rootScope.github.get('/repos/movimento-sem-terra/site-novo/contents/_drafts').done(function(data) {
       $scope.$apply(function(){
         $rootScope.posts = _.map(data, Post.makePost);
-
         $scope.currentPage = 0;
 
         $scope.pageSize = 10;
