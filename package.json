@@ -45,7 +45,7 @@
   },
   "scripts": {
     "test": "grunt test && ./node_modules/protractor/bin/protractor protractor_conf.js",
-    "postinstall": "./node_modules/.bin/bower install && ./node_modules/protractor/bin/webdriver-manager update && cp ./node_modules/protractor/example/chromeOnlyConf.js protractor_conf.js",
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/protractor/bin/webdriver-manager update",
     "prepublish": "./node_modules/.bin/bower install"
   }
 }
