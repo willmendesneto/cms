@@ -43,5 +43,8 @@ angular.module('cmsApp', [
       }
     });
 
+    $rootScope.getTime = function(){
+      return Date.now();
+    };
   }]);
 
