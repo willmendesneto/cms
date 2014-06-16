@@ -142,3 +142,12 @@ p.ckeditor {
   padding-bottom: 63px;
   border-radius: 12px;
 }
+
+p.status {
+  color: brown;
+  border-style: dashed;
+  text-align: center;
+  margin: 0 40% 0 40%;
+  border-width: 2px;
+  padding: 5px;
+}
