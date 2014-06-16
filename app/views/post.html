@@ -1,6 +1,12 @@
 <div>
     <p class='status'> {{postStatus()}} </p>
 		<form name="postForm" novalidate>
+      <p class='actions'>
+        <input type="submit" value="Salvar" ng-click="draft(post)" />
+        <input type="submit" value="Publicar" ng-disabled='true' ng-click="publish(post)" />
+        <a class='cancel' href="#/posts">Cancelar</a>
+      </p>
+
       <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" />
       <section>
         <div class="form">
@@ -43,17 +49,6 @@
               <span class='specificTag'>{{ tagPersonalizada }}</span>
             </span>
           </p>
-          <br/>
-
-          <p>
-            <input type="submit" value="Salvar" ng-click="draft(post)" />
-            <input type="submit" value="Publicar" ng-disabled='true' ng-click="publish(post)" />
-          </p>
-
-          <p class='cancel'>
-            <a href="#/posts">Cancelar</a>
-          </p>
-
 
           <div id="albumImage" ng-controller="UploadCtrl">
             <div>

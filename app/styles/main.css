@@ -151,3 +151,11 @@ p.status {
   border-width: 2px;
   padding: 5px;
 }
+
+p.actions{
+  text-align: right;
+}
+
+a.cancel{
+  margin: 0 3% 0 45px;
+}
