@@ -101,7 +101,6 @@ angular.module('cmsApp')
       $scope.menuTag = post.getMenuItem();
       $scope.section = findLabelByValue($scope.sectionOptions, post.getSection());
       $scope.label = findLabelByValue($scope.labelOptions, post.getLabel());
-      $scope.tag = post.tags;
       $scope.imagesHD = post.getImagesHD();
       $scope.$apply();
     }
@@ -113,8 +112,8 @@ angular.module('cmsApp')
       });
     }else{
       $scope.post.create();
-      fillContent($scope.post);
     }
+
     $scope.processTag = function(){
       if(!$scope.tag){
         return;
