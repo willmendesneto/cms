@@ -1,0 +1,19 @@
+<div id="albumImage" ng-controller="UploadCtrl">
+  <div>
+    <label for="imgFile">Imagem: </label>
+    <input id="imgFile" type="file" upload="" file="file">
+    <button ng-click="uploadImage()">Adicionar</button>
+
+    <div id="header">
+      <input class="imageURL" select-on-focus="" type="text" value="{{currentImage.image}}">
+    </div>
+
+    <div id="thumbWrapper">
+      <ul id="thumbList">
+        <li ng-repeat="image in images" ng-click="setCurrentImage(image)">
+          <img ng-src="{{image.thumbnail}}" alt="{{image.description}}" onclick="$('#currentURL').focus()">
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
