@@ -8,9 +8,9 @@ angular.module('cmsApp')
         var ck = window.CKEDITOR.replace(elm[0]);
         ck.config.height = '100%';
 
-        ck.on('instanceReady', function() {
-          ck.setData(ngModel.$viewValue);
-        });
+        if(!ngModel) {
+          return;
+        }
 
         ck.on('pasteState', function() {
           $scope.$apply(function() {
@@ -19,7 +19,7 @@ angular.module('cmsApp')
         });
 
         ngModel.$render = function() {
-          ck.setData(ngModel.$modelValue);
+          ck.setData(ngModel.$viewValue);
         };
       }
     };
