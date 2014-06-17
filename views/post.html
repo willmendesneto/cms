@@ -40,7 +40,7 @@
           <p>
             <label for="tag">Tag: </label>
             <input type="text" ng-model="tag" name="tag">
-            <button ng-disabled="postForm.tag.$invalid" ng-click="processTag()">Adicionar</button>
+            <button ng-disabled="tag==''" ng-click="processTag()">Adicionar</button>
           </p>
 
           <p class="tag">
