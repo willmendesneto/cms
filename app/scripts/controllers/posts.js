@@ -3,7 +3,7 @@
 angular.module('cmsApp')
   .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter) {
 
-    $rootScope.github.get('/repos/movimento-sem-terra/site-novo/contents/_drafts').done(function(data) {
+    $rootScope.getDrafts().done(function(data) {
       $scope.$apply(function(){
         $rootScope.posts = _.map(data, Post.makePost);
         $scope.currentPage = 0;
