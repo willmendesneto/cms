@@ -18,25 +18,42 @@ angular.module('cmsApp')
       return 'https://api.github.com/repos/movimento-sem-terra/site-novo/git/blobs/'+sha;
     }
 
+    function findLabelByValue(list, value) {
+      var listLength = list.length;
+      for (var index = 0; index < listLength; index++) {
+        if (list[index].value === value) {
+          return list[index];
+        }
+      }
+    }
+
+    function fillContent(post){
+      $scope.menuTag = post.getMenuItem();
+      $scope.section = findLabelByValue($scope.sectionOptions, post.getSection());
+      $scope.label = findLabelByValue($scope.labelOptions, post.getLabel());
+      $scope.imagesHD = post.getImagesHD();
+      $scope.$apply();
+    }
+
+
+    function prepareNameFile(post){
+      if(!!post.name){
+        return post.name;
+      }
+      var fileName, date = '';
+      var today = DateUtil.getTime();
+      var month = ('0' + (today.getMonth() + 1)).slice(-2);
+
+      date = today.getFullYear() + '-' + month + '-' + today.getDate();
+      fileName = post.content.meta.title.toLowerCase()
+                        .replace(/[^\w\s]/gi, '')
+                        .replace(/[ ]([a-zA-Z])/g, function (m, w) { return '-'+w; });
+
+      return date+'-'+fileName+'.md';
+    }
+
     var sha = $routeParams.sha;
     $scope.post = (sha) ? findPost(sha) : newPost();
-
-    $scope.postStatus = function(){
-      var draftExpression = new RegExp('^https?://.*?/_drafts/?');
-      var publishedExpression = new RegExp('^https?://.*?/_posts/?');
-      /*jshint camelcase: false */
-      if (typeof $scope.post.html_url === 'undefined') {
-        return 'NOVO';
-      }
-      else if (draftExpression.exec($scope.post.html_url)) {
-        return 'RASCUNHO';
-      }
-      else if (publishedExpression.exec($scope.post.html_url)) {
-        return 'PUBLICADO';
-      }
-
-      return '';
-    };
 
     $scope.menuTagOptions = [
       'agricultura camponesa',
@@ -88,23 +105,6 @@ angular.module('cmsApp')
       $scope.post.setImagesHD(newval);
     });
 
-    function findLabelByValue(list, value) {
-      var listLength = list.length;
-      for (var index = 0; index < listLength; index++) {
-        if (list[index].value === value) {
-          return list[index];
-        }
-      }
-    }
-
-    function fillContent(post){
-      $scope.menuTag = post.getMenuItem();
-      $scope.section = findLabelByValue($scope.sectionOptions, post.getSection());
-      $scope.label = findLabelByValue($scope.labelOptions, post.getLabel());
-      $scope.imagesHD = post.getImagesHD();
-      $scope.$apply();
-    }
-
     if(sha){
       $rootScope.github.get(contentPath(sha)).done(function(data) {
         $scope.post.loadContentFromJekyllData(atob(data.content));
@@ -155,20 +155,21 @@ angular.module('cmsApp')
       return prepareNameFile(post);
     };
 
-    function prepareNameFile(post){
-      if(!!post.name){
-        return post.name;
+    $scope.postStatus = function(){
+      var draftExpression = new RegExp('^https?://.*?/_drafts/?');
+      var publishedExpression = new RegExp('^https?://.*?/_posts/?');
+      /*jshint camelcase: false */
+      if (typeof $scope.post.html_url === 'undefined') {
+        return 'NOVO';
       }
-      var fileName, date = '';
-      var today = DateUtil.getTime();
-      var month = ('0' + (today.getMonth() + 1)).slice(-2);
+      else if (draftExpression.exec($scope.post.html_url)) {
+        return 'RASCUNHO';
+      }
+      else if (publishedExpression.exec($scope.post.html_url)) {
+        return 'PUBLICADO';
+      }
 
-      date = today.getFullYear() + '-' + month + '-' + today.getDate();
-      fileName = post.content.meta.title.toLowerCase()
-                        .replace(/[^\w\s]/gi, '')
-                        .replace(/[ ]([a-zA-Z])/g, function (m, w) { return '-'+w; });
-
-      return date+'-'+fileName+'.md';
-    }
+      return '';
+    };
 
   });
