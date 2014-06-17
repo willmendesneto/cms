@@ -145,7 +145,7 @@ describe('Controller: PostCtrl', function () {
     it('should save a post in draft', function() {
       scope.post = PostBuilder.buildAndLoadJekyllData();
       spyOn(scope, 'save');
-      var url = DRAFT_URL + scope.post.name;
+      var url = DRAFT_URL + scope.prepareNameFile(scope.post);
       scope.draft(scope.post);
       expect(scope.save).toHaveBeenCalledWith(scope.post, url);
     });
@@ -153,7 +153,7 @@ describe('Controller: PostCtrl', function () {
     it('should publish a post', function() {
       scope.post = PostBuilder.buildAndLoadJekyllData();
       spyOn(scope, 'save');
-      var url = PUBLISH_URL + scope.post.name;
+      var url = PUBLISH_URL + scope.prepareNameFile(scope.post);
       scope.publish(scope.post);
       expect(scope.save).toHaveBeenCalledWith(scope.post, url);
     });

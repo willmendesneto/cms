@@ -129,8 +129,8 @@ angular.module('cmsApp')
       $scope.tagsPersonalizadas.splice(index,1);
     };
 
-    $scope.save = function(post) {
-      $rootScope.github.put(filePath(post), {
+    $scope.save = function(post, url) {
+      $rootScope.github.put(url, {
         data: JSON.stringify(post.commitData())
       }).done(function() {
         alert('Post salvo com sucesso!');
@@ -140,12 +140,12 @@ angular.module('cmsApp')
     };
 
     $scope.publish = function(post) {
-      var url = PUBLISH_URL + post.name;
+      var url = PUBLISH_URL + $scope.prepareNameFile(post);
       $scope.save(post, url);
     };
 
     $scope.draft = function(post) {
-      var url = DRAFT_URL + post.name;
+      var url = DRAFT_URL + $scope.prepareNameFile(post);
       $scope.save(post, url);
     };
 
@@ -169,7 +169,4 @@ angular.module('cmsApp')
       return date+'-'+fileName+'.md';
     }
 
-    function filePath(post) {
-      return '/repos/movimento-sem-terra/site-novo/contents/_drafts/'+prepareNameFile(post);
-    }
   });
