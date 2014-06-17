@@ -116,6 +116,9 @@ angular.module('cmsApp')
       fillContent($scope.post);
     }
     $scope.processTag = function(){
+      if(!$scope.tag){
+        return;
+      }
       if(!_.contains($scope.tagsPersonalizadas, $scope.tag)){
         $scope.post.addNewTag($scope.tag);
         $scope.tagsPersonalizadas.push($scope.tag);
