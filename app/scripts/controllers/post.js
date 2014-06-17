@@ -1,4 +1,3 @@
-/* globals alert */
 'use strict';
 
 angular.module('cmsApp')
@@ -135,7 +134,7 @@ angular.module('cmsApp')
       $rootScope.github.put(url, {
         data: JSON.stringify(post.commitData())
       }).done(function() {
-        alert('Post salvo com sucesso!');
+        window.alert('Post salvo com sucesso!');
       }).fail(function(data) {
         console.log('error data:', data);
       });
