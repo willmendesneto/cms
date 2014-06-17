@@ -142,6 +142,27 @@ p.tag{
   border-width: 2px;
 }
 
+a.logo {
+  text-decoration: initial;
+}
+
+img.logo {
+  display: inline-block;
+  height: 60px;
+  vertical-align: bottom;
+}
+
+h1.logo {
+  display: inline;
+  vertical-align: bottom;
+  margin: 0;
+  margin-left: 5px;
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: -4px;
+  text-shadow: 2px 2px black;
+}
+
 /* ckeditor */
 p.ckeditor {
   border-bottom-style: inset;
