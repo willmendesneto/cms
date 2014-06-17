@@ -81,7 +81,16 @@ angular.module('cmsApp')
           if (!self.content) {
             return '';
           }
-          return 'agricultura camponesa';
+
+          var menuItem = _.filter(self.content.meta.tags, function(tag){
+            return (/^menu:/).test(tag);
+          });
+
+          if(menuItem.length === 0){
+            return '';
+          }
+
+          return menuItem[0].substr(5);
         };
 
         self.setLabel = function(label) {
