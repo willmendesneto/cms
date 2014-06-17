@@ -13,10 +13,6 @@ angular.module('cmsApp')
       return Post.makePost();
     }
 
-    function contentPath(sha) {
-      return 'https://api.github.com/repos/movimento-sem-terra/site-novo/git/blobs/'+sha;
-    }
-
     function findLabelByValue(list, value) {
       var listLength = list.length;
       for (var index = 0; index < listLength; index++) {
@@ -105,7 +101,7 @@ angular.module('cmsApp')
     });
 
     if(sha){
-      $rootScope.github.get(contentPath(sha)).done(function(data) {
+      $rootScope.getPost(sha).done(function(data) {
         $scope.post.loadContentFromJekyllData(atob(data.content));
         fillContent($scope.post);
       });
