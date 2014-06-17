@@ -42,7 +42,7 @@ angular.module('cmsApp', [
         console.log('Github not defined.');
         return;
       }
-      return $rootScope.github.get('/repos/movimento-sem-terra/site-novo/contents/_drafts');
+      return $rootScope.githubGet('contents/_drafts');
     };
 
     $rootScope.getPost = function(sha){
@@ -50,7 +50,11 @@ angular.module('cmsApp', [
         console.log('Github not defined.');
         return;
       }
-      return $rootScope.github.get('/repos/movimento-sem-terra/site-novo/git/blobs/'+sha);
+      return $rootScope.githubGet('git/blobs/'+sha);
+    };
+
+    $rootScope.githubGet = function(url) {
+      return $rootScope.github.get('/repos/movimento-sem-terra/site-novo/'+url);
     };
 
     $rootScope.$on('$locationChangeStart', function () {
