@@ -189,8 +189,8 @@ describe('Controller: PostCtrl', function () {
 
   describe('should save a new post', function() {
 
-    beforeEach(inject(function () {
-      spyOn(scope,'getTime').and.returnValue(new Date(2001,8,29,12,0));
+    beforeEach(inject(function (DateUtil) {
+      spyOn(DateUtil,'getTime').and.returnValue(new Date(2001,8,29,12,0));
     }));
 
     it('add year, month and day in file name', function() {

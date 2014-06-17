@@ -22,9 +22,12 @@ describe('Service: New Post', function(){
   // load the service's module
   beforeEach(module('cmsApp'));
 
-  var Post;
-  beforeEach(inject(function (_Post_) {
+  var Post, $date;
+  beforeEach(inject(function (_Post_, DateUtil) {
     Post = _Post_;
+    $date = DateUtil;
+
+    spyOn(DateUtil,'getTime').and.returnValue(new Date(2001,8,29,12,0));
   }));
   
 
@@ -36,6 +39,15 @@ describe('Service: New Post', function(){
 
       expect(post.content.text).toBe('');
       expect(post.content.meta).toEqual(dummyMeta);
+    });
+
+    it('with created time fill with timestamp', function() {
+      var post = Post.makePost();
+
+      post.create();
+      var data = post.getContent();
+      var timestamp = new Date(2001,8,29,12,0).getTime();
+      expect(data.created).toEqual(timestamp);
     });
   });
 });

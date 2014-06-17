@@ -2,12 +2,12 @@
     <p class='status'> {{postStatus()}} </p>
 		<form name="postForm" novalidate>
       <p class='actions'>
-        <input type="submit" value="Salvar" ng-click="draft(post)" />
+        <input type="submit" value="Salvar" ng-click="draft(post)" ng-disabled="!postForm.$valid"/>
         <input type="submit" value="Publicar" ng-disabled='true' ng-click="publish(post)" />
         <a class='cancel' href="#/posts">Cancelar</a>
       </p>
 
-      <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" />
+      <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" required />
       <section>
         <div class="form">
           <p>

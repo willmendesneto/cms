@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DRAFT_URL, PUBLISH_URL) {
+  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DRAFT_URL, PUBLISH_URL, DateUtil) {
 
     function findPost(sha) {
       return $rootScope.posts.filter(function(post) {
@@ -153,16 +153,12 @@ angular.module('cmsApp')
       return prepareNameFile(post);
     };
 
-    $scope.getTime = function(){
-      return new Date();
-    };
-
     function prepareNameFile(post){
       if(!!post.name){
         return post.name;
       }
       var fileName, date = '';
-      var today = $scope.getTime();
+      var today = DateUtil.getTime();
       var month = ('0' + (today.getMonth() + 1)).slice(-2);
 
       date = today.getFullYear() + '-' + month + '-' + today.getDate();

@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .service('Post', function Post(_, jsyaml, CustomTag) {
+  .service('Post', function Post(_, jsyaml, CustomTag, DateUtil) {
 
     return {
       makePost: function(data) {
@@ -38,12 +38,20 @@ angular.module('cmsApp')
             };
         };
 
+        self.getContent = function(){
+          if(!self.content.meta.created){
+            self.content.meta.created = DateUtil.getTime().getTime();
+          }
+
+          return self.content.meta;
+        };
+
         self.convertContentToJekyllData = function () {
           if (!self.content) {
             return '';
           }
 
-          var compiled = ['---', jsyaml.dump(self.content.meta), '---', self.content.text].join('\n');
+          var compiled = ['---', jsyaml.dump(self.getContent()), '---', self.content.text].join('\n');
           return unescape(encodeURIComponent(compiled));
         };
 
