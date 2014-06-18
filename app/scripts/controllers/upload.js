@@ -9,7 +9,7 @@ angular.module('cmsApp')
 
       if (!!postedFiles) {
         var file = postedFiles;
-        index = ( $scope.images.push(createImg('img/loading.gif')) - 1);
+        index = ( $scope.images.push(createImg('images/loading.gif')) - 1);
         Image.send(file, index, $scope.addImage);
       }
       return index;

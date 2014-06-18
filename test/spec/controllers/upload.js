@@ -20,7 +20,7 @@ describe('Controller: UploadCtrl', function () {
       scope.file = {file:'file'};
       scope.uploadImage();
 
-      expect(scope.images[0].image).toEqual('img/loading.gif');
+      expect(scope.images[0].image).toEqual('images/loading.gif');
     });
 
     it('should replace loading gif to true image after send to upload', function(){
