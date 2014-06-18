@@ -8,8 +8,6 @@ describe('Controller: PostCtrl', function () {
   var PostCtrl,
     scope,
     Post,
-    DRAFT_URL,
-    PUBLISH_URL,
     PostBuilder = {},
     githubMock = {
     get: jasmine.createSpy().and.callFake(function () {
@@ -19,11 +17,9 @@ describe('Controller: PostCtrl', function () {
     })
   };
 
-  beforeEach(inject(function ($rootScope, $controller, _Post_, _DRAFT_URL_, _PUBLISH_URL_) {
+  beforeEach(inject(function ($rootScope, $controller, _Post_) {
     scope = $rootScope.$new();
     Post = _Post_;
-    DRAFT_URL = _DRAFT_URL_;
-    PUBLISH_URL = _PUBLISH_URL_;
     $rootScope.posts = [];
     $rootScope.github = githubMock;
 
@@ -145,7 +141,7 @@ describe('Controller: PostCtrl', function () {
     it('should save a post in draft', function() {
       scope.post = PostBuilder.buildAndLoadJekyllData();
       spyOn(scope, 'save');
-      var url = DRAFT_URL + scope.prepareNameFile(scope.post);
+      var url = scope.getDraftsRepositoryAddress(scope.prepareNameFile(scope.post));
       scope.draft(scope.post);
       expect(scope.save).toHaveBeenCalledWith(scope.post, url);
     });
@@ -153,7 +149,7 @@ describe('Controller: PostCtrl', function () {
     it('should publish a post', function() {
       scope.post = PostBuilder.buildAndLoadJekyllData();
       spyOn(scope, 'save');
-      var url = PUBLISH_URL + scope.prepareNameFile(scope.post);
+      var url = scope.getPublishedRepositoryAddress(scope.prepareNameFile(scope.post));
       scope.publish(scope.post);
       expect(scope.save).toHaveBeenCalledWith(scope.post, url);
     });

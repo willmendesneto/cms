@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DRAFT_URL, PUBLISH_URL, DateUtil) {
+  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil) {
 
     function findPost(sha) {
       return $rootScope.posts.filter(function(post) {
@@ -137,12 +137,12 @@ angular.module('cmsApp')
     };
 
     $scope.publish = function(post) {
-      var url = PUBLISH_URL + $scope.prepareNameFile(post);
+      var url = $rootScope.getPublishedRepositoryAddress($scope.prepareNameFile(post));
       $scope.save(post, url);
     };
 
     $scope.draft = function(post) {
-      var url = DRAFT_URL + $scope.prepareNameFile(post);
+      var url = $rootScope.getDraftsRepositoryAddress($scope.prepareNameFile(post));
       $scope.save(post, url);
     };
 

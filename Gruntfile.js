@@ -304,7 +304,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'test',
-            repository: 'ratox/site-novo/'
+            repository: 'movimento-sem-terra/staging'
           }
         }
       },
@@ -315,7 +315,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            repository: 'ratox/site-novo/'
+            repository: 'movimento-sem-terra/staging'
           }
         }
       },

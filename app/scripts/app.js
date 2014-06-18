@@ -2,14 +2,12 @@
 
 angular.module('cmsApp', [
   'ngRoute',
-  'firebase'
+  'firebase',
+  'config'
 ])
 
   .constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload')
   .constant('FIREBASE_REF', new Firebase('https://mst-cms.firebaseio.com/customtags'))
-  .constant('DRAFT_URL', '/repos/movimento-sem-terra/site-novo/contents/_drafts/')
-  .constant('PUBLISH_URL', '/repos/movimento-sem-terra/site-novo/contents/_posts/')
-
   .config(function ($routeProvider, $httpProvider, $logProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -36,7 +34,7 @@ angular.module('cmsApp', [
         redirectTo: '/auth'
       });
   })
-  .run(['$rootScope', '$location', function ($rootScope, $location) {
+  .run(['$rootScope', '$location', 'ENV', function ($rootScope, $location, ENV) {
     $rootScope.getDrafts = function(){
       if(!$rootScope.github){
         console.log('Github not defined.');
@@ -54,7 +52,19 @@ angular.module('cmsApp', [
     };
 
     $rootScope.githubGet = function(url) {
-      return $rootScope.github.get('/repos/movimento-sem-terra/site-novo/'+url);
+      return $rootScope.github.get($rootScope.getRepositoryAddress(url));
+    };
+
+    $rootScope.getRepositoryAddress = function(url) {
+      return '/repos/'+ ENV.repository + url;
+    };
+
+    $rootScope.getDraftsRepositoryAddress = function(url) {
+      return $rootScope.getRepositoryAddress('contents/_drafts/'+url);
+    };
+
+    $rootScope.getPublishedRepositoryAddress = function(url) {
+      return $rootScope.getRepositoryAddress('contents/_posts/'+url);
     };
 
     $rootScope.$on('$locationChangeStart', function () {
