@@ -2,6 +2,8 @@
 
 This is the MST new website CMS.
 
+[![Build Status](https://snap-ci.com/movimento-sem-terra/cms/branch/master/build_image)](https://snap-ci.com/movimento-sem-terra/cms/branch/master)
+
 ## How to
 
 ### Setup
