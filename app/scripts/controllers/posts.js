@@ -3,7 +3,7 @@
 angular.module('cmsApp')
   .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, Posts) {
 
-  // $rootScope.posts = [];
+  $rootScope.posts = [];
   Posts.success(function(data){
     $rootScope.posts = _.map(data, Post.makePost);
   });
