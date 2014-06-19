@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, Posts, $timeout) {
+  .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, GitRepository, $timeout) {
 
-  Posts.success(function(data){
+  GitRepository.getDrafts().success(function(data){
     $timeout(function(){
       $rootScope.posts = _.map(data, Post.makePost);
 
