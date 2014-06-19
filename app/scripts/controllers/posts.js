@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, Posts) {
+  .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, Posts, $timeout) {
 
   Posts.success(function(data){
-    $scope.$apply(function() {
+    $timeout(function(){  
       $rootScope.posts = _.map(data, Post.makePost);
 
       $scope.currentPage = 0;
@@ -26,7 +26,7 @@ angular.module('cmsApp')
       $scope.previousPage = function(){
         $scope.currentPage=$scope.currentPage-1;
       };
-    });
+    }, 0);
   });
 
 });

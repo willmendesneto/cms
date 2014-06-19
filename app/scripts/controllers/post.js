@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil) {
+  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout) {
 
     function findPost(sha) {
       return $rootScope.posts.filter(function(post) {
@@ -22,15 +22,6 @@ angular.module('cmsApp')
       }
     }
 
-    function fillContent(post){
-      $scope.menuTag = post.getMenuItem();
-      $scope.section = findLabelByValue($scope.sectionOptions, post.getSection());
-      $scope.label = findLabelByValue($scope.labelOptions, post.getLabel());
-      $scope.imagesHD = post.getImagesHD();
-      $scope.$apply();
-    }
-
-
     function prepareNameFile(post){
       if(!!post.name){
         return post.name;
@@ -47,8 +38,6 @@ angular.module('cmsApp')
       return date+'-'+fileName+'.md';
     }
 
-    var sha = $routeParams.sha;
-    $scope.post = (sha) ? findPost(sha) : newPost();
 
     $scope.menuTagOptions = [
       'agricultura camponesa',
@@ -76,13 +65,7 @@ angular.module('cmsApp')
       {label: 'Reportagens Especiais', value: 'special-stories'}
     ];
 
-    $scope.menuTag = undefined;
-    $scope.section = undefined;
-    $scope.label = undefined;
-    $scope.tag = '';
     $scope.tagsPersonalizadas = [];
-
-    $scope.imagesHD = undefined;
 
     $scope.$watch('label', function (newval) {
       $scope.post.setLabel(newval);
@@ -100,14 +83,26 @@ angular.module('cmsApp')
       $scope.post.setImagesHD(newval);
     });
 
+    var sha = $routeParams.sha;
+    $scope.post = (sha) ? findPost(sha) : newPost();
     if(sha){
+      var fileName = $scope.post.name;
       $rootScope.getPost(sha).done(function(data) {
         $scope.post.loadContentFromJekyllData(atob(data.content));
-        fillContent($scope.post);
+
+        $timeout(function(){
+          $scope.menuTag = $scope.post.getMenuItem();
+          $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
+          $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
+          $scope.imagesHD = $scope.post.getImagesHD();
+        },0);
       });
-    }else{
+    }
+    else{
       $scope.post.create();
     }
+
+
 
     $scope.processTag = function(){
       if(!$scope.tag){
