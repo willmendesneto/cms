@@ -2,6 +2,15 @@
 
 angular.module('cmsApp')
   .factory('GitRepository',['$rootScope', '$location', 'ENV', function($rootScope, $location, ENV){
+
+  function githubGet(url) {
+    return $rootScope.github.get(getRepositoryAddress(url));
+  }
+
+  function getRepositoryAddress (url) {
+    return '/repos/'+ ENV.repository + url;
+  }
+
   var GitRepository = {
 
     getDrafts: function() {
@@ -9,7 +18,7 @@ angular.module('cmsApp')
         console.log('Github not defined.');
         return;
       }
-      return $rootScope.githubGet('contents/_drafts');
+      return githubGet('contents/_drafts');
     },
 
 
@@ -18,23 +27,15 @@ angular.module('cmsApp')
         console.log('Github not defined.');
         return;
       }
-      return $rootScope.githubGet('git/blobs/'+sha);
+      return githubGet('git/blobs/'+sha);
     },
 
-    githubGet: function(url) {
-      return $rootScope.github.get($rootScope.getRepositoryAddress(url));
+    getDraftsRepositoryAddress: function(fileName) {
+      return getRepositoryAddress('contents/_drafts/'+fileName);
     },
 
-    getRepositoryAddress: function(url) {
-      return '/repos/'+ ENV.repository + url;
-    },
-
-    getDraftsRepositoryAddress: function(url) {
-      return $rootScope.getRepositoryAddress('contents/_drafts/'+url);
-    },
-
-    getPublishedRepositoryAddress: function(url) {
-      return $rootScope.getRepositoryAddress('contents/_posts/'+url);
+    getPublishedRepositoryAddress: function(fileName) {
+      return getRepositoryAddress('contents/_posts/'+fileName);
     }
 
   };
