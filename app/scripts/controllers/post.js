@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout) {
+  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository) {
 
     function findPost(sha) {
       return $rootScope.posts.filter(function(post) {
@@ -86,8 +86,7 @@ angular.module('cmsApp')
     var sha = $routeParams.sha;
     $scope.post = (sha) ? findPost(sha) : newPost();
     if(sha){
-      var fileName = $scope.post.name;
-      $rootScope.getPost(sha).done(function(data) {
+      GitRepository.getPost(sha).done(function(data) {
         $scope.post.loadContentFromJekyllData(atob(data.content));
 
         $timeout(function(){
@@ -132,12 +131,12 @@ angular.module('cmsApp')
     };
 
     $scope.publish = function(post) {
-      var url = $rootScope.getPublishedRepositoryAddress($scope.prepareNameFile(post));
+      var url = GitRepository.getPublishedRepositoryAddress($scope.prepareNameFile(post));
       $scope.save(post, url);
     };
 
     $scope.draft = function(post) {
-      var url = $rootScope.getDraftsRepositoryAddress($scope.prepareNameFile(post));
+      var url = GitRepository.getDraftsRepositoryAddress($scope.prepareNameFile(post));
       $scope.save(post, url);
     };
 

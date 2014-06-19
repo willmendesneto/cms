@@ -34,39 +34,7 @@ angular.module('cmsApp', [
         redirectTo: '/auth'
       });
   })
-  .run(['$rootScope', '$location', 'ENV', function ($rootScope, $location, ENV) {
-    $rootScope.getDrafts = function(){
-      if(!$rootScope.github){
-        console.log('Github not defined.');
-        return;
-      }
-      return $rootScope.githubGet('contents/_drafts');
-    };
-
-    $rootScope.getPost = function(sha){
-      if(!$rootScope.github){
-        console.log('Github not defined.');
-        return;
-      }
-      return $rootScope.githubGet('git/blobs/'+sha);
-    };
-
-    $rootScope.githubGet = function(url) {
-      return $rootScope.github.get($rootScope.getRepositoryAddress(url));
-    };
-
-    $rootScope.getRepositoryAddress = function(url) {
-      return '/repos/'+ ENV.repository + url;
-    };
-
-    $rootScope.getDraftsRepositoryAddress = function(url) {
-      return $rootScope.getRepositoryAddress('contents/_drafts/'+url);
-    };
-
-    $rootScope.getPublishedRepositoryAddress = function(url) {
-      return $rootScope.getRepositoryAddress('contents/_posts/'+url);
-    };
-
+  .run(['$rootScope', '$location', function ($rootScope, $location) {
     $rootScope.$on('$locationChangeStart', function () {
       $rootScope.error = null;
       if (!$rootScope.github) {

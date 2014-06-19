@@ -4,7 +4,7 @@ angular.module('cmsApp')
   .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, Posts, $timeout) {
 
   Posts.success(function(data){
-    $timeout(function(){  
+    $timeout(function(){
       $rootScope.posts = _.map(data, Post.makePost);
 
       $scope.currentPage = 0;
