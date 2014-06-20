@@ -1,4 +1,5 @@
 'use strict';
+/* jshint undef:false */
 
 angular.module('cmsApp')
   .directive('ckEditor', function () {
@@ -7,7 +8,6 @@ angular.module('cmsApp')
       link : function($scope, elm, attr, ngModel) {
         var ck = window.CKEDITOR.replace(elm[0]);
 
-        /* jshint undef:false */
         CKEDITOR.plugins.addExternal('youtube','/scripts/ck-editor-plugins/youtube/', 'plugin.js');
 
         ck.config.extraPlugins = 'youtube';
