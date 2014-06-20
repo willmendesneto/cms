@@ -246,7 +246,8 @@ module.exports = function (grunt) {
             '.htaccess',
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'fonts/*',
+            'ckeditor-plugins/**/*'
           ]
         }, {
           expand: true,
