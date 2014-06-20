@@ -15,10 +15,6 @@ angular.module('cmsApp')
         return Math.ceil($rootScope.posts.length/$scope.pageSize);
       };
 
-      $scope.tableOrderBy = function(expression, reverse){
-        $scope.posts = $filter('orderBy')($rootScope.posts, expression, reverse);
-      };
-
       $scope.nextPage = function(){
         $scope.currentPage=$scope.currentPage+1;
       };
