@@ -12,7 +12,6 @@ angular.module('cmsApp')
 
         ck.config.extraPlugins = 'youtube';
         ck.config.height = '100%';
-        ck.config.language = 'pt-BR';
 
         if(!ngModel) {
           return;
