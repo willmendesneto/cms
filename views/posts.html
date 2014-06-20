@@ -16,7 +16,7 @@
       <tr data-ng-repeat="post in filteredData = (posts | orderBy:predicate:reverse | filter:search | startFrom:currentPage*pageSize | limitTo:pageSize) track by post.sha">
         <td>{{post.name}}</td>
         <td>
-          <a href="#/post/{{ post.sha }}">EDITAR</a>
+          <a href="#/post/{{ post.name }}">EDITAR</a>
         </td>
       </tr>
     </tbody>
