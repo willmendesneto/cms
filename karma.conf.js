@@ -27,7 +27,10 @@ module.exports = function(config) {
     ],
 
     // list of files to exclude
-    exclude: [],
+    exclude: [
+      'app/scripts/ck-editor-plugins/*.js',
+      'app/scripts/ck-editor-plugins/**/*.js',
+    ],
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
