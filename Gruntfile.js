@@ -292,8 +292,8 @@ module.exports = function (grunt) {
     ngconstant: {
       // Options for all targets
       options: {
-        space: '  ',
-        wrap: '/*jshint quotmark:double */\n\n"use strict";\n\n {%= __ngModule %}',
+        space: '',
+        wrap: '/*jshint quotmark:double */\n\n"use strict";\n\n{%= __ngModule %}',
         name: 'config',
       },
       // Environment targets
