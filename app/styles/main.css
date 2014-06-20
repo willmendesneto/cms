@@ -41,11 +41,20 @@ div.datapreview {
   background-color: #eee;
 }
 
+input.post-hat-input {
+  font-size: 0.8em;
+  font-weight: bold;
+  width: 15%;
+  border: none;
+  display: block;
+}
+
 input.post-title-input {
   font-size: 1.5em;
   font-weight: bold;
   width: 80%;
   border: none;
+  display: block;
 }
 
 textarea.post-abstract {
@@ -53,6 +62,8 @@ textarea.post-abstract {
   margin-bottom: 10px;
   padding: 2px;
   width: 80%;
+  border: none;
+  display: block;
 }
 /* Tags */
 
