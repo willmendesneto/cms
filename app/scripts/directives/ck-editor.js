@@ -8,7 +8,7 @@ angular.module('cmsApp')
       link : function($scope, elm, attr, ngModel) {
         var ck = window.CKEDITOR.replace(elm[0]);
 
-        CKEDITOR.plugins.addExternal('youtube','/scripts/ck-editor-plugins/youtube/', 'plugin.js');
+        CKEDITOR.plugins.addExternal('youtube','/ckeditor-plugins/youtube/', 'plugin.js');
 
         ck.config.extraPlugins = 'youtube';
         ck.config.height = '100%';
