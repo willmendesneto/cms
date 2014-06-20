@@ -22,7 +22,7 @@ angular.module('cmsApp', [
         templateUrl: 'views/posts.html',
         controller: 'PostsCtrl'
       })
-      .when('/post/:sha', {
+      .when('/post/:fileName', {
         templateUrl: 'views/post.html',
         controller: 'PostCtrl'
       })

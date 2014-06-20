@@ -5,14 +5,14 @@ angular.module('cmsApp')
 
   GitRepository.getDrafts().success(function(data){
     $timeout(function(){
-      $rootScope.posts = _.map(data, Post.makePost);
+      $scope.posts = _.map(data, Post.makePost);
 
       $scope.currentPage = 0;
 
       $scope.pageSize = 10;
 
       $scope.numberOfPages = function(){
-        return Math.ceil($rootScope.posts.length/$scope.pageSize);
+        return Math.ceil($scope.posts.length/$scope.pageSize);
       };
 
       $scope.nextPage = function(){

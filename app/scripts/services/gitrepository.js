@@ -22,12 +22,12 @@ angular.module('cmsApp')
     },
 
 
-    getPost: function(sha) {
+    getPost: function(fileName) {
       if(!$rootScope.github){
         console.log('Github not defined.');
         return;
       }
-      return githubGet('git/blobs/'+sha);
+      return githubGet('contents/_drafts/'+fileName);
     },
 
     getDraftsRepositoryAddress: function(fileName) {

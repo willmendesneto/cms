@@ -3,12 +3,6 @@
 angular.module('cmsApp')
   .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository) {
 
-    function findPost(sha) {
-      return $rootScope.posts.filter(function(post) {
-        return post.sha === sha;
-      }).shift(0);
-    }
-
     function newPost(){
       return Post.makePost();
     }
@@ -83,10 +77,11 @@ angular.module('cmsApp')
       $scope.post.setImagesHD(newval);
     });
 
-    var sha = $routeParams.sha;
-    $scope.post = (sha) ? findPost(sha) : newPost();
-    if(sha){
-      GitRepository.getPost(sha).done(function(data) {
+    var fileName = $routeParams.fileName;
+    $scope.post = newPost();
+    if(fileName){
+      GitRepository.getPost(fileName).done(function(data) {
+        $scope.post = Post.makePost(data);
         $scope.post.loadContentFromJekyllData(atob(data.content));
 
         $timeout(function(){
@@ -100,8 +95,6 @@ angular.module('cmsApp')
     else{
       $scope.post.create();
     }
-
-
 
     $scope.processTag = function(){
       if(!$scope.tag){
