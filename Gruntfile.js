@@ -293,7 +293,7 @@ module.exports = function (grunt) {
       // Options for all targets
       options: {
         space: '  ',
-        wrap: '"use strict";\n\n {%= __ngModule %}',
+        wrap: '/*jshint quotmark:double */\n\n"use strict";\n\n {%= __ngModule %}',
         name: 'config',
       },
       // Environment targets
