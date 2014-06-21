@@ -120,7 +120,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      constants: '<%= yeoman.app %>/config.js'
     },
 
     // Add vendor prefixed styles
@@ -353,6 +354,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'clean:constants',
       'sass',
       'ngconstant:development',
       'concurrent:server',
@@ -369,6 +371,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'clean:constants',
     'ngconstant:test',
     'concurrent:test',
     'autoprefixer',
@@ -378,6 +381,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'clean:constants',
     'sass',
     'ngconstant:production',
     'useminPrepare',
