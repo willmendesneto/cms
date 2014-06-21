@@ -121,7 +121,7 @@ module.exports = function (grunt) {
         }]
       },
       server: '.tmp',
-      constants: '<%= yeoman.app %>/config.js'
+      constants: '<%= yeoman.app %>/scripts/config.js'
     },
 
     // Add vendor prefixed styles
@@ -325,7 +325,7 @@ module.exports = function (grunt) {
       },
       production: {
         options: {
-          dest: '<%= yeoman.dist %>/scripts/config.js'
+          dest: '<%= yeoman.app %>/scripts/config.js'
         },
         constants: {
           ENV: {
