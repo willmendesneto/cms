@@ -306,7 +306,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'test',
-            repository: 'movimento-sem-terra/staging/'
+            repository: 'movimento-sem-terra/staging/',
+            basepath: ''
           }
         }
       },
@@ -317,7 +318,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            repository: 'movimento-sem-terra/staging/'
+            repository: 'movimento-sem-terra/staging/',
+            basepath: ''
           }
         }
       },
@@ -328,7 +330,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            repository: 'movimento-sem-terra/site-novo/'
+            repository: 'movimento-sem-terra/site-novo/',
+            basepath: '/cms'
           }
         }
       }

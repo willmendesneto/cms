@@ -2,13 +2,13 @@
 /* jshint undef:false */
 
 angular.module('cmsApp')
-  .directive('ckEditor', function () {
+  .directive('ckEditor', function (ENV) {
     return {
       require : '?ngModel',
       link : function($scope, elm, attr, ngModel) {
         var ck = window.CKEDITOR.replace(elm[0]);
 
-        CKEDITOR.plugins.addExternal('youtube','/cms/ckeditor-plugins/youtube/', 'plugin.js');
+        CKEDITOR.plugins.addExternal('youtube', ENV.basepath+'/ckeditor-plugins/youtube/', 'plugin.js');
 
         ck.config.extraPlugins = 'youtube';
         ck.config.height = '100%';
