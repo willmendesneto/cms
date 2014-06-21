@@ -1,0 +1,14 @@
+section.post {
+  & > form {
+    .sessions {
+      float: left;
+      width: 28%;
+      margin-right: 15px;
+    }
+
+    .editor {
+      float: left;
+      width: 70%;
+    }
+  }
+}
