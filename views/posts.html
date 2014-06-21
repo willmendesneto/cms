@@ -1,34 +1,36 @@
-<form autocomplete="off" role="form">
-    <label for="search">Buscar: </label>
-    <input type="search" name="search" id="search" placeholder="Buscar..." data-ng-model="search">
-</form>
-<a href="#/post">Novo</a>
+<section class="posts">
+  <form autocomplete="off" role="form">
+      <label for="search">Buscar: </label>
+      <input type="search" name="search" id="search" placeholder="Buscar..." data-ng-model="search">
+  </form>
+  <a href="#/post" class="btn btn-primary">Novo</a>
 
-<div ng-show="filteredData.length > 0">
-  <table>
-    <thead>
-      <tr>
-        <th class="table-order" data-ng-class="{asc: reverse === true && predicate === 'name', desc: reverse === false && predicate === 'name'}" data-ng-click="predicate = 'name'; reverse=!reverse; ">Título</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-ng-repeat="post in filteredData = (posts | orderBy:predicate:reverse | filter:search | startFrom:currentPage*pageSize | limitTo:pageSize) track by post.sha">
-        <td>{{post.name}}</td>
-        <td>
-          <a href="#/post/{{ post.name }}">EDITAR</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div ng-show="filteredData.length > 0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="table-order" data-ng-class="{asc: reverse === true && predicate === 'name', desc: reverse === false && predicate === 'name'}" data-ng-click="predicate = 'name'; reverse=!reverse; ">Título</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="post in filteredData = (posts | orderBy:predicate:reverse | filter:search | startFrom:currentPage*pageSize | limitTo:pageSize) track by post.sha">
+          <td>{{post.name}}</td>
+          <td>
+            <a href="#/post/{{ post.name }}">EDITAR</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div data-ng-if="numberOfPages() > 1">
-    <button ng-disabled="currentPage === 0" ng-click="previousPage()">
-        Anterior
-    </button>
-    {{currentPage+1}}/{{numberOfPages()}}
-    <button ng-disabled="currentPage >= numberOfPages() - 1" ng-click="nextPage()">
-        Próximo
-    </button>
+    <div data-ng-if="numberOfPages() > 1">
+      <button ng-disabled="currentPage === 0" ng-click="previousPage()">
+          Anterior
+      </button>
+      {{currentPage+1}}/{{numberOfPages()}}
+      <button ng-disabled="currentPage >= numberOfPages() - 1" ng-click="nextPage()">
+          Próximo
+      </button>
+    </div>
   </div>
-</div>
+</section>
