@@ -1,4 +1,4 @@
-<div>
+<section class="post">
     <p class="status"> {{postStatus()}} </p>
 		<form name="postForm" novalidate="">
       <p class="actions">
@@ -12,46 +12,52 @@
       <textarea msd-elastic="" class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato"></textarea>
 
       <section>
-        <div class="form">
-          <p>
-            <label for="menu-tag">Menu: </label>
-            <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions">
-              <option value="">-- Nenhum --</option>
-            </select>
-          </p>
+        <div class="sessions form-horizontal">
+          <div class="form-group">
+            <label for="menu-tag" class="col-sm-3 control-label">Menu: </label>
+            <div class="col-sm-9">
+              <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions" class="form-control">
+                <option value="">-- Nenhum --</option>
+              </select>
+            </div>
+          </div>  
 
-          <p>
-            <label for="section">Sessão: </label>
-            <select ng-model="section" ng-options="opt.label for opt in sectionOptions">
-              <option value="">-- Nenhuma --</option>
-            </select>
-          </p>
+          <div class="form-group">
+            <label for="section" class="col-sm-3 control-label">Sessão: </label>
+            <div class="col-sm-9">
+              <select ng-model="section" ng-options="opt.label for opt in sectionOptions" class="form-control">
+                <option value="">-- Nenhuma --</option>
+              </select>
+            </div>
+          </div>  
 
-          <p>
-            <label for="label">Rótulo: </label>
-            <select ng-model="label" ng-options="opt.label for opt in labelOptions">
-              <option value="">-- Nenhuma --</option>
-            </select>
-          </p>
+          <div class="form-group">
+            <label for="label" class="col-sm-3 control-label">Gênero: </label>
+            <div class="col-sm-9">
+              <select ng-model="label" ng-options="opt.label for opt in labelOptions" class="form-control">
+                <option value="">-- Nenhuma --</option>
+              </select>
+            </div>
+          </div>  
 
-          <p>
-          <label for="imgFile">Capa: </label>
-            <input name="imgFile" ng-model="imagesHD" type="text"><br>
+          <div class="form-group">
+          <label for="imgFile" class="col-sm-2 control-label">Capa: </label>
+            <input name="imgFile" ng-model="imagesHD" type="text" class="form-control"><br>
             <img id="coverImage" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show="imagesHD">
-          </p>
+          </div>  
 
-          <p>
-            <label for="tag">Tag: </label>
-            <input type="text" ng-model="tag" name="tag">
+          <div class="form-group">
+            <label for="tag" class="col-sm-2 control-label">Tag: </label>
+            <input type="text" ng-model="tag" name="tag" class="form-control">
             <button ng-disabled="tag==''" ng-click="processTag()">Adicionar</button>
-          </p>
+          </div>  
 
-          <p class="tag">
+          <div class="tag form-group">
             <span class="tag" ng-repeat="tagPersonalizada in tagsPersonalizadas">
               <button class="tag" ng-click="removeTag($index)">X</button>
               <span class="specificTag">{{ tagPersonalizada }}</span>
             </span>
-          </p>
+          </div>  
           <div ng-include="'views/postimages.html'"></div>
         </div>
 
@@ -65,4 +71,4 @@
 	<div class="datapreview" style="display:none">
 		<pre>{{ post.convertContentToJekyllData() }}</pre>
 	</div>
-</div>
+</section>

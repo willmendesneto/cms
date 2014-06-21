@@ -1,9 +1,9 @@
 <section class="posts">
-  <form autocomplete="off" role="form">
-      <label for="search">Buscar: </label>
-      <input type="search" name="search" id="search" placeholder="Buscar..." data-ng-model="search">
+  <form autocomplete="off" role="form" class="form-inline">
+      <label for="search" class="sr-only">Buscar: </label>
+      <input type="search" class="form-control" name="search" id="search" placeholder="Buscar..." data-ng-model="search">
+      <a href="#/post" class="btn btn-primary">Novo</a>
   </form>
-  <a href="#/post" class="btn btn-primary">Novo</a>
 
   <div ng-show="filteredData.length > 0">
     <table class="table table-striped">
@@ -17,7 +17,7 @@
         <tr data-ng-repeat="post in filteredData = (posts | orderBy:predicate:reverse | filter:search | startFrom:currentPage*pageSize | limitTo:pageSize) track by post.sha">
           <td>{{post.name}}</td>
           <td>
-            <a href="#/post/{{ post.name }}">EDITAR</a>
+            <a href="#/post/{{ post.name }}" class="btn btn-warning">EDITAR</a>
           </td>
         </tr>
       </tbody>
