@@ -37,8 +37,8 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/sass/{,*/}*.scss'],
+        tasks: ['sass', 'newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -331,7 +331,19 @@ module.exports = function (grunt) {
           }
         }
       }
+    },
+    sass: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/sass',
+          src: ['*.scss'],
+          dest: '<%= yeoman.app %>/styles',
+          ext: '.css'
+        }]
+      }
     }
+
   });
 
   grunt.registerTask('serve', function (target) {
@@ -341,6 +353,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'sass',
       'ngconstant:development',
       'concurrent:server',
       'autoprefixer',
@@ -365,6 +378,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'sass',
     'ngconstant:production',
     'useminPrepare',
     'concurrent:dist',
