@@ -201,40 +201,6 @@ describe('Service: Post', function () {
     });
   });
 
-  describe('manage tags', function () {
-    it('should add a new tag', function () {
-      var post = Post.makePost();
-      post.loadContentFromJekyllData(data);
-      post.content.meta.tags = [];
-
-      post.addNewTag('newTag');
-      expect(post.content.meta.tags).toContain('personalizada:newTag');
-    });
-
-    it('should add tags to firebase service', function(){
-      var post = Post.makePost();
-      post.loadContentFromJekyllData(data);
-      post.content.meta.tags=[];
-      spyOn(CustomTag, 'addNewCustomTag');
-
-      post.addNewTag('newTag');
-      expect(CustomTag.addNewCustomTag).toHaveBeenCalledWith({'personalizada':'newTag'});
-    });
-
-    it('should delete custom tag', function(){
-      var post = Post.makePost();
-      post.loadContentFromJekyllData(data);
-
-      post.content.meta.tags = [];
-      post.addNewTag('newTag');
-      expect(post.content.meta.tags).toContain('personalizada:newTag');
-
-      post.deleteTag('newTag');
-      expect(post.content.meta.tags).not.toContain('personalizada:newTag');
-    });
-
-  });
-
   describe('setting the label', function() {
     it('should set the label', function() {
       var post = Post.makePost();

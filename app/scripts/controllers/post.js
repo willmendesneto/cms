@@ -59,8 +59,6 @@ angular.module('cmsApp')
       {label: 'Reportagens Especiais', value: 'special-stories'}
     ];
 
-    $scope.tagsPersonalizadas = [];
-
     $scope.$watch('label', function (newval) {
       $scope.post.setLabel(newval);
     });
@@ -95,23 +93,6 @@ angular.module('cmsApp')
     else{
       $scope.post.create();
     }
-
-    $scope.processTag = function(){
-      if(!$scope.tag){
-        return;
-      }
-      if(!_.contains($scope.tagsPersonalizadas, $scope.tag)){
-        $scope.post.addNewTag($scope.tag);
-        $scope.tagsPersonalizadas.push($scope.tag);
-      }
-      $scope.tag = '';
-    };
-
-    $scope.removeTag = function(index){
-      var customTag = $scope.tagsPersonalizadas[index];
-      $scope.post.deleteTag(customTag);
-      $scope.tagsPersonalizadas.splice(index,1);
-    };
 
     $scope.save = function(post, url) {
       $rootScope.github.put(url, {

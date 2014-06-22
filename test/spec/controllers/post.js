@@ -88,56 +88,6 @@ describe('Controller: PostCtrl', function () {
     expect(scope.post.setLabel).toHaveBeenCalledWith(scope.label);
   });
 
-  describe('processTag', function(){
-
-    it('should call addNewTag', function(){
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      spyOn(scope.post, 'addNewTag');
-      scope.tag = 'newtag';
-      scope.processTag();
-
-      expect(scope.post.addNewTag).toHaveBeenCalledWith('newtag');
-    });
-
-    it('should add new tag', function(){
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      expect(scope.tagsPersonalizadas.length).toBe(0);
-      scope.tag ='newtag';
-      scope.processTag();
-      expect(scope.tagsPersonalizadas.length).toBe(1);
-    });
-
-    it('should not add the same tag twice', function(){
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      scope.tagsPersonalizadas = ['newtag'];
-      expect(scope.tagsPersonalizadas.length).toBe(1);
-      scope.tag ='newtag';
-      scope.processTag();
-      expect(scope.tagsPersonalizadas.length).toBe(1);
-    });
-  });
-
-  describe('removeTag', function(){
-
-    it('should call deleteTag', function(){
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      spyOn(scope.post, 'deleteTag');
-      scope.tagsPersonalizadas = ['newtag'];
-      scope.removeTag(0);
-
-      expect(scope.post.deleteTag).toHaveBeenCalledWith('newtag');
-    });
-
-    it('should delete tag', function(){
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      scope.tag ='newtag';
-      scope.processTag();
-      expect(scope.tagsPersonalizadas.length).toBe(1);
-      scope.removeTag(0);
-      expect(scope.tagsPersonalizadas.length).toBe(0);
-    });
-  });
-
   describe('save/publish a post', function() {
 
     it('should save a post in draft', function() {
