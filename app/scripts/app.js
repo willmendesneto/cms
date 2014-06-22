@@ -4,7 +4,8 @@ angular.module('cmsApp', [
   'ngRoute',
   'firebase',
   'config',
-  'monospaced.elastic'
+  'monospaced.elastic',
+  'ngTagsInput'
 ])
 
   .constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload')

@@ -16,6 +16,7 @@ module.exports = function(config) {
       'app/bower_components/lodash/dist/lodash.js',
       'app/bower_components/js-yaml/js-yaml.js',
       'app/bower_components/angular/angular.js',
+      'app/bower_components/ng-tags-input/ng-tags-input.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-elastic/elastic.js',
