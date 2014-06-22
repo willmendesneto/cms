@@ -22,10 +22,11 @@ describe('Service: New Post', function(){
   // load the service's module
   beforeEach(module('cmsApp'));
 
-  var Post, $date;
-  beforeEach(inject(function (_Post_, DateUtil) {
+  var Post, $date, underscore;
+  beforeEach(inject(function (_Post_, DateUtil, _) {
     Post = _Post_;
     $date = DateUtil;
+    underscore = _;
 
     spyOn(DateUtil,'getTime').and.returnValue(new Date(2001,8,29,12,0));
   }));
@@ -72,10 +73,11 @@ describe('Service: Post', function () {
   beforeEach(module('cmsApp'));
 
   // instantiate service
-  var Post, CustomTag;
-  beforeEach(inject(function (_Post_, _CustomTag_) {
+  var Post, CustomTag, underscore;
+  beforeEach(inject(function (_Post_, _CustomTag_, _) {
     Post = _Post_;
     CustomTag = _CustomTag_;
+    underscore = _;
     spyOn(jsyaml, 'load').and.returnValue(dummyMeta);
     spyOn(jsyaml, 'dump').and.returnValue('metadata');
   }));
@@ -241,4 +243,25 @@ describe('Service: Post', function () {
       }).not.toThrow();
     });
   });
+
+  describe('processTag', function(){
+
+    it('should add new tag', function(){
+      var post = Post.makePost();
+      post.loadContentFromJekyllData(data);
+      expect(post.tags.length).toBe(0);
+
+      post.tags.push({text:'rodrigo'});
+      post.prepareTags();
+
+      expect(post.tags.length).toBe(1);
+
+      var result = underscore.filter(post.content.meta.tags, function(el){
+        return (/^tag:/).test(el);
+      });
+
+      expect(result.length).toBe(1);
+    });
+  });
+
 });
