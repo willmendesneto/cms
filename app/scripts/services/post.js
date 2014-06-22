@@ -15,6 +15,7 @@ angular.module('cmsApp')
             text: parts.pop().replace(/^\n/, ''),
             meta: jsyaml.load(parts.pop())
           };
+          self.loadTags();
         };
 
         self.create = function(){
@@ -56,6 +57,7 @@ angular.module('cmsApp')
         };
 
         self.commitData = function() {
+          self.prepareTags();
           return {
             sha: self.sha,
             content: btoa(self.convertContentToJekyllData()),
@@ -154,23 +156,38 @@ angular.module('cmsApp')
           return self.content.meta.images_hd;
         };
 
-        self.addNewTag = function(customTag) {
+        self.tags = [];
+
+        self.loadTags = function(){
           if (!self.content.meta.tags) {
             return;
           }
 
-          var customTagJason = {'personalizada': customTag};
-          CustomTag.addNewCustomTag(customTagJason);
+          var tags = _.filter(self.content.meta.tags, function (el) {
+            return (/^tag:/).test(el);
+          });
 
-          var customTagMeta = 'personalizada:'+customTag;
-          self.content.meta.tags.push(customTagMeta);
+          self.tags = [];
+          _.each(tags, function(tag){
+            var value = tag.match(/tag:(.*)/)[1];
+            self.tags.push({ text:value });
+          });
         };
 
-        self.deleteTag = function(customTag){
+        self.prepareTags = function(){
           if (!self.content.meta.tags) {
             return;
           }
-          self.content.meta.tags = _.without(self.content.meta.tags, 'personalizada:'+customTag);
+          var otherTags = _.filter(self.content.meta.tags, function (el) {
+            return !(/^tag:/).test(el);
+          });
+
+          self.content.meta.tags = [];
+          self.content.meta.tags.push(otherTags);
+
+          _.each(self.tags, function(tag){
+            self.content.meta.tags.push('tag:'+tag.text);
+          });
         };
 
         return self;
