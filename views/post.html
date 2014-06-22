@@ -1,15 +1,16 @@
 <section class="post">
-    <p class="status"> {{postStatus()}} </p>
 		<form name="postForm" novalidate="">
       <p class="actions">
-        <input type="button" value="Salvar" ng-click="draft(post)" ng-disabled="!postForm.$valid">
-        <input type="button" value="Publicar" ng-disabled="true" ng-click="publish(post)">
-        <a class="cancel" href="#/posts">Voltar</a>
+        <input type="button" class="btn btn-primary" value="Salvar" ng-click="draft(post)" ng-disabled="!postForm.$valid">
+        <input type="button" class="btn btn-warning" value="Publicar" ng-disabled="true" ng-click="publish(post)">
+        <a href="#/posts" class="btn btn-default">Voltar</a>
       </p>
 
-      <input type="text" class="post-hat-input" ng-model="post.content.meta.hat" placeholder="Informe o chapéu">
-      <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" required="">
-      <textarea msd-elastic="" class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato"></textarea>
+      <section>
+        <input type="text" class="post-hat-input" ng-model="post.content.meta.hat" placeholder="Informe o chapéu">
+        <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" required="">
+        <textarea msd-elastic="" class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato"></textarea>
+      </section>
 
       <section>
         <div class="sessions form-horizontal">
@@ -43,12 +44,11 @@
           <div class="form-group">
           <label for="imgFile" class="col-sm-2 control-label">Capa: </label>
             <input name="imgFile" ng-model="imagesHD" type="text" class="form-control"><br>
-            <img id="coverImage" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show="imagesHD">
+            <img id="coverImage" class="img-thumbnail" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show="imagesHD">
           </div>  
 
           <div class="form-group">
-            <label for="tag" class="col-sm-2 control-label">Tag: </label>
-            <tags-input ng-model="post.tags" class="tag-input">
+            <tags-input ng-model="post.tags" class="tag-input" placeholder="Adicione uma Tag">
             </tags-input>
           </div>  
 
