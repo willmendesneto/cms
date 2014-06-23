@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository) {
+  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal) {
 
     function newPost(){
       return Post.makePost();
@@ -95,13 +95,40 @@ angular.module('cmsApp')
     }
 
     $scope.save = function(post, url) {
-      $rootScope.github.put(url, {
+      console.log($rootScope.github);
+      $modal.open({
+        templateUrl: 'myModalContent.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+          url: url,
+          data: JSON.stringify(post.commitData())
+        }
+      });
+/*      $rootScope.github.put(url, {
         data: JSON.stringify(post.commitData())
+      }).progress(function(){
+        console.log('Teste');
       }).done(function() {
         window.alert('Post salvo com sucesso!');
       }).fail(function(data) {
         console.log('error data:', data);
       });
+*/
+    };
+
+    var ModalInstanceCtrl = function ($rootScope, $scope, $modalInstance, url, data) {
+      $rootScope.github.put(url, { data: data } )
+        .sucess(function(){
+        }).fail(function(data){
+        });
+
+      $scope.ok = function () {
+        $modalInstance.close();
+      };
+
+      $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+      };
     };
 
     $scope.publish = function(post) {
