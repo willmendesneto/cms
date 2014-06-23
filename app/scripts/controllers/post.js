@@ -32,6 +32,17 @@ angular.module('cmsApp')
       return date+'-'+fileName+'.md';
     }
 
+    function loadPostFromData(data){
+      $scope.post = Post.makePost(data);
+      $scope.post.loadContentFromJekyllData(atob(data.content));
+
+      $timeout(function(){
+        $scope.menuTag = $scope.post.getMenuItem();
+        $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
+        $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
+        $scope.imagesHD = $scope.post.getImagesHD();
+      },0);
+    }
 
     $scope.menuTagOptions = [
       'agricultura camponesa',
@@ -79,15 +90,7 @@ angular.module('cmsApp')
     $scope.post = newPost();
     if(fileName){
       GitRepository.getPost(fileName).done(function(data) {
-        $scope.post = Post.makePost(data);
-        $scope.post.loadContentFromJekyllData(atob(data.content));
-
-        $timeout(function(){
-          $scope.menuTag = $scope.post.getMenuItem();
-          $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
-          $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
-          $scope.imagesHD = $scope.post.getImagesHD();
-        },0);
+        loadPostFromData(data);
       });
     }
     else{
@@ -95,40 +98,25 @@ angular.module('cmsApp')
     }
 
     $scope.save = function(post, url) {
-      console.log($rootScope.github);
       $modal.open({
-        templateUrl: 'myModalContent.html',
-        controller: ModalInstanceCtrl,
+        templateUrl: 'saveModalContent.html',
+        controller: 'SaveModalCtrl',
+        backdrop: 'static',
         resolve: {
-          url: url,
-          data: JSON.stringify(post.commitData())
+          url: function(){
+            return url;
+          },
+          post: function(){
+            return post;
+          },
+          fileName: function(){
+            return $routeParams.fileName;
+          },
+          loadPost: function(){
+            return loadPostFromData;
+          }
         }
       });
-/*      $rootScope.github.put(url, {
-        data: JSON.stringify(post.commitData())
-      }).progress(function(){
-        console.log('Teste');
-      }).done(function() {
-        window.alert('Post salvo com sucesso!');
-      }).fail(function(data) {
-        console.log('error data:', data);
-      });
-*/
-    };
-
-    var ModalInstanceCtrl = function ($rootScope, $scope, $modalInstance, url, data) {
-      $rootScope.github.put(url, { data: data } )
-        .sucess(function(){
-        }).fail(function(data){
-        });
-
-      $scope.ok = function () {
-        $modalInstance.close();
-      };
-
-      $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-      };
     };
 
     $scope.publish = function(post) {

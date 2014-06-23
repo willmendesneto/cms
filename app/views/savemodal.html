@@ -1,0 +1,23 @@
+<script type="text/ng-template" id="saveModalContent.html">
+  <div class="modal-header">
+  <h3 class="modal-title">Salvando</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+    <div class="col-sm-100">
+        <progressbar class="progress-striped active" value="dynamic" max="max" type="{{type}}">{{status}}</progressbar></div>
+    </div>
+    <div class="row" ng-show='problem'>
+      <p class='bg-danger'> {{ detail  }} </p>
+
+      <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Detalhes</button>
+      <hr>
+      <div collapse="isCollapsed">
+        <p class="well well-lg">{{ error }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()" ng-show='finish'>Fechar</button>
+  </div>
+</script>
