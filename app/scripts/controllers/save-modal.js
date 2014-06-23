@@ -44,7 +44,7 @@ angular.module('cmsApp')
     });
 
   }).error(function(error){
-    updateProgress(5,'danger','Ops, um problema aconteceu!');
+    updateProgress(5,'danger','Ops, um problema aconteceu!',true);
     $timeout(function(){
       $scope.error = error;
     },0);
