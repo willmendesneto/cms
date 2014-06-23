@@ -110,7 +110,7 @@ angular.module('cmsApp')
             return post;
           },
           fileName: function(){
-            return $routeParams.fileName;
+            return ($routeParams.fileName || prepareNameFile(post));
           },
           loadPost: function(){
             return loadPostFromData;
