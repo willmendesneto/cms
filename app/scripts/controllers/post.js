@@ -2,6 +2,7 @@
 
 angular.module('cmsApp')
   .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal) {
+    var fileName = $routeParams.fileName;
 
     function newPost(){
       return Post.makePost();
@@ -86,16 +87,28 @@ angular.module('cmsApp')
       $scope.post.setImagesHD(newval);
     });
 
-    var fileName = $routeParams.fileName;
     $scope.post = newPost();
-    if(fileName){
-      GitRepository.getPost(fileName).done(function(data) {
-        loadPostFromData(data);
-      });
-    }
-    else{
-      $scope.post.create();
-    }
+
+    $scope.init = function(){
+      if(fileName){
+        $modal.open({
+          template: 'loadingModalContent.html',
+          controller: 'LoadingModalCtrl',
+          backdrop: 'static',
+          resolve: {
+            fileName: function(){
+              return fileName;
+            },
+            loadPost: function(){
+              return loadPostFromData;
+            }
+          }
+        });
+      }
+      else{
+        $scope.post.create();
+      }
+    };
 
     $scope.save = function(post, url) {
       $modal.open({
