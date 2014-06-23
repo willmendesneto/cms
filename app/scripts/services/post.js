@@ -182,8 +182,7 @@ angular.module('cmsApp')
             return !(/^tag:/).test(el);
           });
 
-          self.content.meta.tags = [];
-          self.content.meta.tags.push(otherTags);
+          self.content.meta.tags = otherTags;
 
           _.each(self.tags, function(tag){
             self.content.meta.tags.push('tag:'+tag.text);
