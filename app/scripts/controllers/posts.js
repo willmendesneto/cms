@@ -3,26 +3,43 @@
 angular.module('cmsApp')
   .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, GitRepository, $timeout) {
 
-  GitRepository.getDrafts().success(function(data){
-    $timeout(function(){
-      $scope.posts = _.map(data, Post.makePost);
+    function filterPostByDate(data){
+      var date;
+      data.filter(function(item){
+        date = item.name.substring(0, 10).split('-');
+        item.reverseDate = date.join('');
+        item.publishDate = date.reverse().join('/');
+      });
+      return data;
+    }
 
-      $scope.currentPage = 0;
+    GitRepository.getDrafts().success(function(data){
+      $timeout(function(){
 
-      $scope.pageSize = 10;
+        data = filterPostByDate(data);
 
-      $scope.numberOfPages = function(){
-        return Math.ceil($scope.posts.length/$scope.pageSize);
-      };
+        $scope.posts = _.map(data, Post.makePost);
 
-      $scope.nextPage = function(){
-        $scope.currentPage=$scope.currentPage+1;
-      };
+        $scope.reverse = false;
 
-      $scope.previousPage = function(){
-        $scope.currentPage=$scope.currentPage-1;
-      };
-    }, 0);
+        $scope.predicate = 'name';
+
+        $scope.currentPage = 0;
+
+        $scope.pageSize = 10;
+
+        $scope.numberOfPages = function(){
+          return Math.ceil($scope.filteredData.length/$scope.pageSize);
+        };
+
+        $scope.nextPage = function(){
+          $scope.currentPage=$scope.currentPage+1;
+        };
+
+        $scope.previousPage = function(){
+          $scope.currentPage=$scope.currentPage-1;
+        };
+      }, 0);
+    });
+
   });
-
-});
