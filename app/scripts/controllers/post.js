@@ -92,7 +92,7 @@ angular.module('cmsApp')
     $scope.init = function(){
       if(fileName){
         $modal.open({
-          template: 'loadingModalContent.html',
+          templateUrl: 'views/loadingmodal.html',
           controller: 'LoadingModalCtrl',
           backdrop: 'static',
           resolve: {

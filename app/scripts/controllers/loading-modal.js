@@ -16,17 +16,19 @@ angular.module('cmsApp')
     },0);
   }
 
-  updateProgress(1,'info','Carregando dados');
+  $timeout(function(){
+    updateProgress(1,'info','Carregando dados');
 
-  GitRepository.getPost(fileName)
-  .error(function(error){
-    updateProgress(2,'danger','Ops, um problema aconteceu!',true);
-    $timeout(function(){
-      $scope.error = error;
-    },0);
-  }).success(function(data) {
-    loadPost(data);
-    updateProgress(2,'success','Ok, tudo pronto!',true);
-    $modalInstance.close();
-  });
+    GitRepository.getPost(fileName)
+    .error(function(error){
+      updateProgress(2,'danger','Ops, um problema aconteceu!',true);
+      $timeout(function(){
+        $scope.error = error;
+      },0);
+    }).success(function(data) {
+      loadPost(data);
+      updateProgress(2,'success','Ok, tudo pronto!',true);
+      $modalInstance.close();
+    });
+  },2);
 });
