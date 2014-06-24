@@ -1,4 +1,5 @@
-<section class="post">
+<section class="post" ng-init="init()">
+
 		<form name="postForm" novalidate="">
       <p class="actions">
         <input type="button" class="btn btn-primary" value="Salvar" ng-click="draft(post)" ng-disabled="!postForm.$valid">
@@ -53,6 +54,8 @@
           </div>  
 
           <div ng-include="'views/postimages.html'"></div>
+          <div ng-include="'views/savemodal.html'"></div>
+          <div ng-include="'views/loadingmodal.html'"></div>
         </div>
 
         <div class="editor">
@@ -65,5 +68,4 @@
 	<div class="datapreview" style="display:none">
 		<pre>{{ post.convertContentToJekyllData() }}</pre>
 	</div>
-  <div ng-include="'views/savemodal.html'"></div>
 </section>
