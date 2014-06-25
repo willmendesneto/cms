@@ -1,8 +1,9 @@
 <section class='post' ng-init='init()'>
 
-		<form name="postForm" novalidate>
+		<form name="postForm">
+
       <p class='actions'>
-        <input type="button" class="btn btn-primary" value="Salvar" ng-click="draft(post)" ng-disabled="!postForm.$valid"/>
+        <input type="button" class="btn btn-primary" value="Salvar" ng-click="draft(post)"  ng-disabled="postForm.$invalid"/>
         <input type="button"  class="btn btn-warning" value="Publicar" ng-disabled='true' ng-click="publish(post)" />
         <a href="#/posts" class="btn btn-default">Voltar</a>
       </p>
@@ -10,7 +11,7 @@
       <section>
         <input type="text" class="post-hat-input" ng-model="post.content.meta.hat" placeholder="Informe o chapéu" />
         <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" required />
-        <textarea msd-elastic  class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato"></textarea>
+        <textarea msd-elastic  class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato" required></textarea>
       </section>
 
       <section>
@@ -18,20 +19,21 @@
           <div class="form-group">
             <label for="menu-tag" class="col-sm-3 control-label">Menu: </label>
             <div class="col-sm-9">
-              <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions" class="form-control">
+
+              <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions" class="form-control" required>
                 <option value="">-- Nenhum --</option>
               </select>
             </div>
-          </div>  
+          </div>
 
           <div class="form-group">
             <label for="section" class="col-sm-3 control-label">Sessão: </label>
             <div class="col-sm-9">
-              <select ng-model="section" ng-options="opt.label for opt in sectionOptions" class="form-control">
+              <select ng-model="section" ng-options="opt.label for opt in sectionOptions" class="form-control" required>
                 <option value="">-- Nenhuma --</option>
               </select>
             </div>
-          </div>  
+          </div>
 
           <div class="form-group">
             <label for="label" class="col-sm-3 control-label">Gênero: </label>
@@ -40,18 +42,18 @@
                 <option value="">-- Nenhuma --</option>
               </select>
             </div>
-          </div>  
+          </div>
 
           <div class="form-group">
           <label for="imgFile" class="col-sm-2 control-label">Capa: </label>
-            <input name="imgFile" ng-model="imagesHD" type='text'  class="form-control"/><br/>
+            <input name="imgFile" ng-model="imagesHD" type='text'  class="form-control" required/><br/>
             <img id='coverImage' class="img-thumbnail" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
-          </div>  
+          </div>
 
           <div class="form-group">
             <tags-input ng-model="post.tags" class='tag-input' placeholder='Adicione uma Tag'>
             </tags-input>
-          </div>  
+          </div>
 
           <div ng-include="'views/postimages.html'"></div>
           <div ng-include="'views/savemodal.html'"></div>

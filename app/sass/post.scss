@@ -10,5 +10,11 @@ section.post {
       float: left;
       width: 70%;
     }
+
+    .ng-invalid-required {
+      border-color: #a94442;
+      border-style: solid;
+      border-width: thin;
+    }
   }
 }
