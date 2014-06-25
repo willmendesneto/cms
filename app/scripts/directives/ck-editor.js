@@ -5,18 +5,22 @@ angular.module('cmsApp')
   .directive('ckEditor', function (ENV) {
     return {
       require : '?ngModel',
-      link : function($scope, elm, attr, ngModel) {
-        var ck = window.CKEDITOR.replace(elm[0]);
+      link : function($scope, element, attr, ngModel) {
+        var ck = window.CKEDITOR.replace(element[0]);
 
-        CKEDITOR.plugins.addExternal('youtube', ENV.basepath+'/ckeditor-plugins/youtube/', 'plugin.js');
+        CKEDITOR.plugins.addExternal('youtube', ENV.basepath + '/ckeditor-plugins/youtube/', 'plugin.js');
 
         ck.config.extraPlugins = 'youtube';
-        ck.config.height = '100%';
         ck.config.language = 'pt-BR';
+        ck.config.height = '100%';
 
         if(!ngModel) {
           return;
         }
+
+        ck.on('maximize', function() {
+          window.scrollTo(0, 0);
+        });
 
         ck.on('pasteState', function() {
           $scope.$apply(function() {
