@@ -1,29 +1,30 @@
-<section class='posts'>
-  <form autocomplete="off" role="form" class='form-inline'>
+<section class="posts">
+  <form autocomplete="off" role="form" class="form-inline">
       <label for="search" class="sr-only" >Buscar: </label>
       <input type="search"  class="form-control" name="search" id="search" placeholder="Buscar..." data-ng-model="search" />
-      <a href="#/post" class='btn btn-primary'>Novo</a>
+      <a href="#/post" class="btn btn-primary">Novo</a>
   </form>
 
   <div ng-show="filteredData.length > 0">
     <table class="table table-striped">
       <thead>
         <tr>
+          <th class="table-order"  data-ng-class="{asc: reverse === true && predicate === 'reverseDate', desc: reverse === false && predicate === 'reverseDate'}" data-ng-click="predicate = 'reverseDate'; reverse=!reverse; ">Data</th>
           <th class="table-order"  data-ng-class="{asc: reverse === true && predicate === 'name', desc: reverse === false && predicate === 'name'}" data-ng-click="predicate = 'name'; reverse=!reverse; ">Título</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr data-ng-repeat="post in filteredData = (posts | orderBy:predicate:reverse | filter:search | startFrom:currentPage*pageSize | limitTo:pageSize) track by post.sha">
+        <tr data-ng-repeat="post in filteredData = (posts | orderBy:predicate:reverse | filter:search) | startFrom:currentPage*pageSize | limitTo:pageSize track by post.sha">
+          <td>{{post.publishDate}}</td>
           <td>{{post.name}}</td>
           <td>
-            <a href="#/post/{{ post.name }}" class='btn btn-warning'>EDITAR</a>
+            <a href="#/post/{{ post.name }}" class="btn btn-warning">EDITAR</a>
           </td>
         </tr>
       </tbody>
     </table>
-
-    <div data-ng-if="numberOfPages() > 1">
+    <div data-ng-show="numberOfPages() > 1">
       <button ng-disabled="currentPage === 0" ng-click="previousPage()">
           Anterior
       </button>
