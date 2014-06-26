@@ -5,14 +5,13 @@ angular.module('cmsApp')
     return {
       restrict: 'A',
       controller: 'UploadCtrl',
-      scope: {
-        file: '='
-      },
+      scope: {},
       link: function(scope, el){
         el.bind('change', function(event){
           var files = event.target.files;
-          scope.file = files[0];
-          scope.$apply();
+          scope.$parent.file = files[0];
+          scope.$parent.uploadImage();
+          event.target.value = '';
         });
       }
     };

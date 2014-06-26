@@ -15,23 +15,23 @@ describe('Controller: UploadCtrl', function () {
       UploadCtrl = $controller('UploadCtrl', {$scope: scope});
     }));
 
-    it('should add loading img before send image to upload', function(){
-      spyOn(Image,'send').and.returnValue('aa');
-      scope.file = {file:'file'};
-      scope.uploadImage();
+    // it('should add loading img before send image to upload', function(){
+    //   spyOn(Image,'send').and.returnValue('aa');
+    //   scope.file = {file:'file'};
+    //   scope.uploadImage();
 
-      expect(scope.images[0].image).toEqual('images/loading.gif');
-    });
+    //   expect(scope.images[0].image).toEqual('images/loading.gif');
+    // });
 
-    it('should replace loading gif to true image after send to upload', function(){
-      spyOn(Image,'send').and.returnValue('aa');
-      scope.file = {file:'file'};
-      var index = scope.uploadImage();
+    // it('should replace loading gif to true image after send to upload', function(){
+    //   spyOn(Image,'send').and.returnValue('aa');
+    //   scope.file = {file:'file'};
+    //   var index = scope.uploadImage();
 
-      scope.addImage(index, 'http://true_image.jpg');
+    //   scope.addImage(index, 'http://true_image.jpg');
 
-      expect(scope.images[index].image).toEqual('http://true_image.jpg');
-    });
+    //   expect(scope.images[index].image).toEqual('http://true_image.jpg');
+    // });
 
   });
 });

@@ -56,8 +56,6 @@
           </div>
 
           <div ng-include="'views/postimages.html'"></div>
-          <div ng-include="'views/savemodal.html'"></div>
-          <div ng-include="'views/loadingmodal.html'"></div>
         </div>
 
         <div class='editor'>
@@ -66,6 +64,8 @@
       </section>
 		</form>
 
+  <div ng-include="'views/savemodal.html'"></div>
+  <div ng-include="'views/loadingmodal.html'"></div>
 
 	<div class="datapreview" style="display:none">
 		<pre>{{ post.convertContentToJekyllData() }}</pre>
