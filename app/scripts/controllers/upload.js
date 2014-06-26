@@ -12,9 +12,7 @@ angular.module('cmsApp')
     }
 
     $scope.images = [];
-
     var loadingImage = createImg('images/loading.gif');
-
 
     $scope.setCurrentImage = function (image) {
       $scope.currentImage = image;
@@ -22,20 +20,18 @@ angular.module('cmsApp')
     };
 
     $scope.uploadImage = function() {
-
       var postedFiles = $scope.file;
+
       if (!!postedFiles) {
         var index = $scope.images.length;
         $scope.images[index] = loadingImage;
 
         Image.send(postedFiles).success(function(data) {
-
           $timeout(function(){
             $scope.images[index] = createImg(data);
           });
         });
       }
     };
-
 
   });
