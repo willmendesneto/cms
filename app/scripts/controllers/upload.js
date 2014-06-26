@@ -3,16 +3,9 @@
 angular.module('cmsApp')
   .controller('UploadCtrl', function ($scope, Image, $timeout) {
 
-    function createImg(url){
-      return {
-        image : url,
-        thumbnail: url,
-        description: url
-      };
-    }
-
     $scope.images = [];
-    var loadingImage = createImg('images/loading.gif');
+    var loadingImage = 'images/loading.gif';
+    $scope.url = 'images/loading.gif';
 
     $scope.setCurrentImage = function (image) {
       $scope.currentImage = image;
@@ -28,7 +21,7 @@ angular.module('cmsApp')
 
         Image.send(postedFiles).success(function(data) {
           $timeout(function(){
-            $scope.images[index] = createImg(data);
+            $scope.images[index] = data;
           });
         });
       }

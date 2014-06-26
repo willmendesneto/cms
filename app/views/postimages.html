@@ -4,14 +4,13 @@
     <input id="imgFile" type="file" upload file="file" />
 
     <div id="header">
-      <input id='currentURL' class='imageURL' select-on-focus type="text" value="{{currentImage.image}}"></input>
+      <input id='currentURL' class='imageURL' select-on-focus type="text" value="{{currentImage}}"></input>
     </div>
 
     <div id="thumbWrapper">
       <ul id="thumbList">
         <li ng-repeat="image in images" >
-          <img ng-src="{{image.thumbnail}}" alt="{{image.description}}" onClick="$('#currentURL').focus();" ng-click="setCurrentImage(image)"/>
-          <img ng-src="images/loading.gif" alt="loading"/>
+          <img ng-src="{{image}}" alt="{{image}}" onClick="$('#currentURL').focus();" ng-click="setCurrentImage(image)"/>
         </li>
       </ul>
     </div>
