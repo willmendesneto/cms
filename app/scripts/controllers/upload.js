@@ -5,7 +5,6 @@ angular.module('cmsApp')
 
     $scope.images = [];
     var loadingImage = 'images/loading.gif';
-    $scope.url = 'images/loading.gif';
 
     $scope.setCurrentImage = function (image) {
       $scope.currentImage = image;
