@@ -112,7 +112,7 @@ angular.module('cmsApp')
 
     $scope.save = function(post, url) {
       $modal.open({
-        templateUrl: 'saveModalContent.html',
+        templateUrl: 'views/savemodal.html',
         controller: 'SaveModalCtrl',
         backdrop: 'static',
         resolve: {
