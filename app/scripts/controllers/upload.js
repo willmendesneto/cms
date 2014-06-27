@@ -22,7 +22,7 @@ angular.module('cmsApp')
 
       if (!!postedFiles) {
         var index = $scope.images.length;
-        $scope.images[index] = createImg({thumbnail: loadingImage});
+        $scope.images[index] = createImg('');
 
         Image.send(postedFiles).success(function(data) {
           $timeout(function(){

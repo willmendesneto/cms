@@ -91,50 +91,6 @@ span.specificTag {
   vertical-align: sub;
 }
 
-p.tag{
-}
-/*Images*/
-
-#albumImage {
-  width: 70%;
-  float: left;
-  margin-top: 10px;
-}
-
-
-#thumbWrapper {
-  height: 310px;
-  width: 100%;
-  overflow: auto;
-  margin-top: 10px;
-}
-
-#thumbList {
-  height: 310px;
-  white-space: nowrap;
-  margin: 0px;
-  padding: 0px;
-}
-
-#thumbList img {
-  height: 100px;
-  border-style: solid;
-  border-width: 2px;
-}
-
-#thumbList li {
-  list-style-type: none;
-  padding-left: 2px;
-  padding-right: 2px;
-  cursor: pointer;
-  float: left;
-  margin-bottom: 5px;
-}
-
-#thumbList li:hover {
-  opacity: 0.5;
-}
-
 .imageURL {
   width: 100%;
   margin-top: 15px;
