@@ -6,13 +6,13 @@
     <div id="thumbWrapper">
       <ul id="thumbList">
         <li ng-repeat="image in images" >
-          <img ng-src="{{image}}" alt="{{image}}" onClick="$('#currentURL').focus();" ng-click="setCurrentImage(image)"/>
+          <img ng-src="{{image.thumbnail}}" alt="{{image.thumbnail}}" onClick="$('#currentURL').focus();" ng-click="setCurrentImage(image)"/>
         </li>
       </ul>
     </div>
   </div>
   <div class="panel-footer">
-    <input id='currentURL' class='imageURL' select-on-focus type="text" value="{{currentImage}}"></input>
+    <input id='currentURL' class='imageURL' select-on-focus type="text" value="{{currentImage.link}}"></input>
     <input id="imgFile" type="file" upload file="file" />
   </div>
 </div>
