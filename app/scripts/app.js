@@ -37,7 +37,7 @@ angular.module('cmsApp', [
         redirectTo: '/auth'
       });
   })
-  .run(['$rootScope', '$location', function ($rootScope, $location) {
+  .run(['$rootScope', '$location', 'ENV', function ($rootScope, $location, ENV) {
     $rootScope.$on('$locationChangeStart', function () {
       $rootScope.error = null;
       if (!$rootScope.github) {
@@ -45,5 +45,6 @@ angular.module('cmsApp', [
         return false;
       }
     });
+    $rootScope.basepath = ENV.basepath;
   }]);
 
