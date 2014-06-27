@@ -7,11 +7,11 @@ angular.module('cmsApp')
   $scope.isCollapse = false;
   $scope.finish = false;
 
-  function updateProgress(step, type, statusMensage, finish){
+  function updateProgress(step, type, statusMessage, finish){
     $timeout(function(){
       $scope.dynamic = step;
       $scope.type = type;
-      $scope.status = statusMensage;
+      $scope.status = statusMessage;
       $scope.finish = finish;
     },0);
   }
@@ -45,6 +45,7 @@ angular.module('cmsApp')
 
   }).error(function(error){
     updateProgress(5,'danger','Ops, um problema aconteceu!',true);
+    console.log(error);
     $timeout(function(){
       $scope.error = error;
     },0);
