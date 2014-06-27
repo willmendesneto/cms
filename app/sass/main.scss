@@ -123,11 +123,12 @@ p.tag{
 }
 
 #thumbList li {
-  display: inline;
   list-style-type: none;
   padding-left: 2px;
   padding-right: 2px;
   cursor: pointer;
+  float: left;
+  margin-bottom: 5px;
 }
 
 #thumbList li:hover {

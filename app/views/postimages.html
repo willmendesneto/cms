@@ -1,12 +1,8 @@
-<div id="albumImage" ng-controller="UploadCtrl">
-  <div>
-    <label for="imgFile">Imagem: </label>
-    <input id="imgFile" type="file" upload file="file" />
-
-    <div id="header">
-      <input id='currentURL' class='imageURL' select-on-focus type="text" value="{{currentImage}}"></input>
-    </div>
-
+<div class="panel panel-primary" ng-controller="UploadCtrl">
+  <div class="panel-heading">
+    <h3 class="panel-title">Arquivos</h3>
+  </div>
+  <div class="panel-body">
     <div id="thumbWrapper">
       <ul id="thumbList">
         <li ng-repeat="image in images" >
@@ -14,5 +10,9 @@
         </li>
       </ul>
     </div>
+  </div>
+  <div class="panel-footer">
+    <input id='currentURL' class='imageURL' select-on-focus type="text" value="{{currentImage}}"></input>
+    <input id="imgFile" type="file" upload file="file" />
   </div>
 </div>
