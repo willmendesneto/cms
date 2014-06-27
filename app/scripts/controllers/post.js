@@ -36,6 +36,7 @@ angular.module('cmsApp')
     function loadPostFromData(data){
       $scope.post = Post.makePost(data);
       $scope.post.loadContentFromJekyllData(atob(data.content));
+      $scope.contentLoaded = true;
 
       $timeout(function(){
         $scope.menuTag = $scope.post.getMenuItem();
@@ -107,6 +108,7 @@ angular.module('cmsApp')
       }
       else{
         $scope.post.create();
+        $scope.contentLoaded = true;
       }
     };
 

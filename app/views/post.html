@@ -1,7 +1,8 @@
 <section class='post' ng-init='init()'>
 
-		<form name="postForm" nonvalidate>
+		<form name="postForm" nonvalidate ng-show="contentLoaded">
 
+      <p class='status' > {{postStatus()}} </p>
       <p class='actions'>
         <input type="button" class="btn btn-primary" value="Salvar" ng-click="draft(post)"  ng-disabled="postForm.$invalid"/>
         <input type="button"  class="btn btn-warning" value="Publicar" ng-disabled='true' ng-click="publish(post)" />

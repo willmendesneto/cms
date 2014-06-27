@@ -16,5 +16,14 @@ section.post {
       border-style: solid;
       border-width: thin;
     }
+
+    .status {
+     color: brown;
+     border-style: dashed;
+     text-align: center;
+     margin: 0 40% 0 40%;
+     border-width: 2px;
+     padding: 5px;
+    }
   }
 }
