@@ -11,7 +11,6 @@
       <ul id="thumbList">
         <li ng-repeat="image in images" >
           <img ng-src="{{image}}" alt="{{image}}" onClick="$('#currentURL').focus();" ng-click="setCurrentImage(image)"/>
-          <img ng-src="{{url}}" alt="{{url}}"/>
         </li>
       </ul>
     </div>
