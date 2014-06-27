@@ -34,7 +34,7 @@ module.exports = function (grunt) {
       jsTest: {
         files: ['test/spec/{,*/}*.js',
                 '<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: ['newer:jshint:test', 'karma', 'protractor']
       },
       styles: {
         files: ['<%= yeoman.app %>/sass/{,*/}*.scss'],
@@ -290,6 +290,14 @@ module.exports = function (grunt) {
       }
     },
 
+    protractor: {
+      options: {
+        keepAlive: true,
+        configFile: 'protractor.conf.js'
+      },
+      run: {}
+    },
+
     ngconstant: {
       // Options for all targets
       options: {
@@ -378,7 +386,8 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma',
+    'protractor:run'
   ]);
 
   grunt.registerTask('build', [

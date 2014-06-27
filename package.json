@@ -40,9 +40,10 @@
     "karma-jasmine": "~0.2.0",
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "~0.2.0",
-    "protractor": "~0.24.1",
+    "protractor": "^1.0.0-rc1",
     "time-grunt": "~0.2.1",
-    "grunt-contrib-sass": "~0.7.3"
+    "grunt-contrib-sass": "~0.7.3",
+    "grunt-protractor-runner": "^1.0.0"
   },
   "engines": {
     "node": ">=0.8.0"
