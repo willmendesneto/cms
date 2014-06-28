@@ -4,7 +4,6 @@ angular.module('cmsApp')
   .controller('UploadCtrl', function ($scope, Image, $timeout) {
 
     $scope.images = [];
-    var loadingImage = 'images/loading.gif';
 
     function createImg(data){
       return {
