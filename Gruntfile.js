@@ -292,8 +292,9 @@ module.exports = function (grunt) {
 
     protractor: {
       options: {
-        keepAlive: true,
-        configFile: 'protractor.conf.js'
+        keepAlive: false,
+        configFile: 'protractor.conf.js',
+        debug: false
       },
       run: {}
     },
@@ -386,8 +387,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma',
-    'protractor:run'
+    'karma'
   ]);
 
   grunt.registerTask('build', [
@@ -411,6 +411,18 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
+    'e2etest',
     'build'
+  ]);
+
+  grunt.registerTask('e2etest', [
+    'clean:server',
+    'clean:constants',
+    'sass',
+    'ngconstant:development',
+    'concurrent:server',
+    'autoprefixer',
+    'connect:livereload',
+    'protractor:run'
   ]);
 };
