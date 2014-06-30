@@ -20,9 +20,9 @@ angular.module('cmsApp')
 
         $scope.posts = _.map(data, Post.makePost);
 
-        $scope.reverse = false;
+        $scope.reverse = true;
 
-        $scope.predicate = 'name';
+        $scope.predicate = 'reverseDate';
 
         $scope.currentPage = 0;
 
