@@ -13,7 +13,7 @@ angular.module('cmsApp')
       return data;
     }
 
-    GitRepository.getDrafts().success(function(data){
+    GitRepository.getPosts().success(function(data){
       $timeout(function(){
 
         data = filterPostByDate(data);

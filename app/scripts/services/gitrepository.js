@@ -38,6 +38,14 @@ angular.module('cmsApp')
       return githubGet('contents/_drafts');
     },
 
+    getPosts: function() {
+      if(!$rootScope.github){
+        console.log('Github not defined.');
+        return;
+      }
+      return githubGet('contents/_posts');
+    },
+
     getPost: function(url, fileName) {
       if(!$rootScope.github){
         console.log('Github not defined.');

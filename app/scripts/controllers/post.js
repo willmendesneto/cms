@@ -104,7 +104,7 @@ angular.module('cmsApp')
               return loadPostFromData;
             },
             url: function(){
-              return '/_drafts/';
+              return '/_posts/';
             }
           }
         });
