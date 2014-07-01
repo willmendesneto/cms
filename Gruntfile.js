@@ -34,7 +34,7 @@ module.exports = function (grunt) {
       jsTest: {
         files: ['test/spec/{,*/}*.js',
                 '<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma', 'protractor']
+        tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
         files: ['<%= yeoman.app %>/sass/{,*/}*.scss'],
@@ -411,18 +411,18 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'e2etest',
+    // 'e2etest',
     'build'
   ]);
 
-  grunt.registerTask('e2etest', [
-    'clean:server',
-    'clean:constants',
-    'sass',
-    'ngconstant:development',
-    'concurrent:server',
-    'autoprefixer',
-    'connect:livereload',
-    'protractor:run'
-  ]);
+  // grunt.registerTask('e2etest', [
+  //   'clean:server',
+  //   'clean:constants',
+  //   'sass',
+  //   'ngconstant:development',
+  //   'concurrent:server',
+  //   'autoprefixer',
+  //   'connect:livereload',
+  //   'protractor:run'
+  // ]);
 };
