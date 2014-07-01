@@ -138,9 +138,13 @@ angular.module('cmsApp')
       });
     };
 
-    $scope.publish = function(post) {
-      var url = GitRepository.getPublishedRepositoryAddress($scope.prepareNameFile(post));
-      $scope.save(post, url);
+    $scope.publish = function(post, postForm) {
+      if (postForm.$valid) {
+        var url = GitRepository.getPublishedRepositoryAddress($scope.prepareNameFile(post));
+        $scope.save(post, url);
+      } else {
+        postForm.$submitted = true;
+      }
     };
 
     $scope.draft = function(post) {

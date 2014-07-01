@@ -2,25 +2,25 @@
 
 		<form name="postForm" nonvalidate ng-show="contentLoaded">
 
+      <!-- TODO: Convert this DIV to a custom directive -->
+      <div class="error" 
+        ng-show="postForm.$submitted && postForm.$invalid">
+          <div ng-show="postForm.title.$invalid">O título é obrigatório.</div>
+          <div ng-show="postForm.abstract.$invalid">O abstrato é obrigatório.</div>
+          <div ng-show="postForm.menu_tag.$invalid">Escolha uma opção de menu.</div>
+          <div ng-show="postForm.imgFile.$invalid">A imagem de capa é opbrigatória.</div>
+      </div>
 
-      <section class="title">
-        <section class='inputs'>
-          <input type="text" class="post-hat-input" ng-model="post.content.meta.hat" placeholder="Informe o chapéu" />
-          <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" required />
-          <textarea msd-elastic  class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato" required></textarea>
-        </section>
-        <section class='form-horizontal buttons'>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <input type="button"  class="btn btn-warning" value="Publicar" ng-disabled="postForm.$invalid" ng-click="publish(post)" />
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <a href="#/posts" class="btn btn-default">Voltar</a>
-            </div>
-          </div>
-        </section>
+      <p class='status' > {{postStatus()}} </p>
+      <p class='actions'>
+        <input type="button"  class="btn btn-warning" value="Publicar" ng-click="publish(post, postForm)" />
+        <a href="#/posts" class="btn btn-default">Voltar</a>
+      </p>
+
+      <section>
+        <input name="hat" type="text" class="post-hat-input" ng-model="post.content.meta.hat" placeholder="Informe o chapéu" />
+        <input name="title" type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" required   ired />
+        <textarea name="abstract" msd-elastic  class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato" required></textarea>
       </section>
 
       <section>
@@ -29,7 +29,7 @@
             <label for="menu-tag" class="col-sm-3 control-label">Menu: </label>
             <div class="col-sm-9">
 
-              <select ng-model="menuTag" ng-options="opt for opt in menuTagOptions" class="form-control" required>
+              <select name="menu_tag" ng-model="menuTag" ng-options="opt for opt in menuTagOptions" class="form-control" required>
                 <option value="">-- Nenhum --</option>
               </select>
             </div>
