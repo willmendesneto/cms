@@ -45,7 +45,6 @@ angular.module('cmsApp')
 
   }).error(function(error){
     updateProgress(5,'danger','Ops, um problema aconteceu!',true);
-    console.log(error);
     $timeout(function(){
       $scope.error = error;
     },0);
