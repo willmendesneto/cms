@@ -30,5 +30,15 @@ section.post {
      border-width: 2px;
      padding: 5px;
     }
+
+    .error-summary {
+     color: brown;
+     border-style: solid;
+     text-align: center;
+     border-width: 2px;
+     padding: 5px;
+     border-radius: 6px;
+     margin: 0 30% 10px 30%;
+    }
   }
 }

@@ -3,12 +3,12 @@
 		<form name="postForm" nonvalidate ng-show="contentLoaded">
 
       <!-- TODO: Convert this DIV to a custom directive -->
-      <div class="error" 
+      <div class="error-summary bg-warning" 
         ng-show="postForm.$submitted && postForm.$invalid">
           <div ng-show="postForm.title.$invalid">O título é obrigatório.</div>
           <div ng-show="postForm.abstract.$invalid">O abstrato é obrigatório.</div>
           <div ng-show="postForm.menu_tag.$invalid">Escolha uma opção de menu.</div>
-          <div ng-show="postForm.imgFile.$invalid">A imagem de capa é opbrigatória.</div>
+          <div ng-show="postForm.imgFile.$invalid">A imagem de capa é obrigatória.</div>
       </div>
 
       <p class='status' > {{postStatus()}} </p>
