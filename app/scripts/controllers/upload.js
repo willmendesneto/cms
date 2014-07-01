@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('UploadCtrl', function ($scope, Image, $timeout) {
+  .controller('UploadCtrl', function (_, $scope, Image, $timeout) {
 
     $scope.images = [];
 
@@ -27,6 +27,13 @@ angular.module('cmsApp')
           $timeout(function(){
             $scope.images[index] = createImg(data);
           },0);
+        }).error(function(data, status) {
+          $timeout(function(){
+            $scope.images = _.omit($scope.images, function(image){
+              return image.thumbnail === undefined;
+            });
+          },0);
+          window.alert('Sua imagem não pode ser enviada.\n\n' + 'Detalhes: data: ' + data + ' status: ' + status);
         });
       }
     };
