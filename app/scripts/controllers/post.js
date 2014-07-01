@@ -102,6 +102,9 @@ angular.module('cmsApp')
             },
             loadPost: function(){
               return loadPostFromData;
+            },
+            url: function(){
+              return '/_drafts/';
             }
           }
         });

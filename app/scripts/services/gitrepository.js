@@ -11,6 +11,21 @@ angular.module('cmsApp')
     return '/repos/'+ ENV.repository + url;
   }
 
+  function getFrom(url) {
+    var retorno;
+    var draftExp = new RegExp('\/_drafts\/');
+    var postsExp = new RegExp('\/_posts\/');
+
+    if(draftExp.exec(url)){
+      retorno = '_drafts';
+    }
+    else if(postsExp.exec(url)){
+      retorno = '_posts';
+    }
+
+    return retorno;
+  }
+
   var GitRepository = {
 
     getDrafts: function() {
@@ -21,13 +36,12 @@ angular.module('cmsApp')
       return githubGet('contents/_drafts');
     },
 
-
-    getPost: function(fileName) {
+    getPost: function(url, fileName) {
       if(!$rootScope.github){
         console.log('Github not defined.');
         return;
       }
-      return githubGet('contents/_drafts/'+fileName);
+      return githubGet('contents/'+getFrom(url)+'/'+fileName);
     },
 
     getDraftsRepositoryAddress: function(fileName) {
