@@ -4,7 +4,9 @@ angular.module('cmsApp')
   .factory('GitRepository',['$rootScope', '$location', 'ENV', function($rootScope, $location, ENV){
 
   function githubGet(url) {
-    return $rootScope.github.get(getRepositoryAddress(url));
+    return $rootScope.github.get(getRepositoryAddress(url),{
+      cache: false
+    });
   }
 
   function getRepositoryAddress (url) {
