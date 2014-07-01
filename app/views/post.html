@@ -4,7 +4,6 @@
 
       <p class='status' > {{postStatus()}} </p>
       <p class='actions'>
-        <input type="button" class="btn btn-primary" value="Salvar" ng-click="draft(post)"  ng-disabled="postForm.$invalid"/>
         <input type="button"  class="btn btn-warning" value="Publicar" ng-disabled="postForm.$invalid" ng-click="publish(post)" />
         <a href="#/posts" class="btn btn-default">Voltar</a>
       </p>
