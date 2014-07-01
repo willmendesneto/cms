@@ -23,9 +23,10 @@ angular.module('cmsApp')
       }
       var fileName, date = '';
       var today = DateUtil.getTime();
+      var day = ('0' + (today.getDate())).slice(-2);
       var month = ('0' + (today.getMonth() + 1)).slice(-2);
 
-      date = today.getFullYear() + '-' + month + '-' + today.getDate();
+      date = today.getFullYear() + '-' + month + '-' + day;
       fileName = post.content.meta.title.toLowerCase()
                         .replace(/[^\w\s]/gi, '')
                         .replace(/[ ]([a-zA-Z])/g, function (m, w) { return '-'+w; });

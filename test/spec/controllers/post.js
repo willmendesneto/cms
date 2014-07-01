@@ -138,7 +138,7 @@ describe('Controller: PostCtrl', function () {
   describe('should save a new post', function() {
 
     beforeEach(inject(function (DateUtil) {
-      spyOn(DateUtil,'getTime').and.returnValue(new Date(2001,8,29,12,0));
+      spyOn(DateUtil,'getTime').and.returnValue(new Date(2001,8,9,12,0));
     }));
 
     it('add year, month and day in file name', function() {
@@ -152,7 +152,7 @@ describe('Controller: PostCtrl', function () {
       };
       var fileName = scope.prepareNameFile(post);
 
-      expect(fileName).toMatch(/2001-09-29/);
+      expect(fileName).toMatch(/2001-09-09/);
     });
 
     it('add title post to be file name', function() {
