@@ -411,18 +411,17 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    // 'e2etest',
     'build'
   ]);
 
-  // grunt.registerTask('e2etest', [
-  //   'clean:server',
-  //   'clean:constants',
-  //   'sass',
-  //   'ngconstant:development',
-  //   'concurrent:server',
-  //   'autoprefixer',
-  //   'connect:livereload',
-  //   'protractor:run'
-  // ]);
+   grunt.registerTask('e2etest', [
+    'clean:server',
+    'clean:constants',
+    'sass',
+    'ngconstant:development',
+    'concurrent:server',
+    'autoprefixer',
+    'connect:livereload',
+    'protractor:run'
+  ]);
 };
