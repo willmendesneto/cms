@@ -42,7 +42,10 @@
     <main ng-view>
     </main>
     <footer>
-      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" >{{alert.msg}}</alert>
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" >
+      {{alert.msg}}
+      <a ng-click='alert.detail()'>Detalhes</a>
+      </alert>
     </footer>
 
     <script src="bower_components/angular/angular.js"></script>

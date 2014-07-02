@@ -12,10 +12,14 @@ angular.module('cmsApp')
     var alertService;
     $rootScope.alerts = [];
     return alertService = {
-      add: function(type, msg) {
+      add: function(type, msg, details) {
         return $rootScope.alerts.push({
           type: type,
           msg: msg,
+          details: details,
+          detail: function(){
+            window.alert(alertService.details);
+          },
           close: function() {
             return alertService.closeAlert(this);
           }
