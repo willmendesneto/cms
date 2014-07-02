@@ -414,7 +414,7 @@ module.exports = function (grunt) {
     'build'
   ]);
 
-   grunt.registerTask('e2etest', [
+  grunt.registerTask('e2etest', [
     'clean:server',
     'clean:constants',
     'sass',
