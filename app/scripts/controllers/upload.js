@@ -27,14 +27,14 @@ angular.module('cmsApp')
           $timeout(function(){
             $scope.images[index] = createImg(data);
           },0);
-        }).error(function(error) {
+        }).error(function(error, status) {
           $timeout(function(){
             $scope.images = _.omit($scope.images, function(image){
               return image.thumbnail === undefined;
             });
           },0);
 
-          Alert.add('danger','Ei, algo deu errado com a imagem.', error);
+          Alert.add('danger','Ei, algo deu errado com a imagem.', 'Status: '+status+'\nErro: '+error);
         });
       }
     };

@@ -18,7 +18,7 @@ angular.module('cmsApp')
           msg: msg,
           details: details,
           detail: function(){
-            window.alert(alertService.details);
+            window.alert(details);
           },
           close: function() {
             return alertService.closeAlert(this);
