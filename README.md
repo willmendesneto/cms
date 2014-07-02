@@ -8,7 +8,7 @@ This is the MST new website CMS.
 
 ### Setup
 
-Make sure you have recent versions of `node` and `npm` installed.
+Make sure you have recent versions of `node`, `npm` and `chromedriver` are installed.
 
 Install `grunt-cli` globally so you can use [Grunt](http://gruntjs.com) to run project tasks:
 
