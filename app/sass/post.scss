@@ -1,4 +1,15 @@
 section.post {
+  .title {
+    .inputs {
+      width: 90%;
+      float: left;
+    }
+    .buttons {
+      width: 9%;
+      float: left;
+    }
+  }
+
   & > form {
     .sessions {
       float: left;

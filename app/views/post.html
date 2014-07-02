@@ -2,16 +2,25 @@
 
 		<form name="postForm" nonvalidate ng-show="contentLoaded">
 
-      <p class='status' > {{postStatus()}} </p>
-      <p class='actions'>
-        <input type="button"  class="btn btn-warning" value="Publicar" ng-disabled="postForm.$invalid" ng-click="publish(post)" />
-        <a href="#/posts" class="btn btn-default">Voltar</a>
-      </p>
 
-      <section>
-        <input type="text" class="post-hat-input" ng-model="post.content.meta.hat" placeholder="Informe o chapéu" />
-        <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" required />
-        <textarea msd-elastic  class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato" required></textarea>
+      <section class="title">
+        <section class='inputs'>
+          <input type="text" class="post-hat-input" ng-model="post.content.meta.hat" placeholder="Informe o chapéu" />
+          <input type="text" class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" required />
+          <textarea msd-elastic  class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato" required></textarea>
+        </section>
+        <section class='form-horizontal buttons'>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <input type="button"  class="btn btn-warning" value="Publicar" ng-disabled="postForm.$invalid" ng-click="publish(post)" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <a href="#/posts" class="btn btn-default">Voltar</a>
+            </div>
+          </div>
+        </section>
       </section>
 
       <section>
