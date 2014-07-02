@@ -292,9 +292,7 @@ module.exports = function (grunt) {
 
     protractor: {
       options: {
-        keepAlive: true,
-        configFile: 'protractor.conf.js',
-        debug: false
+        configFile: 'protractor.conf.js'
       },
       run: {}
     },
