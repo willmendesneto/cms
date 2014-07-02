@@ -1,14 +1,16 @@
 'use strict';
 
-/**
- * @ngdoc service
- * @name cmsApp.Alertservice
- * @description
- * # Alertservice
- * Service in the cmsApp.
- */
 angular.module('cmsApp')
   .factory('Alert',['$rootScope', function($rootScope) {
+
+    function getAlert(index) {
+      $rootScope.alerts.splice(index, 1);
+    }
+
+    function closeAlert(alert) {
+      getAlert($rootScope.alerts.indexOf(alert));
+    }
+
     $rootScope.alerts = [];
 
     var alertService = {
@@ -21,18 +23,9 @@ angular.module('cmsApp')
             window.alert(details);
           },
           close: function() {
-            return alertService.closeAlert(this);
+            return closeAlert(this);
           }
         });
-      },
-      closeAlert: function(alert) {
-        return this.closeAlertIdx($rootScope.alerts.indexOf(alert));
-      },
-      closeAlertIdx: function(index) {
-        return $rootScope.alerts.splice(index, 1);
-      },
-      clear: function(){
-        $rootScope.alerts = [];
       }
     };
     return alertService;
