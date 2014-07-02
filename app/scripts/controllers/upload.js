@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('UploadCtrl', function (_, $scope, Image, $timeout) {
+  .controller('UploadCtrl', function (_, $scope, Image, $timeout, Alert) {
 
     $scope.images = [];
 
@@ -33,7 +33,7 @@ angular.module('cmsApp')
               return image.thumbnail === undefined;
             });
           },0);
-          window.alert('Sua imagem não pode ser enviada.\n\n' + 'Detalhes: data: ' + data + ' status: ' + status);
+          Alert.add('danger','Sua imagem não pode ser enviada.');
         });
       }
     };

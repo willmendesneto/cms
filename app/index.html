@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/posts.css">
     <link rel="stylesheet" href="styles/post.css">
+    <link rel="stylesheet" href="styles/alert.css">
     <link rel="stylesheet" href="styles/tag-input.css">
     <!-- endbuild -->
   </head>
@@ -41,6 +42,7 @@
     <main ng-view>
     </main>
     <footer>
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" >{{alert.msg}}</alert>
     </footer>
 
     <script src="bower_components/angular/angular.js"></script>
@@ -81,6 +83,7 @@
     <script src="scripts/services/util.js"></script>
     <script src="scripts/services/jsyaml.js"></script>
     <script src="scripts/filters/start-from.js"></script>
+    <script src="scripts/services/alert.js"></script>
     <!-- endbuild -->
   </body>
 </html>
