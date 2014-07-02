@@ -9,9 +9,9 @@
  */
 angular.module('cmsApp')
   .factory('Alert',['$rootScope', function($rootScope) {
-    var alertService;
     $rootScope.alerts = [];
-    return alertService = {
+
+    var alertService = {
       add: function(type, msg, details) {
         return $rootScope.alerts.push({
           type: type,
@@ -34,5 +34,6 @@ angular.module('cmsApp')
       clear: function(){
         $rootScope.alerts = [];
       }
-    }
+    };
+    return alertService;
   }]);
