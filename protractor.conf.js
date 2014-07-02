@@ -2,6 +2,7 @@
 exports.config = {
   // Do not start a Selenium Standalone sever - only run this using chrome.
   chromeOnly: true,
+  chromeDriver: '/usr/local/bin/chromedriver',
 
   seleniumAddress: 'http://0.0.0.0:4444/wd/hub',
   baseUrl: 'http://127.0.0.1:9000',
