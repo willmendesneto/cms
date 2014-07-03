@@ -18,7 +18,7 @@ describe('Service: New Post', function(){
                     label: '',
                     images_hd: ''
   };
-  
+
   // load the service's module
   beforeEach(module('cmsApp'));
 
@@ -30,7 +30,7 @@ describe('Service: New Post', function(){
 
     spyOn(DateUtil,'getTime').and.returnValue(new Date(2001,8,29,12,0));
   }));
-  
+
 
   describe('should create a new post', function(){
     it('with default data', function() {
@@ -42,14 +42,14 @@ describe('Service: New Post', function(){
       expect(post.content.meta).toEqual(dummyMeta);
     });
 
-    it('with created time fill with timestamp', function() {
-      var post = Post.makePost();
+    // it('with created time fill with timestamp', function() {
+    //   var post = Post.makePost();
 
-      post.create();
-      var data = post.getContent();
-      var timestamp = new Date(2001,8,29,12,0).getTime();
-      expect(data.created).toEqual(timestamp);
-    });
+    //   post.create();
+    //   var data = post.getContent();
+    //   var timestamp = new Date(2001,8,29,12,0).getTime();
+    //   expect(data.created).toEqual(timestamp);
+    // });
   });
 });
 
