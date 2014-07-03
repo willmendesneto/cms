@@ -142,9 +142,8 @@ angular.module('cmsApp')
       if (postForm.$valid) {
         var url = GitRepository.getPublishedRepositoryAddress($scope.prepareNameFile(post));
         $scope.save(post, url);
-      } else {
-        postForm.$submitted = true;
       }
+      postForm.$submitted = true;
     };
 
     $scope.draft = function(post) {

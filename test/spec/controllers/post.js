@@ -90,6 +90,11 @@ describe('Controller: PostCtrl', function () {
 
   describe('save/publish a post', function() {
 
+    var postForm = {
+      $valid: true,
+      $submitted: false
+    };
+
     it('should save a post in draft', function() {
       scope.post = PostBuilder.buildAndLoadJekyllData();
       spyOn(scope, 'save');
@@ -102,8 +107,9 @@ describe('Controller: PostCtrl', function () {
       scope.post = PostBuilder.buildAndLoadJekyllData();
       spyOn(scope, 'save');
       var url = GitRepository.getPublishedRepositoryAddress(scope.prepareNameFile(scope.post));
-      scope.publish(scope.post);
+      scope.publish(scope.post, postForm);
       expect(scope.save).toHaveBeenCalledWith(scope.post, url);
+      expect(postForm.$submitted).toBe(true);
     });
   });
 
