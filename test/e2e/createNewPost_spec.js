@@ -3,9 +3,9 @@
 describe('create a new post', function(){
   var loginPage = require('../page_objects/login_page.js');
   var postPage = require('../page_objects/post_page.js');
+  var postUrl = 'http://localhost:9000/#/post';
 
   beforeEach(function(){
-    browser = protractor.getInstance();
     var username = 'mst-test-user';
     var password = 'GVvm6uvmfX6GeT';
     var novoButton = element(by.css('.form-inline a'));
@@ -26,8 +26,6 @@ describe('create a new post', function(){
   });
 
   it('should save a new one', function(){
-    expect(browser.getCurrentUrl()).toEqual(postsUrl);
-    browser.sleep(10000);
-    console.log(browser);
+    expect(browser.getCurrentUrl()).toEqual(postUrl);
   })
 });

@@ -409,7 +409,8 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'build'
+    'build',
+    'e2etest'
   ]);
 
   grunt.registerTask('e2etest', [
