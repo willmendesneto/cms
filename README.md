@@ -12,7 +12,6 @@ Make sure you have recent versions of `node`, `npm` and `chromedriver` are insta
 
 Install `grunt-cli` globally so you can use [Grunt](http://gruntjs.com) to run project tasks:
 
-
 ```
 npm install -g grunt-cli
 ```

@@ -1,51 +1,33 @@
-// 'use strict';
+'use strict';
 
-// describe('Creating a new post', function(){
+describe('create a new post', function(){
+  var loginPage = require('../page_objects/login_page.js');
+  var postPage = require('../page_objects/post_page.js');
 
-//   // var hat, title, support_line,
-//   // menuTag, section,label, imagesHD,
-//   // section, label, imagesHD, tags, content;
-//   var browser = protractor.getInstance();
-//   var targetUrl = 'http://localhost:9000/#/auth';
-//   var postsUrl = 'http://localhost:9000/#/posts';
+  beforeEach(function(){
+    browser = protractor.getInstance();
+    var username = 'mst-test-user';
+    var password = 'GVvm6uvmfX6GeT';
+    var novoButton = element(by.css('.form-inline a'));
 
+    loginPage.accessPopup();
 
-//   beforeEach(function(){
+    browser.getAllWindowHandles().then(function (handles) {
+      browser.switchTo().window(handles[1]);
+      loginPage.loginWith(username, password);
 
-//   //   hat = element(by.model('post.content.meta.hat'));
-//   //   title = element(by.model('post.content.meta.title'));
-//   //   support_line = element(by.model('post.content.meta.support_line'));
-//   //   menuTag = element(by.model('post.content.meta.menuTag'));
-//   //   section = element(by.model('post.content.meta.section'));
-//   //   label = element(by.model('post.content.meta.label'));
-//   //   imagesHD = element(by.model('post.content.meta.imagesHD'));
-//   //   tags = element(by.model('post.tags'));
-//   //   content = element(by.model('post.content.text'));
+      browser.switchTo().window(handles[0]);
+    });
+    novoButton.click();
+  });
 
+  afterEach(function(){
+    browser.manage().deleteAllCookies();
+  });
 
-//   //   hat.sendKeys('Chapeu');
-//   //   title.sendKeys('3 mitos sobre a agroecologia');
-//   //   support_line.sendKeys('Debate realizado no 1º Seminário   Agrotóxicos e Câncer');
-//   //   menuTag.sendKeys('agricultura camponesa');
-//   //   section.sendKeys('Destaque');
-//   //   label.sendKeys('Artigo');
-//   //   imagesHD.sendKeys('https://farm4.staticflickr.com/3874/14406497013_1ecc286de2_b.jpg');
-//   //   tags.sendKeys('technologia');
-//   //   content.sendKeys('Agrotóxicos e Câncer, no Rio de Janeiro.
-//   //                          Debate realizado no 1º Seminário   ');
-//     browser.ignoreSynchronization = true;
-//     browser.get(targetUrl);
-
-//   });
-
-//   it('should login', function(){
-
-//     var githubButton = element(by.css('.login'))
-
-//     expect(githubButton.getText()).toEqual('Login');
-//     githubButton.click();
-
-//     expect(browser.getCurrentUrl()).toEqual(postsUrl)
-//   });
-
-// });
+  it('should save a new one', function(){
+    expect(browser.getCurrentUrl()).toEqual(postsUrl);
+    browser.sleep(10000);
+    console.log(browser);
+  })
+});
