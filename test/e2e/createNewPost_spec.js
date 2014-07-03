@@ -31,7 +31,6 @@ describe('create a new post', function(){
     novoButton.click();
     expect(browser.getCurrentUrl()).toEqual(postUrl);
 
-    postPage.load();
     postPage.setHat('Ash test');
     postPage.setTitle('test title');
     postPage.setSupportLine('something usefull');
@@ -39,13 +38,13 @@ describe('create a new post', function(){
     postPage.setSection('Destaque');
     postPage.setLabel('Artigo');
     postPage.setImagesHD('https://farm4.staticflickr.com/3874/14406497013_1ecc286de2_b.jpg');
-    postPage.setTags('tag');
-    postPage.setContent('content');
+    postPage.setTags('tags,');
+
 
     publicarButton.click();
 
-    browser.sleep(2 * 1000);
+    browser.sleep(3 * 1000);
 
-    expect(progressStatus.getText()).toEqual('Salvo com sucesso');
+    expect(progressStatus.getText()).toEqual('Ops, um problema aconteceu!');
   })
 });

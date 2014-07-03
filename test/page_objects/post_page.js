@@ -2,15 +2,14 @@
 
 var PostPage =  function() {
 
-  this.hat = element(by.model('post.content.meta.hat'));
-  this.title = element(by.model('post.content.meta.title'));
-  this.support_line = element(by.model('post.content.meta.support_line'));
-  this.menuTag = element(by.model('post.content.meta.menuTag'));
-  this.section = element(by.model('post.content.meta.section'));
-  this.label = element(by.model('post.content.meta.label'));
-  this.imagesHD = element(by.model('post.content.meta.imagesHD'));
-  this.tags = element(by.model('post.tags'));
-  this.content = element(by.model('post.content.text'));
+  this.hat = element(by.css('input[name="hat"]'));
+  this.title = element(by.css('input[name="title"]'));
+  this.support_line = element(by.css('textarea[name="abstract"]'));
+  this.menuTag = element(by.model('menuTag'));
+  this.section = element(by.model('section'));
+  this.label = element(by.model('label'));
+  this.imagesHD = element(by.model('imagesHD'));
+  this.tags = element(by.css('tags-input input'));
   this.targetUrl = 'http://localhost:9000/#/post';
 
   this.setHat = function(value) {

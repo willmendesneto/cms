@@ -25,7 +25,6 @@ var LoginPage = function() {
   this.accessPopup = function(){
     this.load();
     this.githubButton.click();
-    browser.sleep(10000)
   }
 
   this.loginWith = function(name, password) {
