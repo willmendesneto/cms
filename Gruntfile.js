@@ -362,7 +362,7 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      'clean:server',
+
       'clean:constants',
       'sass',
       'ngconstant:development',
@@ -379,7 +379,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
-    'clean:server',
+
     'clean:constants',
     'ngconstant:test',
     'concurrent:test',
@@ -414,12 +414,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('e2etest', [
-    'clean:server',
-    'clean:constants',
-    'sass',
     'ngconstant:development',
     'concurrent:server',
-    'autoprefixer',
     'connect:livereload',
     'protractor:run'
   ]);
