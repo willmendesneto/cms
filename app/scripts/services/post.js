@@ -41,7 +41,7 @@ angular.module('cmsApp')
 
         self.getContent = function(){
           if(!self.content.meta.created){
-            self.content.meta.created = DateUtil.getTime().getTime();
+            self.content.meta.created = Math.round(DateUtil.getTime().getTime() / 1000);
           }
 
           return self.content.meta;
