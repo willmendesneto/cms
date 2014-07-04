@@ -2,17 +2,17 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($scope, $rootScope, $location, oauth, $q, $timeout) {
+  .controller('AuthCtrl', function ($scope, $rootScope, $location, oauth, $q) {
     $scope.authenticate = function() {
       oauth.popup('github', function(err, res) {
         if(err) {
           return alert(err);
         }
-        $rootScope.github = res;        
+        $rootScope.github = res;
         var userInfo = function() {
           var deferred = $q.defer();
-          res.get('user').success(function(data){            
-            var userName = data.name;            
+          res.get('user').success(function(data){
+            var userName = data.name;
             deferred.resolve(userName);
           });
           return deferred.promise;
@@ -20,15 +20,15 @@ angular.module('cmsApp')
 
         var authenticate = function() {
           var deferred = $q.defer();
-          res.get('user/teams').success(function(data){            
+          res.get('user/teams').success(function(data){
             var isJournalist = false;
 
             for (var i=0; i<data.length; i++) {
               var team = data[i].name;
               
-              if (team == 'Jornalistas') {              
-                isJournalist = true;                
-                break;             
+              if (team === 'Jornalistas') {
+                isJournalist = true;
+                break;
               }
             }
             deferred.resolve(isJournalist);
@@ -37,7 +37,7 @@ angular.module('cmsApp')
         };
         
         var userPromise = userInfo();
-        userPromise.then(function(userName) {                              
+        userPromise.then(function(userName) {
           $rootScope.loggedUser = userName;
         });
 
