@@ -35,6 +35,24 @@ angular.module('cmsApp')
       error: function(){}
     },
 
+    getUser: function(options){
+      options = angular.extend(this.opts, options);
+
+      $rootScope.github.get('user')
+      .success(function(data){
+        options.success(data);
+      });
+    },
+
+    getTeams: function(options){
+      options = angular.extend(this.opts, options);
+
+      $rootScope.github.get('user/teams')
+      .success(function(data){
+        options.success(data);
+      });
+    },
+
     save: function(url, options){
       options = angular.extend(this.opts, options);
 

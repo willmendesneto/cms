@@ -313,7 +313,10 @@ module.exports = function (grunt) {
           ENV: {
             name: 'test',
             repository: 'movimento-sem-terra/staging/',
-            basepath: ''
+            basepath: '',
+            repo: {
+              jornalist: 740343
+            }
           }
         }
       },
@@ -325,7 +328,10 @@ module.exports = function (grunt) {
           ENV: {
             name: 'development',
             repository: 'movimento-sem-terra/staging/',
-            basepath: ''
+            basepath: '',
+            repo: {
+              jornalist: 740343
+            }
           }
         }
       },
@@ -337,7 +343,10 @@ module.exports = function (grunt) {
           ENV: {
             name: 'production',
             repository: 'movimento-sem-terra/site-novo/',
-            basepath: '/cms'
+            basepath: '/cms',
+            repo: {
+              jornalist: 881401
+            }
           }
         }
       }
