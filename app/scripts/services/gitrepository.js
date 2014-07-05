@@ -29,7 +29,15 @@ angular.module('cmsApp')
   }
 
   var GitRepository = {
+    opts : {
+      progress: function(){},
+      save: function(){},
+      error: function(){}
+    },
+
     save: function(url, options){
+      options = angular.extend(this.opts, options);
+
       $rootScope.github.put(url, {
         data: options.data,
         cache: false,
@@ -51,6 +59,8 @@ angular.module('cmsApp')
     },
 
     getPost: function(url, fileName, options) {
+      options = angular.extend(this.opts, options);
+
       githubGet('contents/'+getFrom(url)+'/'+fileName)
       .success(function(data){
         options.success(data);
