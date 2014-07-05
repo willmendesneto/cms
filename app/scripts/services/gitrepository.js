@@ -29,7 +29,6 @@ angular.module('cmsApp')
   }
 
   var GitRepository = {
-
     save: function(url, options){
       $rootScope.github.put(url, {
         data: options.data,
@@ -44,27 +43,21 @@ angular.module('cmsApp')
     },
 
     getDrafts: function() {
-      if(!$rootScope.github){
-        console.log('Github not defined.');
-        return;
-      }
       return githubGet('contents/_drafts');
     },
 
     getPosts: function() {
-      if(!$rootScope.github){
-        console.log('Github not defined.');
-        return;
-      }
       return githubGet('contents/_posts');
     },
 
-    getPost: function(url, fileName) {
-      if(!$rootScope.github){
-        console.log('Github not defined.');
-        return;
-      }
-      return githubGet('contents/'+getFrom(url)+'/'+fileName);
+    getPost: function(url, fileName, options) {
+      githubGet('contents/'+getFrom(url)+'/'+fileName)
+      .success(function(data){
+        options.success(data);
+      })
+      .error(function(error, status){
+        options.error(error, status);
+      });
     },
 
     getDraftsRepositoryAddress: function(fileName) {

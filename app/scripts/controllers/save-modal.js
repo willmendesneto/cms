@@ -39,9 +39,12 @@ angular.module('cmsApp')
   function onsuccess(){
     updateProgress(4,'info','Carregando dados do servidor');
 
-    GitRepository.getPost(url, fileName).done(function(data) {
-      loadPost(data);
-      updateProgress(5,'success','Salvo com sucesso',true);
+    GitRepository.getPost(url, fileName,{
+      success: function(data){
+        loadPost(data);
+        updateProgress(5,'success','Salvo com sucesso',true);
+      },
+      error: onerror
     });
   }
 
