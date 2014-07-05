@@ -30,6 +30,19 @@ angular.module('cmsApp')
 
   var GitRepository = {
 
+    save: function(url, options){
+      $rootScope.github.put(url, {
+        data: options.data,
+        cache: false,
+      }).progress(function(){
+        options.progress();
+      }).success(function(){
+        options.success();
+      }).error(function(error, status){
+        options.error(error, status);
+      });
+    },
+
     getDrafts: function() {
       if(!$rootScope.github){
         console.log('Github not defined.');
