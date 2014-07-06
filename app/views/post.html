@@ -12,12 +12,7 @@
           <div ng-show="postForm.imgFile.$invalid">A imagem de capa é obrigatória.</div>
       </div>
 
-      <section class="title">
-        <section class='inputs'>
-          <input type="text" name='hat' class="post-hat-input" ng-model="post.content.meta.hat" placeholder="Informe o chapéu" required/>
-          <input type="text" name='title' class="post-title-input" ng-model="post.content.meta.title" placeholder="Informe o título" required />
-          <textarea msd-elastic  name='abstract' class="post-abstract" ng-model="post.content.meta.support_line" placeholder="Informe o abstrato" required></textarea>
-        </section>
+      <section class="title" style='display:none'>
         <section class='form-horizontal buttons'>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -30,9 +25,28 @@
             </div>
           </div>
         </section>
+      </section>
 
       <section>
         <div class="sessions form-horizontal">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" name='hat' class="form-control" ng-model="post.content.meta.hat" placeholder="Informe o chapéu" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" name='title' class="form-control" ng-model="post.content.meta.title" placeholder="Informe o título" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <textarea msd-elastic  name='abstract' class="form-control" ng-model="post.content.meta.support_line" placeholder="Informe a linha fina" required></textarea>
+            </div>
+          </div>
+
           <div class="form-group">
             <label for="menu-tag" class="col-sm-3 control-label">Menu: </label>
             <div class="col-sm-9">
@@ -62,9 +76,11 @@
           </div>
 
           <div class="form-group">
-          <label for="imgFile" class="col-sm-2 control-label">Capa: </label>
-            <input name="imgFile" ng-model="imagesHD" type='text'  class="form-control" required/><br/>
-            <img id='coverImage' class="img-thumbnail" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
+            <label for="imgFile" class="col-sm-3 control-label">Capa: </label>
+            <div class="col-sm-9">
+              <img id='coverImage' popover="{{ image_input() }}" class="img-thumbnail" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
+            </div>
+            <input name="imgFile" ng-model="imagesHD" type='text'  class="form-control" required ng-hide='true' />
           </div>
 
           <div class="form-group">
@@ -78,7 +94,6 @@
         <div class='editor'>
           <textarea ck-editor ng-model="post.content.text"></textarea>
         </div>
-      </section>
     </form>
 
   <div class="datapreview" style="display:none">
