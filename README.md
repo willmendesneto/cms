@@ -30,6 +30,37 @@ After installing all dependencies, you can use grunt to run different project re
 * Run the jasmine specs: `grunt test`
 * Run all grunt tasks: `grunt`
 
+To run e2etest you need install chromedrive in your machine:
+* http://chromedriver.storage.googleapis.com/index.html?path=2.9/
+or
+* brew install chromedriver
+
+## Tests Tasks
+
+You need create a test envoriment to you:
+
+1. Create a single account in github;
+2. Create a new repo to test;
+
+And add this new repo inside Gruntfile
+
+```
+ng-constant: {
+  test: {
+    ENV: {
+      repository: 'your-user/cool-repository/',
+    }
+  }
+}
+
+```
+
+Then run the test with the password see:
+
+```
+TEST_USER=your-user  TEST_PASSWORD=sucrilhos grunt e2etest
+```
+
 ## Deployment tasks
 
 When all the grunt  tasks pass:

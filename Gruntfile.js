@@ -312,7 +312,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'test',
-            repository: 'movimento-sem-terra/staging/',
+            repository: 'mst-test-user/test/',
             basepath: '',
             repo: {
               jornalist: 740343
@@ -423,7 +423,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('e2etest', [
-    'ngconstant:development',
+    'ngconstant:test',
     'concurrent:server',
     'connect:livereload',
     'protractor:run'

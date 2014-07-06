@@ -21,7 +21,7 @@ angular.module('cmsApp')
   }
 
   function onerror(error, status){
-    var detail;
+    var detail = error;
     if(status === 409){
       detail = 'Ei, uma outra pessoa já fez alteração nesse texto.\n\n'+
         'O melhor a se fazer agora é salvar o seus dados em sua maquina e tenta novamente\n\n'+

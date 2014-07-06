@@ -6,8 +6,8 @@ describe('create a new post', function(){
   var postUrl = 'http://localhost:9000/#/post';
   var postsUrl = 'http://localhost:9000/#/posts';
 
-  var username = 'mst-test-user';
-  var password = 'GVvm6uvmfX6GeT';
+  var username = process.env.TEST_USER;
+  var password = process.env.TEST_PASSWORD;
   var novoButton = element(by.css('.form-inline a'));
   var publicarButton = element(by.css('input[value="Publicar"]'));
   var progressStatus = element(by.binding('status'));
@@ -47,6 +47,6 @@ describe('create a new post', function(){
 
     browser.sleep(3 * 1000);
 
-    expect(progressStatus.getText()).toEqual('Ops, um problema aconteceu!');
+    expect(progressStatus.getText()).toEqual('Salvo com sucesso');
   })
 });
