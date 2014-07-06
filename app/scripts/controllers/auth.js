@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($scope, $rootScope, $location, oauth, User) {
+  .controller('AuthCtrl', function ($scope, $rootScope, $location, oauth, User, ENV) {
     $scope.authenticate = function() {
       oauth.popup('github', function(err, res) {
         if(err) {
@@ -16,8 +16,8 @@ angular.module('cmsApp')
         });
 
         var authPromise = User.authenticate();
-        authPromise.then(function(isJournalist) {
-          if (isJournalist) {
+        authPromise.then(function(journalist) {
+          if (!ENV.checkTeams || journalist.id) {
             $location.path('/posts');
           } else {
             alert('Acesso negado!');

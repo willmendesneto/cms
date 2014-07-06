@@ -314,8 +314,9 @@ module.exports = function (grunt) {
             name: 'test',
             repository: 'mst-test-user/test/',
             basepath: '',
+            checkTeams: false,
             repo: {
-              jornalist: 740343
+              journalist: undefined
             }
           }
         }
@@ -344,6 +345,7 @@ module.exports = function (grunt) {
             name: 'production',
             repository: 'movimento-sem-terra/site-novo/',
             basepath: '/cms',
+            checkTeams: true,
             repo: {
               jornalist: 881401
             }

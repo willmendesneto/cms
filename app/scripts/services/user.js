@@ -22,7 +22,10 @@ angular.module('cmsApp')
               return element.id === ENV.repo.jornalist;
             });
 
-            deferred.resolve(teamJornalist);
+            var team = { id: undefined };
+            team = angular.extend(team, teamJornalist[0]);
+
+            deferred.resolve(team);
           }
         });
         return deferred.promise;
