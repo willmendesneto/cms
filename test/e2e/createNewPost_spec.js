@@ -33,8 +33,9 @@ describe('create a new post', function(){
     novoButton.click();
     expect(browser.getCurrentUrl()).toEqual(postUrl);
 
+    var date = new Date();
     postPage.setHat('Ash test');
-    postPage.setTitle('test title');
+    postPage.setTitle('test title '+date.getTime());
     postPage.setSupportLine('something usefull');
     postPage.setMenuTag('agricultura camponesa');
     postPage.setSection('Destaque');
