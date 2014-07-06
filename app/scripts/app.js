@@ -6,7 +6,7 @@ angular.module('cmsApp', [
   'config',
   'monospaced.elastic',
   'ngTagsInput',
-  'ui.bootstrap'
+  'mgcrea.ngStrap'
 ])
 
   .constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload')
