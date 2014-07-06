@@ -29,14 +29,17 @@ angular.module('cmsApp')
   }
 
   var GitRepository = {
-    opts : {
-      progress: function(){},
-      save: function(){},
-      error: function(){}
+    opts: function(){
+      var opts = {
+        progress: function(){},
+        success: function(){},
+        error: function(){}
+      };
+      return opts;
     },
 
     getUser: function(options){
-      options = angular.extend(this.opts, options);
+      options = angular.extend(this.opts(), options);
 
       $rootScope.github.get('user')
       .success(function(data){
@@ -45,7 +48,7 @@ angular.module('cmsApp')
     },
 
     getTeams: function(options){
-      options = angular.extend(this.opts, options);
+      options = angular.extend(this.opts(), options);
 
       $rootScope.github.get('user/teams')
       .success(function(data){
@@ -54,7 +57,7 @@ angular.module('cmsApp')
     },
 
     save: function(url, options){
-      options = angular.extend(this.opts, options);
+      options = angular.extend(this.opts(), options);
 
       $rootScope.github.put(url, {
         data: options.data,
