@@ -388,7 +388,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
-
+    'newer:jshint',
     'clean:constants',
     'ngconstant:test',
     'concurrent:test',
@@ -416,13 +416,13 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
     'test',
     'build',
     'e2etest'
   ]);
 
   grunt.registerTask('e2etest', [
+    'clean:constants',
     'ngconstant:test',
     'concurrent:server',
     'connect:livereload',
