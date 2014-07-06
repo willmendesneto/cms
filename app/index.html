@@ -16,6 +16,7 @@
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/album-images.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/posts.css">
     <link rel="stylesheet" href="styles/post.css">
     <link rel="stylesheet" href="styles/alert.css">
@@ -38,7 +39,10 @@
         <img class="logo" ng-src="images/logo.png" alt="MST Logo" />
         <h1 class="logo">MST CMS</h1>
       </a>
-      <label style="float:right;color:#ffffff;">{{loggedUser}}</label>
+      <section>
+      <label>{{ user.name }}</label>
+      <img ng-show="user.avatar_url" ng-src="{{ user.avatar_url }}" alt="{{ user.login  }}">
+    </section>
     </header>
     <main ng-view>
     </main>

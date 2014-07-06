@@ -7,7 +7,7 @@ angular.module('cmsApp')
         var deferred = $q.defer();
         GitRepository.getUser({
           success: function(data){
-            deferred.resolve(data.name);
+            deferred.resolve(data);
           }
         });
         return deferred.promise;

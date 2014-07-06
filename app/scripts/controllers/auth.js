@@ -11,8 +11,8 @@ angular.module('cmsApp')
         $rootScope.github = res;
         
         var userPromise = User.userInfo();
-        userPromise.then(function(userName) {
-          $rootScope.loggedUser = userName;
+        userPromise.then(function(user) {
+          $rootScope.user = user;
         });
 
         var authPromise = User.authenticate();

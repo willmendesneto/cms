@@ -37,7 +37,7 @@ describe('Service: User', function () {
     });
 
     rootScope.$apply();
-    expect(result).toBe(user.name);
+    expect(result).toBe(user);
   });
 
   it('should return the team', function () {
