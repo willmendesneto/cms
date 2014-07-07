@@ -14,6 +14,7 @@ function gh_pages {
 function heroku {
   DIST_DIR=$1
   MASTER_HEAD_SHA=$(git rev-parse --short HEAD)
+  mkdir $DIST_DIR
   pushd $DIST_DIR 
     git init
     git remote add heroku git@heroku.com:mst-cms.git
@@ -23,8 +24,10 @@ function heroku {
   rsync -r ./dist/* $DIST_DIR/
 
   pushd $DIST_DIR 
-    git commit -m "Deployed from master: $MASTER_HEAD_SHA"
-    git push origin heroku
+    touch index.php
+    git add . -A
+    git commit -m "CMS to staging"
+    git push -f heroku master
   popd
 }
 
@@ -63,10 +66,12 @@ function deploy {
 }
 
 DIST_FOLDER="/tmp/$(LC_CTYPE=C tr -dc 0-9 < /dev/urandom | head -c 20 | xargs | cat)"
-#gh_pages
-heroku $DIST_FOLDER
+TARGET=$1
 
-#dist $DIST_FOLDER
-#deploy $DIST_FOLDER
-
-
+if [ "$TARGET" == "production" ]; then
+  gh_pages
+  dist $DIST_FOLDER
+  deploy $DIST_FOLDER
+else
+  heroku $DIST_FOLDER
+fi
