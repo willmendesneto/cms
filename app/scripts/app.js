@@ -2,7 +2,6 @@
 
 angular.module('cmsApp', [
   'ngRoute',
-  'firebase',
   'config',
   'monospaced.elastic',
   'ngTagsInput',
@@ -10,7 +9,6 @@ angular.module('cmsApp', [
 ])
 
   .constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload')
-  .constant('FIREBASE_REF', new Firebase('https://mst-cms.firebaseio.com/customtags'))
   .config(function ($routeProvider, $httpProvider, $logProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];

@@ -73,10 +73,9 @@ describe('Service: Post', function () {
   beforeEach(module('cmsApp'));
 
   // instantiate service
-  var Post, CustomTag, underscore;
-  beforeEach(inject(function (_Post_, _CustomTag_, _) {
+  var Post, underscore;
+  beforeEach(inject(function (_Post_, _) {
     Post = _Post_;
-    CustomTag = _CustomTag_;
     underscore = _;
     spyOn(jsyaml, 'load').and.returnValue(dummyMeta);
     spyOn(jsyaml, 'dump').and.returnValue('metadata');

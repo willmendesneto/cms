@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .service('Post', function Post(_, jsyaml, CustomTag, DateUtil) {
+  .service('Post', function Post(_, jsyaml, DateUtil) {
 
     return {
       makePost: function(data) {
