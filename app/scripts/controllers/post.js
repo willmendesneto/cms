@@ -172,5 +172,10 @@ angular.module('cmsApp')
       return '';
     };
 
-    $scope.image = '<input />';
+    $scope.fileNameChaged = function(element)
+    {
+      $scope.$apply(function(){
+        $scope.imagesHD = element.value;
+      });
+    };
   });
