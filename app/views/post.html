@@ -78,7 +78,7 @@
           <div class="form-group">
             <label for="imgFile" class="col-sm-3 control-label">Capa: </label>
             <div class="col-sm-9">
-              <img id='coverImage' popover="{{ image_input() }}" class="img-thumbnail" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
+              <img id='coverImage' title='Digite a URL da foto' data-content="{{ image }}" data-html='true' bs-popover  class="img-thumbnail" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
             </div>
             <input name="imgFile" ng-model="imagesHD" type='text'  class="form-control" required ng-hide='true' />
           </div>

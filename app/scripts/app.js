@@ -5,7 +5,10 @@ angular.module('cmsApp', [
   'config',
   'monospaced.elastic',
   'ngTagsInput',
-  'ui.bootstrap'
+  'ui.bootstrap.modal',
+  'ui.bootstrap.progressbar',
+  'ui.bootstrap.tpls',
+  'mgcrea.ngStrap.popover'
 ])
 
   .constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload')

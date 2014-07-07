@@ -171,4 +171,6 @@ angular.module('cmsApp')
 
       return '';
     };
+
+    $scope.image = '<input />';
   });
