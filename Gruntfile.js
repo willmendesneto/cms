@@ -401,9 +401,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'clean:constants',
     'sass',
-    'ngconstant:production',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -415,6 +413,18 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin'
+  ]);
+
+  grunt.registerTask('build-test', [
+    'clean:constants',
+    'ngconstant:test',
+    'build'
+  ]);
+
+  grunt.registerTask('build-production', [
+    'clean:constants',
+    'ngconstant:production',
+    'build'
   ]);
 
   grunt.registerTask('default', [
