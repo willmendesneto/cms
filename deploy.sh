@@ -11,6 +11,23 @@ function gh_pages {
   rm -rf $TMP
 }
 
+function heroku {
+  DIST_DIR=$1
+  MASTER_HEAD_SHA=$(git rev-parse --short HEAD)
+  pushd $DIST_DIR 
+    git init
+    git remote add heroku git@heroku.com:mst-cms.git
+    git commit -qam "" --allow-empty --allow-empty-message
+  popd
+
+  rsync -r ./dist/* $DIST_DIR/
+
+  pushd $DIST_DIR 
+    git commit -m "Deployed from master: $MASTER_HEAD_SHA"
+    git push origin heroku
+  popd
+}
+
 function dist {
   DIST_DIR=$1
   if [[ ! -d $DIST_DIR/.git ]]; then
@@ -46,8 +63,10 @@ function deploy {
 }
 
 DIST_FOLDER="/tmp/$(LC_CTYPE=C tr -dc 0-9 < /dev/urandom | head -c 20 | xargs | cat)"
-gh_pages
-dist $DIST_FOLDER
-deploy $DIST_FOLDER
+#gh_pages
+heroku $DIST_FOLDER
+
+#dist $DIST_FOLDER
+#deploy $DIST_FOLDER
 
 
