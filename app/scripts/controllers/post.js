@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal) {
+  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal, $compile) {
     var fileName = $routeParams.fileName;
 
     function newPost(){
@@ -172,7 +172,7 @@ angular.module('cmsApp')
       return '';
     };
 
-    $scope.imageInput = function(){
+    $scope.image_input = function(){
       return '<input />';
     };
 
