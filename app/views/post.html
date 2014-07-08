@@ -12,6 +12,12 @@
           <div ng-show="postForm.imgFile.$invalid">A imagem de capa é obrigatória.</div>
       </div>
 
+      <p class='actions'>
+        <input type="button"  class="btn btn-warning" value="Publicar" ng-click="publish(post, postForm)" />
+        <a href="#/posts" class="btn btn-default">Voltar</a>
+      </p>
+
+
       <section class="title" style='display:none'>
         <section class='form-horizontal buttons'>
           <div class="form-group">
@@ -75,22 +81,10 @@
             </div>
           </div>
 
-
-      <!-- TODO: Remove reference to script this is ANGULAR JS!!! -->
-          <script type="text/ng-template" id="custom" ng-controller='PostCtrl'>
-            <div class="popover">
-            <h3 class="popover-title ng-binding" ng-bind-html="title" ng-show="title">Digite a URL da Imagem</h3>
-            <div class="popover-content">
-            <input name="imgFile" ng-model="imagesHD" type='text'  class="form-control" onkeyup="angular.element(this).scope().fileNameChaged(this)" required  />
-            </div>
-            </div>
-          </script>
-
           <div class="form-group">
-            <label for="imgFile" class="col-sm-3 control-label">Capa: </label>
-            <div class="col-sm-9">
-              <img id='coverImage' title='Digite a URL da foto' data-template="custom" bs-popover class="img-thumbnail" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
-            </div>
+            <label for="imgFile" class="col-sm-2 control-label">Capa: </label>
+            <input name="imgFile" ng-model="imagesHD" type='text'  class="form-control" required/><br/>
+            <img id='coverImage' class="img-thumbnail" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
           </div>
 
           <div class="form-group">
