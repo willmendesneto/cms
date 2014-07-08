@@ -1,6 +1,9 @@
 {
   "name": "cms",
   "version": "0.0.0",
+  "dependencies": {
+    "grunt-google-cdn": "~0.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/movimento-sem-terra/cms"
@@ -22,6 +25,7 @@
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.5.2",
+    "grunt-google-cdn": "~0.2.0",
     "grunt-karma": "^0.8.3",
     "grunt-newer": "~0.5.4",
     "grunt-ng-constant": "^0.5.0",
