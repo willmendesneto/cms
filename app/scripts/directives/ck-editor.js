@@ -10,7 +10,7 @@ angular.module('cmsApp')
 
         CKEDITOR.plugins.addExternal('youtube', ENV.basepath + '/ckeditor-plugins/youtube/', 'plugin.js');
 
-        ck.config.extraPlugins = 'youtube';
+        ck.config.extraPlugins = 'youtube,justify';
         ck.config.language = 'pt-BR';
         ck.config.height = '100%';
 
