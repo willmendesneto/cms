@@ -6,7 +6,7 @@
     <div id="thumbWrapper">
       <ul id="thumbList">
         <li ng-repeat="image in images" >
-          <img ng-src="{{image.thumbnail}}" alt="{{image.thumbnail}}" onClick="$('#currentURL').focus();" ng-click="setCurrentImage(image)"/>
+          <img ng-src="{{image.thumbnail}}" title="{{image.title}}" alt="{{image.thumbnail}}"   loading-src="images/loading.gif" onClick="$('#currentURL').focus();" ng-click="setCurrentImage(image)" />
         </li>
       </ul>
     </div>

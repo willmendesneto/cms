@@ -8,7 +8,8 @@ angular.module('cmsApp')
     function createImg(data){
       return {
         link : data.link,
-        thumbnail: data.thumbnail
+        thumbnail: data.thumbnail,
+        title: data.title
       };
     }
 
@@ -25,7 +26,12 @@ angular.module('cmsApp')
 
         Image.send(postedFiles).success(function(data) {
           $timeout(function(){
-            $scope.images[index] = createImg(data);
+            if (data.thumbnail === null){
+              $scope.images[index] = {link: data.link, thumbnail: 'images/pdf_placeholder.jpg', title: data.title};
+            }
+            else {
+              $scope.images[index] = createImg(data);
+            }
           },0);
         }).error(function(error, status) {
           $timeout(function(){

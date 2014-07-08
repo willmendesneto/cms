@@ -19,8 +19,7 @@ describe('create a new post', function(){
     loginPage.loginWith(username, password);
 
     browser.switchTo().window(handles[0]);
-    var ptor = protractor.getInstance();
-    ptor.sleep(5000);
+    browser.sleep(2 * 1000);
   });
 
   afterEach(function(){

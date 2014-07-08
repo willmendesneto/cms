@@ -8,7 +8,8 @@ angular.module('cmsApp', [
   'ui.bootstrap.modal',
   'ui.bootstrap.progressbar',
   'ui.bootstrap.tpls',
-  'mgcrea.ngStrap.popover'
+  'mgcrea.ngStrap.popover',
+  'dcbImgFallback'
 ])
 
   .constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload')
