@@ -25,8 +25,6 @@ module.exports = function(config) {
       'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-elastic/elastic.js',
       'app/bower_components/angular-img-fallback/angular.dcb-img-fallback.min.js',
-      'https://cdn.firebase.com/js/client/1.0.15/firebase.js',
-      'https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/helpers/**/*.js',
