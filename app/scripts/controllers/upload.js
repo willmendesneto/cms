@@ -32,6 +32,7 @@ angular.module('cmsApp')
             else {
               $scope.images[index] = createImg(data);
             }
+            $scope.$emit('newFile', $scope.images);
           },0);
         }).error(function(error, status) {
           $timeout(function(){

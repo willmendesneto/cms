@@ -37,6 +37,7 @@ describe('Controller: PostCtrl', function () {
         'images: []\n' +
         'video:\n' +
         'tags:\n' +
+        'files:\n' +
         'section:\n' +
         'label:\n' +
         '- menu:menuitem\n' +

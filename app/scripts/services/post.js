@@ -29,6 +29,7 @@ angular.module('cmsApp')
                       images: '',
                       video: '',
                       tags: [],
+                      files: [],
                       type: '',
                       support_line: '',
                       section: '',
@@ -186,6 +187,10 @@ angular.module('cmsApp')
 
           _.each(self.tags, function(tag){
             self.content.meta.tags.push('tag:'+tag.text);
+          });
+
+          _.each(self.files, function(file){
+            self.content.meta.files.push('file:'+file.link);
           });
         };
 

@@ -11,6 +11,7 @@ describe('Service: New Post', function(){
                     images: '',
                     video: '',
                     tags: [],
+                    files: [],
                     type: '',
                     support_line: '',
                     section: '',

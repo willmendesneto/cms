@@ -4,6 +4,10 @@ angular.module('cmsApp')
   .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal) {
     var fileName = $routeParams.fileName;
 
+    $scope.$on('newFile', function(event, args) {
+      $scope.post.files = args;
+    });
+
     function newPost(){
       return Post.makePost();
     }
