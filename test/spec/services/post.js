@@ -17,7 +17,8 @@ describe('Service: New Post', function(){
                     section: '',
                     hat: '',
                     label: '',
-                    images_hd: ''
+                    images_hd: '',
+                    published: false
   };
 
   // load the service's module
@@ -43,6 +44,7 @@ describe('Service: New Post', function(){
       expect(post.content.meta).toEqual(dummyMeta);
     });
 
+// TO DO:  Fix this TEST
     // it('with created time fill with timestamp', function() {
     //   var post = Post.makePost();
 

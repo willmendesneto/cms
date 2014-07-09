@@ -189,4 +189,40 @@ describe('Controller: PostCtrl', function () {
       expect(fileName).toMatch('2014-10-10-algo-aqui');
     });
   });
+
+  describe('updatePost', function(){
+    var postForm = {$valid : true, $submitted: false};
+    it('should set published true', function() {
+      var post = {
+        name: '2014-10-10-something-here',
+        content: {
+          meta: {
+            title: 'look! its a plane!',
+            published: false
+          }
+        }
+      };
+      scope.publish(post, postForm);
+
+      expect(post.content.meta.published).toBe(true);
+      expect(scope.isPublished(post)).toBe(true);
+    });
+
+    it('should set published false', function() {
+      var post = {
+        name: '2014-10-10-something-here',
+        content: {
+          meta: {
+            title: 'look! its a plane!',
+            published: true
+          }
+        }
+      };
+      scope.unPublish(post, postForm);
+
+      expect(post.content.meta.published).toBe(false);
+      expect(scope.isPublished(post)).toBe(false);
+    });
+
+  });
 });

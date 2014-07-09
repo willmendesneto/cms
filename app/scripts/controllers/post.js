@@ -4,10 +4,6 @@ angular.module('cmsApp')
   .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal) {
     var fileName = $routeParams.fileName;
 
-    $scope.$on('newFile', function(event, args) {
-      $scope.post.files = args;
-    });
-
     function newPost(){
       return Post.makePost();
     }
@@ -38,7 +34,7 @@ angular.module('cmsApp')
       return date+'-'+fileName+'.md';
     }
 
-    function loadPostFromData(data){
+    function loadPostFromData(data) {
       $scope.post = Post.makePost(data);
       $scope.post.loadContentFromJekyllData(atob(data.content));
       $scope.contentLoaded = true;
@@ -52,6 +48,23 @@ angular.module('cmsApp')
 
       $scope.$broadcast('filesLoaded', $scope.post.files);
     }
+
+    function updatePost(post, postForm, postState) {
+      if (postForm.$valid) {
+        var url = GitRepository.getPublishedRepositoryAddress($scope.prepareNameFile(post));
+        post.content.meta.published = postState;
+        $scope.save(post, url);
+      }
+      postForm.$submitted = true;
+    }
+
+    $scope.isPublished = function (post) {
+      return post.content.meta.published;
+    };
+
+    $scope.$on('newFile', function(event, args) {
+      $scope.post.files = args;
+    });
 
     $scope.menuTagOptions = [
       'agricultura camponesa',
@@ -143,13 +156,14 @@ angular.module('cmsApp')
       });
     };
 
-    $scope.publish = function(post, postForm) {
-      if (postForm.$valid) {
-        var url = GitRepository.getPublishedRepositoryAddress($scope.prepareNameFile(post));
-        $scope.save(post, url);
-      }
-      postForm.$submitted = true;
+    $scope.unPublish = function(post, postForm){
+      updatePost(post,postForm,false);
     };
+
+    $scope.publish = function(post, postForm) {
+      updatePost(post,postForm,true);
+    };
+
 
     $scope.draft = function(post) {
       var url = GitRepository.getDraftsRepositoryAddress($scope.prepareNameFile(post));
