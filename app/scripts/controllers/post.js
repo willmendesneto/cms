@@ -65,10 +65,9 @@ angular.module('cmsApp')
     ];
 
     $scope.sectionOptions = [
-      {label: 'Destaque', value: 'featured-news'},
-      {label: 'Debate', value: 'debate'},
       {label: 'Capa', value: 'cover'},
-      {label: 'MST TV', value: 'tv'}
+      {label: 'Destaque', value: 'featured-news'},
+      {label: 'VÍDEO', value: 'tv'}
     ];
 
     $scope.labelOptions = [
