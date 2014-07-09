@@ -49,17 +49,12 @@ angular.module('cmsApp')
       $scope.$broadcast('filesLoaded', $scope.post.files);
     }
 
-    function updatePost(post, postForm, postState) {
+    $scope.updatePost = function (post, postForm) {
       if (postForm.$valid) {
         var url = GitRepository.getPublishedRepositoryAddress($scope.prepareNameFile(post));
-        post.content.meta.published = postState;
         $scope.save(post, url);
       }
       postForm.$submitted = true;
-    }
-
-    $scope.isPublished = function (post) {
-      return post.content.meta.published;
     };
 
     $scope.$on('newFile', function(event, args) {
@@ -155,15 +150,6 @@ angular.module('cmsApp')
         }
       });
     };
-
-    $scope.unPublish = function(post, postForm){
-      updatePost(post,postForm,false);
-    };
-
-    $scope.publish = function(post, postForm) {
-      updatePost(post,postForm,true);
-    };
-
 
     $scope.draft = function(post) {
       var url = GitRepository.getDraftsRepositoryAddress($scope.prepareNameFile(post));

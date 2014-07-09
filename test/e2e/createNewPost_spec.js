@@ -9,7 +9,7 @@ describe('create a new post', function(){
   var username = process.env.TEST_USER;
   var password = process.env.TEST_PASSWORD;
   var novoButton = element(by.css('.form-inline a'));
-  var publicarButton = element(by.css('input[value="Publicar"]'));
+  var publicarButton = element(by.css('input[value="Salvar"]'));
   var progressStatus = element(by.binding('status'));
 
   loginPage.accessPopup();

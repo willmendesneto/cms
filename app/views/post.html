@@ -14,28 +14,13 @@
 
 
       <p class='actions'>
-        <input type="button"  class="btn btn-warning" value="Publicar" ng-hide="isPublished(post)" ng-click="publish(post, postForm)" />
-        <input type="button"  class="btn btn-warning" value="Despublicar" ng-show="isPublished(post)" ng-click="unPublish(post, postForm)" />
+        <input type="button"  class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm)" />
         <a href="#/posts" class="btn btn-default">Voltar</a>
       </p>
 
-      <section class="title" style='display:none'>
-        <section class='form-horizontal buttons'>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <input type="button"  class="btn btn-warning" value="Publicar"  ng-click="publish(post, postForm)" />
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <a href="#/posts" class="btn btn-default">Voltar</a>
-            </div>
-          </div>
-        </section>
-      </section>
-
       <section>
         <div class="sessions form-horizontal">
+
           <div class="form-group">
             <div class="col-sm-12">
               <input type="text" name='hat' class="form-control" ng-model="post.content.meta.hat" placeholder="Informe o chapéu" required />
@@ -51,6 +36,13 @@
           <div class="form-group">
             <div class="col-sm-12">
               <textarea msd-elastic  name='abstract' class="form-control" ng-model="post.content.meta.support_line" placeholder="Informe a linha fina" required></textarea>
+            </div>
+          </div>
+
+         <div class="form-group">
+            <label for="publicar" class=" col-sm-3 control-label">Publicar: </label>
+            <div class="col-sm-9">
+              <input id="publicar" type="checkbox"  class="btn btn-warning" ng-model='post.content.meta.published'/>
             </div>
           </div>
 
