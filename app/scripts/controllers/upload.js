@@ -5,6 +5,10 @@ angular.module('cmsApp')
 
     $scope.images = [];
 
+    $scope.$on('filesLoaded', function(event, args) {
+      $scope.images = args;
+    });
+
     function createImg(data){
       return {
         link : data.link,

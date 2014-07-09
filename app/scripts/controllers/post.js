@@ -49,6 +49,8 @@ angular.module('cmsApp')
         $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
         $scope.imagesHD = $scope.post.getImagesHD();
       },0);
+
+      $scope.$broadcast('filesLoaded', $scope.post.files);
     }
 
     $scope.menuTagOptions = [

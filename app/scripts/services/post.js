@@ -16,6 +16,7 @@ angular.module('cmsApp')
             meta: jsyaml.load(parts.pop())
           };
           self.loadTags();
+          self.loadFiles();
         };
 
         self.create = function(){
@@ -59,6 +60,7 @@ angular.module('cmsApp')
 
         self.commitData = function() {
           self.prepareTags();
+          self.prepareFiles();
           return {
             sha: self.sha,
             content: btoa(self.convertContentToJekyllData()),
@@ -74,6 +76,8 @@ angular.module('cmsApp')
           self.content.meta.tags = _.filter(self.content.meta.tags, function (el) {
             return !(/^menu:/).test(el);
           });
+
+          self.content.meta.files = [];
 
           if (!!menuItemName){
             self.content.meta.tags.push('menu:'+menuItemName);
@@ -159,6 +163,8 @@ angular.module('cmsApp')
 
         self.tags = [];
 
+        self.files = [];
+
         self.loadTags = function(){
           if (!self.content.meta.tags) {
             return;
@@ -175,6 +181,22 @@ angular.module('cmsApp')
           });
         };
 
+        self.loadFiles = function(){
+          if (!self.content.meta.files) {
+            return;
+          }
+
+          var files = self.content.meta.files;
+
+          self.files = [];
+          _.each(files, function(file){
+            var linkValue = file.match(/link:(.*),/)[1];
+            var titleValue = file.match(/title:(.*),/)[1];
+            var thumbnailValue = file.match(/thumbnail:(.*)}/)[1];
+            self.files.push({ link:linkValue, title:titleValue, thumbnail:thumbnailValue });
+          });
+        };
+
         self.prepareTags = function(){
           if (!self.content.meta.tags) {
             return;
@@ -188,9 +210,15 @@ angular.module('cmsApp')
           _.each(self.tags, function(tag){
             self.content.meta.tags.push('tag:'+tag.text);
           });
+        };
+
+        self.prepareFiles = function(){
+          if (!self.content.meta.files) {
+            return;
+          }
 
           _.each(self.files, function(file){
-            self.content.meta.files.push('file:'+file.link);
+            self.content.meta.files.push('{link:' + file.link + ',title:' + file.title + ',thumbnail:' + file.thumbnail + '}');
           });
         };
 
