@@ -37,7 +37,7 @@ angular.module('cmsApp')
                       hat: '',
                       label: '',
                       images_hd: '',
-                      published: false
+                      published: true
               }
             };
         };

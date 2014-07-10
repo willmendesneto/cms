@@ -18,7 +18,7 @@ describe('Service: New Post', function(){
                     hat: '',
                     label: '',
                     images_hd: '',
-                    published: false
+                    published: true
   };
 
   // load the service's module
