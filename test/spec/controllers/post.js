@@ -55,38 +55,56 @@ describe('Controller: PostCtrl', function () {
 
   }));
 
+  describe('updatePost', function(){
+    var postForm = {
+      $valid: true,
+      $submitted: false
+    };
+    it('should set the menu item of a post', function() {
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      spyOn(scope.post, 'setMenuItem');
 
-  it('should set the menu item of a post', function() {
-    scope.post = PostBuilder.buildAndLoadJekyllData();
-    spyOn(scope.post, 'setMenuItem');
+      scope.updatePost(scope.post, postForm);
 
-    scope.$apply(function () {
-      scope.menuTag = 'agronegócios';
+      expect(scope.post.setMenuItem).toHaveBeenCalledWith(scope.menuTag);
     });
 
-    expect(scope.post.setMenuItem).toHaveBeenCalledWith('agronegócios');
-  });
+    it('should set the section of a post', function() {
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      spyOn(scope.post, 'setSection');
 
-  it('should set the section of a post', function() {
-    scope.post = PostBuilder.buildAndLoadJekyllData();
-    spyOn(scope.post, 'setSection');
+      scope.updatePost(scope.post, postForm);
 
-    scope.$apply(function () {
-      scope.section = {label: 'Destaques', value: 'featured-news'};
+      expect(scope.post.setSection).toHaveBeenCalledWith(scope.section);
     });
 
-    expect(scope.post.setSection).toHaveBeenCalledWith(scope.section);
-  });
+    it('should set the label of a post', function() {
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      spyOn(scope.post, 'setLabel');
 
-  it('should set the label of a post', function() {
-    scope.post = PostBuilder.buildAndLoadJekyllData();
-    spyOn(scope.post, 'setLabel');
+      scope.updatePost(scope.post, postForm);
 
-    scope.$apply(function () {
-      scope.label = {label: 'Artigo', value: 'article'};
+      expect(scope.post.setLabel).toHaveBeenCalledWith(scope.label);
     });
 
-    expect(scope.post.setLabel).toHaveBeenCalledWith(scope.label);
+    it('should set cover image url', function() {
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      spyOn(scope.post, 'setImagesHD');
+
+      scope.updatePost(scope.post, postForm);
+
+      expect(scope.post.setImagesHD).toHaveBeenCalledWith(scope.imagesHD);
+    });
+
+    it('should call save', function(){
+      scope.post = PostBuilder.buildAndLoadJekyllData();
+      spyOn(scope, 'save');
+
+      scope.updatePost(scope.post, postForm);
+
+      expect(scope.save).toHaveBeenCalled();
+    });
+
   });
 
   describe('save/publish a post', function() {

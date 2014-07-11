@@ -53,7 +53,12 @@ angular.module('cmsApp')
 
     $scope.updatePost = function (post, postForm) {
       if (postForm.$valid) {
+
         var url = GitRepository.getPublishedRepositoryAddress($scope.prepareNameFile(post));
+        post.setSection($scope.section);
+        post.setLabel($scope.label);
+        post.setMenuItem($scope.menuTag);
+        post.setImagesHD($scope.imagesHD);
         $scope.save(post, url);
       }
       postForm.$submitted = true;
@@ -87,24 +92,6 @@ angular.module('cmsApp')
       {label: 'Entrevista', value: 'interviews'},
       {label: 'Reportagens Especiais', value: 'special-stories'}
     ];
-
-    $scope.$watch('label', function (newval) {
-      $scope.post.setLabel(newval);
-    });
-
-    $scope.$watch('menuTag', function (newval) {
-      $scope.post.setMenuItem(newval);
-    });
-
-    $scope.$watch('section', function (newval) {
-      $scope.post.setSection(newval);
-    });
-
-    $scope.$watch('imagesHD', function (newval) {
-      $scope.post.setImagesHD(newval);
-    });
-
-    $scope.post = newPost();
 
     $scope.init = function(){
       if(fileName){
