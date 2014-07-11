@@ -1,0 +1,15 @@
+<div class="form-group">
+  <span class="col-sm-6">
+    <p class="input-group date">
+      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="date" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" ng-required="true" clear-text="Limpar" current-text="Hoje" close-text="Fechar" />
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open($event)">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </span>
+  <span class="col-sm-6">
+    <timepicker ng-model="time" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+  </span>
+</div>

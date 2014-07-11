@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="styles/post.css">
     <link rel="stylesheet" href="styles/alert.css">
     <link rel="stylesheet" href="styles/tag-input.css">
+    <link rel="stylesheet" href="styles/datepicker.css">
     <!-- endbuild -->
   </head>
   <body ng-app="cmsApp" ng-cloak>
@@ -55,6 +56,7 @@
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/ckeditor/ckeditor.js"></script>
+    <script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_pt-br.js"></script>
 
 
     <!-- build:js scripts/modules.js -->
@@ -73,24 +75,29 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/config.js"></script>
     <script src="scripts/app.js"></script>
+
     <script src="scripts/controllers/post.js"></script>
     <script src="scripts/controllers/upload.js"></script>
     <script src="scripts/controllers/save-modal.js"></script>
     <script src="scripts/controllers/loading-modal.js"></script>
     <script src="scripts/controllers/posts.js"></script>
     <script src="scripts/controllers/auth.js"></script>
-    <script src="scripts/services/oauth.js"></script>
+    <script src="scripts/controllers/date-picker.js"></script>
+
     <script src="scripts/directives/ck-editor.js"></script>
     <script src="scripts/directives/upload.js"></script>
     <script src="scripts/directives/selectonfocus.js"></script>
+
+    <script src="scripts/filters/start-from.js"></script>
+
+    <script src="scripts/services/oauth.js"></script>
     <script src="scripts/services/lodash.js"></script>
     <script src="scripts/services/image.js"></script>
     <script src="scripts/services/formdataobject.js"></script>
     <script src="scripts/services/post.js"></script>
     <script src="scripts/services/gitrepository.js"></script>
-    <script src="scripts/services/util.js"></script>
+    <script src="scripts/services/dateutil.js"></script>
     <script src="scripts/services/jsyaml.js"></script>
-    <script src="scripts/filters/start-from.js"></script>
     <script src="scripts/services/alert.js"></script>
     <script src="scripts/services/user.js"></script>
     <!-- endbuild -->

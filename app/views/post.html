@@ -14,12 +14,14 @@
 
 
       <p class='actions'>
-        <input type="button"  class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm)" />
+        <input type="button"  class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm, date, time)" />
         <a href="#/posts" class="btn btn-default">Voltar</a>
       </p>
 
       <section>
         <div class="sessions form-horizontal">
+
+          <div ng-include="'views/datepicker.html'" ng-controller="DatePickerCtrl" ></div>
 
           <div class="form-group">
             <div class="col-sm-12">

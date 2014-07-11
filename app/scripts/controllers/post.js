@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $rootScope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal) {
+  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal) {
     var fileName = $routeParams.fileName;
 
     function newPost(){
@@ -37,9 +37,11 @@ angular.module('cmsApp')
     function loadPostFromData(data) {
       $scope.post = Post.makePost(data);
       $scope.post.loadContentFromJekyllData(atob(data.content));
+
       $scope.contentLoaded = true;
 
       $timeout(function(){
+        $scope.$broadcast('postLoaded');
         $scope.menuTag = $scope.post.getMenuItem();
         $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
         $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
@@ -124,8 +126,13 @@ angular.module('cmsApp')
         });
       }
       else{
+        $scope.post = newPost();
         $scope.post.create();
         $scope.contentLoaded = true;
+
+        $timeout(function(){
+          $scope.$broadcast('postLoaded');
+        });
       }
     };
 
