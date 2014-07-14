@@ -37,7 +37,12 @@
 
           <div class="form-group">
             <div class="col-sm-12">
-              <textarea msd-elastic  name='abstract' class="form-control" ng-model="post.content.meta.support_line" placeholder="Informe a linha fina" required></textarea>
+              <div class="input-group">
+                <textarea msd-elastic  name='abstract' id='abstract' class="form-control" ng-model="post.content.meta.support_line" placeholder="Informe a linha fina" required warnsize max-length="150"></textarea>
+                <span name="abstract-size" class="input-group-addon">
+                  {{post.content.meta.support_line.length}}
+                </span>
+              </div>
             </div>
           </div>
 
