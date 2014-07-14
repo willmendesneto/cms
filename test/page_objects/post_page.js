@@ -5,6 +5,7 @@ var PostPage =  function() {
   this.hat = element(by.css('input[name="hat"]'));
   this.title = element(by.css('input[name="title"]'));
   this.support_line = element(by.css('textarea[name="abstract"]'));
+  this.support_line_size = element(by.name('abstract-size'));
   this.menuTag = element(by.model('menuTag'));
   this.section = element(by.model('section'));
   this.label = element(by.model('label'));

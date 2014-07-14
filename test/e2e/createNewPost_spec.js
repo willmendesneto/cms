@@ -48,5 +48,45 @@ describe('create a new post', function(){
     browser.sleep(3 * 1000);
 
     expect(progressStatus.getText()).toEqual('Salvo com sucesso');
-  })
+
+    var fecharButton = element(by.css('.btn-primary'));
+    fecharButton.click();
+  });
+
+  it('should change the background according to the abstract length', function(){
+    browser.sleep(3 * 1000);
+
+    browser.get(postsUrl);
+
+    expect(browser.getCurrentUrl()).toEqual(postsUrl);
+
+    novoButton.click();
+    expect(browser.getCurrentUrl()).toEqual(postUrl);
+
+    postPage.setSupportLine(Array(151).join("a"));
+    expect(postPage.support_line.getAttribute('style').getCssValue('background-color')).toEqual('rgba(255, 255, 255, 1)');
+
+    browser.sleep(1 * 1000);    
+
+    postPage.setSupportLine(Array(2).join("a"));
+    expect(postPage.support_line.getAttribute('style').getCssValue('background-color')).toEqual('rgba(255, 187, 187, 1)');
+
+    browser.sleep(3 * 1000);    
+  });
+
+  it('should update the abstracts char count accordingly', function(){
+    browser.sleep(3 * 1000);
+
+    browser.get(postsUrl);
+
+    expect(browser.getCurrentUrl()).toEqual(postsUrl);
+
+    novoButton.click();
+    expect(browser.getCurrentUrl()).toEqual(postUrl);
+
+    postPage.setSupportLine(Array(16).join("a"));
+    expect(postPage.support_line_size.getText()).toEqual('15');
+
+    browser.sleep(3 * 1000);    
+  });
 });
