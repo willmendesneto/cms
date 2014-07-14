@@ -17,8 +17,8 @@ describe('Controller: DatePickerCtrl', function () {
   it('#updateDate should set post created attribute', function(){
     var post = {content:{ meta: {created: 0}}};
     scope.$broadcast('postLoaded', post);
-    scope.selectedDate = new Date('June 14 2014 17:41:08');
-    scope.selectedTime = new Date('June 14 2014 6:41:08');
+    scope.selectedDate = new Date('June 14 2014 17:41:08 GMT-0300 (BRT)');
+    scope.selectedTime = new Date('June 14 2014 6:41:08 GMT-0300 (BRT)');
 
     scope.updateDate();
     expect(post.content.meta.created).toBe(1402738860000);

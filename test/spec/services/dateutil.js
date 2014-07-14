@@ -27,8 +27,8 @@ describe('Service: DateUtil', function () {
     });
 
     it('should convert date and time to timestamp', function(){
-      var date = new Date('June 14 2014 17:41:08');
-      var time = new Date('June 14 2014 6:41:08');
+      var date = new Date('June 14 2014 17:41:08 GMT-0300 (BRT)');
+      var time = new Date('June 14 2014 6:41:08 GMT-0300 (BRT)');
 
       var timestamp = DateUtilService.getTimestamp(date, time);
 
