@@ -7,7 +7,7 @@ angular.module('cmsApp')
     $scope.selectedDate = new Date(post.content.meta.created);
     $scope.selectedTime = new Date(post.content.meta.created);
 
-    $scope.updateDate = function(){
+    $scope.updateDate = function() {
       post.content.meta.created = DateUtil.getTimestamp($scope.selectedDate, $scope.selectedTime);
     };
 
