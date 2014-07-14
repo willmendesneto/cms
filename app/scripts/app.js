@@ -10,8 +10,10 @@ angular.module('cmsApp', [
   'ui.bootstrap.tpls',
   'mgcrea.ngStrap.popover',
   'dcbImgFallback',
-  'ui.bootstrap.datepicker',
-  'ui.bootstrap.timepicker'
+  'mgcrea.ngStrap.datepicker',
+  'mgcrea.ngStrap.tooltip',
+  'mgcrea.ngStrap.helpers.dateParser',
+  'mgcrea.ngStrap.timepicker'
 ])
 
   .constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload')

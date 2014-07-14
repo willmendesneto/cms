@@ -1,31 +1,15 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('DatePickerCtrl', function ($scope) {
+  .controller('DatePickerCtrl', function ($scope, DateUtil) {
 
-  $scope.$on( ('postLoaded'), function() {
-    if(!$scope.post.content.meta.title) {
-      $scope.date = new Date();
-      $scope.time = new Date();
-    }
-    else {
-      $scope.date = new Date($scope.post.content.meta.created);
-      $scope.time = new Date($scope.post.content.meta.created);
-    }
+  $scope.$on('postLoaded', function(event, post) {
+    $scope.selectedDate = new Date(post.content.meta.created);
+    $scope.selectedTime = new Date(post.content.meta.created);
 
-    $scope.hstep = 1;
-    $scope.mstep = 1;
-
-    $scope.ismeridian = false;
-
-    $scope.open = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope.opened = true;
+    $scope.updateDate = function(){
+      post.content.meta.created = DateUtil.getTimestamp($scope.selectedDate, $scope.selectedTime);
     };
-
-    $scope.format = 'dd-MMMM-yyyy';
 
   });
 

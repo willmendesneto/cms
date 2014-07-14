@@ -41,7 +41,7 @@ angular.module('cmsApp')
       $scope.contentLoaded = true;
 
       $timeout(function(){
-        $scope.$broadcast('postLoaded');
+        $scope.$broadcast('postLoaded', $scope.post);
         $scope.menuTag = $scope.post.getMenuItem();
         $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
         $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
@@ -118,7 +118,7 @@ angular.module('cmsApp')
         $scope.contentLoaded = true;
 
         $timeout(function(){
-          $scope.$broadcast('postLoaded');
+          $scope.$broadcast('postLoaded', $scope.post);
         });
       }
     };

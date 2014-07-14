@@ -13,7 +13,7 @@ angular.module('cmsApp')
         var day = date.getDate();
         var hours = time.getHours();
         var minutes = time.getMinutes();
-        return new Date(year + '/' + month + '/' + day + ' ' + hours + ':' + minutes).getTime();
+        return new Date(year, month, day, hours, minutes).getTime();
       }
     };
 

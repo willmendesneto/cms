@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .service('Post', function Post(_, jsyaml, DateUtil) {
+  .service('Post', function Post(_, jsyaml) {
 
     return {
       makePost: function(data) {
@@ -44,7 +44,7 @@ angular.module('cmsApp')
 
         self.getContent = function(){
           if(!self.content.meta.created){
-            self.content.meta.created = Math.round(DateUtil.getTime().getTime() / 1000);
+            self.content.meta.created = new Date();
           }
 
           return self.content.meta;
