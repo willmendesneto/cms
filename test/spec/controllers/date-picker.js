@@ -4,10 +4,11 @@ describe('Controller: DatePickerCtrl', function () {
 
   beforeEach(module('cmsApp'));
 
-  var DatePickerCtrl, scope, timestampRuby, timestampJavaScript;
+  var DatePickerCtrl, scope, timestampRuby, timestampJavaScript, DateUtil;
 
-  beforeEach(inject(function ( $rootScope, $controller) {
+  beforeEach(inject(function ( $rootScope, $controller, _DateUtil_) {
     scope = $rootScope.$new();
+    DateUtil = _DateUtil_;
     timestampJavaScript = 1402738860000;
     timestampRuby = timestampJavaScript/1000;
 
@@ -22,6 +23,8 @@ describe('Controller: DatePickerCtrl', function () {
     scope.$broadcast('postLoaded', post);
     scope.selectedDate = new Date('June 14 2014 17:41:08 GMT-0300 (BRT)');
     scope.selectedTime = new Date('June 14 2014 6:41:08 GMT-0300 (BRT)');
+
+    spyOn(DateUtil,'getTimestamp').and.returnValue(timestampRuby);
 
     scope.updateDate();
     expect(post.content.meta.created).toBe(timestampRuby);
