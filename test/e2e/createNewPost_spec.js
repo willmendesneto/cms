@@ -63,14 +63,11 @@ describe('create a new post', function(){
     novoButton.click();
     expect(browser.getCurrentUrl()).toEqual(postUrl);
 
-    postPage.setSupportLine(Array(151).join("a"));
+    postPage.setSupportLine(Array(10).join("a"));
     browser.sleep(1 * 1000);
-
     expect(postPage.support_line.getAttribute('style').getCssValue('background-color')).toEqual('rgba(255, 255, 255, 1)');
 
-    browser.sleep(1 * 1000);    
-
-    postPage.setSupportLine(Array(2).join("a"));
+    postPage.setSupportLine(Array(150).join("a"));
     browser.sleep(1 * 1000);
     expect(postPage.support_line.getAttribute('style').getCssValue('background-color')).toEqual('rgba(255, 187, 187, 1)');
 
