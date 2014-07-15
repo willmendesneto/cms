@@ -2,7 +2,8 @@
 
 angular.module('cmsApp')
   .factory('DateUtil', function () {
-    return {
+
+    var DateUtil = {
       //TODO: this function should be removed. it has no meaning.
       getTime: function(){
           return new Date();
@@ -21,6 +22,9 @@ angular.module('cmsApp')
           return 0;
         }
       }
+
     };
+
+    return DateUtil;
 
   });

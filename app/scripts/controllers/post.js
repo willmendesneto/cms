@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal) {
+  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal, PostViewOptions) {
     var fileName = $routeParams.fileName;
 
     function findLabelByValue(list, value) {
@@ -64,30 +64,11 @@ angular.module('cmsApp')
       $scope.post.files = args;
     });
 
-    $scope.menuTagOptions = [
-      'agricultura camponesa',
-      'agronegócio',
-      'direitos humanos',
-      'educação, cultura e comunicação',
-      'lutas e mobilizações',
-      'solidariedade internacional',
-      'meio ambiente',
-      'projeto popular',
-      'reforma agrária',
-      'transgênicos'
-    ];
+    $scope.menuTagOptions = PostViewOptions.getMenuTagOptions();
 
-    $scope.sectionOptions = [
-      {label: 'Capa', value: 'cover'},
-      {label: 'Destaque', value: 'featured-news'},
-      {label: 'Vídeo', value: 'tv'}
-    ];
+    $scope.sectionOptions = PostViewOptions.getSectionOptions();
 
-    $scope.labelOptions = [
-      {label: 'Artigo', value: 'articles'},
-      {label: 'Entrevista', value: 'interviews'},
-      {label: 'Reportagens Especiais', value: 'special-stories'}
-    ];
+    $scope.labelOptions = PostViewOptions.getLabelOptions();
 
     $scope.init = function(){
       if(fileName){

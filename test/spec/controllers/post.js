@@ -179,4 +179,33 @@ describe('Controller: PostCtrl', function () {
       expect(fileName).toMatch('2014-10-10-algo-aqui');
     });
   });
+
+  describe('PostViewOptionsService method:', function() {
+
+    var PostViewOptionsService, testArray;
+    beforeEach(inject(function ($controller, _PostViewOptions_) {
+      PostViewOptionsService = _PostViewOptions_;
+
+      testArray = ['test'];
+      spyOn(PostViewOptionsService,'getMenuTagOptions').and.returnValue(testArray);
+      spyOn(PostViewOptionsService,'getLabelOptions').and.returnValue(testArray);
+      spyOn(PostViewOptionsService,'getSectionOptions').and.returnValue(testArray);
+
+      PostCtrl = $controller('PostCtrl', {
+        $scope: scope
+      });
+    }));
+
+    it('#getMenuTagOptions should be called',function(){
+      expect(scope.menuTagOptions).toEqual(testArray);
+    });
+
+    it('#getLabelOptions should be called',function(){
+      expect(scope.labelOptions).toEqual(testArray);
+    });
+
+    it('#getSectionOptions should be called',function(){
+      expect(scope.sectionOptions).toEqual(testArray);
+    });
+  });
 });
