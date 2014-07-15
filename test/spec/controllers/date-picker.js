@@ -8,7 +8,7 @@ describe('Controller: DatePickerCtrl', function () {
 
   beforeEach(inject(function ( $rootScope, $controller) {
     scope = $rootScope.$new();
-    dateJavaScript = 1402738860000
+    dateJavaScript = 1402738860000;
     dateRuby = dateJavaScript/1000;
 
     DatePickerCtrl = $controller('DatePickerCtrl', {

@@ -31,8 +31,9 @@ describe('Service: DateUtil', function () {
       var time = new Date('June 14 2014 6:41:08 GMT-0300 (BRT)');
 
       var timestamp = DateUtilService.getTimestamp(date, time);
+      var dateRuby = 1402738860000/1000;
 
-      expect(timestamp).toBe(1402738860000);
+      expect(timestamp).toBe(dateRuby);
     });
   });
 

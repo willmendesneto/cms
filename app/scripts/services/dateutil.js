@@ -15,7 +15,8 @@ angular.module('cmsApp')
           var day = date.getDate();
           var hours = time.getHours();
           var minutes = time.getMinutes();
-          return new Date(year, month, day, hours, minutes).getTime();
+          var dateCreated = new Date(year, month, day, hours, minutes).getTime();
+          return dateCreated/1000;
         } catch (err) {
           return 0;
         }
