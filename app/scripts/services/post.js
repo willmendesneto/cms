@@ -43,10 +43,6 @@ angular.module('cmsApp')
         };
 
         self.getContent = function(){
-          if(!self.content.meta.created){
-            self.content.meta.created = new Date();
-          }
-
           return self.content.meta;
         };
 

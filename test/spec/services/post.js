@@ -43,16 +43,6 @@ describe('Service: New Post', function(){
       expect(post.content.text).toBe('');
       expect(post.content.meta).toEqual(dummyMeta);
     });
-
-// TO DO:  Fix this TEST
-    // it('with created time fill with timestamp', function() {
-    //   var post = Post.makePost();
-
-    //   post.create();
-    //   var data = post.getContent();
-    //   var timestamp = new Date(2001,8,29,12,0).getTime();
-    //   expect(data.created).toEqual(timestamp);
-    // });
   });
 });
 
