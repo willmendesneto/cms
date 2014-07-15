@@ -64,11 +64,14 @@ describe('create a new post', function(){
     expect(browser.getCurrentUrl()).toEqual(postUrl);
 
     postPage.setSupportLine(Array(151).join("a"));
+    browser.sleep(1 * 1000);
+
     expect(postPage.support_line.getAttribute('style').getCssValue('background-color')).toEqual('rgba(255, 255, 255, 1)');
 
     browser.sleep(1 * 1000);    
 
     postPage.setSupportLine(Array(2).join("a"));
+    browser.sleep(1 * 1000);
     expect(postPage.support_line.getAttribute('style').getCssValue('background-color')).toEqual('rgba(255, 187, 187, 1)');
 
     browser.sleep(3 * 1000);    
