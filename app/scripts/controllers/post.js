@@ -154,22 +154,6 @@ angular.module('cmsApp')
       return prepareNameFile(post);
     };
 
-    $scope.postStatus = function(){
-      var draftExpression = new RegExp('^https?://.*?/_drafts/?');
-      var publishedExpression = new RegExp('^https?://.*?/_posts/?');
-      /*jshint camelcase: false */
-      if (typeof $scope.post.html_url === 'undefined') {
-        return 'NOVO';
-      }
-      else if (draftExpression.exec($scope.post.html_url)) {
-        return 'RASCUNHO';
-      }
-      else if (publishedExpression.exec($scope.post.html_url)) {
-        return 'PUBLICADO';
-      }
-
-      return '';
-    };
 
     $scope.fileNameChaged = function(element)
     {

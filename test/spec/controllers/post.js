@@ -132,34 +132,6 @@ describe('Controller: PostCtrl', function () {
     });
   });
 
-
-  describe('post status', function(){
-    /*jshint camelcase: false */
-    it('should be RASCUNHO when post is draft', function(){
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      scope.post.html_url = 'https://laskjdfl;sjdfl;ksja;lkfjsa/_drafts/l;sadjfl;sakjdflj';
-      expect(scope.postStatus()).toBe('RASCUNHO');
-    });
-
-    it('should be PUBLICADO when post is published', function(){
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      scope.post.html_url = 'https://laskjdfl;sjdfl;ksja;lkfjsa/_posts/l;sadjfl;sakjdflj';
-      expect(scope.postStatus()).toBe('PUBLICADO');
-    });
-
-    it('should be NOVO when post url is undefined', function(){
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      scope.post.html_url = undefined;
-      expect(scope.postStatus()).toBe('NOVO');
-    });
-
-    it('should be empty when post is not published and not draft', function(){
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      scope.post.html_url = 'https://laskjdfl;sjdfl;ksja;lkfjsa/_xxxx/l;sadjfl;sakjdflj';
-      expect(scope.postStatus()).toBe('');
-    });
-  });
-
   describe('should save a new post', function() {
 
     beforeEach(inject(function (DateUtil) {
