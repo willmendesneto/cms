@@ -208,4 +208,5 @@ describe('Controller: PostCtrl', function () {
       expect(scope.sectionOptions).toEqual(testArray);
     });
   });
+
 });

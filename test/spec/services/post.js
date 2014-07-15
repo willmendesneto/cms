@@ -256,4 +256,31 @@ describe('Service: Post', function () {
     });
   });
 
+  describe('should get the correct label for post options', function() {
+    var post;
+
+    beforeEach(function(){
+      post = Post.makePost();
+      post.create();
+    });
+
+    it('#getSectionLabel return the label corresponding to the section',function() {
+      var sectionOptions = [{label: 'Capa', value: 'cover'}];
+      post.content.meta.section = 'cover';
+
+      var sectionLabel = post.getSectionLabel(sectionOptions);
+
+      expect(sectionLabel).toBe('Capa');
+    });
+
+    it('#getSectionLabel return the label corresponding to the label item', function() {
+      var labelOptions = [{label: 'Artigo', value: 'articles'}];
+      post.content.meta.label = 'articles';
+
+      var label = post.getLabel(labelOptions);
+
+      expect(label).toBe('Artigo');
+    });
+  });
+
 });

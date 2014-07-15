@@ -4,15 +4,6 @@ angular.module('cmsApp')
   .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal, PostViewOptions) {
     var fileName = $routeParams.fileName;
 
-    function findLabelByValue(list, value) {
-      var listLength = list.length;
-      for (var index = 0; index < listLength; index++) {
-        if (list[index].value === value) {
-          return list[index];
-        }
-      }
-    }
-
     function prepareNameFile(post){
       if(!!post.name){
         return post.name;
@@ -39,8 +30,8 @@ angular.module('cmsApp')
       $timeout(function(){
         $scope.$broadcast('postLoaded', $scope.post);
         $scope.menuTag = $scope.post.getMenuItem();
-        $scope.section = findLabelByValue($scope.sectionOptions, $scope.post.getSection());
-        $scope.label = findLabelByValue($scope.labelOptions, $scope.post.getLabel());
+        $scope.section = $scope.post.getSectionLabel($scope.sectionOptions);
+        $scope.label = $scope.post.getLabel($scope.labelOptions);
         $scope.imagesHD = $scope.post.getImagesHD();
       },0);
 

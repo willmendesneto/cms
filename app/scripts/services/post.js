@@ -110,11 +110,17 @@ angular.module('cmsApp')
           self.content.meta.label = label.value;
         };
 
-        self.getLabel = function() {
+        self.getLabel = function(labelOptions) {
           if (!self.content) {
             return '';
           }
-          return self.content.meta.label;
+
+          var label = self.content.meta.label;
+          var optionItem = _.find(labelOptions, function(option){
+            return option.value === label;
+          });
+
+          return optionItem.label;
         };
 
         self.setSection = function(section) {
@@ -130,11 +136,17 @@ angular.module('cmsApp')
           self.content.meta.section = section.value;
         };
 
-        self.getSection = function() {
+        self.getSectionLabel = function(sectionOptions) {
+          var section = self.content.meta.section;
           if (!self.content) {
             return '';
           }
-          return self.content.meta.section;
+
+          var optionItem = _.find(sectionOptions, function(option){
+            return option.value === section;
+          });
+
+          return optionItem.label;
         };
 
         self.setImagesHD = function(imagesHD) {
