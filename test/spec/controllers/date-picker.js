@@ -4,12 +4,12 @@ describe('Controller: DatePickerCtrl', function () {
 
   beforeEach(module('cmsApp'));
 
-  var DatePickerCtrl, scope, dateRuby, dateJavaScript;
+  var DatePickerCtrl, scope, timestampRuby, timestampJavaScript;
 
   beforeEach(inject(function ( $rootScope, $controller) {
     scope = $rootScope.$new();
-    dateJavaScript = 1402738860000;
-    dateRuby = dateJavaScript/1000;
+    timestampJavaScript = 1402738860000;
+    timestampRuby = timestampJavaScript/1000;
 
     DatePickerCtrl = $controller('DatePickerCtrl', {
       $scope: scope
@@ -24,21 +24,23 @@ describe('Controller: DatePickerCtrl', function () {
     scope.selectedTime = new Date('June 14 2014 6:41:08 GMT-0300 (BRT)');
 
     scope.updateDate();
-    expect(post.content.meta.created).toBe(dateRuby);
+    expect(post.content.meta.created).toBe(timestampRuby);
   });
 
-  it('should set selectedDate to the date of  post created value', function(){
-    var post = {content:{ meta: {created: dateRuby}}};
-    scope.$broadcast('postLoaded', post);
+  describe('when post created is defined', function(){
+    it('should set selectedDate to the date of  post created value', function(){
+      var post = {content:{ meta: {created: timestampRuby}}};
+      scope.$broadcast('postLoaded', post);
 
-    expect(scope.selectedDate.getTime()).toBe(dateJavaScript);
-  });
+      expect(scope.selectedDate.getTime()).toBe(timestampJavaScript);
+    });
 
-  it('should set selectedTime to the date of  post created value', function(){
-    var post = {content:{ meta: {created: dateRuby}}};
-    scope.$broadcast('postLoaded', post);
+    it('should set selectedTime to the date of  post created value', function(){
+      var post = {content:{ meta: {created: timestampRuby}}};
+      scope.$broadcast('postLoaded', post);
 
-    expect(scope.selectedTime.getTime()).toBe(dateJavaScript);
+      expect(scope.selectedTime.getTime()).toBe(timestampJavaScript);
+    });
   });
 
 });
