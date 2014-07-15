@@ -137,3 +137,11 @@ a.cancel{
 {
   display: none !important;
 }
+
+textarea.warn {
+  background-color: #ffbbbb;
+}
+
+textarea.nowarn {
+  background-color: '';
+}
