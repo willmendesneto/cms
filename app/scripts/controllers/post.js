@@ -4,10 +4,6 @@ angular.module('cmsApp')
   .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal) {
     var fileName = $routeParams.fileName;
 
-    function newPost(){
-      return Post.makePost();
-    }
-
     function findLabelByValue(list, value) {
       var listLength = list.length;
       for (var index = 0; index < listLength; index++) {
@@ -113,7 +109,7 @@ angular.module('cmsApp')
         });
       }
       else{
-        $scope.post = newPost();
+        $scope.post = Post.makePost();
         $scope.post.create();
         $scope.contentLoaded = true;
 
