@@ -114,14 +114,6 @@ describe('Controller: PostCtrl', function () {
       $submitted: false
     };
 
-    it('should save a post in draft', function() {
-      scope.post = PostBuilder.buildAndLoadJekyllData();
-      spyOn(scope, 'save');
-      var url = GitRepository.getDraftsRepositoryAddress(scope.prepareNameFile(scope.post));
-      scope.draft(scope.post);
-      expect(scope.save).toHaveBeenCalledWith(scope.post, url);
-    });
-
     it('should publish a post', function() {
       scope.post = PostBuilder.buildAndLoadJekyllData();
       spyOn(scope, 'save');

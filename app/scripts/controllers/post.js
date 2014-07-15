@@ -1,24 +1,11 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal, PostViewOptions) {
+  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal, PostViewOptions, GenerateFilename) {
     var fileName = $routeParams.fileName;
 
     function prepareNameFile(post){
-      if(!!post.name){
-        return post.name;
-      }
-      var fileName, date = '';
-      var today = DateUtil.getTime();
-      var day = ('0' + (today.getDate())).slice(-2);
-      var month = ('0' + (today.getMonth() + 1)).slice(-2);
-
-      date = today.getFullYear() + '-' + month + '-' + day;
-      fileName = post.content.meta.title.toLowerCase()
-                        .replace(/[^\w\s]/gi, '')
-                        .replace(/[ ]([a-zA-Z])/g, function (m, w) { return '-'+w; });
-
-      return date+'-'+fileName+'.md';
+      return GenerateFilename.create(post);
     }
 
     function loadPostFromData(data) {
@@ -111,11 +98,6 @@ angular.module('cmsApp')
           }
         }
       });
-    };
-
-    $scope.draft = function(post) {
-      var url = GitRepository.getDraftsRepositoryAddress($scope.prepareNameFile(post));
-      $scope.save(post, url);
     };
 
     $scope.prepareNameFile =  function(post){
