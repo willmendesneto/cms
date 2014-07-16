@@ -117,9 +117,8 @@ describe('Controller: PostCtrl', function () {
     it('should publish a post', function() {
       scope.post = PostBuilder.buildAndLoadJekyllData();
       spyOn(scope, 'save');
-      var url = GitRepository.getPublishedRepositoryAddress(scope.prepareNameFile(scope.post));
       scope.updatePost(scope.post, postForm);
-      expect(scope.save).toHaveBeenCalledWith(scope.post, url);
+      expect(scope.save).toHaveBeenCalledWith(scope.post);
       expect(postForm.$submitted).toBe(true);
     });
   });

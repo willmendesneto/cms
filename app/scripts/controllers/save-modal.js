@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-.controller('SaveModalCtrl', function ($rootScope, $scope, $timeout, $modalInstance, GitRepository, url, post, fileName, loadPost) {
+.controller('SaveModalCtrl', function ($rootScope, $scope, $timeout, $modalInstance, GitRepositoryNew, post, fileName, loadPost) {
   $scope.max = 5;
   $scope.problem = false;
   $scope.isCollapse = false;
@@ -39,21 +39,22 @@ angular.module('cmsApp')
   function onsuccess(){
     updateProgress(4,'info','Carregando dados do servidor');
 
-    GitRepository.getPost(url, fileName,{
-      success: function(data){
-        loadPost(data);
-        updateProgress(5,'success','Salvo com sucesso',true);
-      },
-      error: onerror
+    GitRepositoryNew.getPost(fileName).success(function(data){
+      loadPost(data);
+      updateProgress(5,'success','Salvo com sucesso',true);
+    }).error(function(error, status){
+      onerror(error, status);
     });
   }
 
   updateProgress(1,'info','Preparando dados');
 
-  GitRepository.save(url,{ data: JSON.stringify(post.commitData()),
-                     progress: onprogress,
-                     success: onsuccess,
-                     error: onerror
+  GitRepositoryNew.save(fileName, JSON.stringify(post.commitData())).progress(function(){
+    onprogress();
+  }).success(function(){
+    onsuccess();
+  }).error(function(error, status){
+    onerror(error, status);
   });
 
   $scope.ok = function () {

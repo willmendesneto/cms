@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, GitRepository, $modal, PostViewOptions, GenerateFilename) {
+  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, $modal, PostViewOptions, GenerateFilename) {
     var fileName = $routeParams.fileName;
 
     function prepareNameFile(post){
@@ -28,12 +28,11 @@ angular.module('cmsApp')
     $scope.updatePost = function (post, postForm) {
       if (postForm.$valid) {
 
-        var url = GitRepository.getPublishedRepositoryAddress($scope.prepareNameFile(post));
         post.setSection($scope.section);
         post.setLabel($scope.label);
         post.setMenuItem($scope.menuTag);
         post.setImagesHD($scope.imagesHD);
-        $scope.save(post, url);
+        $scope.save(post);
       }
       postForm.$submitted = true;
     };
@@ -78,15 +77,12 @@ angular.module('cmsApp')
       }
     };
 
-    $scope.save = function(post, url) {
+    $scope.save = function(post) {
       $modal.open({
         templateUrl: 'views/savemodal.html',
         controller: 'SaveModalCtrl',
         backdrop: 'static',
         resolve: {
-          url: function(){
-            return url;
-          },
           post: function(){
             return post;
           },
