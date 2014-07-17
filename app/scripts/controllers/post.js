@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, $modal, PostViewOptions, GenerateFilename) {
+  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, $modal, Modal, PostViewOptions, GenerateFilename) {
     var fileName = $routeParams.fileName;
 
     function prepareNameFile(post){
@@ -49,19 +49,20 @@ angular.module('cmsApp')
 
     $scope.init = function(){
       if(fileName){
-        $modal.open({
-          templateUrl: 'views/loadingmodal.html',
-          controller: 'LoadingModalCtrl',
-          backdrop: 'static',
-          resolve: {
-            fileName: function(){
-              return fileName;
-            },
-            loadPost: function(){
-              return loadPostFromData;
-            },
-          }
-        });
+        // $modal.open({
+        //   templateUrl: 'views/loadingmodal.html',
+        //   controller: 'LoadingModalCtrl',
+        //   backdrop: 'static',
+        //   resolve: {
+        //     fileName: function(){
+        //       return fileName;
+        //     },
+        //     loadPost: function(){
+        //       return loadPostFromData;
+        //     },
+        //   }
+        // });
+        Modal.open('views/loadingmodal.html', 'LoadingModalCtrl', 'static', fileName, loadPostFromData);
       }
       else{
         $scope.post = Post.makePost();
