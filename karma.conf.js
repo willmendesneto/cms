@@ -23,7 +23,6 @@ module.exports = function(config) {
       'app/bower_components/ng-tags-input/ng-tags-input.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-route/angular-route.js',
-      'app/bower_components/angular-elastic/elastic.js',
       'app/bower_components/angular-img-fallback/angular.dcb-img-fallback.min.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',

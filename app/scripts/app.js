@@ -3,7 +3,6 @@
 angular.module('cmsApp', [
   'ngRoute',
   'config',
-  'monospaced.elastic',
   'ngTagsInput',
   'ui.bootstrap.modal',
   'ui.bootstrap.progressbar',
