@@ -2,53 +2,61 @@
 
 describe('Service: User', function () {
 
-  // load the service's module
+
   beforeEach(module('cmsApp'));
 
-  // instantiate service
-  var User, rootScope;
+
+  var UserService, rootScope, $q, GitRepositoryNewService, objectDefer;
   var user = { name: 'Rodrigo' };
-  var teams = [{id: 12}];
+  var teamId = 12;
+  var teams = [ {id: teamId } ];
+
 
   beforeEach(module(function ($provide) {
-    var gitRepositoryMock = {
-      getUser: function (options) {
-        options.success(user);
-      },
-      getTeams: function(options){
-        options.success(teams);
-      }
-    };
+    var enviromentMock = { repo: {jornalist: teamId } };
 
-    $provide.value('GitRepository', gitRepositoryMock);
+    $provide.constant('ENV', enviromentMock);
   }));
 
-  beforeEach(inject(function ($rootScope,_User_) {
-    User = _User_;
+  beforeEach(inject(function ($rootScope,_User_, _$q_, _GitRepositoryNew_) {
+    UserService = _User_;
     rootScope = $rootScope;
+
+    $q = _$q_;
+    objectDefer = $q.defer();
+
+    GitRepositoryNewService = _GitRepositoryNew_;
+
+    spyOn(GitRepositoryNewService, 'getUser').and.returnValue(objectDefer.promise);
+    spyOn(GitRepositoryNewService, 'getTeams').and.returnValue(objectDefer.promise);
   }));
+
 
   it('should return the user name', function () {
-    var defered = User.userInfo();
-    var result = '';
-
-    defered.then(function(userName){
-      result = userName;
+    var deferedPromise = UserService.userInfo();
+    var result;
+    deferedPromise.then(function(data){
+      result = data;
     });
 
+    objectDefer.resolve(user);
+
     rootScope.$apply();
-    expect(result).toBe(user);
+    expect(GitRepositoryNewService.getUser).toHaveBeenCalled();
+    expect(result).toEqual(user);
   });
 
   it('should return the team', function () {
-    var defered = User.authenticate();
-    var result = '';
+    var deferedPromise = UserService.authenticate();
+    var result;
 
-    defered.then(function(jornalist){
-      result = jornalist;
+    deferedPromise.then(function(data){
+      result = data;
     });
 
+    objectDefer.resolve(teams);
+
     rootScope.$apply();
-    expect(result.id).toBe(teams.id);
+    expect(result.id).toBe(teamId);
   });
 });

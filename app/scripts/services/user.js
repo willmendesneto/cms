@@ -1,33 +1,36 @@
 'use strict';
 
 angular.module('cmsApp')
-  .service('User', function User($q, GitRepository, ENV) {
+  .service('User', function User($q, GitRepositoryNew, ENV, _) {
+
+    function getJournalistId(data){
+      var  teamJournalist = _.find(data, function(element){
+        return element.id === ENV.repo.jornalist;
+      });
+      return teamJournalist;
+    }
+
     var user = {
       userInfo: function() {
         var deferred = $q.defer();
-        GitRepository.getUser({
-          success: function(data){
+        GitRepositoryNew.getUser().then(function(data){
             deferred.resolve(data);
-          }
-        });
+          });
         return deferred.promise;
       },
 
       authenticate: function() {
         var deferred = $q.defer();
 
-        GitRepository.getTeams({
-          success: function(data) {
-            var teamJornalist = data.filter(function(element){
-              return element.id === ENV.repo.jornalist;
-            });
+        GitRepositoryNew.getTeams().then(function(data) {
+          var journalistId = getJournalistId(data);
+          var team = { id2: undefined };
 
-            var team = { id: undefined };
-            team = angular.extend(team, teamJornalist[0]);
-
-            deferred.resolve(team);
-          }
+          //TODO: replace angular extend with more easy to understand code
+          team = angular.extend(team, journalistId);
+          deferred.resolve(team);
         });
+
         return deferred.promise;
       }
     };
