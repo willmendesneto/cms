@@ -1,12 +1,12 @@
 'use strict';
 
-describe('Service: GitRepositoryNew', function () {
+describe('Service: GitRepository', function () {
 
   beforeEach(module('cmsApp'));
 
   var GitRepositoryService, rootScope, repositoryURL;
-  beforeEach(inject(function (_GitRepositoryNew_, $rootScope) {
-    GitRepositoryService = _GitRepositoryNew_;
+  beforeEach(inject(function (_GitRepository_, $rootScope) {
+    GitRepositoryService = _GitRepository_;
     rootScope = $rootScope;
     rootScope.github = {
       get: function(value) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-.controller('LoadingModalCtrl', function ($rootScope, $scope, $timeout, $modalInstance, GitRepositoryNew, fileName, loadPost) {
+.controller('LoadingModalCtrl', function ($rootScope, $scope, $timeout, $modalInstance, GitRepository, fileName, loadPost) {
   $scope.max = 2;
   $scope.problem = false;
   $scope.isCollapse = false;
@@ -33,7 +33,7 @@ angular.module('cmsApp')
   $timeout(function(){
     updateProgress(1,'info','Carregando dados');
 
-    GitRepositoryNew.getPost(fileName).success( function(data) {
+    GitRepository.getPost(fileName).success( function(data) {
       onsuccess(data);
     }).error(function(error){
       onerror(error);

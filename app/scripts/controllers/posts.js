@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, GitRepositoryNew, $timeout) {
+  .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, GitRepository, $timeout) {
 
     function filterPostByDate(data){
       var date;
@@ -13,7 +13,7 @@ angular.module('cmsApp')
       return data;
     }
 
-    GitRepositoryNew.getPosts().success(function(data){
+    GitRepository.getPosts().success(function(data){
       $timeout(function(){
 
         data = filterPostByDate(data);

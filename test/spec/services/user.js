@@ -6,7 +6,7 @@ describe('Service: User', function () {
   beforeEach(module('cmsApp'));
 
 
-  var UserService, rootScope, $q, GitRepositoryNewService, objectDefer;
+  var UserService, rootScope, $q, GitRepositoryService, objectDefer;
   var user = { name: 'Rodrigo' };
   var teamId = 12;
   var teams = [ {id: teamId } ];
@@ -18,17 +18,17 @@ describe('Service: User', function () {
     $provide.constant('ENV', enviromentMock);
   }));
 
-  beforeEach(inject(function ($rootScope,_User_, _$q_, _GitRepositoryNew_) {
+  beforeEach(inject(function ($rootScope,_User_, _$q_, _GitRepository_) {
     UserService = _User_;
     rootScope = $rootScope;
 
     $q = _$q_;
     objectDefer = $q.defer();
 
-    GitRepositoryNewService = _GitRepositoryNew_;
+    GitRepositoryService = _GitRepository_;
 
-    spyOn(GitRepositoryNewService, 'getUser').and.returnValue(objectDefer.promise);
-    spyOn(GitRepositoryNewService, 'getTeams').and.returnValue(objectDefer.promise);
+    spyOn(GitRepositoryService, 'getUser').and.returnValue(objectDefer.promise);
+    spyOn(GitRepositoryService, 'getTeams').and.returnValue(objectDefer.promise);
   }));
 
 
@@ -42,7 +42,7 @@ describe('Service: User', function () {
     objectDefer.resolve(user);
 
     rootScope.$apply();
-    expect(GitRepositoryNewService.getUser).toHaveBeenCalled();
+    expect(GitRepositoryService.getUser).toHaveBeenCalled();
     expect(result).toEqual(user);
   });
 

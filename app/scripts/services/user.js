@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .service('User', function User($q, GitRepositoryNew, ENV, _) {
+  .service('User', function User($q, GitRepository, ENV, _) {
 
     function getJournalistId(data){
       var  teamJournalist = _.find(data, function(element){
@@ -13,7 +13,7 @@ angular.module('cmsApp')
     var user = {
       userInfo: function() {
         var deferred = $q.defer();
-        GitRepositoryNew.getUser().then(function(data){
+        GitRepository.getUser().then(function(data){
             deferred.resolve(data);
           });
         return deferred.promise;
@@ -22,7 +22,7 @@ angular.module('cmsApp')
       authenticate: function() {
         var deferred = $q.defer();
 
-        GitRepositoryNew.getTeams().then(function(data) {
+        GitRepository.getTeams().then(function(data) {
           var journalistId = getJournalistId(data);
           var team = { id2: undefined };
 

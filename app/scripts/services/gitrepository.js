@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .factory('GitRepositoryNew',['$rootScope', '$location', 'ENV', function($rootScope, $location, ENV){
+  .factory('GitRepository',['$rootScope', '$location', 'ENV', function($rootScope, $location, ENV){
 
   function githubGet(filename) {
     var url = getRepositoryAddress(filename);
