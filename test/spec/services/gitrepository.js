@@ -5,6 +5,14 @@ describe('Service: GitRepository', function () {
   beforeEach(module('cmsApp'));
 
   var GitRepositoryService, rootScope, repositoryURL;
+
+  beforeEach(module(function ($provide) {
+    repositoryURL = 'mst-test-user/test/';
+    var enviromentMock = { repository: repositoryURL };
+
+    $provide.constant('ENV', enviromentMock);
+  }));
+
   beforeEach(inject(function (_GitRepository_, $rootScope) {
     GitRepositoryService = _GitRepository_;
     rootScope = $rootScope;
@@ -19,7 +27,6 @@ describe('Service: GitRepository', function () {
     };
 
     spyOn(rootScope.github, 'get');
-    repositoryURL = 'mst-test-user/test/';
   }));
 
   it('#getUser should call github with user', function() {
