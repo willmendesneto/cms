@@ -111,11 +111,12 @@ angular.module('cmsApp')
         };
 
         self.getLabel = function(labelOptions) {
-          if (!self.content) {
+          var label = self.content.meta.label;
+
+          if (!self.content || !label) {
             return '';
           }
 
-          var label = self.content.meta.label;
           var optionItem = _.find(labelOptions, function(option){
             return option.value === label;
           });
@@ -138,7 +139,8 @@ angular.module('cmsApp')
 
         self.getSectionLabel = function(sectionOptions) {
           var section = self.content.meta.section;
-          if (!self.content) {
+
+          if (!self.content || !section) {
             return '';
           }
 

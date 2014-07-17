@@ -273,6 +273,15 @@ describe('Service: Post', function () {
       expect(sectionLabel).toBe('Capa');
     });
 
+    it('#getSectionLabel should return empty string when the post has no selected section',function() {
+      var sectionOptions = [{label: 'any', value: 'any'}];
+      post.content.meta.section = '';
+
+      var sectionLabel = post.getSectionLabel(sectionOptions);
+
+      expect(sectionLabel).toBe('');
+    });
+
     it('#getSectionLabel return the label corresponding to the label item', function() {
       var labelOptions = [{label: 'Artigo', value: 'articles'}];
       post.content.meta.label = 'articles';
@@ -280,6 +289,15 @@ describe('Service: Post', function () {
       var label = post.getLabel(labelOptions);
 
       expect(label).toBe('Artigo');
+    });
+
+    it('#getSectionLabel should return empty string when the post has no selected label', function() {
+      var labelOptions = [{label: 'any', value: 'any'}];
+      post.content.meta.label = '';
+
+      var label = post.getLabel(labelOptions);
+
+      expect(label).toBe('');
     });
   });
 
