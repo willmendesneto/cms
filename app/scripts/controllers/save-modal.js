@@ -49,9 +49,13 @@ angular.module('cmsApp')
 
   updateProgress(1,'info','Preparando dados');
 
+  console.log('passou por aqui');
+
   GitRepository.save(fileName, JSON.stringify(post.commitData())).progress(function(){
+    console.log('entrou no progress');
     onprogress();
   }).success(function(){
+    console.log('entrou no success');
     onsuccess();
   }).error(function(error, status){
     onerror(error, status);

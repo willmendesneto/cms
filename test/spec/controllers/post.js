@@ -4,21 +4,29 @@ describe('Controller: PostCtrl', function () {
 
   beforeEach(module('cmsApp'));
 
-  var PostCtrl,scope,Post, GitRepository, SaveModalService, LoadModalService,
+  var PostCtrl, scope, $q, objectDefer, Post, GitRepository, LoadModalService,
 
   githubMock = {
     get: jasmine.createSpy().and.callFake(function () {
       return {
         done: jasmine.createSpy()
       };
+    }),
+    put: jasmine.createSpy().and.callFake(function () {
+      return {
+        done: jasmine.createSpy()
+      };
     })
   };
 
-  beforeEach(inject(function ($rootScope, $controller, _Post_, _GitRepository_, _SaveModal_, $routeParams, _LoadModal_) {
+  beforeEach(inject(function ($rootScope, $controller, _Post_, _GitRepository_, $routeParams, _LoadModal_, _&q_) {
     scope = $rootScope.$new();
+
+    $q = _$q_;
+    objectDefer = $q.defer();
+
     Post = _Post_;
     GitRepository = _GitRepository_;
-    SaveModalService = _SaveModal_;
     LoadModalService = _LoadModal_;
     $routeParams.fileName = 'test post';
     $rootScope.posts = [];
@@ -30,6 +38,8 @@ describe('Controller: PostCtrl', function () {
 
     scope.post = Post.makePost();
     scope.post.create();
+
+    spyOn(GitRepository, 'save').and.returnValue(objectDefer.promise);
 
   }));
 
@@ -79,16 +89,6 @@ describe('Controller: PostCtrl', function () {
       expect(postForm.$submitted).toBe(true);
     });
 
-  });
-
-  describe('#save', function(){
-    it('calls save modal service', function(){
-      spyOn(SaveModalService, 'show');
-
-      scope.save(scope.post);
-
-      expect(SaveModalService.show).toHaveBeenCalled();
-    });
   });
 
   describe('#init', function(){

@@ -12,10 +12,10 @@
           <div ng-show="postForm.imgFile.$invalid">A imagem de capa é obrigatória.</div>
       </div>
 
-
       <p class='actions'>
-        <input type="button"  class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm, date, time)" />
-        <a href="#/posts" class="btn btn-default">Voltar</a>
+        <progress max="100" ng-show="showProgress"></progress>
+        <input type="button" ng-disabled="showProgress" class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm, date, time)" />
+        <a href="#/posts" ng-disabled="showProgress" class="btn btn-default">Voltar</a>
       </p>
 
       <section>

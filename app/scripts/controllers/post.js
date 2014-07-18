@@ -1,13 +1,9 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, $modal, PostViewOptions, GenerateFilename, LoadModal, SaveModal) {
+  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, LoadModal, $location, GitRepository) {
 
     var fileName = $routeParams.fileName;
-
-    function prepareNameFile(post){
-      return GenerateFilename.create(post);
-    }
 
     function loadPostFromData(data) {
       $scope.post = Post.makePost(data);
@@ -24,11 +20,11 @@ angular.module('cmsApp')
       },0);
 
       $scope.$broadcast('filesLoaded', $scope.post.files);
+      $scope.showProgress = false;
     }
 
     $scope.updatePost = function (post, postForm) {
       if (postForm.$valid) {
-
         post.setSection($scope.section);
         post.setLabel($scope.label);
         post.setMenuItem($scope.menuTag);
@@ -64,8 +60,19 @@ angular.module('cmsApp')
     };
 
     $scope.save = function(post) {
-      var filename = $routeParams.fileName || prepareNameFile(post);
-      SaveModal.show(filename, loadPostFromData, post);
+      var filename = $routeParams.fileName || GenerateFilename.create(post);
+
+      //SaveModal.show(filename, post);
+      GitRepository.save(filename, JSON.stringify(post.commitData()))
+      .progress(function() {
+        $scope.showProgress = true;
+      }).success(function() {
+        $location.path('#/posts');
+      }).error(function(error, status) {
+        // onerror(error, status);
+        // permanecer na pg e apresentar o erro no local mais indicado
+        console.log('find a better way to show error: ' + error + ' and the status: ' + status);
+      });
     };
 
   });
