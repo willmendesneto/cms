@@ -2,10 +2,9 @@
 
 describe('Controller: PostCtrl', function () {
 
-  // load the controller's module
   beforeEach(module('cmsApp'));
 
-  var PostCtrl,scope,Post, GitRepository,
+  var PostCtrl,scope,Post, GitRepository, SaveModalService, LoadModalService,
 
   githubMock = {
     get: jasmine.createSpy().and.callFake(function () {
@@ -15,10 +14,13 @@ describe('Controller: PostCtrl', function () {
     })
   };
 
-  beforeEach(inject(function ($rootScope, $controller, _Post_, _GitRepository_) {
+  beforeEach(inject(function ($rootScope, $controller, _Post_, _GitRepository_, _SaveModal_, $routeParams, _LoadModal_) {
     scope = $rootScope.$new();
     Post = _Post_;
     GitRepository = _GitRepository_;
+    SaveModalService = _SaveModal_;
+    LoadModalService = _LoadModal_;
+    $routeParams.fileName = 'test post';
     $rootScope.posts = [];
     $rootScope.github = githubMock;
 
@@ -77,6 +79,26 @@ describe('Controller: PostCtrl', function () {
       expect(postForm.$submitted).toBe(true);
     });
 
+  });
+
+  describe('#save', function(){
+    it('calls save modal service', function(){
+      spyOn(SaveModalService, 'show');
+
+      scope.save(scope.post);
+
+      expect(SaveModalService.show).toHaveBeenCalled();
+    });
+  });
+
+  describe('#init', function(){
+    it('calls load modal service when editing a post', function(){
+      spyOn(LoadModalService, 'show');
+
+      scope.init();
+
+      expect(LoadModalService.show).toHaveBeenCalled();
+    });
   });
 
   describe('PostViewOptionsService method:', function() {
