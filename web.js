@@ -3,6 +3,7 @@ var express           = require('express'),
     server            = require('http').createServer(app)
     ;
 
+setupMiddlewares();
 startServer();
 
 function startServer () {
