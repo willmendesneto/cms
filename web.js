@@ -1,4 +1,5 @@
 var express           = require('express'),
+	path              = require('path'),
     app               = express(),
     server            = require('http').createServer(app)
     ;
