@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, $modal, Modal, PostViewOptions, GenerateFilename) {
+  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, $modal, PostViewOptions, GenerateFilename, LoadModal, SaveModal) {
+
     var fileName = $routeParams.fileName;
 
     function prepareNameFile(post){
@@ -49,20 +50,7 @@ angular.module('cmsApp')
 
     $scope.init = function(){
       if(fileName){
-        // $modal.open({
-        //   templateUrl: 'views/loadingmodal.html',
-        //   controller: 'LoadingModalCtrl',
-        //   backdrop: 'static',
-        //   resolve: {
-        //     fileName: function(){
-        //       return fileName;
-        //     },
-        //     loadPost: function(){
-        //       return loadPostFromData;
-        //     },
-        //   }
-        // });
-        Modal.open('views/loadingmodal.html', 'LoadingModalCtrl', 'static', fileName, loadPostFromData);
+        LoadModal.show(fileName, loadPostFromData);
       }
       else{
         $scope.post = Post.makePost();
@@ -76,33 +64,8 @@ angular.module('cmsApp')
     };
 
     $scope.save = function(post) {
-      $modal.open({
-        templateUrl: 'views/savemodal.html',
-        controller: 'SaveModalCtrl',
-        backdrop: 'static',
-        resolve: {
-          post: function(){
-            return post;
-          },
-          fileName: function(){
-            return ($routeParams.fileName || prepareNameFile(post));
-          },
-          loadPost: function(){
-            return loadPostFromData;
-          }
-        }
-      });
+      var filename = $routeParams.fileName || prepareNameFile(post);
+      SaveModal.show(filename, loadPostFromData, post);
     };
 
-    $scope.prepareNameFile =  function(post){
-      return prepareNameFile(post);
-    };
-
-
-    $scope.fileNameChaged = function(element)
-    {
-      $scope.$apply(function(){
-        $scope.imagesHD = element.value;
-      });
-    };
   });
