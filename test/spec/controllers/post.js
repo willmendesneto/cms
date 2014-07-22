@@ -4,7 +4,7 @@ describe('Controller: PostCtrl', function () {
 
   beforeEach(module('cmsApp'));
 
-  var PostCtrl, scope, Post, GitRepository, LoadModalService,
+  var PostCtrl, scope, Post, GitRepository,
 
   githubMock = {
     get: jasmine.createSpy().and.callFake(function () {
@@ -19,12 +19,11 @@ describe('Controller: PostCtrl', function () {
     })
   };
 
-  beforeEach(inject(function ($rootScope, $controller, _Post_, _GitRepository_, $routeParams, _LoadModal_) {
+  beforeEach(inject(function ($rootScope, $controller, _Post_, _GitRepository_, $routeParams) {
     scope = $rootScope.$new();
 
     Post = _Post_;
     GitRepository = _GitRepository_;
-    LoadModalService = _LoadModal_;
     $routeParams.fileName = 'test post';
     $rootScope.posts = [];
     $rootScope.github = githubMock;

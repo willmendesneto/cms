@@ -15,6 +15,7 @@ describe('create a new post', function(){
   loginPage.accessPopup();
 
   browser.getAllWindowHandles().then(function (handles) {
+    browser.sleep(2 * 1000);
     browser.switchTo().window(handles[1]);
     loginPage.loginWith(username, password);
 
