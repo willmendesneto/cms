@@ -62,17 +62,19 @@ angular.module('cmsApp')
     $scope.save = function(post) {
       var filename = $routeParams.fileName || GenerateFilename.create(post);
 
-      //SaveModal.show(filename, post);
-      GitRepository.save(filename, JSON.stringify(post.commitData()))
-      .progress(function() {
+      $timeout(function(){
+        $scope.type = 'success';
         $scope.showProgress = true;
-      }).success(function() {
-        $location.path('#/posts');
+
+      },0);
+
+      GitRepository.save(filename, JSON.stringify(post.commitData()))
+      .success(function() {
+        $timeout(function(){
+          $location.path('/posts');
+        },0);
       }).error(function(error, status) {
-        // onerror(error, status);
-        // permanecer na pg e apresentar o erro no local mais indicado
         console.log('find a better way to show error: ' + error + ' and the status: ' + status);
       });
     };
-
   });
