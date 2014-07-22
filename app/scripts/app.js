@@ -4,7 +4,6 @@ angular.module('cmsApp', [
   'ngRoute',
   'config',
   'ngTagsInput',
-  'ui.bootstrap.modal',
   'ui.bootstrap.progressbar',
   'ui.bootstrap.tpls',
   'mgcrea.ngStrap.popover',
