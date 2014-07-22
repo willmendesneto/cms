@@ -37,11 +37,21 @@ describe('Controller: PostCtrl', function () {
 
     var mockResult = {
       success: function(onsuccess){
-        onsuccess();
+        onsuccess({
+          status: 200,
+          responseJSON: {
+            message: '',
+          }
+        });
         return this;
       },
       error: function(onerror){
-        onerror();
+        onerror({
+          status: 200,
+          responseJSON: {
+            message: '',
+          }
+        });
         return this;
       }
     };
