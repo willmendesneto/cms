@@ -4,7 +4,7 @@ describe('Controller: PostCtrl', function () {
 
   beforeEach(module('cmsApp'));
 
-  var PostCtrl, scope, $q, objectDefer, Post, GitRepository, LoadModalService,
+  var PostCtrl, scope, Post, GitRepository, LoadModalService,
 
   githubMock = {
     get: jasmine.createSpy().and.callFake(function () {
@@ -19,11 +19,8 @@ describe('Controller: PostCtrl', function () {
     })
   };
 
-  beforeEach(inject(function ($rootScope, $controller, _Post_, _GitRepository_, $routeParams, _LoadModal_, _&q_) {
+  beforeEach(inject(function ($rootScope, $controller, _Post_, _GitRepository_, $routeParams, _LoadModal_) {
     scope = $rootScope.$new();
-
-    $q = _$q_;
-    objectDefer = $q.defer();
 
     Post = _Post_;
     GitRepository = _GitRepository_;
@@ -39,8 +36,16 @@ describe('Controller: PostCtrl', function () {
     scope.post = Post.makePost();
     scope.post.create();
 
-    spyOn(GitRepository, 'save').and.returnValue(objectDefer.promise);
-
+    spyOn(GitRepository,'save').and.returnValue({
+      success: function(onsuccess){
+        onsuccess();
+        return this;
+      },
+      error: function(onerror){
+        onerror();
+        return this;
+      }
+    });
   }));
 
   describe('#updatePost', function(){
@@ -48,6 +53,7 @@ describe('Controller: PostCtrl', function () {
       $valid: true,
       $submitted: false
     };
+
     it('should set the menu item of a post', function() {
       spyOn(scope.post, 'setMenuItem');
 
