@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostsCtrl', function ($scope, $rootScope, _, Post, $filter, GitRepository, $timeout) {
+  .controller('PostsCtrl', function ($scope, $rootScope, _, $filter, GitRepository, $timeout) {
 
     function filterPostByDate(data){
       var date;
@@ -18,7 +18,14 @@ angular.module('cmsApp')
 
         data = filterPostByDate(data);
 
-        $scope.posts = _.map(data, Post.makePost);
+        $scope.posts = _.map(data, function(data){
+          return {
+            sha: data.sha,
+            publishDate: data.publishDate,
+            name: data.name,
+            reverseDate: data.reverseDate
+          };
+        });
 
         $scope.reverse = true;
 

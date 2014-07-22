@@ -34,23 +34,23 @@
 
           <div class="form-group">
             <div class="col-sm-12">
-              <input type="text" name='hat' class="form-control" ng-model="post.content.meta.hat" placeholder="Informe o chapéu" required />
+              <input type="text" name='hat' class="form-control" ng-model="post.metadata.hat" placeholder="Informe o chapéu" required />
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-sm-12">
-              <input type="text" name='title' class="form-control" ng-model="post.content.meta.title" placeholder="Informe o título" required />
+              <input type="text" name='title' class="form-control" ng-model="post.metadata.title" placeholder="Informe o título" required />
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-sm-12">
               <div class="input-group">
-                <textarea name='abstract' id='abstract' class="form-control" ng-model="post.content.meta.support_line" placeholder="Informe a linha fina" required expand
-                ng-class="{true: 'warn', false: 'nowarn'}[post.content.meta.support_line.length>150]"></textarea>
+                <textarea name='abstract' id='abstract' class="form-control" ng-model="post.metadata.support_line" placeholder="Informe a linha fina" required expand
+                ng-class="{true: 'warn', false: 'nowarn'}[post.metadata.support_line.length>150]"></textarea>
                 <span name="abstract-size" class="input-group-addon">
-                  {{post.content.meta.support_line.length}}
+                  {{post.metadata.support_line.length}}
                 </span>
               </div>
             </div>
@@ -59,7 +59,7 @@
          <div class="form-group">
             <label for="publicar" class=" col-sm-3 control-label">Publicar: </label>
             <div class="col-sm-9">
-              <input id="publicar" type="checkbox"  class="btn btn-warning" ng-model='post.content.meta.published'/>
+              <input id="publicar" type="checkbox"  class="btn btn-warning" ng-model='post.metadata.published'/>
             </div>
           </div>
 
@@ -67,7 +67,9 @@
             <label for="menu-tag" class="col-sm-3 control-label">Menu: </label>
             <div class="col-sm-9">
 
-              <select name="menu_tag" ng-model="menuTag" ng-options="opt for opt in menuTagOptions" class="form-control" required>
+              <select name="menu_tag"
+                ng-model="post.metadata.menu"
+                      ng-options="opt.value as opt.label for opt in menuTagOptions" class="form-control" required>
                 <option value="">-- Nenhum --</option>
               </select>
             </div>
@@ -76,7 +78,9 @@
           <div class="form-group">
             <label for="section" class="col-sm-3 control-label">Sessão: </label>
             <div class="col-sm-9">
-              <select ng-model="section" ng-options="opt.label for opt in sectionOptions" class="form-control">
+              <select  ng-model="post.metadata.section"
+                      name='section'
+                      ng-options="opt.value as opt.label for opt in sectionOptions" class="form-control">
                 <option value="">-- Nenhuma --</option>
               </select>
             </div>
@@ -85,7 +89,9 @@
           <div class="form-group">
             <label for="label" class="col-sm-3 control-label">Gênero: </label>
             <div class="col-sm-9">
-              <select ng-model="label" ng-options="opt.label for opt in labelOptions" class="form-control">
+              <select ng-model="post.metadata.label"
+                      name='label'
+                      ng-options="opt.value as opt.label for opt in labelOptions" class="form-control">
                 <option value="">-- Nenhuma --</option>
               </select>
             </div>
@@ -93,12 +99,15 @@
 
           <div class="form-group">
             <label for="imgFile" class="col-sm-2 control-label">Capa: </label>
-            <input name="imgFile" ng-model="imagesHD" type='text'  class="form-control"/><br/>
-            <img id='coverImage' class="img-thumbnail" ng-src="{{imagesHD}}" alt="{{imagesHD}}" ng-show=imagesHD />
+            <input name="imgFile" 
+                   ng-model="post.metadata.images_hd" 
+                   type='text'  class="form-control"/><br/>
+                   <img id='coverImage' class="img-thumbnail" ng-src="{{post.metadata.images_hd}}" alt="{{post.metadata.images_hd}}" 
+                   ng-show='post.metadata.images_hd' />
           </div>
 
           <div class="form-group">
-            <tags-input ng-model="post.tags" class='tag-input' placeholder='Adicione uma Tag'>
+            <tags-input ng-model="post.metadata.tags" display-property="tag" class='tag-input' placeholder='Adicione uma Tag'>
             </tags-input>
           </div>
 

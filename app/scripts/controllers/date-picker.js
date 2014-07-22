@@ -4,7 +4,7 @@ angular.module('cmsApp')
   .controller('DatePickerCtrl', function ($scope, DateUtil) {
 
   $scope.$on('postLoaded', function(event, post) {
-    var dateCreated = post.content.meta.created * 1000;
+    var dateCreated = post.metadata.created * 1000;
     if (!dateCreated){
       $scope.selectedDate = new Date();
       $scope.selectedTime = new Date();
@@ -15,7 +15,7 @@ angular.module('cmsApp')
     }
 
     $scope.updateDate = function() {
-      post.content.meta.created = DateUtil.getTimestamp($scope.selectedDate, $scope.selectedTime);
+      post.metadata.created = DateUtil.getTimestamp($scope.selectedDate, $scope.selectedTime);
     };
 
   });

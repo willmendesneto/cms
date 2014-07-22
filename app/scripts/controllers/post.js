@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository, $alert) {
+  .controller('PostCtrl', function ($scope, $routeParams, PostModel, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository, $alert) {
 
     var fileName = $routeParams.fileName;
 
@@ -29,29 +29,21 @@ angular.module('cmsApp')
     }
 
     function loadPostFromData(data) {
-      $scope.post = Post.makePost(data);
-      $scope.post.loadContentFromJekyllData(atob(data.content));
+      var post = PostModel;
+      post.fromMarkDown(atob(data.content));
+      post.sha = data.sha;
+      post.filename = data.name;
 
+      $scope.post = post;
       $scope.contentLoaded = true;
+      $scope.$broadcast('filesLoaded', $scope.post.metadata.files);
+      $scope.$broadcast('postLoaded', $scope.post);
 
-      $timeout(function(){
-        $scope.$broadcast('postLoaded', $scope.post);
-        $scope.menuTag = $scope.post.getMenuItem();
-        $scope.section = $scope.post.getSectionLabel($scope.sectionOptions);
-        $scope.label = $scope.post.getLabel($scope.labelOptions);
-        $scope.imagesHD = $scope.post.getImagesHD();
-      },0);
-
-      $scope.$broadcast('filesLoaded', $scope.post.files);
       $scope.showProgress = false;
     }
 
     $scope.updatePost = function (post, postForm) {
       if (postForm.$valid) {
-        post.setSection($scope.section);
-        post.setLabel($scope.label);
-        post.setMenuItem($scope.menuTag);
-        post.setImagesHD($scope.imagesHD);
         $scope.save(post);
       }
       postForm.$submitted = true;
@@ -79,8 +71,7 @@ angular.module('cmsApp')
         });
       }
       else{
-        $scope.post = Post.makePost();
-        $scope.post.create();
+        $scope.post = PostModel;
         $scope.contentLoaded = true;
 
         $timeout(function(){
@@ -94,7 +85,7 @@ angular.module('cmsApp')
 
       progressBarStatus(true,'success');
 
-      GitRepository.save(filename, JSON.stringify(post.commitData()))
+      GitRepository.save(filename, JSON.stringify(post.toCommit()))
       .success(function() {
         $timeout(function(){
           $location.path('/posts');

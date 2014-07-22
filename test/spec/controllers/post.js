@@ -4,7 +4,7 @@ describe('Controller: PostCtrl', function () {
 
   beforeEach(module('cmsApp'));
 
-  var PostCtrl, scope, Post, GitRepository,
+  var PostCtrl, scope, PostModel, GitRepository,
 
   githubMock = {
     get: jasmine.createSpy().and.callFake(function () {
@@ -19,10 +19,10 @@ describe('Controller: PostCtrl', function () {
     })
   };
 
-  beforeEach(inject(function ($rootScope, $controller, _Post_, _GitRepository_, $routeParams) {
+  beforeEach(inject(function ($rootScope, $controller, _PostModel_, _GitRepository_, $routeParams) {
     scope = $rootScope.$new();
 
-    Post = _Post_;
+    PostModel = _PostModel_;
     GitRepository = _GitRepository_;
     $routeParams.fileName = 'test post';
     $rootScope.posts = [];
@@ -32,8 +32,7 @@ describe('Controller: PostCtrl', function () {
       $scope: scope
     });
 
-    scope.post = Post.makePost();
-    scope.post.create();
+    scope.post = PostModel;
 
     var mockResult = {
       success: function(onsuccess){
@@ -65,38 +64,6 @@ describe('Controller: PostCtrl', function () {
       $valid: true,
       $submitted: false
     };
-
-    it('should set the menu item of a post', function() {
-      spyOn(scope.post, 'setMenuItem');
-
-      scope.updatePost(scope.post, postForm);
-
-      expect(scope.post.setMenuItem).toHaveBeenCalledWith(scope.menuTag);
-    });
-
-    it('should set the section of a post', function() {
-      spyOn(scope.post, 'setSection');
-
-      scope.updatePost(scope.post, postForm);
-
-      expect(scope.post.setSection).toHaveBeenCalledWith(scope.section);
-    });
-
-    it('should set the label of a post', function() {
-      spyOn(scope.post, 'setLabel');
-
-      scope.updatePost(scope.post, postForm);
-
-      expect(scope.post.setLabel).toHaveBeenCalledWith(scope.label);
-    });
-
-    it('should set cover image url', function() {
-      spyOn(scope.post, 'setImagesHD');
-
-      scope.updatePost(scope.post, postForm);
-
-      expect(scope.post.setImagesHD).toHaveBeenCalledWith(scope.imagesHD);
-    });
 
     it('should save a post', function() {
       spyOn(scope, 'save');

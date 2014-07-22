@@ -5,16 +5,16 @@ describe('Service: PostViewOptions',function() {
   beforeEach(module('cmsApp'));
 
   var menuTagOptions = [
-    'agricultura camponesa',
-    'agronegócio',
-    'direitos humanos',
-    'educação, cultura e comunicação',
-    'lutas e mobilizações',
-    'solidariedade internacional',
-    'meio ambiente',
-    'projeto popular',
-    'reforma agrária',
-    'transgênicos'
+    {label: 'agricultura camponesa', value: 'agricultura camponesa'},
+    {label: 'agronegócio', value: 'agronegócio'},
+    {label: 'direitos humanos', value: 'direitos humanos'},
+    {label: 'educação, cultura e comunicação', value: 'educação, cultura e comunicação'},
+    {label: 'lutas e mobilizações', value: 'lutas e mobilizações'},
+    {label: 'solidariedade internacional', value: 'solidariedade'},
+    {label: 'meio ambiente', value: 'meio ambiente'},
+    {label: 'projeto popular', value: 'projeto popular'},
+    {label: 'reforma agrária', value: 'reforma agrária'},
+    {label: 'transgênicos', value: 'transgênicos'}
   ];
 
   var sectionOptions = [
