@@ -45,9 +45,6 @@ describe('create a new post', function(){
     browser.sleep(3 * 1000);
 
     expect(browser.getCurrentUrl()).toEqual(postsUrl);
-
-    novoButton.click();
-    expect(browser.getCurrentUrl()).toEqual(postUrl);
   });
 
   it('should update the abstracts char count accordingly', function(){
