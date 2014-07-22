@@ -5,6 +5,13 @@ angular.module('cmsApp')
 
     var fileName = $routeParams.fileName;
 
+    function progressBarStatus(show, type){
+      $timeout(function(){
+        $scope.type = type;
+        $scope.showProgress = show;
+      },0);
+    }
+
     function loadPostFromData(data) {
       $scope.post = Post.makePost(data);
       $scope.post.loadContentFromJekyllData(atob(data.content));
@@ -46,7 +53,14 @@ angular.module('cmsApp')
 
     $scope.init = function(){
       if(fileName){
-        LoadModal.show(fileName, loadPostFromData);
+        progressBarStatus(true,'info');
+
+        GitRepository.getPost(fileName).success(function(data){
+          loadPostFromData(data);
+          progressBarStatus(false,'info');
+        }).error(function(error, status){
+          console.log('find a better way to show error: ' + error + ' and the status: ' + status);
+        });
       }
       else{
         $scope.post = Post.makePost();
@@ -62,11 +76,7 @@ angular.module('cmsApp')
     $scope.save = function(post) {
       var filename = $routeParams.fileName || GenerateFilename.create(post);
 
-      $timeout(function(){
-        $scope.type = 'success';
-        $scope.showProgress = true;
-
-      },0);
+      progressBarStatus(true,'success');
 
       GitRepository.save(filename, JSON.stringify(post.commitData()))
       .success(function() {

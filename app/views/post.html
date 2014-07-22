@@ -1,5 +1,11 @@
 <section class='post' ng-init='init()'>
 
+  <progressbar class="progress-striped active" max='1' value='1' value="dynamic" type="{{type}}" ng-show='showProgress'>
+    <i ng-show="type == 'success'">Salvando</i>
+    <i ng-show="type == 'info'">Carregando</i>
+    <i ng-show="type == 'danger'">Ops, ocorreu um problema</i>
+  </progressbar>
+
     <form name="postForm" nonvalidate ng-show="contentLoaded">
 
       <!-- TODO: Convert this DIV to a custom directive -->
@@ -13,11 +19,6 @@
       </div>
 
       <p class='actions'>
-        <progressbar class="progress-striped active" max='1' value='1' value="dynamic" type="{{type}}" ng-show='showProgress'>
-          <i ng-show="type == 'success'">Salvando</i>
-          <i ng-show="type == 'info'">Carregando</i>
-          <i ng-show="type == 'danger'">Ops, ocorreu um problema</i>
-        </progressbar>
         <input type="button" ng-disabled="showProgress" class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm, date, time)" />
         <a href="#/posts" ng-disabled="showProgress" class="btn btn-default">Voltar</a>
       </p>

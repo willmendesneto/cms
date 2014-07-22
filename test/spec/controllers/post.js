@@ -36,7 +36,7 @@ describe('Controller: PostCtrl', function () {
     scope.post = Post.makePost();
     scope.post.create();
 
-    spyOn(GitRepository,'save').and.returnValue({
+    var mockResult = {
       success: function(onsuccess){
         onsuccess();
         return this;
@@ -45,7 +45,10 @@ describe('Controller: PostCtrl', function () {
         onerror();
         return this;
       }
-    });
+    };
+
+    spyOn(GitRepository,'save').and.returnValue(mockResult);
+    spyOn(GitRepository,'getPost').and.returnValue(mockResult);
   }));
 
   describe('#updatePost', function(){
@@ -95,16 +98,6 @@ describe('Controller: PostCtrl', function () {
       expect(postForm.$submitted).toBe(true);
     });
 
-  });
-
-  describe('#init', function(){
-    it('calls load modal service when editing a post', function(){
-      spyOn(LoadModalService, 'show');
-
-      scope.init();
-
-      expect(LoadModalService.show).toHaveBeenCalled();
-    });
   });
 
   describe('PostViewOptionsService method:', function() {
