@@ -11,7 +11,9 @@ angular.module('cmsApp', [
   'mgcrea.ngStrap.datepicker',
   'mgcrea.ngStrap.tooltip',
   'mgcrea.ngStrap.helpers.dateParser',
-  'mgcrea.ngStrap.timepicker'
+  'mgcrea.ngStrap.timepicker',
+  'mgcrea.ngStrap.alert',
+  'mgcrea.ngStrap.modal'
 ])
 
   .constant('IMAGE_SERVICE_URL', 'http://mst-image-service.herokuapp.com/upload')
@@ -51,4 +53,3 @@ angular.module('cmsApp', [
     });
     $rootScope.basepath = ENV.basepath;
   }]);
-

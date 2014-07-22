@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/posts.css">
+    <link rel="stylesheet" href="styles/progress.css">
     <link rel="stylesheet" href="styles/post.css">
-    <link rel="stylesheet" href="styles/alert.css">
     <link rel="stylesheet" href="styles/tag-input.css">
     <link rel="stylesheet" href="styles/datepicker.css">
     <!-- endbuild -->
@@ -41,17 +41,13 @@
         <h1 class="logo">MST CMS</h1>
       </a>
       <section>
-      <label>{{ user.name }}</label>
-      <img ng-show="user.avatar_url" ng-src="{{ user.avatar_url }}" alt="{{ user.login  }}">
-    </section>
+        <label>{{ user.name }}</label>
+        <img ng-show="user.avatar_url" ng-src="{{ user.avatar_url }}" alt="{{ user.login  }}">
+      </section>
     </header>
     <main ng-view>
     </main>
     <footer>
-      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close()" >
-      {{alert.msg}}
-      <a ng-click='alert.detail()'>Detalhes</a>
-      </alert>
     </footer>
 
     <script src="bower_components/angular/angular.js"></script>

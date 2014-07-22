@@ -1,9 +1,25 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository) {
+  .controller('PostCtrl', function ($scope, $routeParams, Post, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository, $alert) {
 
     var fileName = $routeParams.fileName;
+
+    function catchError(error){
+      progressBarStatus(true,'danger');
+      var message = 'Error: '+error.status+', '+error.statusText;
+      var content = error.responseJSON.message;
+      showError(message, content);
+    }
+
+    function showError(title, content){
+      $alert({title: title,
+             content: content,
+             type: 'danger',
+             show: true,
+             dissmissable: false,
+             container: '#alerts-container'});
+    }
 
     function progressBarStatus(show, type){
       $timeout(function(){
@@ -57,9 +73,9 @@ angular.module('cmsApp')
 
         GitRepository.getPost(fileName).success(function(data){
           loadPostFromData(data);
-          progressBarStatus(false,'info');
-        }).error(function(error, status){
-          console.log('find a better way to show error: ' + error + ' and the status: ' + status);
+          progressBarStatus(false);
+        }).error(function(error){
+          catchError(error);
         });
       }
       else{
@@ -83,8 +99,8 @@ angular.module('cmsApp')
         $timeout(function(){
           $location.path('/posts');
         },0);
-      }).error(function(error, status) {
-        console.log('find a better way to show error: ' + error + ' and the status: ' + status);
+      }).error(function(error) {
+        catchError(error);
       });
     };
   });

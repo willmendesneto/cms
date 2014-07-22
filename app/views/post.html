@@ -1,10 +1,6 @@
+<div id="alerts-container"></div>
 <section class='post' ng-init='init()'>
 
-  <progressbar class="progress-striped active" max='1' value='1' value="dynamic" type="{{type}}" ng-show='showProgress'>
-    <i ng-show="type == 'success'">Salvando</i>
-    <i ng-show="type == 'info'">Carregando</i>
-    <i ng-show="type == 'danger'">Ops, ocorreu um problema</i>
-  </progressbar>
 
     <form name="postForm" nonvalidate ng-show="contentLoaded">
 
@@ -18,10 +14,18 @@
           <div ng-show="postForm.imgFile.$invalid">A imagem de capa é obrigatória.</div>
       </div>
 
-      <p class='actions'>
-        <input type="button" ng-disabled="showProgress" class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm, date, time)" />
-        <a href="#/posts" ng-disabled="showProgress" class="btn btn-default">Voltar</a>
-      </p>
+      <section>
+        <progressbar class="progress-striped active" max='1' value='1' value="dynamic" type="{{type}}" ng-show='showProgress'>
+        <i ng-show="type == 'success'">Salvando</i>
+        <i ng-show="type == 'info'">Carregando</i>
+        <i ng-show="type == 'danger'">Ops, ocorreu um problema</i>
+        </progressbar>
+
+        <p class='actions'>
+          <input type="button" ng-disabled="showProgress" class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm, date, time)" />
+          <a href="#/posts" ng-disabled="showProgress" class="btn btn-default">Voltar</a>
+        </p>
+      </section>
 
       <section>
         <div class="sessions form-horizontal">
