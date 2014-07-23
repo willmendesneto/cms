@@ -8,7 +8,7 @@ angular.module('cmsApp').factory('GenerateFilename', ['DateUtil', function(DateU
 
   function replaceSpaceWithDash(string) {
 
-    var result = string.replace(/[ ]([a-zA-Z])/g, function (match, firstGroup) {
+    var result = string.replace(/[ ]([a-zA-Z0-9])/g, function (match, firstGroup) {
       return '-' + firstGroup;
     });
 

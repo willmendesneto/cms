@@ -40,6 +40,14 @@ describe('Service: GenerateFilename', function () {
       expect(filename).toBe('2014-07-15-test-titulo-de-post.md');
     });
 
-  });
+    it('should remove space before number from title to generate the filename', function() {
 
+      var post = {metadata: {title: 'Olá 2012, como vai 3 de voces'}};
+      spyOn(DateUtilService, 'getTime').and.returnValue(new Date('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)'));
+
+      var filename = GenerateFilenameService.create(post);
+
+      expect(filename).toBe('2014-07-15-ol-2012-como-vai-3-de-voces.md');
+    });
+  });
 });
