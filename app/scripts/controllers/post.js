@@ -36,7 +36,6 @@ angular.module('cmsApp')
 
       $scope.post = post;
       $scope.$broadcast('filesLoaded', $scope.post.metadata.files);
-      $scope.$broadcast('postLoaded', $scope.post);
 
       $scope.showProgress = false;
     }
@@ -71,10 +70,6 @@ angular.module('cmsApp')
       }
       else{
         $scope.post = PostModel.create();
-
-        $timeout(function(){
-          $scope.$broadcast('postLoaded', $scope.post);
-        });
       }
     };
 
