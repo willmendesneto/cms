@@ -1,6 +1,13 @@
 <div class="panel panel-primary" ng-controller="UploadCtrl">
   <div class="panel-heading">
-    <h3 class="panel-title">Arquivos</h3>
+    <h3 class="panel-title">
+      Arquivos
+
+      <span class='btn btn-default btn-file'>
+        + <input id="imgFile" type="file" upload file="file" />
+      </span>
+    </h3>
+
   </div>
   <div class="panel-body">
     <div id="thumbWrapper">
@@ -13,6 +20,5 @@
   </div>
   <div class="panel-footer">
     <input id='currentURL' class='imageURL' select-on-focus type="text" value="{{currentImage.link}}"></input>
-    <input id="imgFile" type="file" upload file="file" />
   </div>
 </div>
