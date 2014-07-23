@@ -16,13 +16,13 @@ describe('Service: GenerateFilename', function () {
       var post = {name: 'test post'};
 
       var filename = GenerateFilenameService.create(post);
-      
+
       expect(filename).toBe(post.name);
     });
 
     it('should generate the filename for a new post', function() {
 
-      var post = {content: { meta: {title: 'test titulo de post'}}};
+      var post = {metadata: {title: 'test titulo de post'}};
       spyOn(DateUtilService, 'getTime').and.returnValue(new Date('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)'));
 
       var filename = GenerateFilenameService.create(post);
@@ -32,7 +32,7 @@ describe('Service: GenerateFilename', function () {
 
     it('should remove special chars from title to generate the filename', function() {
 
-      var post = {content: { meta: {title: '%#\'test titulo de post^'}}};
+      var post = {metadata: {title: '%#\'test titulo de post^'}};
       spyOn(DateUtilService, 'getTime').and.returnValue(new Date('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)'));
 
       var filename = GenerateFilenameService.create(post);

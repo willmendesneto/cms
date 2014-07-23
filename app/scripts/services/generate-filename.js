@@ -31,7 +31,7 @@ angular.module('cmsApp').factory('GenerateFilename', ['DateUtil', function(DateU
         return post.name;
       }
 
-      var fileName = formatTitle(post.content.meta.title.toLowerCase());
+      var fileName = formatTitle(post.metadata.title.toLowerCase());
 
       return formatDate()+'-'+fileName+'.md';
     }

@@ -29,7 +29,7 @@ angular.module('cmsApp')
     }
 
     function loadPostFromData(data) {
-      var post = PostModel;
+      var post = PostModel.create();
       post.fromMarkDown(atob(data.content));
       post.sha = data.sha;
       post.filename = data.name;
@@ -71,7 +71,7 @@ angular.module('cmsApp')
         });
       }
       else{
-        $scope.post = PostModel;
+        $scope.post = PostModel.create();
         $scope.contentLoaded = true;
 
         $timeout(function(){
