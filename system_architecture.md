@@ -31,34 +31,58 @@ We are using, for now, the github repository from MST organization to host all t
 
 The Client knows about the OpenSource way and have agreed on working like that. All code is open, because of that think twice before commiting code to master! The community is following us!
 
-Static files:
+### Current Scenario
 
-The problem: Show the same information to many user.
-What they have now: A huge and older CMS call drupal to create static content.
-Which that bring together:
-Slow, really, slow, the average to page load are 30 seconds.
-Security, they have only one user to do anything.
-Security, DDoS, zero-day and another of security issues they have now because the drupal version, currently 6.22 ( lasted update 2011 )
-Ugly
-Indexing content, to now is hard to spiders index all information
-Without semantic
-Maintain a complicated and very large database
-Not responsive
-Pay to maintain online
-What we offer to then: A new website without drupal.
-What more?
-Fast, using a lot of techniques with cache, compress and other stuff to make a better experience to the users.
-Free to maintain online
-Security, without hacker attacks
-Beautiful and clean
-Can tracking any action from the user
-Responsive
-Easy to deploy in any place
-Easy to another social movements do a fork
-Index information
-Web Server:
+The problem: Present the same information to many users.
+
+What they have now:
+
+* A huge and old CMS called [Drupal](https://www.drupal.org/) to create static content.
+
+* The average page load is 30 seconds
+
+* Only one admin user to do everything.
+
+* Security, DDoS, zero-day and another of security issues due the Drupal version, currently 6.22 (lasted updated in 2011)
+
+* Ugly layout
+
+* Indexing problems. It is hard for web crawlers to index the site's information
+
+* No semantic at all
+
+* Maintain a complicated and very large database
+
+* Not responsive
+
+* Paid online hosting
+
+### Proposed Scenario
+
+* A new website that does not uses Drupal
+
+* Faster page loads, using a lot of techniques such as cache, compress and others to deliver a better experience to the users
+
+* Free online hosting
+
+* No hacker attacks
+
+* Beautiful and clean
+
+* Tracking of every user interaction
+
+* Responsiveness
+
+* Easy to deploy
+
+* Easy for another social movements to do a fork and start using it
+
+* Indexing friendly
+
+### Web Hosting
 
 We don't pay to web server, we chose use Github Pages to host our static files.
+
 Why?
 The Github have a big infra to take care ours files and we are using Github to save our code it's easy do a deploy.
 If the user wanna change?
