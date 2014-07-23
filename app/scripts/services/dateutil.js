@@ -6,8 +6,25 @@ angular.module('cmsApp')
     var DateUtil = {
       //TODO: this function should be removed. it has no meaning.
       getTime: function(){
-          return new Date();
-        },
+        return new Date();
+      },
+
+      getDate: function(date){
+        date = date || new Date();
+        return {
+          toMilliseconds: function(){
+            return date.getTime();
+          }
+        };
+      },
+
+      toJavaScriptTimeStamp: function(valueInTimeStamp) {
+        return valueInTimeStamp * 1000;
+      },
+
+      toRubyTimeStamp: function(valueInTimeStamp) {
+        return valueInTimeStamp / 1000;
+      },
 
       getTimestamp: function(date, time) {
         try {

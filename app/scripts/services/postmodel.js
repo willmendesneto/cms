@@ -3,13 +3,14 @@
 'use strict';
 
 angular.module('cmsApp')
-.service('PostModel', function(jsyaml) {
+.service('PostModel', function(jsyaml, DateUtil) {
 
   this.create = function() {
     return {
       sha: '',
       filename: '',
       body: '',
+      createdTime: DateUtil.getDate().toMilliseconds(),
       metadata: {
         layout: 'post',
         title: '',
@@ -35,9 +36,14 @@ angular.module('cmsApp')
         var metadata = jsyaml.load(parts.pop());
 
         angular.extend(this.metadata, metadata);
+
+        this.createdTime = DateUtil.toJavaScriptTimeStamp(this.metadata.created);
+
         return this;
       },
       toMarkDown: function(){
+        this.metadata.created = DateUtil.toRubyTimeStamp(this.createdTime);
+
         var compiled = ['---', jsyaml.dump(this.metadata), '---', this.body].join('\n');
         return unescape(encodeURIComponent(compiled));
       },

@@ -37,4 +37,31 @@ describe('Service: DateUtil', function () {
     });
   });
 
+  describe('#toJavaScriptDate ', function() {
+    it('should return value multiplied by a thousand', function (){
+      var timestamp = DateUtilService.toJavaScriptTimeStamp(1);
+
+      expect(timestamp).toBe(1000);
+    });
+
+    it('should return when the value is a string', function (){
+      var timestamp = DateUtilService.toJavaScriptTimeStamp('1');
+
+      expect(timestamp).toBe(1000);
+    });
+  });
+
+  describe('#toRubyTimeStamp ', function() {
+    it('should return value divided by a thousand', function (){
+      var timestamp = DateUtilService.toRubyTimeStamp(1000);
+
+      expect(timestamp).toBe(1);
+    });
+
+    it('should return when the value is a string', function (){
+      var timestamp = DateUtilService.toRubyTimeStamp('1000');
+
+      expect(timestamp).toBe(1);
+    });
+  });
 });
