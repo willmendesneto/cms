@@ -35,7 +35,6 @@ angular.module('cmsApp')
       post.filename = data.name;
 
       $scope.post = post;
-      $scope.contentLoaded = true;
       $scope.$broadcast('filesLoaded', $scope.post.metadata.files);
       $scope.$broadcast('postLoaded', $scope.post);
 
@@ -72,7 +71,6 @@ angular.module('cmsApp')
       }
       else{
         $scope.post = PostModel.create();
-        $scope.contentLoaded = true;
 
         $timeout(function(){
           $scope.$broadcast('postLoaded', $scope.post);
