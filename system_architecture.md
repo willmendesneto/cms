@@ -9,19 +9,15 @@ The goal was to provide the user with a simple way to publish a static site. We'
 
 ### Overall Architecture of the Solution
 
-1. https://github.com/movimento-sem-terra/site-novo - The Jekyll blog, published using GitHub pages.
+1. [Site-Novo](https://github.com/movimento-sem-terra/site-novo) - The Jekyll blog, published using GitHub pages.
 
-2. https://github.com/movimento-sem-terra/cms - The CMS used to generate the posts and commit them to the blog
+2. [CMS](https://github.com/movimento-sem-terra/cms) - The CMS used to generate the posts and commit them to the blog
 
-3. https://github.com/movimento-sem-terra/mst-image-service - Responsible for uploading documents, to be attached to posts
+3. [Image-Service]( https://github.com/movimento-sem-terra/mst-image-service) - Responsible for uploading documents, to be attached to posts
 
-4. https://github.com/movimento-sem-terra/mst-cron - A simple CRON job to import the posts from the previous site and publish them on the new blog
+4. [MST-CRON]( https://github.com/movimento-sem-terra/mst-cron) - A simple CRON job to import the posts from the previous site and publish them on the new blog
 
-### Lifecycle
-
-The client creates a new post on the CMS, that generates a Markdown file and put it inside the site-novo's '_posts' folder. Then Jekyll runs and processes all the posts, putting them inside the '_sites' folder.
-
-In order to the blog to get published we need to perform the Github Pages necessary steps (detailed here: https://pages.github.com/) that consists, basically, of having a 'gh-pages' branch, which will be used as source.
+5. [Snap-CI](http://snap-ci.com) - A continuos delivery tool, used to perform the deploys between the applications
 
 ### Version Control
 
@@ -81,54 +77,68 @@ What they have now:
 
 ### Web Hosting
 
-We don't pay to web server, we chose use Github Pages to host our static files.
+[Github Pages](https://pages.github.com) is our choice.
 
-Why?
-The Github have a big infra to take care ours files and we are using Github to save our code it's easy do a deploy.
-If the user wanna change?
- It's simple, change the deploy to send all files to the new web host
-Do we have a hard link with github?
-No, we can change any time, without a lot a work just move the HTML files to another server like Apache but reproduce the same infra from github it's expensive and hard to maintain.
+They have a big infrastructure to take care ours files and we are using Github to save our code, thus it's easier to deploy.
 
-Content Management System:
+In case the client might want to change it, it's simple, just need to change the deploy to send all the files to the new web host.
 
-To the user create a new Markdown files, they need a tool and these kind of tool already exists, like prose.io, but to final user it is impossible, because that we created a new using CKEditor.
+That said, we are not tied to Github. We can change any time, without a lot of work, just move the HTML files to another server, running an Apache for instance. But reproducing the same infrastructure we have on Github is extremely expensive and hard to maintain.
 
-How is it works?
-Simple, the user create a new content and this content go to '_posts' folder inside the webapp code and then the jekyll run and compile to html files.
-Do we need send all time to github?
-Now, yes because all code are in github, if the client chose other serve to save the code this place need be have a git server to the CMS send the content.
-Are you seeing we depending the git?
-Yes, for now, we don't need implement in other way now, because we are using the git to the code, with we change to other think we can easily change the way to save the content, for sample save text files using ssh.
-Is it not complex? I mean we need do a lot of step to create a new post
- Yes, that is the challenge of the project, we need do all these stuff and a simple way to make generic to others social movements.
-Why not using a database?
-To save files? The jekyll working with static files, we don't need using a huge and expensive database to read static content.
+### Content Management System
 
-Authentication:
+To create a new Markdown files, the user needs a tool, such as [Prose.io](http://prose.io),  but that's not feasible for the MST. Thus we created a CMS application based on [CKEditor](http://ckeditor.com/).
 
-Here it's another challenge, we chose using a third-party way to authentic with security. Our main motivation was to reuse an existing authentication service instead of building our own solution from scratch. For that, we decided to use auth.io.
+### CMS Post Lifecycle
 
-How the authorization works?
-For authorization, we leveraged the Github organizations feature. That way, we can provide authorized access only for a specific group of users. Here again, we didn't need to write our own authorization code from scratch.
+This is what happens when a user creates a new post:
 
-If we need remove from github?
-We can choose any service (auth.io, for instance, supports Google, Twitter, Facebook, and many others) to provide authentication, but for now, Github is easier because a Github user can create commits to the repository (as new posts) directly. If we use any other authentication service, we would have to come up with a customized way to create those commits.
+1. The CMS creates a Markdown file and commits it to the Master branch on the Site-Novo's repository
 
-Images:
+2. The Snap-CI detects the commit and fires a deploy script to run Jekyll.
 
-Before that the client user the locaweb to host all images and PDF, because of that they get a lot of problem with slowness and difficult to manager these files and do backups, they needed maintain a big infra to save an increasing amount of images.
+3. The aforementioned script converts all the Markdown files on the "_posts" folder into HTML files and place them on the "_site" folder.
 
-The Idea: Using a free CDN ( Flickr, photoboot, picasa and etc ) to save all image and using the cloud ( drive, mega, dropbox and etc) to save all PDF files.
-The Solution: Create a restful service to save all images (using CDN and cloud services behind the scenes) and files in the cloud and return a link to have access to these contents.
+4. Then, all these files are pushed to the "gh_pages" branch, in order to Github Pages be able to publish them to the website
 
-How do we have a communication with these services?
- We created a API Keys inside Flickr and Google Drive to have access to their API's from inside our image service.
+### Github Dependency
 
-But, who can upload files?
-We are using the same authentication from CMS, if the user have access to Github then can upload files.
+This current solution relies strongly on Github, but in case the MST decides to change it we should be able to do it. We would only need a new GIT server.
 
+### Complexity
 
-Jekyll:
+This solution might seem a little over complicated for a simple CMS, and in truth it is. And that's our challenge!
 
-I'll write more about why Jekyll, but for now I bag to you read this post: http://developmentseed.org/blog/2012/07/27/build-cms-free-websites/
+Our goal is not only to be used by the MST but also be used by other social projects. By adhering to this we designed a solution based on the open-source community, best practicies, and tools.
+
+### Data Storage
+
+Jekyll works with static content, thus we don't need to use a huge and expensive database only to deal with this kind of information.
+
+### Authentication
+
+Here it's another challenge, we chose using a third-party way to authenticate securely. Our main motivation was to reuse an existing authentication service instead of building our own solution from scratch. For that, we decided to use [OAuth.io](https://oauth.io/).
+
+For this authorization, we leveraged the Github's Organizations feature. That way, we can provide authorized access only for a specific group of users. Here again, we didn't need to write our own authorization code from scratch.
+
+In the need of removing the dependency on Github, we can choose to use any other service (OAuth.io, for instance, supports Google, Twitter, Facebook, and many others) to provide authentication.
+
+But for now Github is easier because a Github user can create commits to the repository (as new posts) directly. If we use any other authentication service, we would have to come up with a customized way to create those commits.
+
+### Images
+
+With the current solution the MST uses the Locaweb web hosting to host all images and PDF files. Because of that they get a lot of problem with slowness and difficult to manage these files and do backups. They need to maintain this big infrastructure to save an increasing amount of images.
+
+The new solution is to use a free CDN (Content Delivery Network), such as Flickr, PhotoBooth, Picasa, etc, to save all the images and use the cloud storage, such as Google Drive, Mega, Dropbox, etc, to save all the PDF files.
+
+This is the responsibility of the Image-Service application. It's a RESTful service for saving both images and PDF files to each respective service (either CDN or Cloud Storage) and return with the appropriate URL.
+
+The platforms of choice are [Flickr](http://www.flickr.com/) and [Google Drive](http://drive.google.com). And for each one of them API keys were created and stored within the Image-Service application.
+
+Finally, this application uses the same authentication schema from the CMS, thus if a user has access to creating posts, he has access to upload files.
+
+### Jekyll
+
+We will write a little more about Jekyll, but for now we recommend you to read this post:
+
+http://developmentseed.org/blog/2012/07/27/build-cms-free-websites/
