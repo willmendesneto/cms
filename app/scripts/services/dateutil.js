@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('cmsApp')
-  .factory('DateUtil', function () {
+  .factory('DateUtil', function ($filter) {
+
+    function truncate(n) {
+      return Math[n > 0 ? 'floor' : 'ceil'](n);
+    }
 
     var DateUtil = {
       //TODO: this function should be removed. it has no meaning.
@@ -18,12 +22,18 @@ angular.module('cmsApp')
         };
       },
 
+      applyFormat: function(format, date){
+        date = date || new Date();
+
+        return $filter('date')(date, format);
+      },
+
       toJavaScriptTimeStamp: function(valueInTimeStamp) {
         return valueInTimeStamp * 1000;
       },
 
       toRubyTimeStamp: function(valueInTimeStamp) {
-        return valueInTimeStamp / 1000;
+        return truncate(valueInTimeStamp / 1000);
       },
 
       getTimestamp: function(date, time) {

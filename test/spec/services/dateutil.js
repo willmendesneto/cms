@@ -63,5 +63,21 @@ describe('Service: DateUtil', function () {
 
       expect(timestamp).toBe(1);
     });
+
+    it('should return a truncate number', function (){
+      var timestamp = DateUtilService.toRubyTimeStamp('2222');
+
+      expect(timestamp).toBe(2);
+    });
+  });
+
+  describe('#applyFormat ', function() {
+    it('should return a formated date', function (){
+      var date = new Date(2012,7,13,20,45,23);
+
+      var formated = DateUtilService.applyFormat('yyyy-MM-dd HH:mm:ss',date);
+
+      expect(formated).toBe('2012-08-13 20:45:23');
+    });
   });
 });

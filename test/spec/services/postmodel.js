@@ -73,5 +73,21 @@ describe('Service: New Post Model', function(){
 
       expect(markdown).toMatch(/created: 5/);
     });
+
+    it('is a post to markdown if it is have a date dont change the date', function() {
+      var post = PostModel.create();
+      post.metadata.date = '2014-07-15 12:00:12';
+      var markdown = post.toMarkDown();
+
+      expect(markdown).toMatch(/date: \"2014-07-15 12:00:12\"/);
+    });
+
+
+    it('is a post to markdown if it is have a date dont change the date', function() {
+      var post = PostModel.create();
+      var markdown = post.toMarkDown();
+
+      expect(markdown).toMatch(/date: \".*\"/);
+    });
   });
 });

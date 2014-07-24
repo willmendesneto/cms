@@ -28,6 +28,7 @@ angular.module('cmsApp')
         images_hd: '',
         menu: '',
         published: true,
+        date: ''
       },
       fromMarkDown: function(data) {
         var parts = decodeURIComponent(escape(data)).split('---');
@@ -43,6 +44,7 @@ angular.module('cmsApp')
       },
       toMarkDown: function(){
         this.metadata.created = DateUtil.toRubyTimeStamp(this.createdTime);
+        this.metadata.date = this.metadata.date || DateUtil.applyFormat('yyyy-MM-dd HH:mm:ss');
 
         var compiled = ['---', jsyaml.dump(this.metadata), '---', this.body].join('\n');
         return unescape(encodeURIComponent(compiled));
