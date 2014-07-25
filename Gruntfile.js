@@ -380,9 +380,9 @@ module.exports = function (grunt) {
     'ngmin',
     'copy:dist',
     'cssmin',
-    'uglify',
+    'usemin',
     'rev',
-    'usemin'
+    'uglify'
   ]);
 
   grunt.registerTask('build-test', [
