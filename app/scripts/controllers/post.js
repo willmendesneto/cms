@@ -29,12 +29,7 @@ angular.module('cmsApp')
     }
 
     function loadPostFromData(data) {
-      var post = PostModel.create();
-      post.fromMarkDown(atob(data.content));
-      post.sha = data.sha;
-      post.filename = data.name;
-
-      $scope.post = post;
+      $scope.post = PostModel.create(data);
       $scope.$broadcast('filesLoaded', $scope.post.metadata.files);
 
       $scope.showProgress = false;

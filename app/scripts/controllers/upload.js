@@ -28,14 +28,12 @@ angular.module('cmsApp')
         var index = $scope.images.length;
         $scope.images[index] = createImg('');
 
-        Image.send(postedFiles).success(function(data) {
+        Image.send(postedFiles)
+        .success(function(data) {
+          data.thumbnail = data.thumbnail || 'images/pdf_placeholder.jpg';
+
           $timeout(function(){
-            if (data.thumbnail === null){
-              $scope.images[index] = {link: data.link, thumbnail: 'images/pdf_placeholder.jpg', title: data.title};
-            }
-            else {
-              $scope.images[index] = createImg(data);
-            }
+            $scope.images[index] = createImg(data);
             $scope.$emit('newFile', $scope.images);
           },0);
         }).error(function(error, status) {
@@ -45,7 +43,9 @@ angular.module('cmsApp')
             });
           },0);
 
-          Alert.add('danger','Ei, algo deu errado com a imagem.', 'Status: '+status+'\nErro: '+error);
+          Alert.add('danger',
+                    'Ei, algo deu errado com a imagem.',
+                    'Status: '+status+'\nErro: '+error);
         });
       }
     };

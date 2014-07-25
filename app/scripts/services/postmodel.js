@@ -5,8 +5,8 @@
 angular.module('cmsApp')
 .service('PostModel', function(jsyaml, DateUtil) {
 
-  this.create = function() {
-    return {
+  this.create = function(dataFromGit) {
+    var post = {
       sha: '',
       filename: '',
       body: '',
@@ -57,5 +57,13 @@ angular.module('cmsApp')
         };
       }
     };
+
+    if(dataFromGit){
+      post.fromMarkDown(atob(dataFromGit.content));
+      post.sha = dataFromGit.sha;
+      post.filename = dataFromGit.name;
+    }
+
+    return post;
   };
 });
