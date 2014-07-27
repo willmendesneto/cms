@@ -4,7 +4,7 @@ describe('Service: GitRepository', function () {
 
   beforeEach(module('cmsApp'));
 
-  var GitRepositoryService, rootScope, repositoryURL;
+  var GitRepositoryService, rootScope, repositoryURL, DateUtil;
 
   beforeEach(module(function ($provide) {
     repositoryURL = 'mst-test-user/test/';
@@ -13,9 +13,10 @@ describe('Service: GitRepository', function () {
     $provide.constant('ENV', enviromentMock);
   }));
 
-  beforeEach(inject(function (_GitRepository_, $rootScope) {
+  beforeEach(inject(function (_GitRepository_, $rootScope, _DateUtil_) {
     GitRepositoryService = _GitRepository_;
     rootScope = $rootScope;
+    DateUtil = _DateUtil_;
     rootScope.github = {
       get: function(value) {
         return value;
@@ -48,24 +49,26 @@ describe('Service: GitRepository', function () {
     var data = 'some random string';
     GitRepositoryService.save(filename, data);
 
-    var url = '/repos/'+ repositoryURL +'contents/_posts/'+filename;
+    var yearFolder = DateUtil.applyFormat('yyyy/MM/');
+    var url = '/repos/'+ repositoryURL +'contents/_posts/'+yearFolder+filename;
+
     var processedData = { data : 'some random string', cache : false };
     expect(rootScope.github.put).toHaveBeenCalledWith(url, processedData);
   });
 
   it('#getPosts should call github with git url and options', function() {
-    GitRepositoryService.getPosts();
+    GitRepositoryService.getPosts(2014,6);
 
-    var gitUrl = '/repos/'+ repositoryURL +'contents/_posts';
+    var gitUrl = '/repos/'+ repositoryURL +'contents/_posts/2014/07';
     var option = { cache : false };
     expect(rootScope.github.get).toHaveBeenCalledWith(gitUrl, option);
   });
 
   it('#getPost should call github with git url and filename', function() {
     var filename = '2014-16-04-the-name-of-the-file';
-    GitRepositoryService.getPost(filename);
+    GitRepositoryService.getPost(2014,3,filename);
 
-    var gitUrl = '/repos/'+ repositoryURL +'contents/_posts/'+filename;
+    var gitUrl = '/repos/'+ repositoryURL +'contents/_posts/2014/04/'+filename;
     var option = { cache : false };
     expect(rootScope.github.get).toHaveBeenCalledWith(gitUrl, option);
   });

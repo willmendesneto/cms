@@ -31,7 +31,7 @@ angular.module('cmsApp', [
         templateUrl: 'views/posts.html',
         controller: 'PostsCtrl'
       })
-      .when('/post/:fileName', {
+      .when('/post/:year/:month/:fileName', {
         templateUrl: 'views/post.html',
         controller: 'PostCtrl'
       })

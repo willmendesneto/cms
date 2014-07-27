@@ -3,6 +3,9 @@
 angular.module('cmsApp')
   .controller('PostsCtrl', function ($scope, $rootScope, _, $filter, GitRepository, $timeout) {
 
+    var year = 2014;
+    var month = 6;
+
     function filterPostByDate(data){
       var date;
       data.filter(function(item){
@@ -13,7 +16,7 @@ angular.module('cmsApp')
       return data;
     }
 
-    GitRepository.getPosts().success(function(data){
+    GitRepository.getPosts(year, month).success(function(data){
       $timeout(function(){
 
         data = filterPostByDate(data);
@@ -23,6 +26,9 @@ angular.module('cmsApp')
             sha: data.sha,
             publishDate: data.publishDate,
             name: data.name,
+            path: data.path,
+            year: year,
+            month: month,
             reverseDate: data.reverseDate
           };
         });

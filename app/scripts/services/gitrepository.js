@@ -1,17 +1,22 @@
 'use strict';
 
 angular.module('cmsApp')
-  .factory('GitRepository',['$rootScope', '$location', 'ENV', function($rootScope, $location, ENV){
+  .factory('GitRepository',['$rootScope', '$location', 'DateUtil', 'ENV', function($rootScope, $location, DateUtil, ENV){
 
-  function githubGet(filename) {
-    var url = getRepositoryAddress(filename);
+  function getYearMonthFolder() {
+    return DateUtil.applyFormat('yyyy/MM/');
+  }
+
+  function githubGet(year, month, filename) {
+    var yearMonth = DateUtil.applyFormat('yyyy/MM', new Date(year,month));
+    var url = getRepositoryAddress(yearMonth+filename);
     return $rootScope.github.get(url ,{
       cache: false
     });
   }
 
   function getRepositoryAddress (filename) {
-    return '/repos/'+ ENV.repository + 'contents/_posts' + filename;
+    return '/repos/'+ ENV.repository + 'contents/_posts/' +filename;
   }
 
   var GitRepository = {
@@ -25,19 +30,20 @@ angular.module('cmsApp')
     },
 
     save: function(filename, data){
-      var url = getRepositoryAddress('/'+filename);
+      var yearMonthFolder = getYearMonthFolder();
+      var url = getRepositoryAddress(yearMonthFolder+filename);
       return $rootScope.github.put(url, {
         data: data,
         cache: false
       });
     },
 
-    getPosts: function() {
-      return githubGet('');
+    getPosts: function(year, month) {
+      return githubGet(year, month,'');
     },
 
-    getPost: function(filename) {
-      return githubGet('/'+filename);
+    getPost: function(year, month, filename) {
+      return githubGet(year, month,'/'+filename);
     }
   };
 

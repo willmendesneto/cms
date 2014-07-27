@@ -4,6 +4,8 @@ angular.module('cmsApp')
   .controller('PostCtrl', function ($scope, $routeParams, PostModel, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository, $alert) {
 
     var fileName = $routeParams.fileName;
+    var postYear = $routeParams.year;
+    var postMonth = $routeParams.month;
 
     function catchError(error){
       progressBarStatus(true,'danger');
@@ -56,7 +58,7 @@ angular.module('cmsApp')
       if(fileName){
         progressBarStatus(true,'info');
 
-        GitRepository.getPost(fileName).success(function(data){
+        GitRepository.getPost(postYear, postMonth, fileName).success(function(data){
           loadPostFromData(data);
           progressBarStatus(false);
         }).error(function(error){
