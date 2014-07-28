@@ -1,31 +1,24 @@
 'use strict';
 
 angular.module('cmsApp')
-  .factory('Alert',['$rootScope', function($rootScope) {
-
-    function getAlert(index) {
-      $rootScope.alerts.splice(index, 1);
-    }
-
-    function closeAlert(alert) {
-      getAlert($rootScope.alerts.indexOf(alert));
-    }
-
-    $rootScope.alerts = [];
-
+  .factory('Alert',['$alert', function($alert) {
     var alertService = {
-      add: function(type, msg, details) {
-        return $rootScope.alerts.push({
-          type: type,
-          msg: msg,
-          details: details,
-          detail: function(){
-            window.alert(details);
-          },
-          close: function() {
-            return closeAlert(this);
-          }
-        });
+      showError: function(title, content){
+        $alert({title: title,
+               content: content,
+               type: 'danger',
+               show: true,
+               dissmissable: false,
+               container: '#alerts-container'});
+      },
+      showInfo: function(title, content){
+        $alert({title: title,
+               content: content,
+               type: 'info',
+               show: true,
+               duration: 5,
+               dissmissable: true,
+               container: '#alerts-container'});
       }
     };
     return alertService;

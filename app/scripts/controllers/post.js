@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, PostModel, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository, $alert) {
+  .controller('PostCtrl', function ($scope, $routeParams, PostModel, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository, Alert) {
 
     var fileName = $routeParams.fileName;
     var postYear = $routeParams.year;
@@ -11,16 +11,7 @@ angular.module('cmsApp')
       progressBarStatus(true,'danger');
       var message = 'Error: '+error.status+', '+error.statusText;
       var content = error.responseJSON.message;
-      showError(message, content);
-    }
-
-    function showError(title, content){
-      $alert({title: title,
-             content: content,
-             type: 'danger',
-             show: true,
-             dissmissable: false,
-             container: '#alerts-container'});
+      Alert.showError(message, content);
     }
 
     function progressBarStatus(show, type){
