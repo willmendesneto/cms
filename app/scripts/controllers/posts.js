@@ -25,7 +25,7 @@ angular.module('cmsApp')
 
         }, 0);
       }).error(function(error){
-        if(error.status == 404){
+        if(error.status === 404){
           Alert.showInfo('Vixe, a pesquisa não encontrou nada, tente com outras opções.');
         }else{
           Alert.showError(error.status, error.responseText);
