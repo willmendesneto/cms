@@ -1,4 +1,5 @@
 <section class="posts">
+  <div id="alerts-container"></div>
   <form autocomplete="off" role="form" class="form-inline">
       <label for="search" class="sr-only" >Buscar: </label>
 
@@ -23,8 +24,11 @@
       </div>
 
       <input type="search"  class="form-control" name="search" id="search" placeholder="Buscar..." data-ng-model="search" />
-      <button class="btn btn-default" value="Pesquisar" ng-click="find()">
-        <i class="fa fa-search"></i>
+      <button class="btn btn-default" value="Pesquisar" 
+        ng-click="find()"
+        ng-disabled='!searchDone'>
+        <i class="fa fa-search" ng-show='searchDone'></i>
+        <i class="fa fa-refresh fa-spin" ng-hide='searchDone'></i>
       </button>
       <a href="#/post" class="btn btn-primary">Novo</a>
   </form>
