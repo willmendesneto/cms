@@ -1,5 +1,4 @@
-<section class="posts">
-  <div id="alerts-container"></div>
+<section class="posts" ng-init='find()'>
   <form autocomplete="off" role="form" class="form-inline">
       <label for="search" class="sr-only" >Buscar: </label>
 
@@ -34,7 +33,8 @@
   </form>
 
   <div>
-    <table class="table table-striped">
+    <i class="fa fa-refresh fa-spin" ng-hide='searchDone'></i>
+    <table class="table table-striped" ng-show='searchDone'>
       <thead>
         <tr>
           <th>Título</th>
