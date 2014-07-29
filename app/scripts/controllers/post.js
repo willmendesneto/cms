@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, PostModel, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository, $alert) {
+  .controller('PostCtrl', function ($scope, $routeParams, PostModel, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository, $alert) {
 
     var fileName = $routeParams.fileName;
 
