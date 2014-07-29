@@ -1,13 +1,12 @@
 'use strict';
 
 angular.module('cmsApp')
-  .service('User', function User($q, GitRepository, ENV, _) {
+  .service('User', function User($q, GitRepository, ENV) {
 
     function getJournalistId(data){
-      var  teamJournalist = _.find(data, function(element){
+      return data.filter(function(element){
         return element.id === ENV.repo.jornalist;
-      });
-      return teamJournalist;
+      })[0];
     }
 
     var user = {

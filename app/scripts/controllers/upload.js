@@ -38,8 +38,8 @@ angular.module('cmsApp')
           },0);
         }).error(function(error, status) {
           $timeout(function(){
-            $scope.images = _.omit($scope.images, function(image){
-              return image.thumbnail === undefined;
+            $scope.images = $scope.images.filter(function(image){
+              return typeof image.thumbnail !== 'undefined';
             });
           },0);
 
