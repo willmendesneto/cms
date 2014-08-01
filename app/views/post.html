@@ -10,8 +10,8 @@
           <div ng-show="postForm.hat.$invalid">O chapéu é obrigatório.</div>
           <div ng-show="postForm.title.$invalid">O título é obrigatório.</div>
           <div ng-show="postForm.abstract.$invalid">A linha fina é obrigatório.</div>
-          <div ng-show="postForm.menu_tag.$invalid">Escolha uma opção de menu.</div>
-          <div ng-show="postForm.imgFile.$invalid">A imagem de capa é obrigatória.</div>
+          <div ng-show="postForm.menu.$invalid">Escolha uma opção de menu.</div>
+          <div ng-show="postForm.images_hd.$invalid">A imagem de capa é obrigatória.</div>
       </div>
 
       <section>
@@ -47,21 +47,21 @@
           </div>
 
           <div class="form-group">
-            <label for="menu-tag" class=" control-label">Chapéu </label>
+            <label for="hat" class="control-label">Chapéu </label>
             <div >
               <input type="text" name='hat' class="form-control" ng-model="post.metadata.hat" placeholder="Informe o chapéu" required />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="menu-tag" class=" control-label">Título</label>
+            <label for="title" class=" control-label">Título</label>
             <div>
               <input type="text" name='title' class="form-control" ng-model="post.metadata.title" placeholder="Informe o título" required />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="menu-tag" class=" control-label">Linha fina</label>
+            <label for="abstract" class=" control-label">Linha fina</label>
             <div>
               <div class="input-group">
                 <textarea name='abstract' id='abstract' class="form-control" ng-model="post.metadata.support_line" placeholder="Informe a linha fina" required expand
@@ -74,10 +74,10 @@
           </div>
 
           <div class="form-group">
-            <label for="menu-tag" class=" control-label">Menu </label>
+            <label for="menu" class=" control-label">Menu </label>
             <div>
 
-              <select name="menu_tag"
+              <select name="menu"
                 ng-model="post.metadata.menu"
                       ng-options="opt.value as opt.label for opt in menuTagOptions" class="form-control" required>
                 <option value="">-- Nenhum --</option>
@@ -108,13 +108,13 @@
           </div>
 
           <div class="form-group">
-            <label for="imgFile" class=" control-label">
+            <label for="images_hd" class="control-label">
               <i class="fa fa-picture-o"></i>
               Capa
             </label>
-            <input name="imgFile" 
+            <input name="images_hd"
                    ng-model="post.metadata.images_hd" 
-                   type='text'  class="form-control"/><br/>
+                   type='text'  class="form-control" required/><br/>
                    <img id='coverImage' class="img-thumbnail" ng-src="{{post.metadata.images_hd}}" alt="{{post.metadata.images_hd}}" 
                    ng-show='post.metadata.images_hd' />
           </div>
