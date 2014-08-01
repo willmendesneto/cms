@@ -25,7 +25,7 @@
           <input id="publicar" type="checkbox"  class="btn btn-warning" ng-model='post.metadata.published'/>
           Publicar
 
-          <input type="button" ng-disabled="showProgress" class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm, date, time)" />
+          <input type="button" ng-disabled="showProgress" class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm)" />
           <a href="#/posts" ng-disabled="showProgress" class="btn btn-default">Voltar</a>
         </p>
       </section>
@@ -121,7 +121,7 @@
 
           <div class="form-group">
             <label class="control-label">Tags </label>
-            <tags-input ng-model="post.metadata.tags" display-property="tag" class='tag-input' placeholder='Adicione uma Tag'>
+            <tags-input ng-model="post.metadata.tags" name='tags' display-property="tag" class='tag-input' placeholder='Adicione uma Tag'>
             </tags-input>
           </div>
 
