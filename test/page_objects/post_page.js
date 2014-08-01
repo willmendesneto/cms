@@ -6,10 +6,10 @@ var PostPage =  function() {
   this.title = element(by.css('input[name="title"]'));
   this.support_line = element(by.css('textarea[name="abstract"]'));
   this.support_line_size = element(by.name('abstract-size'));
-  this.menuTag = element(by.name('menu_tag'));
+  this.menuTag = element(by.name('menu'));
   this.section = element(by.name('section'));
   this.label = element(by.name('label'));
-  this.imagesHD = element(by.name('imgFile'));
+  this.imagesHD = element(by.name('images_hd'));
   this.tags = element(by.css('tags-input input'));
   this.targetUrl = 'http://localhost:9000/#/post';
 
