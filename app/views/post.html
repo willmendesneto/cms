@@ -7,7 +7,6 @@
       <!-- TODO: Convert this DIV to a custom directive -->
       <div class="error-summary bg-warning"
         ng-show="postForm.$submitted && postForm.$invalid">
-          <div ng-show="postForm.hat.$invalid">O chapéu é obrigatório.</div>
           <div ng-show="postForm.title.$invalid">O título é obrigatório.</div>
           <div ng-show="postForm.abstract.$invalid">A linha fina é obrigatório.</div>
           <div ng-show="postForm.menu.$invalid">Escolha uma opção de menu.</div>
@@ -49,7 +48,7 @@
           <div class="form-group">
             <label for="hat" class="control-label">Chapéu </label>
             <div >
-              <input type="text" name='hat' class="form-control" ng-model="post.metadata.hat" placeholder="Informe o chapéu" required />
+              <input type="text" name='hat' class="form-control" ng-model="post.metadata.hat" placeholder="Informe o chapéu" />
             </div>
           </div>
 
