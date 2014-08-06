@@ -25,16 +25,16 @@
       <input type="search"  class="form-control" name="search" id="search" placeholder="Buscar..." data-ng-model="search" />
       <button class="btn btn-default" value="Pesquisar" 
         ng-click="find()"
-        ng-disabled='!searchDone'>
-        <i class="fa fa-search" ng-show='searchDone'></i>
-        <i class="fa fa-refresh fa-spin" ng-hide='searchDone'></i>
+        ng-disabled='!searchEngine.done'>
+        <i class="fa fa-search" ng-show='searchEngine.done'></i>
+        <i class="fa fa-refresh fa-spin" ng-hide='searchEngine.done'></i>
       </button>
       <a href="#/post" class="btn btn-primary">Novo</a>
   </form>
 
   <div>
-    <i class="fa fa-refresh fa-spin" ng-hide='searchDone'></i>
-    <table class="table table-striped" ng-show='searchDone'>
+    <i class="fa fa-refresh fa-spin" ng-hide='searchEngine.done'></i>
+    <table class="table table-striped" ng-show='searchEngine.done'>
       <thead>
         <tr>
           <th>Título</th>
@@ -42,7 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr data-ng-repeat="post in filteredData = (posts | filter:search)">
+        <tr data-ng-repeat="post in filteredData = (searchEngine.result | filter:search)">
           <td>{{post.name}}</td>
           <td>
             <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-warning">EDITAR</a>
