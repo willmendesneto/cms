@@ -42,7 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr data-ng-repeat="post in filteredData = (searchEngine.result | filter:search)">
+        <tr data-ng-repeat="post in filteredData = searchEngine.result | filter:search | orderBy:'name':true ">
           <td>{{post.name}}</td>
           <td>
             <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-warning">EDITAR</a>
