@@ -397,6 +397,12 @@ module.exports = function (grunt) {
     'build'
   ]);
 
+  grunt.registerTask('build-development', [
+    'clean:constants',
+    'ngconstant:development',
+    'build'
+  ]);
+
   grunt.registerTask('default', [
     'test',
     'build',

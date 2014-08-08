@@ -24,6 +24,7 @@ function heroku {
   rsync -r ./dist/* $DIST_DIR/
 
   pushd $DIST_DIR 
+    touch index.php
     git add . -A
     git commit -m "CMS to staging"
     git push -f heroku master
