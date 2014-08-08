@@ -8,7 +8,7 @@ angular.module('cmsApp')
     var postMonth = $routeParams.month;
 
     function catchError(error){
-      progressBarStatus(true,'danger');
+      progressBarStatus(false,'danger');
       var message = 'Error: '+error.status+', '+error.statusText;
       var content = error.responseJSON.message;
       Alert.showError(message, content);
