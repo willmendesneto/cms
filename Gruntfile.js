@@ -28,12 +28,12 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
-        files: ['{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'],
+        files: ['{.tmp,<%= yeoman.app %>}/scripts/{,*/,**/}*.js'],
         tasks: ['newer:jshint:all']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js',
-                '<%= yeoman.app %>/scripts/{,*/}*.js'],
+                '<%= yeoman.app %>/scripts/{,*/,**/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
@@ -98,7 +98,7 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js'
+        '<%= yeoman.app %>/scripts/{,*/,**/}*.js'
       ],
       test: {
         options: {
