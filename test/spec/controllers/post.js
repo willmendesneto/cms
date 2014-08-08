@@ -55,8 +55,9 @@ describe('Controller: PostCtrl', function () {
       }
     };
 
-    spyOn(GitRepository,'save').and.returnValue(mockResult);
-    spyOn(GitRepository,'getPost').and.returnValue(mockResult);
+    spyOn(GitRepository.post,'save').and.returnValue(mockResult);
+    spyOn(GitRepository.post,'get').and.returnValue(mockResult);
+
   }));
 
   describe('#updatePost', function(){

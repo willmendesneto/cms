@@ -19,7 +19,26 @@ angular.module('cmsApp')
     return '/repos/'+ ENV.repository + 'contents/_posts/' +filename;
   }
 
+  var post = {
+    find: function(year, month){
+      return githubGet(year, month,'');
+    },
+    get: function(year, month, filename){
+      return githubGet(year, month,'/'+filename);
+    },
+    save: function(filename, data){
+      var yearMonthFolder = getYearMonthFolder();
+      var url = getRepositoryAddress(yearMonthFolder+filename);
+      return $rootScope.github.put(url, {
+        data: data,
+        cache: false
+      });
+    }
+  };
+
+
   var GitRepository = {
+    post: post,
 
     getUser: function() {
       return $rootScope.github.get('user');
@@ -28,23 +47,6 @@ angular.module('cmsApp')
     getTeams: function(){
       return $rootScope.github.get('user/teams');
     },
-
-    save: function(filename, data){
-      var yearMonthFolder = getYearMonthFolder();
-      var url = getRepositoryAddress(yearMonthFolder+filename);
-      return $rootScope.github.put(url, {
-        data: data,
-        cache: false
-      });
-    },
-
-    getPosts: function(year, month) {
-      return githubGet(year, month,'');
-    },
-
-    getPost: function(year, month, filename) {
-      return githubGet(year, month,'/'+filename);
-    }
   };
 
   return GitRepository;

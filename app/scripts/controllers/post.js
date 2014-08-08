@@ -14,8 +14,6 @@ angular.module('cmsApp')
     function loadPostFromData(data) {
       $scope.post = PostModel.create(data);
       $scope.$broadcast('filesLoaded', $scope.post.metadata.files);
-
-      $scope.progressbar.close();
     }
 
     $scope.updatePost = function (post, postForm) {
@@ -39,7 +37,8 @@ angular.module('cmsApp')
       if(fileName){
         $scope.progressbar.show();
 
-        GitRepository.getPost(postYear, postMonth, fileName).success(function(data){
+        GitRepository.post.get(postYear, postMonth, fileName)
+        .success(function(data){
           loadPostFromData(data);
           $scope.progressbar.close();
         }).error(function(error){
@@ -56,7 +55,7 @@ angular.module('cmsApp')
 
       $scope.progressbar.success();
 
-      GitRepository.save(filename, JSON.stringify(post.toCommit()))
+      GitRepository.post.save(filename, JSON.stringify(post.toCommit()))
       .success(function() {
         $timeout(function(){
           $location.path('/posts');

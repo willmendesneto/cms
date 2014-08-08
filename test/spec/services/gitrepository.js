@@ -47,7 +47,7 @@ describe('Service: GitRepository', function () {
 
     var filename = 'test post';
     var data = 'some random string';
-    GitRepositoryService.save(filename, data);
+    GitRepositoryService.post.save(filename, data);
 
     var yearFolder = DateUtil.applyFormat('yyyy/MM/');
     var url = '/repos/'+ repositoryURL +'contents/_posts/'+yearFolder+filename;
@@ -57,7 +57,7 @@ describe('Service: GitRepository', function () {
   });
 
   it('#getPosts should call github with git url and options', function() {
-    GitRepositoryService.getPosts(2014,6);
+    GitRepositoryService.post.find(2014,6);
 
     var gitUrl = '/repos/'+ repositoryURL +'contents/_posts/2014/07';
     var option = { cache : false };
@@ -66,7 +66,7 @@ describe('Service: GitRepository', function () {
 
   it('#getPost should call github with git url and filename', function() {
     var filename = '2014-16-04-the-name-of-the-file';
-    GitRepositoryService.getPost(2014,3,filename);
+    GitRepositoryService.post.get(2014,3,filename);
 
     var gitUrl = '/repos/'+ repositoryURL +'contents/_posts/2014/04/'+filename;
     var option = { cache : false };

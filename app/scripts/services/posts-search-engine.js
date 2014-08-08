@@ -18,7 +18,7 @@ angular.module('cmsApp')
     };
 
     function find(searchEngine, year, month){
-      GitRepository.getPosts(year, month)
+      GitRepository.post.find(year, month)
       .success(function(data){
         var result = _.map(data, function(data){
           return {
