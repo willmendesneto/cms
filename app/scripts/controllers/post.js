@@ -1,31 +1,21 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCtrl', function ($scope, $routeParams, PostModel, _, DateUtil, $timeout, PostViewOptions, GenerateFilename, $location, GitRepository, Alert) {
+  .controller('PostCtrl', function ($scope, $routeParams, PostModel, _, DateUtil, $timeout, PostViewOptions,
+                                    ProgressBarUtil,
+                                    GenerateFilename, $location, GitRepository) {
 
     var fileName = $routeParams.fileName;
     var postYear = $routeParams.year;
     var postMonth = $routeParams.month;
 
-    function catchError(error){
-      progressBarStatus(false,'danger');
-      var message = 'Error: '+error.status+', '+error.statusText;
-      var content = error.responseJSON.message;
-      Alert.showError(message, content);
-    }
-
-    function progressBarStatus(show, type){
-      $timeout(function(){
-        $scope.type = type;
-        $scope.showProgress = show;
-      },0);
-    }
+    $scope.progressbar = new ProgressBarUtil($scope);
 
     function loadPostFromData(data) {
       $scope.post = PostModel.create(data);
       $scope.$broadcast('filesLoaded', $scope.post.metadata.files);
 
-      $scope.showProgress = false;
+      $scope.progressbar.close();
     }
 
     $scope.updatePost = function (post, postForm) {
@@ -47,13 +37,13 @@ angular.module('cmsApp')
 
     $scope.init = function(){
       if(fileName){
-        progressBarStatus(true,'info');
+        $scope.progressbar.show();
 
         GitRepository.getPost(postYear, postMonth, fileName).success(function(data){
           loadPostFromData(data);
-          progressBarStatus(false);
+          $scope.progressbar.close();
         }).error(function(error){
-          catchError(error);
+          $scope.progressbar.error(error);
         });
       }
       else{
@@ -64,7 +54,7 @@ angular.module('cmsApp')
     $scope.save = function(post) {
       var filename = $routeParams.fileName || GenerateFilename.create(post);
 
-      progressBarStatus(true,'success');
+      $scope.progressbar.success();
 
       GitRepository.save(filename, JSON.stringify(post.toCommit()))
       .success(function() {
@@ -72,7 +62,7 @@ angular.module('cmsApp')
           $location.path('/posts');
         },0);
       }).error(function(error) {
-        catchError(error);
+        $scope.progressbar.error(error);
       });
     };
   });
