@@ -283,7 +283,10 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'test',
-            repository: 'mst-test-user/test/',
+            repository: {
+              posts: '/repos/mst-test-user/test/contents/_posts/',
+              banners: '/repos/mst-test-user/test/contents/_banners/'
+            },
             basepath: '',
             checkTeams: false,
             repo: {
@@ -299,7 +302,10 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            repository: 'movimento-sem-terra/staging/',
+            repository: {
+              posts: '/repos/movimento-sem-terra/staging/contents/_posts/',
+              banners: '/repos/movimento-sem-terra/staging/contents/_banners/'
+            },
             basepath: '',
             repo: {
               jornalist: 740343
@@ -314,7 +320,10 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            repository: 'movimento-sem-terra/site-novo/',
+            repository: {
+              posts: '/repos/movimento-sem-terra/site-novo/contents/_posts/',
+              banners: '/repos/movimento-sem-terra/site-novo/contents/_banners/'
+            },
             basepath: '/cms',
             checkTeams: true,
             repo: {

@@ -7,7 +7,9 @@ describe('Service: GitRepository', function () {
   var GitRepositoryService, rootScope, repositoryURL, DateUtil;
 
   beforeEach(module(function ($provide) {
-    repositoryURL = 'mst-test-user/test/';
+    repositoryURL = {
+      posts: 'repos/mst-test-user/test/content/_posts/'
+    };
     var enviromentMock = { repository: repositoryURL };
 
     $provide.constant('ENV', enviromentMock);
@@ -50,7 +52,7 @@ describe('Service: GitRepository', function () {
     GitRepositoryService.post.save(filename, data);
 
     var yearFolder = DateUtil.applyFormat('yyyy/MM/');
-    var url = '/repos/'+ repositoryURL +'contents/_posts/'+yearFolder+filename;
+    var url = repositoryURL.posts +yearFolder+filename;
 
     var processedData = { data : 'some random string', cache : false };
     expect(rootScope.github.put).toHaveBeenCalledWith(url, processedData);
@@ -59,7 +61,7 @@ describe('Service: GitRepository', function () {
   it('#getPosts should call github with git url and options', function() {
     GitRepositoryService.post.find(2014,6);
 
-    var gitUrl = '/repos/'+ repositoryURL +'contents/_posts/2014/07';
+    var gitUrl = repositoryURL.posts +'2014/07';
     var option = { cache : false };
     expect(rootScope.github.get).toHaveBeenCalledWith(gitUrl, option);
   });
@@ -68,7 +70,7 @@ describe('Service: GitRepository', function () {
     var filename = '2014-16-04-the-name-of-the-file';
     GitRepositoryService.post.get(2014,3,filename);
 
-    var gitUrl = '/repos/'+ repositoryURL +'contents/_posts/2014/04/'+filename;
+    var gitUrl = repositoryURL.posts +'2014/04/'+filename;
     var option = { cache : false };
     expect(rootScope.github.get).toHaveBeenCalledWith(gitUrl, option);
   });
