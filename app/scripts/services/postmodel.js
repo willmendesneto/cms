@@ -18,7 +18,6 @@ angular.module('cmsApp')
       filename: '',
       body: '',
       createdTime: DateUtil.getDate().toMilliseconds(),
-      video: '',
       metadata: {
         layout: 'post',
         title: '',
@@ -26,6 +25,7 @@ angular.module('cmsApp')
         created: 0,
         images: '',
         video: '',
+        youtube_link: '',
         tags: [],
         files: [],
         type: '',
@@ -53,7 +53,7 @@ angular.module('cmsApp')
       toMarkDown: function(){
         this.metadata.created = DateUtil.toRubyTimeStamp(this.createdTime);
         this.metadata.date = this.metadata.date || DateUtil.applyFormat('yyyy-MM-dd HH:mm:ss', this.createdTime);
-        this.metadata.video = videoFromUrl(this.video);
+        this.metadata.video = videoFromUrl(this.metadata.youtube_link);
 
         var compiled = ['---', jsyaml.dump(this.metadata), '---', this.body].join('\n');
         return unescape(encodeURIComponent(compiled));

@@ -44,7 +44,9 @@ describe('Service: New Post Model', function(){
   describe('should get video id', function(){
     it('is get a id from url to youtube video', function() {
       var post = PostModel.create();
-      post.video = 'https://www.youtube.com/watch?v=VHxuvaIyiXo';
+/* jshint camelcase: false */
+      post.metadata.youtube_link = 'https://www.youtube.com/watch?v=VHxuvaIyiXo';
+
       var markdown = post.toMarkDown();
 
       expect(markdown).toMatch(/video: VHxuvaIyiXo/);
