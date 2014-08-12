@@ -52,16 +52,12 @@ function deploy {
   DIST_DIR=$1
   MASTER_HEAD_SHA=$(git rev-parse --short HEAD)
   GH_PAGES_HEAD_SHA=$(git rev-parse HEAD)
-  TAG_NUMBER=$(git tag | awk -F  "#" '{x=$2>x?$2:x}END{print x+1}' x=1)
   pushd $DIST_DIR
     git add . -A
     git commit -m "Deployed from master: $MASTER_HEAD_SHA"
-    git tag -a "Deploy#$TAG_NUMBER" -m "Deployed from master $MASTER_HEAD_SHA to gh-pages $GH_PAGES_HEAD_SHA"
 
     echo "Pushing code to branch gh-pages..."
     git push origin gh-pages
-    echo "Pushing deploy tag..."
-    git push origin --tags
   popd
 }
 
