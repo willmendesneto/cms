@@ -44,7 +44,7 @@ angular.module('cmsApp')
       },
       toMarkDown: function(){
         this.metadata.created = DateUtil.toRubyTimeStamp(this.createdTime);
-        this.metadata.date = this.metadata.date || DateUtil.applyFormat('yyyy-MM-dd HH:mm:ss');
+        this.metadata.date = this.metadata.date || DateUtil.applyFormat('yyyy-MM-dd HH:mm:ss', this.createdTime);
 
         var compiled = ['---', jsyaml.dump(this.metadata), '---', this.body].join('\n');
         return unescape(encodeURIComponent(compiled));

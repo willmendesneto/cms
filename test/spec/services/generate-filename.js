@@ -4,10 +4,9 @@ describe('Service: GenerateFilename', function () {
 
   beforeEach(module('cmsApp'));
 
-  var GenerateFilenameService, DateUtilService;
-  beforeEach(inject(function (_GenerateFilename_, _DateUtil_) {
+  var GenerateFilenameService;
+  beforeEach(inject(function (_GenerateFilename_) {
     GenerateFilenameService = _GenerateFilename_;
-    DateUtilService = _DateUtil_;
   }));
 
   describe('#create', function(){
@@ -21,9 +20,12 @@ describe('Service: GenerateFilename', function () {
     });
 
     it('should generate the filename for a new post', function() {
-
-      var post = {metadata: {title: 'test titulo de post'}};
-      spyOn(DateUtilService, 'getTime').and.returnValue(new Date('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)'));
+      var post = {
+        createdTime: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
+        metadata: {
+          title: 'test titulo de post'
+        }
+      };
 
       var filename = GenerateFilenameService.create(post);
 
@@ -32,8 +34,12 @@ describe('Service: GenerateFilename', function () {
 
     it('should remove special chars from title to generate the filename', function() {
 
-      var post = {metadata: {title: '%#\'test titulo de post^'}};
-      spyOn(DateUtilService, 'getTime').and.returnValue(new Date('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)'));
+      var post = {
+        createdTime: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
+        metadata: {
+          title: '%#\'test titulo de post^'
+        }
+      };
 
       var filename = GenerateFilenameService.create(post);
 
@@ -42,8 +48,12 @@ describe('Service: GenerateFilename', function () {
 
     it('should remove space before number from title to generate the filename', function() {
 
-      var post = {metadata: {title: 'Olá 2012, como vai 3 de voces'}};
-      spyOn(DateUtilService, 'getTime').and.returnValue(new Date('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)'));
+      var post = {
+        createdTime: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
+        metadata: {
+          title: 'Olá 2012, como vai 3 de voces'
+        }
+      };
 
       var filename = GenerateFilenameService.create(post);
 

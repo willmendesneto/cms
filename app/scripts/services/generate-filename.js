@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('cmsApp').factory('GenerateFilename', ['DateUtil', function(DateUtil) {
+angular.module('cmsApp').factory('GenerateFilename', [function() {
 
   function removeSpecialChar(string) {
     return string.replace(/[^\w\s]/gi, '');
@@ -20,8 +20,8 @@ angular.module('cmsApp').factory('GenerateFilename', ['DateUtil', function(DateU
     return replaceSpaceWithDash(result);
   }
 
-  function formatDate() {
-    var today = DateUtil.getTime();
+  function formatDate(post) {
+    var today = new Date(post.createdTime);
     return today.toISOString().split('T')[0];
   }
 
@@ -33,7 +33,7 @@ angular.module('cmsApp').factory('GenerateFilename', ['DateUtil', function(DateU
 
       var fileName = formatTitle(post.metadata.title.toLowerCase());
 
-      return formatDate()+'-'+fileName+'.md';
+      return formatDate(post)+'-'+fileName+'.md';
     }
   };
 
