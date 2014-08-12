@@ -41,6 +41,17 @@ describe('Service: New Post Model', function(){
     });
   });
 
+  describe('should get video id', function(){
+    it('is get a id from url to youtube video', function() {
+      var post = PostModel.create();
+      post.video = 'https://www.youtube.com/watch?v=VHxuvaIyiXo';
+      var markdown = post.toMarkDown();
+
+      expect(markdown).toMatch(/video: VHxuvaIyiXo/);
+
+    });
+  });
+
   describe('should work with time', function(){
     var DateUtil;
     beforeEach(inject(function (_DateUtil_) {
