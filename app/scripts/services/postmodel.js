@@ -22,7 +22,6 @@ angular.module('cmsApp')
         layout: 'post',
         title: '',
         legacy_url: '',
-        created: 0,
         images: '',
         video: '',
         youtube_link: '',
@@ -46,13 +45,12 @@ angular.module('cmsApp')
 
         angular.extend(this.metadata, metadata);
 
-        this.createdTime = DateUtil.toJavaScriptTimeStamp(this.metadata.created);
+        this.createdTime = DateUtil.toJavaScriptTimeStamp(this.metadata.date);
 
         return this;
       },
       toMarkDown: function(){
-        this.metadata.created = DateUtil.toRubyTimeStamp(this.createdTime);
-        this.metadata.date = this.metadata.date || DateUtil.applyFormat('yyyy-MM-dd HH:mm:ss', this.createdTime);
+        this.metadata.date = this.metadata.date || DateUtil.toRubyTimeStamp(this.createdTime);
         this.metadata.video = videoFromUrl(this.metadata.youtube_link);
 
         var compiled = ['---', jsyaml.dump(this.metadata), '---', this.body].join('\n');

@@ -58,33 +58,29 @@ describe('Service: New Post Model', function(){
     var DateUtil;
     beforeEach(inject(function (_DateUtil_) {
       DateUtil = _DateUtil_;
-
-      var mockDateUtil = {
-        toMilliseconds: function() { return 1000; }
-      };
-
-      spyOn(DateUtil, 'getDate').and.returnValue(mockDateUtil);
     }));
 
     it('is a new post should have the actual datetime in milleseconds', function() {
       var post = PostModel.create();
 
-      expect(post.createdTime).toBe(1000);
+      expect(post.createdTime).not.toBeNull();
     });
 
-    it('is a post from markdown should have the timestamp in millisenconds', function() {
-      var data = '---\ncreated: 1404239760\n---Texto Qualquer';
+    it('is a post from markdown should have the timestamp', function() {
+      var data = '---\ndate: 1407947455\n---Texto Qualquer';
       var post = PostModel.create().fromMarkDown(data);
 
-      expect(post.createdTime).toBe(1404239760 * 1000);
+      expect(post.createdTime).toBe(1407947455 * 1000);
     });
 
-    it('is a post to markdown should have the timestamp without milliseconds', function() {
+    it('is a post to markdown should have the date', function() {
       var post = PostModel.create();
-      post.createdTime = 5000;
+      var creationDate = new Date(2014,7,13,13,30,55);
+      post.createdTime = DateUtil.getDate(creationDate).toMilliseconds();
       var markdown = post.toMarkDown();
 
-      expect(markdown).toMatch(/created: 5/);
+
+      expect(markdown).toMatch(/date: 1407947455/);
     });
 
     it('is a post to markdown if it is have a date dont change the date', function() {
@@ -100,7 +96,7 @@ describe('Service: New Post Model', function(){
       var post = PostModel.create();
       var markdown = post.toMarkDown();
 
-      expect(markdown).toMatch(/date: \".*\"/);
+      expect(markdown).toMatch(/date: *[0-9]/);
     });
   });
 });
