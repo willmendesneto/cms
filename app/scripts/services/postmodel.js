@@ -45,12 +45,12 @@ angular.module('cmsApp')
 
         angular.extend(this.metadata, metadata);
 
-        this.createdTime = DateUtil.toJavaScriptTimeStamp(this.metadata.date);
+        this.createdTime = DateUtil.fromISO8601(this.metadata.date).toMilliseconds();
 
         return this;
       },
       toMarkDown: function(){
-        this.metadata.date = this.metadata.date || DateUtil.toRubyTimeStamp(this.createdTime);
+        this.metadata.date = this.metadata.date || DateUtil.fromMilliseconds(this.createdTime).toISO8601();
         this.metadata.video = videoFromUrl(this.metadata.youtube_link);
 
         var compiled = ['---', jsyaml.dump(this.metadata), '---', this.body].join('\n');

@@ -7,6 +7,24 @@ angular.module('cmsApp')
       return Math[n > 0 ? 'floor' : 'ceil'](n);
     }
 
+    function pad(num) {
+      var norm = Math.abs(Math.floor(num));
+      return (norm < 10 ? '0' : '') + norm;
+    }
+
+    function toISO8601(local) {
+      var tzo = -local.getTimezoneOffset();
+      var sign = tzo >= 0 ? '+' : '-';
+      return local.getFullYear() +
+        '-' + pad(local.getMonth()+1) +
+        '-' + pad(local.getDate()) +
+        'T' + pad(local.getHours()) +
+        ':' + pad(local.getMinutes()) +
+        ':' + pad(local.getSeconds()) +
+        sign + pad(tzo / 60) +
+        ':' + pad(tzo % 60);
+    }
+
     var DateUtil = {
       //TODO: this function should be removed. it has no meaning.
       getTime: function(){
@@ -21,7 +39,20 @@ angular.module('cmsApp')
           }
         };
       },
-
+      fromMilliseconds: function(milliseconds){
+        return {
+          toISO8601: function(){
+            return toISO8601(new Date(milliseconds));
+          }
+        };
+      },
+      fromISO8601: function(dateISO){
+        return {
+          toMilliseconds: function(){
+            return new Date(dateISO).getTime();
+          }
+        };
+      },
       applyFormat: function(format, date){
         date = date || new Date();
 

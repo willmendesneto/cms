@@ -67,7 +67,7 @@ describe('Service: New Post Model', function(){
     });
 
     it('is a post from markdown should have the timestamp', function() {
-      var data = '---\ndate: 1407947455\n---Texto Qualquer';
+      var data = '---\ndate: "2014-08-13T13:30:55-03:00"\n---Texto Qualquer';
       var post = PostModel.create().fromMarkDown(data);
 
       expect(post.createdTime).toBe(1407947455 * 1000);
@@ -80,15 +80,15 @@ describe('Service: New Post Model', function(){
       var markdown = post.toMarkDown();
 
 
-      expect(markdown).toMatch(/date: 1407947455/);
+      expect(markdown).toMatch(/date: "2014-08-13T13:30:55-03:00"/);
     });
 
     it('is a post to markdown if it is have a date dont change the date', function() {
       var post = PostModel.create();
-      post.metadata.date = '2014-07-15 12:00:12';
+      post.metadata.date = '2014-08-13T13:30:55-03:00';
       var markdown = post.toMarkDown();
 
-      expect(markdown).toMatch(/date: \"2014-07-15 12:00:12\"/);
+      expect(markdown).toMatch(/date: \"2014-08-13T13:30:55-03:00\"/);
     });
 
 
@@ -96,7 +96,7 @@ describe('Service: New Post Model', function(){
       var post = PostModel.create();
       var markdown = post.toMarkDown();
 
-      expect(markdown).toMatch(/date: *[0-9]/);
+      expect(markdown).toMatch(/date: ".*"/);
     });
   });
 });
