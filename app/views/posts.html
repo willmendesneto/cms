@@ -37,12 +37,14 @@
     <table class="table table-striped" ng-show='searchEngine.done'>
       <thead>
         <tr>
+          <th>SHA</th>
           <th>Título</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr data-ng-repeat="post in filteredData = searchEngine.result | filter:search | orderBy:'name':true ">
+          <td>{{post.sha}}</td>
           <td>{{post.name}}</td>
           <td>
             <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-warning">EDITAR</a>
