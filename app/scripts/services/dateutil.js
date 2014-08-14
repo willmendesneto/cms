@@ -21,12 +21,22 @@ angular.module('cmsApp')
         ':' + pad(tzo % 60);
     }
 
+
+
     var DateUtil = {
       //TODO: this function should be removed. it has no meaning.
       getTime: function(){
         return new Date();
       },
 
+      getTimeZone: function(){
+        var offset = new Date().getTimezoneOffset();
+        offset = ((offset<0? '+':'-')+ // Note the reversed sign!
+                  pad(parseInt(Math.abs(offset/60)), 2) +
+                  ':' +
+                  pad(Math.abs(offset%60), 2));
+        return offset;
+      },
       getDate: function(date){
         date = date || new Date();
         return {

@@ -78,9 +78,9 @@ describe('Service: New Post Model', function(){
       var creationDate = new Date(2014,7,13,13,30,55);
       post.createdTime = DateUtil.getDate(creationDate).toMilliseconds();
       var markdown = post.toMarkDown();
+      var offset = DateUtil.getTimeZone();
 
-
-      expect(markdown).toMatch(/date: "2014-08-13T13:30:55-03:00"/);
+      expect(markdown).toMatch('date: "2014-08-13T13:30:55'+offset+'"');
     });
 
     it('is a post to markdown if it is have a date i can change the date', function() {
