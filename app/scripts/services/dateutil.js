@@ -59,14 +59,6 @@ angular.module('cmsApp')
         return $filter('date')(date, format);
       },
 
-      toJavaScriptTimeStamp: function(valueInTimeStamp) {
-        return valueInTimeStamp * 1000;
-      },
-
-      toRubyTimeStamp: function(valueInTimeStamp) {
-        return truncate(valueInTimeStamp / 1000);
-      },
-
       getTimestamp: function(date, time) {
         try {
           var year = date.getFullYear();
