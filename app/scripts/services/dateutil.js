@@ -3,10 +3,6 @@
 angular.module('cmsApp')
   .factory('DateUtil', function ($filter) {
 
-    function truncate(n) {
-      return Math[n > 0 ? 'floor' : 'ceil'](n);
-    }
-
     function pad(num) {
       var norm = Math.abs(Math.floor(num));
       return (norm < 10 ? '0' : '') + norm;

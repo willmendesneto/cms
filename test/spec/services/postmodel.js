@@ -83,20 +83,15 @@ describe('Service: New Post Model', function(){
       expect(markdown).toMatch(/date: "2014-08-13T13:30:55-03:00"/);
     });
 
-    it('is a post to markdown if it is have a date dont change the date', function() {
+    it('is a post to markdown if it is have a date i can change the date', function() {
       var post = PostModel.create();
+      var creationDate = new Date(2012,7,13,13,30,55);
+      post.createdTime = DateUtil.getDate(creationDate).toMilliseconds();
       post.metadata.date = '2014-08-13T13:30:55-03:00';
       var markdown = post.toMarkDown();
 
-      expect(markdown).toMatch(/date: \"2014-08-13T13:30:55-03:00\"/);
+      expect(markdown).not.toMatch(/date: \"2014-08-13T13:30:55-03:00\"/);
     });
 
-
-    it('is a post to markdown if it is have a date dont change the date', function() {
-      var post = PostModel.create();
-      var markdown = post.toMarkDown();
-
-      expect(markdown).toMatch(/date: ".*"/);
-    });
   });
 });

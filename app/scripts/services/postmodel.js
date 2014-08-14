@@ -50,7 +50,7 @@ angular.module('cmsApp')
         return this;
       },
       toMarkDown: function(){
-        this.metadata.date = this.metadata.date || DateUtil.fromMilliseconds(this.createdTime).toISO8601();
+        this.metadata.date = DateUtil.fromMilliseconds(this.createdTime).toISO8601();
         this.metadata.video = videoFromUrl(this.metadata.youtube_link);
 
         var compiled = ['---', jsyaml.dump(this.metadata), '---', this.body].join('\n');
