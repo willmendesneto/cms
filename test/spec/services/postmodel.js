@@ -80,7 +80,8 @@ describe('Service: New Post Model', function(){
       var markdown = post.toMarkDown();
       var offset = DateUtil.getTimeZone();
 
-      expect(markdown).toMatch('date: "2014-08-13T13:30:55'+offset+'"');
+      var regex = new RegExp('date: "2014-08-13T13:30:55'+offset+'"');
+      expect(markdown).toMatch(regex);
     });
 
     it('is a post to markdown if it is have a date i can change the date', function() {
