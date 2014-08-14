@@ -78,9 +78,8 @@ describe('Service: New Post Model', function(){
       var creationDate = new Date(2014,7,13,13,30,55);
       post.createdTime = DateUtil.getDate(creationDate).toMilliseconds();
       var markdown = post.toMarkDown();
-      var offset = DateUtil.getTimeZone();
 
-      var regex = new RegExp('date: \"2014-08-13T13:30:55'+offset+'\"');
+      var regex = new RegExp('date: \"2014-08-13T13:30:55(.*)\"');
       expect(markdown).toMatch(regex);
     });
 
