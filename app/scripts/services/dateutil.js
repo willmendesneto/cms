@@ -10,6 +10,7 @@ angular.module('cmsApp')
 
     function toISO8601(local) {
       var tzo = -local.getTimezoneOffset();
+      console.log(tzo);
       var sign = tzo >= 0 ? '+' : '-';
       return local.getFullYear() +
         '-' + pad(local.getMonth()+1) +
