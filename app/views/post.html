@@ -25,8 +25,8 @@
           <input id="publicar" type="checkbox"  class="btn btn-warning" ng-model='post.metadata.published'/>
           Publicar
 
-          <input type="button" ng-disabled="showProgress" class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm)" />
-          <a href="#/posts" ng-disabled="showProgress" class="btn btn-default">Voltar</a>
+          <input type="button" ng-disabled="postForm.$invalid && !postForm.data.$dirty" class="btn btn-warning" value="Salvar" ng-click="updatePost(post, postForm)" />
+          <a href="#/posts" class="btn btn-default">Voltar</a>
         </p>
       </section>
 
@@ -56,7 +56,7 @@
           <div class="form-group">
             <label for="title" class=" control-label">Título</label>
             <div>
-              <input type="text" name='title' class="form-control" ng-model="post.metadata.title" placeholder="Informe o título" required />
+              <input type="text" name='title' class="form-control" ng-model="post.metadata.title" cms-maxlength="140" placeholder="Informe o título" required />
             </div>
           </div>
 
@@ -120,9 +120,9 @@
               Capa
             </label>
             <input name="images_hd"
-                   ng-model="post.metadata.images_hd" 
+                   ng-model="post.metadata.images_hd"
                    type='text'  class="form-control" required/><br/>
-                   <img id='coverImage' class="img-thumbnail" ng-src="{{post.metadata.images_hd}}" alt="{{post.metadata.images_hd}}" 
+                   <img id='coverImage' class="img-thumbnail" ng-src="{{post.metadata.images_hd}}" alt="{{post.metadata.images_hd}}"
                    ng-show='post.metadata.images_hd' />
           </div>
 
